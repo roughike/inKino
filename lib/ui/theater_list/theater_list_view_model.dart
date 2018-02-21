@@ -1,0 +1,43 @@
+import 'package:inkino/redux/actions.dart';
+import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/data/theater.dart';
+import 'package:meta/meta.dart';
+import 'package:redux/redux.dart';
+import 'package:inkino/redux/selectors.dart';
+
+class TheaterListViewModel {
+  TheaterListViewModel({
+    @required this.currentTheater,
+    @required this.theaters,
+    @required this.changeCurrentTheater,
+  });
+
+  final Theater currentTheater;
+  final List<Theater> theaters;
+  final Function(Theater) changeCurrentTheater;
+
+  static TheaterListViewModel fromStore(Store<AppState> store) {
+    return new TheaterListViewModel(
+      currentTheater: currentTheaterSelector(store.state),
+      theaters: theatersSelector(store.state),
+      changeCurrentTheater: (theater) {
+        store.dispatch(new ChangeCurrentTheaterAction(theater));
+      },
+    );
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is TheaterListViewModel &&
+              runtimeType == other.runtimeType &&
+              currentTheater == other.currentTheater &&
+              theaters == other.theaters &&
+              changeCurrentTheater == other.changeCurrentTheater;
+
+  @override
+  int get hashCode =>
+      currentTheater.hashCode ^
+      theaters.hashCode ^
+      changeCurrentTheater.hashCode;
+}

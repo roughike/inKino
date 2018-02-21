@@ -1,0 +1,19 @@
+name: inkino
+description: A new Flutter application.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  xml: ^2.6.0
+  flutter_redux: ^0.3.5
+  intl: ^0.15.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^2.2.2
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets/preloaded_data/theaters.xml
