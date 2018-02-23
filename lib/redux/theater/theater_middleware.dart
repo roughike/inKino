@@ -27,7 +27,8 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     var theaterXml =
         await bundle.loadString('assets/preloaded_data/theaters.xml');
     var theaters = Theater.parseAll(theaterXml);
+    var currentTheater = theaters.first; // TODO: Store default in SharedPrefs.
 
-    next(new InitCompleteAction(theaters));
+    next(new InitCompleteAction(theaters, currentTheater));
   }
 }

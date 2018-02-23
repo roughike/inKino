@@ -10,12 +10,12 @@ final theaterReducer = combineTypedReducers<TheaterState>([
 
 TheaterState _initComplete(TheaterState state, InitCompleteAction action) {
   return state.copyWith(
-    currentTheater: action.theaters.first,
+    currentTheater: action.selectedTheater,
     theaters: action.theaters,
   );
 }
 
 TheaterState _currentTheaterChanged(
     TheaterState state, ChangeCurrentTheaterAction action) {
-  return state.copyWith(currentTheater: action.newTheater);
+  return state.copyWith(currentTheater: action.selectedTheater);
 }

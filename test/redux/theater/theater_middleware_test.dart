@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/theater/theater_middleware.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class MockAssetBundle extends Mock implements AssetBundle {}
+import '../../mocks.dart';
 
 void main() {
   group('TheaterMiddleware', () {
@@ -35,8 +34,8 @@ void main() {
           verify(mockAssetBundle.loadString(captureAny)).captured.first;
       expect(requestedPath, 'assets/preloaded_data/theaters.xml');
 
-      InitCompleteAction action = log.single;
-      expect(action.theaters.length, 3);
+      final InitCompleteAction initComplete = log.single;
+      expect(initComplete.theaters.length, 3);
     });
   });
 }

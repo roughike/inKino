@@ -4,20 +4,27 @@ import 'package:inkino/data/theater.dart';
 class InitAction {}
 
 class InitCompleteAction {
-  InitCompleteAction(this.theaters);
+  InitCompleteAction(
+    this.theaters,
+    this.selectedTheater,
+  );
+
   final List<Theater> theaters;
+  final Theater selectedTheater;
 }
 
 class ChangeCurrentTheaterAction {
-  ChangeCurrentTheaterAction(this.newTheater);
-  final Theater newTheater;
+  ChangeCurrentTheaterAction(this.selectedTheater);
+  final Theater selectedTheater;
 }
 
 class FetchShowsAction {
   FetchShowsAction(this.theater);
   final Theater theater;
 }
+
 class RequestingShowsAction {}
+
 class ReceivedShowsAction {
   ReceivedShowsAction(this.theater, this.shows);
 

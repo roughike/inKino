@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:inkino/data/finnkino_api.dart';
-import 'package:inkino/redux/app/api_middleware.dart';
+import 'package:inkino/redux/show/show_middleware.dart';
 import 'package:inkino/redux/app/app_reducer.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/theater/theater_middleware.dart';
@@ -11,8 +11,9 @@ Store<AppState> createStore() {
     appReducer,
     initialState: new AppState.initial(),
     middleware: [
+      // TODO: test the ordering, since it matters.
       new TheaterMiddleware(rootBundle),
-      new ApiMiddleware(new FinnkinoApi()),
+      new ShowMiddleware(new FinnkinoApi()),
     ],
   );
 }
