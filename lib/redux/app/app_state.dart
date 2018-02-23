@@ -1,21 +1,21 @@
-import 'package:inkino/redux/show_state.dart';
-import 'package:inkino/redux/theater_state.dart';
+import 'package:inkino/redux/show/show_state.dart';
+import 'package:inkino/redux/theater/theater_state.dart';
 import 'package:meta/meta.dart';
 
 @immutable
 class AppState {
   AppState({
     @required this.theaterState,
-    @required this.shows,
+    @required this.showState,
   });
 
   final TheaterState theaterState;
-  final ShowState shows;
+  final ShowState showState;
 
   factory AppState.initial() {
     return new AppState(
       theaterState: new TheaterState.initial(),
-      shows: new ShowState.initial(),
+      showState: new ShowState.initial(),
     );
   }
 
@@ -25,7 +25,7 @@ class AppState {
   }) {
     return new AppState(
       theaterState: theaters ?? this.theaterState,
-      shows: shows ?? this.shows,
+      showState: shows ?? this.showState,
     );
   }
 }

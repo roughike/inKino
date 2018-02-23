@@ -1,6 +1,6 @@
 import 'package:inkino/redux/actions.dart';
 import 'package:redux/redux.dart';
-import 'package:inkino/redux/theater_state.dart';
+import 'package:inkino/redux/theater/theater_state.dart';
 
 final theaterReducer = combineTypedReducers<TheaterState>([
   new ReducerBinding<TheaterState, InitCompleteAction>(_initComplete),

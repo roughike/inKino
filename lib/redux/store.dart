@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:inkino/data/finnkino_api.dart';
-import 'package:inkino/redux/api_middleware.dart';
-import 'package:inkino/redux/app_reducer.dart';
-import 'package:inkino/redux/app_state.dart';
-import 'package:inkino/redux/theater_middleware.dart';
+import 'package:inkino/redux/app/api_middleware.dart';
+import 'package:inkino/redux/app/app_reducer.dart';
+import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/theater/theater_middleware.dart';
 import 'package:redux/redux.dart';
 
 Store<AppState> createStore() {

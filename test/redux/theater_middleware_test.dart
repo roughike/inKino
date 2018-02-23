@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:inkino/redux/actions.dart';
-import 'package:inkino/redux/theater_middleware.dart';
+import 'package:inkino/redux/theater/theater_middleware.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 

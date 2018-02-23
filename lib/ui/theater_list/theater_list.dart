@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/ui/theater_list/theater_list_view_model.dart';
 

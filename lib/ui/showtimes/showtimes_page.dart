@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/actions.dart';
-import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/selectors.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';

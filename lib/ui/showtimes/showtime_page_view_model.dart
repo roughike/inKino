@@ -1,5 +1,5 @@
 import 'package:inkino/data/show.dart';
-import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 import 'package:inkino/redux/selectors.dart';

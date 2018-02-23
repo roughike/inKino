@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:inkino/redux/actions.dart';
-import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:redux/redux.dart';
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:inkino/data/finnkino_api.dart';
 import 'package:inkino/redux/actions.dart';
-import 'package:inkino/redux/app_state.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:redux/redux.dart';
 import 'package:inkino/redux/selectors.dart';
 

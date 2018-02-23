@@ -1,6 +1,6 @@
 import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/actions.dart';
-import 'package:inkino/redux/show_state.dart';
+import 'package:inkino/redux/show/show_state.dart';
 import 'package:redux/redux.dart';
 
 final showReducer = combineTypedReducers([
