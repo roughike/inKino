@@ -73,22 +73,27 @@ class ShowtimeListTile extends StatelessWidget {
         ? Colors.black.withOpacity(0.01)
         : Colors.white;
 
-    return new Container(
+    return new Material(
       color: backgroundColor,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 16.0,
-      ),
-      child: new Row(
-        children: <Widget>[
-          _buildShowtimesInfo(),
-          new Expanded(
-            child: new Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: _buildDetailedInfo(),
-            ),
+      child: new InkWell(
+        onTap: () {},
+        child: new Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16.0,
+            vertical: 16.0,
           ),
-        ],
+          child: new Row(
+            children: <Widget>[
+              _buildShowtimesInfo(),
+              new Expanded(
+                child: new Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: _buildDetailedInfo(),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
