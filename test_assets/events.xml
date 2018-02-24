@@ -128,12 +128,8 @@
             Rooleissa: Curt Lindström – Jens Hulten, Hannu Aravirta – Kari-Pekka Toivonen, Heikki Riihiranta – Pekka Huotari, Saku Koivu – Jon-Jon Geitel, Ville Peltonen – Akseli Kouki, Jere Lehtinen – Kustaa Tuohimaa, Timo Jutila – Joel Hirvonen, Janne Ojanen – Oskari Ojanen, Marko Palo – Valtteri Honka, Marko Kiprusoff – Karlo Haapiainen, Raimo Helminen – Sebastian Rejman, Sami Kapanen – Mikko Laine, Esa Keskinen – Topias Hirvelä, Hannu Virta – Jarkko Järvinen, Mika Nieminen – Victor Paul, Antti Törmänen – Lauri Talvio, Jukka Tammi – Lauri Tilkanen, Raimo Summanen – Akseli Mattila, Ari Sulander – Henri Nyqvist, Mika Strömberg – Rasmus Tarkiainen, Erik Hämäläinen – Tommi Lipasti, Petteri Nummelin – Ronny Roslöf, Janne Niinimaa – Kimi Vilkkula, Juha Ylönen – Mikko Lindbom, Jarmo Myllys – Hannes Suominen, Tero Lehterä – Roman Tiinus</Synopsis>
         <EventURL>http://www.finnkino.fi/event/302465/title/95/</EventURL>
         <Images>
-            <EventMicroImagePortrait>http://media.finnkino.fi/1012/Event_11811/portrait_micro/95_1080.jpg</EventMicroImagePortrait>
-            <EventSmallImagePortrait>http://media.finnkino.fi/1012/Event_11811/portrait_small/95_1080.jpg</EventSmallImagePortrait>
-            <EventMediumImagePortrait>http://media.finnkino.fi/1012/Event_11811/portrait_medium/95_1080.jpg</EventMediumImagePortrait>
-            <EventLargeImagePortrait>http://media.finnkino.fi/1012/Event_11811/portrait_small/95_1080.jpg</EventLargeImagePortrait>
-            <EventSmallImageLandscape>http://media.finnkino.fi/1012/Event_11811/landscape_small/95_444.jpg</EventSmallImageLandscape>
-            <EventLargeImageLandscape>http://media.finnkino.fi/1012/Event_11811/landscape_large/95_670.jpg</EventLargeImageLandscape>
+            <!-- Testing empty images element -->
+            <SomeOtherImage>test</SomeOtherImage>
         </Images>
         <Videos>
             <EventVideo>
@@ -201,14 +197,9 @@
         <ShortSynopsis>Elokuva kertoo 16-vuotiaan John Paul Getty III:n (Charlie Plummer) kidnappauksesta ja hänen omistautuneen äitinsä Gailin (Michelle Williams) epätoivoisesta yrityksestä saada poikansa miljonääri isoisä (Christopher Plummer) maksamaan lunnaat.</ShortSynopsis>
         <Synopsis>Elokuva kertoo 16-vuotiaan John Paul Getty III:n (Charlie Plummer) kidnappauksesta ja hänen omistautuneen äitinsä Gailin (Michelle Williams) epätoivoisesta yrityksestä saada poikansa miljonääri isoisä (Christopher Plummer) maksamaan lunnaat. Getty vanhemman kieltäytyessä, ja sieppaajien muuttuessa yhä epävakaammiksi ja brutaalimmaksi, Gail yrittää vedota häneen. Poikansa elämän ollessa vaakalaudalla, Gailista ja Gettyn neuvonantajasta (Mark Wahlberg) muodostuu epätavalliset liittolaiset kilpailussa aikaa vastaan. Kilpailussa, joka lopulta paljastaa rakkauden todellisen arvon suhteessa rahaan.</Synopsis>
         <EventURL>http://www.finnkino.fi/event/302478/title/all_the_money_in_the_world/</EventURL>
-        <Images>
-            <EventMicroImagePortrait>http://media.finnkino.fi/1012/Event_11825/portrait_micro/AllTheMoneyInTheWorld_1080.jpg</EventMicroImagePortrait>
-            <EventSmallImagePortrait>http://media.finnkino.fi/1012/Event_11825/portrait_small/AllTheMoneyInTheWorld_1080.jpg</EventSmallImagePortrait>
-            <EventMediumImagePortrait>http://media.finnkino.fi/1012/Event_11825/portrait_medium/AllTheMoneyInTheWorld_1080.jpg</EventMediumImagePortrait>
-            <EventLargeImagePortrait>http://media.finnkino.fi/1012/Event_11825/portrait_small/AllTheMoneyInTheWorld_1080.jpg</EventLargeImagePortrait>
-            <EventSmallImageLandscape>http://media.finnkino.fi/1012/Event_11825/landscape_small/AllTheMoneyInTheWorld_444.jpg</EventSmallImageLandscape>
-            <EventLargeImageLandscape>http://media.finnkino.fi/1012/Event_11825/landscape_large/AllTheMoneyInTheWorld_670.jpg</EventLargeImageLandscape>
-        </Images>
+
+        <!-- Testing event without "Images" tag at all -->
+
         <Videos>
             <EventVideo>
                 <Title>Katso traileri</Title>

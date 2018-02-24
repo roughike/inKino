@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
+import 'package:inkino/utils.dart';
 
 final RegExp _nameExpr = new RegExp(r'([A-Z])([A-Z]+)');
 
@@ -22,8 +23,8 @@ class Theater {
     var document = xml.parse(xmlString);
 
     document.findAllElements('TheatreArea').forEach((node) {
-      var id = node.findElements('ID').single.text;
-      var normalizedName = _normalize(node.findElements('Name').single.text);
+      var id = tagContents(node, 'ID');
+      var normalizedName = _normalize(tagContents(node, 'Name'));
 
       if (id == kChooseTheaterId) {
         normalizedName = 'All theaters';

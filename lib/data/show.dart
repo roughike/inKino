@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
+import 'package:inkino/utils.dart';
 
 class Show {
   Show({
@@ -24,19 +25,15 @@ class Show {
 
     document.findAllElements('Show').forEach((node) {
       shows.add(new Show(
-        id: _findTagContents(node, 'ID'),
-        title: _findTagContents(node, 'Title'),
-        presentationMethod: _findTagContents(node, 'PresentationMethod'),
-        theaterAndAuditorium: _findTagContents(node, 'TheatreAndAuditorium'),
-        start: DateTime.parse(_findTagContents(node, 'dttmShowStart')),
-        end: DateTime.parse(_findTagContents(node, 'dttmShowEnd')),
+        id: tagContents(node, 'ID'),
+        title: tagContents(node, 'Title'),
+        presentationMethod: tagContents(node, 'PresentationMethod'),
+        theaterAndAuditorium: tagContents(node, 'TheatreAndAuditorium'),
+        start: DateTime.parse(tagContents(node, 'dttmShowStart')),
+        end: DateTime.parse(tagContents(node, 'dttmShowEnd')),
       ));
     });
 
     return shows;
-  }
-
-  static String _findTagContents(xml.XmlElement node, String tagName) {
-    return node.findElements(tagName).single.text;
   }
 }

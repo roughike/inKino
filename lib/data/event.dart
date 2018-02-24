@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
+import 'package:inkino/utils.dart';
 
 class Event {
   Event({
@@ -20,10 +21,10 @@ class Event {
 
     document.findAllElements('Event').forEach((node) {
       events.add(new Event(
-        id: node.findElements('ID').single.text,
-        title: node.findElements('Title').single.text,
-        genres: node.findElements('Genres').single.text,
-        images: new EventImageData.empty() // EventImageData.parseAll(node.findElements('Images')),
+        id: tagContents(node, 'ID'),
+        title: tagContents(node, 'Title'),
+        genres: tagContents(node, 'Genres'),
+        images: EventImageData.parseAll(node.findElements('Images')),
       ));
     });
 
@@ -46,24 +47,26 @@ class EventImageData {
   final String landscapeSmall;
   final String landscapeBig;
 
-  EventImageData.empty() :
-      portraitSmall = null,
-    portraitMedium = null,
-    portraitLarge = null,
-    landscapeSmall = null,
-  landscapeBig = null;
+  EventImageData.empty()
+      : portraitSmall = null,
+        portraitMedium = null,
+        portraitLarge = null,
+        landscapeSmall = null,
+        landscapeBig = null;
 
   static EventImageData parseAll(Iterable<xml.XmlElement> roots) {
-    if (roots == null || roots.isEmpty) return new EventImageData.empty();
+    if (roots == null || roots.isEmpty) {
+      return new EventImageData.empty();
+    }
 
     var root = roots.first;
 
     return new EventImageData(
-      portraitSmall: root.findElements('EventSmallImagePortrait').single.text,
-      portraitMedium: root.findElements('EventMediumImagePortrait').single.text,
-      portraitLarge: root.findElements('EventLargeImagePortrait').single.text,
-      landscapeSmall: root.findElements('EventSmallImageLandscape').single.text,
-      landscapeBig: root.findElements('EventLargeImageLandscape').single.text,
+      portraitSmall: tagContentsOrNull(root, 'EventSmallImagePortrait'),
+      portraitMedium: tagContentsOrNull(root, 'EventMediumImagePortrait'),
+      portraitLarge: tagContentsOrNull(root, 'EventLargeImagePortrait'),
+      landscapeSmall: tagContentsOrNull(root, 'EventSmallImageLandscape'),
+      landscapeBig: tagContentsOrNull(root, 'EventLargeImageLandscape'),
     );
   }
 }
