@@ -10,6 +10,4 @@ class MockFinnkinoApi extends Mock implements FinnkinoApi {}
 class MockAssetBundle extends Mock implements AssetBundle {}
 
 class MockStore extends Mock implements Store<AppState> {}
-
-class MockTheater extends Mock implements Theater {}
 class MockShow extends Mock implements Show {}

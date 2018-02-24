@@ -18,7 +18,7 @@ ShowState _receivedShows(ShowState state, ReceivedShowsAction action) {
   showIdsByTheaterId[action.theater.id] = showsById.keys.toList();
 
   return state.copyWith(
-    showsById: showsById,
+    allShowsById: showsById,
     showIdsByTheaterId: showIdsByTheaterId,
   );
 }

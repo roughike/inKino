@@ -4,26 +4,26 @@ import 'package:meta/meta.dart';
 @immutable
 class ShowState {
   ShowState({
-    @required this.showsById,
+    @required this.allShowsById,
     @required this.showIdsByTheaterId,
   });
 
-  final Map<String, Show> showsById;
+  final Map<String, Show> allShowsById;
   final Map<String, List<String>> showIdsByTheaterId;
 
   factory ShowState.initial() {
     return new ShowState(
-      showsById: <String, Show>{},
+      allShowsById: <String, Show>{},
       showIdsByTheaterId: <String, List<String>>{},
     );
   }
 
   ShowState copyWith({
-    Map<String, Show> showsById,
+    Map<String, Show> allShowsById,
     Map<String, List<String>> showIdsByTheaterId,
   }) {
     return new ShowState(
-      showsById: showsById ?? this.showsById,
+      allShowsById: allShowsById ?? this.allShowsById,
       showIdsByTheaterId: showIdsByTheaterId ?? this.showIdsByTheaterId,
     );
   }

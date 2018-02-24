@@ -27,11 +27,10 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     NextDispatcher next,
   ) async {
     // TODO: persist the shows and actually include the time when the shows were last loaded.
-    var shows = showsForTheaterSelector(store.state, newTheater);
-    var hasCachedShowsForNewTheater = shows.isNotEmpty;
+    var cachedShows = showsForTheaterSelector(store.state, newTheater);
 
-    if (hasCachedShowsForNewTheater) {
-      next(new ReceivedShowsAction(newTheater, shows));
+    if (cachedShows.isNotEmpty) {
+      next(new ReceivedShowsAction(newTheater, cachedShows));
     } else {
       return _fetchShows(store, newTheater, next);
     }

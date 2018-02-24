@@ -11,6 +11,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/packages" />
       <excludeFolder url="file://$MODULE_DIR$/test/redux/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/test/redux/show/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/test/redux/theater/packages" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
