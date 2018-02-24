@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/ui/movie_grid_item.dart';
+import 'package:inkino/data/event.dart';
+import 'package:inkino/ui/events/event_grid_item.dart';
 
-class MovieGrid extends StatelessWidget {
-  MovieGrid(this.movies);
-  final List<Object> movies;
+class EventGrid extends StatelessWidget {
+  EventGrid(this.events);
+  final List<Event> events;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +15,10 @@ class MovieGrid extends StatelessWidget {
         crossAxisSpacing: 1.0,
         mainAxisSpacing: 1.0,
       ),
-      itemCount: movies.length,
+      itemCount: events.length,
       itemBuilder: (BuildContext context, int index) {
-        var movie = movies[index];
-        return new MovieGridItem(index);
+        var event = events[index];
+        return new EventGridItem(event);
       },
     );
   }

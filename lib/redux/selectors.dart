@@ -1,3 +1,4 @@
+import 'package:inkino/data/event.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
@@ -22,4 +23,21 @@ List<Show> showsForTheaterSelector(AppState state, Theater theater) {
   });
 
   return shows;
+}
+
+List<Event> eventsForTheaterSelector(AppState state, Theater theater) {
+  var events = <Event>[];
+  var allEvents = state.eventState.allEventsById;
+  var eventIdsForTheater =
+      theater != null ? state.eventState.eventIdsByTheaterId[theater.id] : [];
+
+  eventIdsForTheater?.forEach((id) {
+    var event = allEvents[id];
+
+    if (event != null) {
+      events.add(event);
+    }
+  });
+
+  return events;
 }

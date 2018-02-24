@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/ui/movie_grid.dart';
+import 'package:inkino/ui/events/coming_soon_events_page.dart';
+import 'package:inkino/ui/events/event_grid.dart';
+import 'package:inkino/ui/events/now_playing_events_page.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
 
@@ -10,8 +12,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  static final List<Object> movieList = new List.generate(100, (_) => '');
-
   TabController _controller;
 
   @override
@@ -65,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage>
         controller: _controller,
         children: <Widget>[
           new ShowtimesPage(),
-          new MovieGrid(movieList),
-          new MovieGrid(movieList),
+          new NowPlayingEventsPage(),
+          new ComingSoonEventsPage(),
         ],
       ),
     );

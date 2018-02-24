@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:inkino/data/event.dart';
 
-class MovieGridItem extends StatelessWidget {
-  final int index;
-  MovieGridItem(this.index);
+class EventGridItem extends StatelessWidget {
+  EventGridItem(this.event);
+  final Event event;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +34,13 @@ class MovieGridItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Text(
-                  'Movie number $index',
+                  event.title,
                   style: new TextStyle(fontWeight: FontWeight.w500),
                 ),
                 new Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: new Text(
-                    'Drama, Action',
+                    event.genres,
                     style: new TextStyle(fontSize: 12.0),
                   ),
                 ),

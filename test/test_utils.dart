@@ -8,8 +8,8 @@ AppState appState({
   ShowState shows,
 }) {
   return new AppState.initial().copyWith(
-    theaters: theaters,
-    shows: shows,
+    theaterState: theaters,
+    showState: shows,
   );
 }
 
@@ -18,7 +18,7 @@ AppState showState({
   Map<String, List<String>> showIdsByTheaterId,
 }) {
   return appState().copyWith(
-    shows: appState().showState.copyWith(
+    showState: appState().showState.copyWith(
           allShowsById: allShowsById,
           showIdsByTheaterId: showIdsByTheaterId,
         ),
