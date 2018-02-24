@@ -12,14 +12,20 @@ class EventGridItem extends StatelessWidget {
       child: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Placeholder(),
+          new Image.network(event.images.portraitMedium),
           new Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
+                stops: <double>[
+                  0.0,
+                  0.7,
+                  0.7,
+                ],
                 colors: <Color>[
-                  Colors.black54,
+                  Colors.black,
+                  Colors.transparent,
                   Colors.transparent,
                 ],
               ),
@@ -35,13 +41,19 @@ class EventGridItem extends StatelessWidget {
               children: <Widget>[
                 new Text(
                   event.title,
-                  style: new TextStyle(fontWeight: FontWeight.w500),
+                  style: new TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                  ),
                 ),
                 new Padding(
                   padding: const EdgeInsets.only(top: 4.0),
                   child: new Text(
                     event.genres,
-                    style: new TextStyle(fontSize: 12.0),
+                    style: new TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.white70,
+                    ),
                   ),
                 ),
               ],

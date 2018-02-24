@@ -12,8 +12,6 @@ class EventGrid extends StatelessWidget {
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 2 / 3,
-        crossAxisSpacing: 1.0,
-        mainAxisSpacing: 1.0,
       ),
       itemCount: events.length,
       itemBuilder: (BuildContext context, int index) {
