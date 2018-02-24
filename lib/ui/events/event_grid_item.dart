@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
+import 'package:inkino/ui/event_details/event_details_page.dart';
 
 class EventGridItem extends StatelessWidget {
   EventGridItem(this.event);
@@ -57,6 +58,20 @@ class EventGridItem extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          new Material(
+            color: Colors.transparent,
+            child: new InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (_) => new EventDetailsPage(event),
+                  ),
+                );
+              },
+              child: new Container(),
             ),
           ),
         ],
