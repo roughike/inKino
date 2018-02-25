@@ -5,6 +5,60 @@ class EventDetailsPage extends StatelessWidget {
   EventDetailsPage(this.event);
   final Event event;
 
+  Widget _buildBackdropPhoto() {
+    var backdropPhoto =
+        event.images.landscapeBig ?? event.images.landscapeSmall;
+
+    if (backdropPhoto != null) {
+      return new Image.network(
+        backdropPhoto,
+        height: 175.0,
+        fit: BoxFit.cover,
+      );
+    }
+
+    return new Container(
+      decoration: new BoxDecoration(
+        gradient: new LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: <Color>[
+            const Color(0xFF222222),
+            const Color(0xFF424242),
+          ],
+        ),
+      ),
+      height: 175.0,
+      child: new Center(
+        child: new Icon(
+          Icons.theaters,
+          color: Colors.white70,
+          size: 96.0,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPortraitPhoto() {
+    return new DecoratedBox(
+      decoration: new BoxDecoration(
+        boxShadow: <BoxShadow>[
+          new BoxShadow(
+            offset: const Offset(1.0, 1.0),
+            spreadRadius: 1.0,
+            blurRadius: 2.0,
+            color: Colors.black38,
+          ),
+        ],
+      ),
+      child: new Image.network(
+        event.images.portraitMedium,
+        height: 150.0,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
   Widget _buildEventInfo() {
     var content = <Widget>[
       new Text(
@@ -67,11 +121,7 @@ class EventDetailsPage extends StatelessWidget {
         children: <Widget>[
           new Padding(
             padding: const EdgeInsets.only(bottom: 118.0),
-            child: new Image.network(
-              event.images.landscapeBig,
-              height: 175.0,
-              fit: BoxFit.cover,
-            ),
+            child: _buildBackdropPhoto(),
           ),
           new Positioned(
             left: 16.0,
@@ -80,26 +130,13 @@ class EventDetailsPage extends StatelessWidget {
             child: new Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new DecoratedBox(
-                  decoration: new BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      new BoxShadow(
-                        offset: const Offset(1.0, 1.0),
-                        spreadRadius: 1.0,
-                        blurRadius: 2.0,
-                        color: Colors.black38,
-                      ),
-                    ],
-                  ),
-                  child: new Image.network(
-                    event.images.portraitMedium,
-                    height: 150.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                _buildPortraitPhoto(),
                 new Expanded(
                   child: new Padding(
-                    padding: const EdgeInsets.only(left: 16.0, top: 48.0),
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      top: 48.0,
+                    ),
                     child: _buildEventInfo(),
                   ),
                 ),
