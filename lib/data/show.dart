@@ -5,6 +5,7 @@ import 'package:inkino/utils.dart';
 class Show {
   Show({
     @required this.id,
+    @required this.eventId,
     @required this.title,
     @required this.presentationMethod,
     @required this.theaterAndAuditorium,
@@ -13,6 +14,7 @@ class Show {
   });
 
   final String id;
+  final String eventId;
   final String title;
   final String presentationMethod;
   final String theaterAndAuditorium;
@@ -26,6 +28,7 @@ class Show {
     document.findAllElements('Show').forEach((node) {
       shows.add(new Show(
         id: tagContents(node, 'ID'),
+        eventId: tagContents(node, 'EventID'),
         title: tagContents(node, 'Title'),
         presentationMethod: tagContents(node, 'PresentationMethod'),
         theaterAndAuditorium: tagContents(node, 'TheatreAndAuditorium'),

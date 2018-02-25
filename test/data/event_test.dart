@@ -21,7 +21,7 @@ void main() {
       expect(paris1517.shortSynopsis, 'Short synopsis goes here.');
       expect(paris1517.synopsis, 'Synopsis goes here.');
       expect(paris1517.youtubeTrailers.length, 1);
-      expect(paris1517.youtubeTrailers.first, 'https://www.youtube.com/watch?v=oFa4C6OcuM4');
+      expect(paris1517.youtubeTrailers.first, 'https://youtube.com/watch?v=oFa4C6OcuM4');
       expect(
         paris1517.images.portraitSmall,
         'http://media.finnkino.fi/1012/Event_11881/portrait_small/The1517toParis_1080.jpg',

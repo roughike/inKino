@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/show.dart';
+import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:intl/intl.dart';
+import 'package:inkino/redux/selectors.dart';
 
 class ShowtimeListTile extends StatelessWidget {
   static final DateFormat hoursAndMins = new DateFormat('HH:mm');
@@ -53,8 +56,7 @@ class ShowtimeListTile extends StatelessWidget {
             borderRadius: new BorderRadius.circular(4.0),
           ),
           margin: const EdgeInsets.only(top: 8.0),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 8.0, vertical: 2.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
           child: new Text(
             show.presentationMethod,
             style: new TextStyle(
@@ -69,14 +71,23 @@ class ShowtimeListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var backgroundColor = useAlternateBackground
-        ? Colors.black.withOpacity(0.01)
-        : Colors.white;
+    var backgroundColor =
+        useAlternateBackground ? Colors.black.withOpacity(0.01) : Colors.white;
 
     return new Material(
       color: backgroundColor,
       child: new InkWell(
-        onTap: () {},
+        onTap: () {
+          var store = new StoreProvider.of(context).store;
+          var event = eventByShowSelector(store.state, show);
+
+          Navigator.push(
+            context,
+            new MaterialPageRoute(
+              builder: (_) => new EventDetailsPage(event),
+            ),
+          );
+        },
         child: new Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,

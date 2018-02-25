@@ -41,3 +41,7 @@ List<Event> eventsForTheaterSelector(AppState state, Theater theater) {
 
   return events;
 }
+
+Event eventByShowSelector(AppState state, Show show) {
+  return state.eventState.allEventsById[show.eventId];
+}
