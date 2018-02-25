@@ -124,6 +124,15 @@ class EventDetailsPage extends StatelessWidget {
             child: _buildBackdropPhoto(),
           ),
           new Positioned(
+            top: MediaQuery.of(context).padding.top,
+            left: 4.0,
+            child: new Material(
+              type: MaterialType.circle,
+              color: Colors.transparent,
+              child: new BackButton(color: Colors.white.withOpacity(0.8)),
+            ),
+          ),
+          new Positioned(
             left: 16.0,
             right: 16.0,
             bottom: 0.0,
