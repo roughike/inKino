@@ -17,6 +17,8 @@ void main() {
       expect(paris1517.genres, 'Draama, Jännitys');
       expect(paris1517.directors.length, 1);
       expect(paris1517.directors.first, 'Clint Eastwood');
+      expect(paris1517.actors.length, 11);
+      expect(paris1517.actors.first, 'Anthony Sadler');
       expect(paris1517.lengthInMinutes, '94');
       expect(paris1517.shortSynopsis, 'Short synopsis goes here.');
       expect(paris1517.synopsis, 'Synopsis goes here.');

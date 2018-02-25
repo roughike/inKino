@@ -183,52 +183,117 @@ class EventDetailsPage extends StatelessWidget {
     );
   }
 
+  Widget _buildActorScroller() {
+    return new Container(
+      padding: const EdgeInsets.only(top: 24.0),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          new Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: new Text(
+              'Cast',
+              style: new TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          new Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: new SizedBox.fromSize(
+              size: new Size.fromHeight(96.0),
+              child: new ListView.builder(
+                padding: const EdgeInsets.only(left: 16.0),
+                scrollDirection: Axis.horizontal,
+                itemCount: event.actors.length,
+                itemBuilder: (BuildContext context, int index) {
+                  var actor = event.actors[index];
+
+                  return new Container(
+                    width: 90.0,
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: new Column(
+                      children: <Widget>[
+                        new CircleAvatar(
+                          radius: 28.0,
+                          child: new Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 26.0,
+                          ),
+                        ),
+                        new Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: new Text(
+                            actor,
+                            style: new TextStyle(fontSize: 12.0),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new SingleChildScrollView(
-        child: new Column(
-          children: [
-            new Stack(
+    var content = <Widget>[
+      new Stack(
+        children: <Widget>[
+          new Padding(
+            padding: const EdgeInsets.only(bottom: 118.0),
+            child: _buildBackdropPhoto(),
+          ),
+          new Positioned(
+            top: MediaQuery.of(context).padding.top,
+            left: 4.0,
+            child: new Material(
+              type: MaterialType.circle,
+              color: Colors.transparent,
+              child: new BackButton(color: Colors.white.withOpacity(0.9)),
+            ),
+          ),
+          new Positioned(
+            left: 16.0,
+            right: 16.0,
+            bottom: 0.0,
+            child: new Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Padding(
-                  padding: const EdgeInsets.only(bottom: 118.0),
-                  child: _buildBackdropPhoto(),
-                ),
-                new Positioned(
-                  top: MediaQuery.of(context).padding.top,
-                  left: 4.0,
-                  child: new Material(
-                    type: MaterialType.circle,
-                    color: Colors.transparent,
-                    child: new BackButton(color: Colors.white.withOpacity(0.9)),
-                  ),
-                ),
-                new Positioned(
-                  left: 16.0,
-                  right: 16.0,
-                  bottom: 0.0,
-                  child: new Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      _buildPortraitPhoto(),
-                      new Expanded(
-                        child: new Padding(
-                          padding: const EdgeInsets.only(
-                            left: 16.0,
-                            top: 48.0,
-                          ),
-                          child: _buildEventInfo(),
-                        ),
-                      ),
-                    ],
+                _buildPortraitPhoto(),
+                new Expanded(
+                  child: new Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      top: 48.0,
+                    ),
+                    child: _buildEventInfo(),
                   ),
                 ),
               ],
             ),
-            _buildEventStoryline(),
-          ],
-        ),
+          ),
+        ],
+      ),
+    ];
+
+    if (event.actors.isNotEmpty) {
+      content.add(_buildActorScroller());
+    }
+
+    content.add(_buildEventStoryline());
+
+    return new Scaffold(
+      body: new SingleChildScrollView(
+        child: new Column(children: content),
       ),
     );
   }

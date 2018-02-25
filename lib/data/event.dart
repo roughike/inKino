@@ -8,6 +8,7 @@ class Event {
     @required this.title,
     @required this.genres,
     @required this.directors,
+    @required this.actors,
     @required this.lengthInMinutes,
     @required this.shortSynopsis,
     @required this.synopsis,
@@ -19,6 +20,7 @@ class Event {
   final String title;
   final String genres;
   final List<String> directors;
+  final List<String> actors;
   final String lengthInMinutes;
   final String shortSynopsis;
   final String synopsis;
@@ -35,6 +37,7 @@ class Event {
         title: tagContents(node, 'Title'),
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
+        actors: _parseActors(node.findAllElements('Actor')),
         lengthInMinutes: tagContents(node, 'LengthInMinutes'),
         shortSynopsis: tagContents(node, 'ShortSynopsis'),
         synopsis: tagContents(node, 'Synopsis'),
@@ -56,6 +59,18 @@ class Event {
     });
 
     return directors;
+  }
+
+  static List<String> _parseActors(Iterable<xml.XmlElement> nodes) {
+    var actors = <String>[];
+
+    nodes.forEach((node) {
+      var first = tagContents(node, 'FirstName');
+      var last = tagContents(node, 'LastName');
+      actors.add('$first $last');
+    });
+
+    return actors;
   }
 
   static List<String> _parseTrailers(Iterable<xml.XmlElement> nodes) {
