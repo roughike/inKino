@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
+import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
@@ -157,32 +158,6 @@ class EventDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildEventStoryline() {
-    return new Padding(
-      padding: const EdgeInsets.only(
-        top: 24.0,
-        left: 16.0,
-        right: 16.0,
-      ),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new Text(
-            'Storyline',
-            style: new TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          new Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: new Text(event.shortSynopsis),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildActorScroller() {
     return new Container(
       padding: const EdgeInsets.only(top: 24.0),
@@ -289,7 +264,7 @@ class EventDetailsPage extends StatelessWidget {
       content.add(_buildActorScroller());
     }
 
-    content.add(_buildEventStoryline());
+    content.add(new StorylineWidget(event));
 
     return new Scaffold(
       body: new SingleChildScrollView(
