@@ -3,10 +3,16 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/ui/theater_list/theater_list_view_model.dart';
+import 'package:meta/meta.dart';
 
 class TheaterList extends StatelessWidget {
-  TheaterList(this.header);
+  TheaterList({
+    @required this.header,
+    @required this.onTheaterTapped,
+  });
+
   final Widget header;
+  final VoidCallback onTheaterTapped;
 
   Widget _buildTheatersSubhead(BuildContext context) {
     return new Column(
@@ -68,7 +74,10 @@ class TheaterList extends StatelessWidget {
                       ? const Color(0xFFEEEEEE)
                       : Theme.of(context).canvasColor,
                   child: new ListTile(
-                    onTap: () => viewModel.changeCurrentTheater(theater),
+                    onTap: () {
+                      viewModel.changeCurrentTheater(theater);
+                      onTheaterTapped();
+                    },
                     selected: isSelected,
                     title: new Text(theater.name),
                   ),

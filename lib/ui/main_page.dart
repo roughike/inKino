@@ -42,7 +42,14 @@ class _MyHomePageState extends State<MyHomePage>
       ),
     );
 
-    return new Drawer(child: new TheaterList(drawerHeader));
+    return new Drawer(
+      child: new TheaterList(
+        header: drawerHeader,
+        onTheaterTapped: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
   }
 
   @override
