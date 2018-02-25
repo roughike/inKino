@@ -114,45 +114,78 @@ class EventDetailsPage extends StatelessWidget {
     );
   }
 
+  Widget _buildEventStoryline() {
+    return new Padding(
+      padding: const EdgeInsets.only(
+        top: 24.0,
+        left: 16.0,
+        right: 16.0,
+      ),
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Text(
+            'Storyline',
+            style: new TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          new Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: new Text(event.shortSynopsis),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: new Stack(
-        children: <Widget>[
-          new Padding(
-            padding: const EdgeInsets.only(bottom: 118.0),
-            child: _buildBackdropPhoto(),
-          ),
-          new Positioned(
-            top: MediaQuery.of(context).padding.top,
-            left: 4.0,
-            child: new Material(
-              type: MaterialType.circle,
-              color: Colors.transparent,
-              child: new BackButton(color: Colors.white.withOpacity(0.8)),
-            ),
-          ),
-          new Positioned(
-            left: 16.0,
-            right: 16.0,
-            bottom: 0.0,
-            child: new Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: new SingleChildScrollView(
+        child: new Column(
+          children: [
+            new Stack(
               children: <Widget>[
-                _buildPortraitPhoto(),
-                new Expanded(
-                  child: new Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16.0,
-                      top: 48.0,
-                    ),
-                    child: _buildEventInfo(),
+                new Padding(
+                  padding: const EdgeInsets.only(bottom: 118.0),
+                  child: _buildBackdropPhoto(),
+                ),
+                new Positioned(
+                  top: MediaQuery.of(context).padding.top,
+                  left: 4.0,
+                  child: new Material(
+                    type: MaterialType.circle,
+                    color: Colors.transparent,
+                    child: new BackButton(color: Colors.white.withOpacity(0.8)),
+                  ),
+                ),
+                new Positioned(
+                  left: 16.0,
+                  right: 16.0,
+                  bottom: 0.0,
+                  child: new Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      _buildPortraitPhoto(),
+                      new Expanded(
+                        child: new Padding(
+                          padding: const EdgeInsets.only(
+                            left: 16.0,
+                            top: 48.0,
+                          ),
+                          child: _buildEventInfo(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+            _buildEventStoryline(),
+          ],
+        ),
       ),
     );
   }

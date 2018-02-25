@@ -18,6 +18,8 @@ void main() {
       expect(paris1517.directors.length, 1);
       expect(paris1517.directors.first, 'Clint Eastwood');
       expect(paris1517.lengthInMinutes, '94');
+      expect(paris1517.shortSynopsis, 'Short synopsis goes here.');
+      expect(paris1517.synopsis, 'Synopsis goes here.');
       expect(
         paris1517.images.portraitSmall,
         'http://media.finnkino.fi/1012/Event_11881/portrait_small/The1517toParis_1080.jpg',

@@ -9,6 +9,8 @@ class Event {
     @required this.genres,
     @required this.directors,
     @required this.lengthInMinutes,
+    @required this.shortSynopsis,
+    @required this.synopsis,
     @required this.images,
   });
 
@@ -17,6 +19,8 @@ class Event {
   final String genres;
   final List<String> directors;
   final String lengthInMinutes;
+  final String shortSynopsis;
+  final String synopsis;
   final EventImageData images;
 
   static List<Event> parseAll(String xmlString) {
@@ -30,6 +34,8 @@ class Event {
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
         lengthInMinutes: tagContents(node, 'LengthInMinutes'),
+        shortSynopsis: tagContents(node, 'ShortSynopsis'),
+        synopsis: tagContents(node, 'Synopsis'),
         images: EventImageData.parseAll(node.findElements('Images')),
       ));
     });
