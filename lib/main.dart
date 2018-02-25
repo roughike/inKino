@@ -6,7 +6,11 @@ import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/store.dart';
 import 'package:redux/redux.dart';
 
-void main() => runApp(new InKinoApp());
+void main() {
+  MaterialPageRoute.debugEnableFadingRoutes = true;
+
+  runApp(new InKinoApp());
+}
 
 class InKinoApp extends StatefulWidget {
   final Store<AppState> store = createStore();
