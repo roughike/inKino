@@ -167,10 +167,8 @@
             </Actor>
         </Cast>
         <Directors>
-            <Director>
-                <FirstName>Aleksi</FirstName>
-                <LastName>Mäkelä</LastName>
-            </Director>
+            <!-- Testing empty Directors element -->
+            <Test>test</Test>
         </Directors>
         <ContentDescriptors>
             <ContentDescriptor>
@@ -243,6 +241,10 @@
             <Director>
                 <FirstName>Ridley</FirstName>
                 <LastName>Scott</LastName>
+            </Director>
+            <Director>
+                <FirstName>Clint</FirstName>
+                <LastName>Eastwood</LastName>
             </Director>
         </Directors>
         <ContentDescriptors>

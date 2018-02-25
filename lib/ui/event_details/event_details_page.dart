@@ -5,6 +5,61 @@ class EventDetailsPage extends StatelessWidget {
   EventDetailsPage(this.event);
   final Event event;
 
+  Widget _buildEventInfo() {
+    var content = <Widget>[
+      new Text(
+        event.title,
+        style: new TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      new Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: new Text(
+          '${event.lengthInMinutes}min | ${event.genres}',
+          style: new TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    ];
+
+    if (event.directors.isNotEmpty) {
+      content.add(new Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: new Row(
+          children: [
+            new Text(
+              'Director:',
+              style: new TextStyle(
+                fontSize: 12.0,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: new Text(
+                event.directors.first,
+                style: new TextStyle(
+                  fontSize: 12.0,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ));
+    }
+
+    return new Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: content,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -24,7 +79,7 @@ class EventDetailsPage extends StatelessWidget {
             bottom: 0.0,
             child: new Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 new DecoratedBox(
                   decoration: new BoxDecoration(
                     boxShadow: <BoxShadow>[
@@ -45,55 +100,7 @@ class EventDetailsPage extends StatelessWidget {
                 new Expanded(
                   child: new Padding(
                     padding: const EdgeInsets.only(left: 16.0, top: 48.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Text(
-                          event.title,
-                          style: new TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: new Text(
-                            // TODO: Add actual movie length
-                            '90min | ' + event.genres,
-                            style: new TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: new Row(
-                            children: [
-                              new Text(
-                                'Director:',
-                                style: new TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              new Padding(
-                                padding: const EdgeInsets.only(left: 4.0),
-                                child: new Text(
-                                  // TODO: Replace with actual director
-                                  'Clint Eastwood',
-                                  style: new TextStyle(
-                                    fontSize: 12.0,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: _buildEventInfo(),
                   ),
                 ),
               ],

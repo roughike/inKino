@@ -15,6 +15,9 @@ void main() {
       expect(paris1517.id, '302535');
       expect(paris1517.title, '15:17 Pariisiin');
       expect(paris1517.genres, 'Draama, Jännitys');
+      expect(paris1517.directors.length, 1);
+      expect(paris1517.directors.first, 'Clint Eastwood');
+      expect(paris1517.lengthInMinutes, '94');
       expect(
         paris1517.images.portraitSmall,
         'http://media.finnkino.fi/1012/Event_11881/portrait_small/The1517toParis_1080.jpg',

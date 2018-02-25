@@ -7,12 +7,16 @@ class Event {
     @required this.id,
     @required this.title,
     @required this.genres,
+    @required this.directors,
+    @required this.lengthInMinutes,
     @required this.images,
   });
 
   final String id;
   final String title;
   final String genres;
+  final List<String> directors;
+  final String lengthInMinutes;
   final EventImageData images;
 
   static List<Event> parseAll(String xmlString) {
@@ -24,11 +28,25 @@ class Event {
         id: tagContents(node, 'ID'),
         title: tagContents(node, 'Title'),
         genres: tagContents(node, 'Genres'),
+        directors: _parseDirectors(node.findAllElements('Director')),
+        lengthInMinutes: tagContents(node, 'LengthInMinutes'),
         images: EventImageData.parseAll(node.findElements('Images')),
       ));
     });
 
     return events;
+  }
+
+  static List<String> _parseDirectors(Iterable<xml.XmlElement> nodes) {
+    var directors = <String>[];
+
+    nodes.forEach((node) {
+      var first = tagContents(node, 'FirstName');
+      var last = tagContents(node, 'LastName');
+      directors.add('$first $last');
+    });
+
+    return directors;
   }
 }
 
