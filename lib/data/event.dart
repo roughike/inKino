@@ -12,6 +12,7 @@ class Event {
     @required this.shortSynopsis,
     @required this.synopsis,
     @required this.images,
+    @required this.youtubeTrailers,
   });
 
   final String id;
@@ -22,6 +23,7 @@ class Event {
   final String shortSynopsis;
   final String synopsis;
   final EventImageData images;
+  final List<String> youtubeTrailers;
 
   static List<Event> parseAll(String xmlString) {
     var events = <Event>[];
@@ -37,6 +39,7 @@ class Event {
         shortSynopsis: tagContents(node, 'ShortSynopsis'),
         synopsis: tagContents(node, 'Synopsis'),
         images: EventImageData.parseAll(node.findElements('Images')),
+        youtubeTrailers: _parseTrailers(node.findAllElements('EventVideo')),
       ));
     });
 
@@ -53,6 +56,18 @@ class Event {
     });
 
     return directors;
+  }
+
+  static List<String> _parseTrailers(Iterable<xml.XmlElement> nodes) {
+    var trailers = <String>[];
+
+    nodes.forEach((node) {
+      trailers.add(
+        'https://youtube.com/watch?v=' + tagContents(node, 'Location'),
+      );
+    });
+
+    return trailers;
   }
 }
 

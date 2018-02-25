@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
   EventDetailsPage(this.event);
@@ -8,35 +9,77 @@ class EventDetailsPage extends StatelessWidget {
   Widget _buildBackdropPhoto() {
     var backdropPhoto =
         event.images.landscapeBig ?? event.images.landscapeSmall;
+    var content = <Widget>[];
 
     if (backdropPhoto != null) {
-      return new Image.network(
+      content.add(new Image.network(
         backdropPhoto,
         height: 175.0,
         fit: BoxFit.cover,
+      ));
+    } else {
+      content.add(new Container(
+        decoration: new BoxDecoration(
+          gradient: new LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: <Color>[
+              const Color(0xFF222222),
+              const Color(0xFF424242),
+            ],
+          ),
+        ),
+        height: 175.0,
+        child: new Center(
+          child: new Icon(
+            Icons.theaters,
+            color: Colors.white30,
+            size: 96.0,
+          ),
+        ),
+      ));
+    }
+
+    var playButton = _buildPlayButton();
+
+    if (playButton != null) {
+      content.add(playButton);
+    }
+
+    return new Stack(
+      alignment: Alignment.center,
+      children: content,
+    );
+  }
+
+  Widget _buildPlayButton() {
+    if (event.youtubeTrailers.isNotEmpty) {
+      return new DecoratedBox(
+        decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.black26,
+        ),
+        child: new Material(
+          type: MaterialType.circle,
+          color: Colors.transparent,
+          child: new IconButton(
+            padding: EdgeInsets.zero,
+            icon: new Icon(Icons.play_circle_outline),
+            iconSize: 42.0,
+            color: Colors.white.withOpacity(0.8),
+            onPressed: () async {
+              var url = event.youtubeTrailers.first;
+
+              if (await canLaunch(url)) {
+                await launch(url);
+              }
+            },
+          ),
+        ),
       );
     }
 
-    return new Container(
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: <Color>[
-            const Color(0xFF222222),
-            const Color(0xFF424242),
-          ],
-        ),
-      ),
-      height: 175.0,
-      child: new Center(
-        child: new Icon(
-          Icons.theaters,
-          color: Colors.white70,
-          size: 96.0,
-        ),
-      ),
-    );
+    return null;
   }
 
   Widget _buildPortraitPhoto() {
@@ -158,7 +201,7 @@ class EventDetailsPage extends StatelessWidget {
                   child: new Material(
                     type: MaterialType.circle,
                     color: Colors.transparent,
-                    child: new BackButton(color: Colors.white.withOpacity(0.8)),
+                    child: new BackButton(color: Colors.white.withOpacity(0.9)),
                   ),
                 ),
                 new Positioned(
