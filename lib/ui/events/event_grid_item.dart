@@ -13,7 +13,10 @@ class EventGridItem extends StatelessWidget {
       child: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Image.network(event.images.portraitMedium),
+          new Hero(
+            tag: event.id,
+            child: new Image.network(event.images.portraitMedium),
+          ),
           new Container(
             decoration: new BoxDecoration(
               gradient: new LinearGradient(

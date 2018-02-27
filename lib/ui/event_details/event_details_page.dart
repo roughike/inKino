@@ -96,10 +96,13 @@ class EventDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      child: new Image.network(
-        event.images.portraitMedium,
-        height: 150.0,
-        fit: BoxFit.cover,
+      child: new Hero(
+        tag: event.id,
+        child: new Image.network(
+          event.images.portraitMedium,
+          height: 150.0,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
