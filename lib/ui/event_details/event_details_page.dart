@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
+import 'package:inkino/ui/events/event_poster.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
@@ -11,34 +12,35 @@ class EventDetailsPage extends StatelessWidget {
     var backdropPhoto =
         event.images.landscapeBig ?? event.images.landscapeSmall;
     var content = <Widget>[];
+    content.add(new Container(
+      decoration: new BoxDecoration(
+        gradient: new LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: <Color>[
+            const Color(0xFF222222),
+            const Color(0xFF424242),
+          ],
+        ),
+      ),
+      height: 175.0,
+      child: new Center(
+        child: new Icon(
+          Icons.theaters,
+          color: Colors.white30,
+          size: 96.0,
+        ),
+      ),
+    ));
 
     if (backdropPhoto != null) {
-      content.add(new Image.network(
-        backdropPhoto,
+      content.add(new FadeInImage.assetNetwork(
+        placeholder: 'assets/images/1x1_transparent.png',
+        image: backdropPhoto,
         width: MediaQuery.of(context).size.width,
         height: 175.0,
+        fadeInDuration: const Duration(milliseconds: 300),
         fit: BoxFit.cover,
-      ));
-    } else {
-      content.add(new Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            colors: <Color>[
-              const Color(0xFF222222),
-              const Color(0xFF424242),
-            ],
-          ),
-        ),
-        height: 175.0,
-        child: new Center(
-          child: new Icon(
-            Icons.theaters,
-            color: Colors.white30,
-            size: 96.0,
-          ),
-        ),
       ));
     }
 
@@ -85,24 +87,12 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   Widget _buildPortraitPhoto() {
-    return new DecoratedBox(
-      decoration: new BoxDecoration(
-        boxShadow: <BoxShadow>[
-          new BoxShadow(
-            offset: const Offset(1.0, 1.0),
-            spreadRadius: 1.0,
-            blurRadius: 2.0,
-            color: Colors.black38,
-          ),
-        ],
-      ),
-      child: new Hero(
-        tag: event.id,
-        child: new Image.network(
-          event.images.portraitMedium,
-          height: 150.0,
-          fit: BoxFit.cover,
-        ),
+    return new Hero(
+      tag: event.id,
+      child: new EventPoster(
+        url: event.images.portraitMedium,
+        size: new Size(100.0, 150.0),
+        useShadow: true,
       ),
     );
   }

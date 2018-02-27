@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
+import 'package:inkino/ui/events/event_poster.dart';
 
 class EventGridItem extends StatelessWidget {
   EventGridItem(this.event);
@@ -15,7 +16,7 @@ class EventGridItem extends StatelessWidget {
         children: <Widget>[
           new Hero(
             tag: event.id,
-            child: new Image.network(event.images.portraitMedium),
+            child: new EventPoster(url: event.images.portraitMedium),
           ),
           new Container(
             decoration: new BoxDecoration(
