@@ -8,9 +8,12 @@ class EventGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    var crossAxisChildCount = isPortrait? 2 : 4;
+
     return new GridView.builder(
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisChildCount,
         childAspectRatio: 2 / 3,
       ),
       itemCount: events.length,

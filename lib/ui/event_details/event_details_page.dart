@@ -7,7 +7,7 @@ class EventDetailsPage extends StatelessWidget {
   EventDetailsPage(this.event);
   final Event event;
 
-  Widget _buildBackdropPhoto() {
+  Widget _buildBackdropPhoto(BuildContext context) {
     var backdropPhoto =
         event.images.landscapeBig ?? event.images.landscapeSmall;
     var content = <Widget>[];
@@ -15,6 +15,7 @@ class EventDetailsPage extends StatelessWidget {
     if (backdropPhoto != null) {
       content.add(new Image.network(
         backdropPhoto,
+        width: MediaQuery.of(context).size.width,
         height: 175.0,
         fit: BoxFit.cover,
       ));
@@ -225,7 +226,7 @@ class EventDetailsPage extends StatelessWidget {
         children: <Widget>[
           new Padding(
             padding: const EdgeInsets.only(bottom: 118.0),
-            child: _buildBackdropPhoto(),
+            child: _buildBackdropPhoto(context),
           ),
           new Positioned(
             top: MediaQuery.of(context).padding.top,
