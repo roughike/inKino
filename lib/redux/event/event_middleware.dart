@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:inkino/data/file_cache.dart';
+import 'package:inkino/data/event.dart';
 import 'package:inkino/data/finnkino_api.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
@@ -8,8 +10,12 @@ import 'package:redux/redux.dart';
 import 'package:inkino/redux/selectors.dart';
 
 class EventMiddleware extends MiddlewareClass<AppState> {
-  EventMiddleware(this.api);
+  static const Duration kMaxStaleness = const Duration(minutes: 5);
+
+  EventMiddleware(this.api, this.cache);
+
   final FinnkinoApi api;
+  final FileCache cache;
 
   @override
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
@@ -26,13 +32,21 @@ class EventMiddleware extends MiddlewareClass<AppState> {
     Theater newTheater,
     NextDispatcher next,
   ) async {
-    // TODO: persist the shows and actually include the time when the shows were last loaded.
-    var cachedEvents = eventsForTheaterSelector(store.state, newTheater);
+    var inMemoryCache = eventsForTheaterSelector(store.state, newTheater);
 
-    if (cachedEvents.isNotEmpty) {
-      next(new ReceivedEventsAction(newTheater, cachedEvents));
+    if (inMemoryCache.isNotEmpty) {
+      next(new ReceivedEventsAction(newTheater, inMemoryCache));
     } else {
-      return _fetchEvents(store, newTheater, next);
+      var diskCache = await cache.read('events_${newTheater.id}');
+
+      if (diskCache.contentFreshEnough(kMaxStaleness)) {
+        next(new ReceivedEventsAction(
+          newTheater,
+          Event.parseAll(diskCache.content),
+        ));
+      } else {
+        return _fetchEvents(store, newTheater, next);
+      }
     }
   }
 
@@ -42,7 +56,13 @@ class EventMiddleware extends MiddlewareClass<AppState> {
     NextDispatcher next,
   ) async {
     next(new RequestingEventsAction());
-    var events = await api.getEvents(newTheater);
-    next(new ReceivedEventsAction(newTheater, events));
+
+    try {
+      var events = await api.getEvents(newTheater);
+      next(new ReceivedEventsAction(newTheater, Event.parseAll(events)));
+      await cache.persist('events_${newTheater.id}', events);
+    } on Exception {
+      print('Event error');
+    }
   }
 }

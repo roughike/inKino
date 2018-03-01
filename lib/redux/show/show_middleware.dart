@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:inkino/data/file_cache.dart';
 import 'package:inkino/data/finnkino_api.dart';
+import 'package:inkino/data/show.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
@@ -8,8 +10,12 @@ import 'package:redux/redux.dart';
 import 'package:inkino/redux/selectors.dart';
 
 class ShowMiddleware extends MiddlewareClass<AppState> {
-  ShowMiddleware(this.api);
+  static const Duration kMaxStaleness = const Duration(minutes: 5);
+
+  ShowMiddleware(this.api, this.cache);
+
   final FinnkinoApi api;
+  final FileCache cache;
 
   @override
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
@@ -26,12 +32,20 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     Theater newTheater,
     NextDispatcher next,
   ) async {
-    // TODO: persist the shows and actually include the time when the shows were last loaded.
-    var cachedShows = showsForTheaterSelector(store.state, newTheater);
+    var inMemoryCache = showsForTheaterSelector(store.state, newTheater);
 
-    if (cachedShows.isNotEmpty) {
-      next(new ReceivedShowsAction(newTheater, cachedShows));
+    if (inMemoryCache.isNotEmpty) {
+      next(new ReceivedShowsAction(newTheater, inMemoryCache));
     } else {
+      var diskCache = await cache.read('shows_${newTheater.id}');
+
+      if (diskCache.contentFreshEnough(kMaxStaleness)) {
+        next(new ReceivedShowsAction(
+          newTheater,
+          Show.parseAll(diskCache.content),
+        ));
+      }
+
       return _fetchShows(store, newTheater, next);
     }
   }
@@ -42,7 +56,13 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     NextDispatcher next,
   ) async {
     next(new RequestingShowsAction());
-    var shows = await api.getSchedule(newTheater);
-    next(new ReceivedShowsAction(newTheater, shows));
+
+    try {
+      var shows = await api.getSchedule(newTheater);
+      next(new ReceivedShowsAction(newTheater, Show.parseAll(shows)));
+      await cache.persist('shows_${newTheater.id}', shows);
+    } on Exception {
+      print('Shows error');
+    }
   }
 }

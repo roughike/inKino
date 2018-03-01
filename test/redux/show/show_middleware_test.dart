@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:inkino/data/file_cache.dart';
 import 'package:inkino/data/finnkino_api.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
@@ -38,12 +39,14 @@ void main() {
 
     MockStore mockStore;
     MockFinnkinoApi mockApi;
+    MockCache mockCache;
     ShowMiddleware sut;
 
     setUp(() {
       mockStore = new MockStore();
       mockApi = new MockFinnkinoApi();
-      sut = new ShowMiddleware(mockApi);
+      mockCache = new MockCache();
+      sut = new ShowMiddleware(mockApi, mockCache);
 
       log.clear();
     });
@@ -56,7 +59,11 @@ void main() {
       var action = new InitCompleteAction(theaters, theaters.first);
 
       when(mockStore.state).thenReturn(new AppState.initial());
-      when(mockApi.getSchedule(currentTheater)).thenReturn(shows);
+      when(mockApi.getSchedule(currentTheater)).thenReturn(
+        new File('test_assets/schedule.xml').readAsStringSync(),
+      );
+
+      when(mockCache.read(any)).thenReturn(new Future.value(new CacheData.empty()));
 
       // When
       await sut.call(mockStore, action, next);
@@ -67,7 +74,7 @@ void main() {
 
       final ReceivedShowsAction receivedShows = log[2];
       expect(receivedShows.theater, theaters.first);
-      expect(receivedShows.shows, shows);
+      expect(receivedShows.shows.length, 3);
     });
 
     group('when called with ChangeCurrentTheaterAction', () {
