@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inkino/assets.dart';
 import 'package:meta/meta.dart';
 
 class EventPoster extends StatelessWidget {
@@ -48,7 +49,7 @@ class EventPoster extends StatelessWidget {
             size: 72.0,
           ),
           new FadeInImage.assetNetwork(
-            placeholder: 'assets/images/1x1_transparent.png',
+            placeholder: ImageAssets.transparentImage,
             image: url ?? '',
             width: size?.width,
             height: size?.height,

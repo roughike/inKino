@@ -44,9 +44,9 @@ class EventMiddleware extends MiddlewareClass<AppState> {
           newTheater,
           Event.parseAll(diskCache.content),
         ));
-      } else {
-        return _fetchEvents(store, newTheater, next);
       }
+
+      return _fetchEvents(store, newTheater, next);
     }
   }
 

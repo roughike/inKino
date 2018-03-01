@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inkino/assets.dart';
 import 'package:inkino/data/event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,7 +35,7 @@ class EventHeader extends StatelessWidget {
 
     if (photoUrl != null) {
       return new FadeInImage.assetNetwork(
-        placeholder: 'assets/images/1x1_transparent.png',
+        placeholder: ImageAssets.transparentImage,
         image: photoUrl,
         width: MediaQuery.of(context).size.width,
         height: 175.0,

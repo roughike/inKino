@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:inkino/assets.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
@@ -25,7 +26,7 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     NextDispatcher next,
   ) async {
     var theaterXml =
-        await bundle.loadString('assets/preloaded_data/theaters.xml');
+        await bundle.loadString(OtherAssets.preloadedTheaters);
     var theaters = Theater.parseAll(theaterXml);
     var currentTheater = theaters.first; // TODO: Store default in SharedPrefs.
 
