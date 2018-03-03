@@ -22,6 +22,11 @@ List<Show> showsForTheaterSelector(AppState state, Theater theater) {
     }
   });
 
+  if (isSearching(state)) {
+    var query = new RegExp(state.searchQuery);
+    shows.removeWhere((show) => !query.hasMatch(show.title));
+  }
+
   return shows;
 }
 
@@ -39,7 +44,16 @@ List<Event> eventsForTheaterSelector(AppState state, Theater theater) {
     }
   });
 
+  if (isSearching(state)) {
+    var query = new RegExp(state.searchQuery);
+    events.removeWhere((event) => !query.hasMatch(event.title));
+  }
+
   return events;
+}
+
+bool isSearching(AppState state) {
+  return state.searchQuery != null && state.searchQuery.isNotEmpty;
 }
 
 Event eventByShowSelector(AppState state, Show show) {
