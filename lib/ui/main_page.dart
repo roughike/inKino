@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:inkino/redux/actions.dart';
 import 'package:inkino/ui/events/coming_soon_events_page.dart';
 import 'package:inkino/ui/events/event_grid.dart';
 import 'package:inkino/ui/events/now_playing_events_page.dart';
@@ -13,11 +15,46 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+  TextEditingController _searchQuery;
+  bool _isSearching = false;
 
   @override
   void initState() {
     super.initState();
     _controller = new TabController(length: 3, vsync: this);
+    _searchQuery = new TextEditingController();
+  }
+
+  void _startSearch() {
+    ModalRoute.of(context).addLocalHistoryEntry(new LocalHistoryEntry(
+      onRemove: () {
+        setState(() {
+          _searchQuery.clear();
+          _isSearching = false;
+        });
+      },
+    ));
+
+    setState(() {
+      _isSearching = true;
+    });
+  }
+
+  Widget _buildSearchField() {
+    return new TextField(
+      controller: _searchQuery,
+      autofocus: true,
+      decoration: const InputDecoration(
+        hintText: 'Search movies...',
+        border: InputBorder.none,
+        hintStyle: const TextStyle(color: Colors.white30),
+      ),
+      style: new TextStyle(color: Colors.white, fontSize: 16.0),
+      onChanged: (value) {
+        var store = new StoreProvider.of(context).store;
+        store.dispatch(new SearchQueryChangedAction(value));
+      },
+    );
   }
 
   Widget _buildDrawer() {
@@ -56,7 +93,8 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('inKino'),
+        leading: _isSearching ? new BackButton() : null,
+        title: _isSearching ? _buildSearchField() : new Text('inKino'),
         bottom: new TabBar(
           controller: _controller,
           isScrollable: true,
@@ -66,6 +104,12 @@ class _MyHomePageState extends State<MyHomePage>
             new Tab(text: 'Coming soon'),
           ],
         ),
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: _startSearch,
+          ),
+        ],
       ),
       drawer: _buildDrawer(),
       body: new TabBarView(

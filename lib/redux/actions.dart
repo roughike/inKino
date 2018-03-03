@@ -45,3 +45,8 @@ class ReceivedEventsAction {
   final Theater theater;
   final List<Event> events;
 }
+
+class SearchQueryChangedAction {
+  SearchQueryChangedAction(this.query);
+  final String query;
+}
