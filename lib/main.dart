@@ -31,20 +31,9 @@ class _InKinoAppState extends State<InKinoApp> {
     return new StoreProvider(
       store: widget.store,
       child: new MaterialApp(
-        title: 'Flutter Demo',
+        title: 'inKino',
         theme: new ThemeData(
-          primarySwatch: new MaterialColor(0xFF1C306D, <int, Color>{
-            50: const Color(0xFFE4E6ED),
-            100: const Color(0xFFBBC1D3),
-            200: const Color(0xFF8E98B6),
-            300: const Color(0xFF606E99),
-            400: const Color(0xFF3E4F83),
-            500: const Color(0xFF1C306D),
-            600: const Color(0xFF192B65),
-            700: const Color(0xFF14245A),
-            800: const Color(0xFF111E50),
-            900: const Color(0xFF09133E),
-          }),
+          primaryColor: new Color(0xFF1C306D),
           accentColor: new Color(0xFFFFAD32),
         ),
         home: new MyHomePage(),
