@@ -31,6 +31,8 @@ class _MyHomePageState extends State<MyHomePage>
         setState(() {
           _searchQuery.clear();
           _isSearching = false;
+
+          _updateSearchQuery(null);
         });
       },
     ));
@@ -50,11 +52,13 @@ class _MyHomePageState extends State<MyHomePage>
         hintStyle: const TextStyle(color: Colors.white30),
       ),
       style: new TextStyle(color: Colors.white, fontSize: 16.0),
-      onChanged: (value) {
-        var store = new StoreProvider.of(context).store;
-        store.dispatch(new SearchQueryChangedAction(value));
-      },
+      onChanged: _updateSearchQuery,
     );
+  }
+
+  void _updateSearchQuery(String newQuery) {
+    var store = new StoreProvider.of(context).store;
+    store.dispatch(new SearchQueryChangedAction(newQuery));
   }
 
   Widget _buildDrawer() {
