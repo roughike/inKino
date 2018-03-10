@@ -12,9 +12,9 @@ class CacheData {
   final DateTime lastModified;
   final String content;
 
-  CacheData.empty() :
-      lastModified = null,
-      content = null;
+  CacheData.empty()
+      : lastModified = null,
+        content = null;
 
   bool get hasContent => content != null;
 
@@ -27,9 +27,17 @@ class CacheData {
   }
 }
 
+typedef Future<File> TempFileGetter(String filename);
+
 class FileCache {
+  @visibleForTesting
+  TempFileGetter tempFile = (String filename) async {
+    var path = (await getTemporaryDirectory()).path;
+    return new File('$path/filename');
+  };
+
   Future<CacheData> read(String filename) async {
-    var cachedFile = await _getCachedFileReference(filename);
+    var cachedFile = await tempFile(filename);
 
     try {
       var lastModified = await cachedFile.lastModified();
@@ -45,12 +53,7 @@ class FileCache {
   }
 
   Future<Null> persist(String filename, String rawContent) async {
-    var cacheFile = await _getCachedFileReference(filename);
+    var cacheFile = await tempFile(filename);
     return cacheFile.writeAsString(rawContent);
-  }
-
-  Future<File> _getCachedFileReference(String filename) async {
-    var path = (await getTemporaryDirectory()).path;
-    return new File('$path/filename');
   }
 }
