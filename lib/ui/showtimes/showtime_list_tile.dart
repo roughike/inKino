@@ -72,7 +72,7 @@ class ShowtimeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var backgroundColor =
-        useAlternateBackground ? Colors.black.withOpacity(0.01) : Colors.white;
+        useAlternateBackground ? const Color(0xFFFAFAFA) : Colors.white;
 
     return new Material(
       color: backgroundColor,
