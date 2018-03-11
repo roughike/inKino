@@ -1,4 +1,5 @@
 import 'package:inkino/data/event.dart';
+import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/data/theater.dart';
 
@@ -17,6 +18,16 @@ class InitCompleteAction {
 class ChangeCurrentTheaterAction {
   ChangeCurrentTheaterAction(this.selectedTheater);
   final Theater selectedTheater;
+}
+
+class ChangeCurrentDateAction {
+  ChangeCurrentDateAction(this.date);
+  final ScheduleDate date;
+}
+
+class ReceivedScheduleDatesAction {
+  ReceivedScheduleDatesAction(this.dates);
+  final List<ScheduleDate> dates;
 }
 
 class FetchShowsAction {

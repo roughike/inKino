@@ -15,4 +15,14 @@ class ScheduleDate {
     
     return scheduleDates;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is ScheduleDate &&
+              runtimeType == other.runtimeType &&
+              dateTime == other.dateTime;
+
+  @override
+  int get hashCode => dateTime.hashCode;
 }

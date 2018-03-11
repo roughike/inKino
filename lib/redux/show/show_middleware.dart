@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:inkino/data/file_cache.dart';
 import 'package:inkino/data/finnkino_api.dart';
+import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
@@ -23,8 +24,19 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
 
     if (action is InitCompleteAction || action is ChangeCurrentTheaterAction) {
       final Theater currentTheater = action.selectedTheater;
+
+      await _refreshScheduleDates(store, currentTheater, next);
       await _refreshShowsForTheaterIfNeeded(store, currentTheater, next);
     }
+  }
+
+  Future<Null> _refreshScheduleDates(
+    Store<AppState> store,
+    Theater currentTheater,
+    NextDispatcher next,
+  ) async {
+    var dates = await api.getScheduleDates(currentTheater);
+    next(new ReceivedScheduleDatesAction(ScheduleDate.parseAll(dates)));
   }
 
   Future<Null> _refreshShowsForTheaterIfNeeded(

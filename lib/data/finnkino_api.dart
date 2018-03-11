@@ -5,10 +5,22 @@ import 'dart:io';
 import 'package:inkino/data/theater.dart';
 
 class FinnkinoApi {
+  static final Uri kScheduleDatesBaseUrl =
+      new Uri.https('www.finnkino.fi', '/xml/ScheduleDates');
   static final Uri kScheduleBaseUrl =
       new Uri.https('www.finnkino.fi', '/xml/Schedule');
   static final Uri kEventsBaseUrl =
       new Uri.https('www.finnkino.fi', '/xml/Events');
+
+  Future<String> getScheduleDates(Theater theater) async {
+    return _performGetRequest(
+      kScheduleDatesBaseUrl.replace(
+        queryParameters: {
+          'area': theater.id,
+        },
+      ),
+    );
+  }
 
   Future<String> getSchedule(Theater theater) async {
     return _performGetRequest(
