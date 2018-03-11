@@ -16,7 +16,7 @@ class ShowtimesPage extends StatelessWidget {
         var useAlternateBackground = index % 2 == 0;
 
         return new Column(
-          children: [
+          children: <Widget>[
             new ShowtimeListTile(show, useAlternateBackground),
             new Divider(
               height: 1.0,

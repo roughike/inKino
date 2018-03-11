@@ -11,7 +11,7 @@ class _ShowtimeDateSelectorState extends State<ShowtimeDateSelector> {
   Widget _buildDateItem(int myIndex) {
     var color = _selectedIndex == myIndex
         ? Colors.white
-        : Colors.white.withOpacity(0.5);
+        : Colors.white.withOpacity(0.4);
 
     return new Material(
       color: Colors.transparent,
