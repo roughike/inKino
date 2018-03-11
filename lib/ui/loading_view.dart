@@ -108,6 +108,7 @@ class _LoadingViewState extends State<LoadingView>
       alignment: Alignment.center,
       children: <Widget>[
         new _TransitionAnimation(
+          yOffset: 50.0,
           controller: _loadingController,
           child: widget.loadingContent,
         ),
@@ -126,6 +127,7 @@ class _LoadingViewState extends State<LoadingView>
 
 class _TransitionAnimation extends StatelessWidget {
   _TransitionAnimation({
+    double yOffset,
     @required this.controller,
     @required this.child,
   })  : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
@@ -138,7 +140,7 @@ class _TransitionAnimation extends StatelessWidget {
             ),
           ),
         ),
-        _yTranslation = new Tween(begin: 250.0, end: 0.0).animate(
+        _yTranslation = new Tween(begin: yOffset ?? 250.0, end: 0.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
