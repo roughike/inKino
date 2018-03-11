@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/events/coming_soon_events_page.dart';
 import 'package:inkino/ui/events/event_grid.dart';
 import 'package:inkino/ui/events/now_playing_events_page.dart';
@@ -14,6 +16,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
+  static final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
   TabController _controller;
   TextEditingController _searchQuery;
   bool _isSearching = false;
@@ -40,6 +44,33 @@ class _MyHomePageState extends State<MyHomePage>
     setState(() {
       _isSearching = true;
     });
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    return new InkWell(
+      onTap: () => scaffoldKey.currentState.openDrawer(),
+      child: new Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Text('inKino'),
+            new StoreConnector<AppState, Theater>(
+              converter: (store) => store.state.theaterState.currentTheater,
+              builder: (BuildContext context, Theater currentTheater) {
+                return new Text(
+                  currentTheater?.name ?? '',
+                  style: new TextStyle(
+                    fontSize: 12.0,
+                    color: Colors.white70,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildSearchField() {
@@ -96,9 +127,10 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: scaffoldKey,
       appBar: new AppBar(
         leading: _isSearching ? new BackButton() : null,
-        title: _isSearching ? _buildSearchField() : new Text('inKino'),
+        title: _isSearching? _buildSearchField() : _buildTitle(context),
         bottom: new TabBar(
           controller: _controller,
           isScrollable: true,
