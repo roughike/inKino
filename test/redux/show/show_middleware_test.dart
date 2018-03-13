@@ -27,26 +27,14 @@ void main() {
       ),
     ];
 
-    final shows = <MockShow>[
-      new MockShow(),
-      new MockShow(),
-    ];
-
-    final showsById = <String, MockShow>{
-      'first': shows[0],
-      'second': shows[1],
-    };
-
     MockStore mockStore;
     MockFinnkinoApi mockApi;
-    MockCache mockCache;
     ShowMiddleware sut;
 
     setUp(() {
       mockStore = new MockStore();
       mockApi = new MockFinnkinoApi();
-      mockCache = new MockCache();
-      sut = new ShowMiddleware(mockApi, mockCache);
+      sut = new ShowMiddleware(mockApi);
 
       log.clear();
     });
@@ -59,48 +47,24 @@ void main() {
       var action = new InitCompleteAction(theaters, theaters.first);
 
       when(mockStore.state).thenReturn(new AppState.initial());
-      when(mockApi.getSchedule(currentTheater)).thenReturn(
+      when(mockApi.getSchedule(currentTheater, null)).thenReturn(
         new File('test_assets/schedule.xml').readAsStringSync(),
       );
-
-      when(mockCache.read(any)).thenReturn(new Future.value(new CacheData.empty()));
+      when(mockApi.getScheduleDates(currentTheater)).thenReturn(
+        new File('test_assets/schedule_dates.xml').readAsStringSync(),
+      );
 
       // When
       await sut.call(mockStore, action, next);
 
       // Then
       expect(log[0], new isInstanceOf<InitCompleteAction>());
-      expect(log[1], new isInstanceOf<RequestingShowsAction>());
+      expect(log[1], new isInstanceOf<ReceivedScheduleDatesAction>());
+      expect(log[2], new isInstanceOf<RequestingShowsAction>());
 
-      final ReceivedShowsAction receivedShows = log[2];
+      final ReceivedShowsAction receivedShows = log[3];
       expect(receivedShows.theater, theaters.first);
       expect(receivedShows.shows.length, 3);
-    });
-
-    group('when called with ChangeCurrentTheaterAction', () {
-      test('when cached shows exist, skips API calls and returns cached shows',
-          () async {
-        // Given
-        var theater = theaters.first;
-        var action = new ChangeCurrentTheaterAction(theater);
-
-        when(mockStore.state).thenReturn(showState(
-          allShowsById: showsById,
-          showIdsByTheaterId: {theater.id: showsById.keys},
-        ));
-
-        // When
-        await sut.call(mockStore, action, next);
-
-        // Then
-        expect(log[0], new isInstanceOf<ChangeCurrentTheaterAction>());
-
-        final ReceivedShowsAction receivedShows = log[1];
-        expect(receivedShows.theater, theaters.first);
-        expect(receivedShows.shows, shows);
-
-        verifyZeroInteractions(mockApi);
-      });
     });
   });
 }

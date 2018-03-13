@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
+import 'package:intl/intl.dart';
 
 class ShowtimeDateSelector extends StatelessWidget {
   Widget _buildDateItem(ScheduleDate date, ShowtimesPageViewModel viewModel) {
@@ -21,14 +22,14 @@ class ShowtimeDateSelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(
-                'Sun',
+                new DateFormat('E').format(date.dateTime),
                 style: new TextStyle(
                   fontSize: 12.0,
                   color: color,
                 ),
               ),
               new Text(
-                '11',
+                date.dateTime.day.toString(),
                 style: new TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,

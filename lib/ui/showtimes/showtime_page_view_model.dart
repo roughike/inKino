@@ -29,9 +29,9 @@ class ShowtimesPageViewModel {
     );
 
     return new ShowtimesPageViewModel(
-      availableDates: store.state.showState.availableDates,
+      availableDates: store.state.showState.availableDates.take(7).toList(),
       selectedDate: store.state.showState.selectedDate,
-      status: shows.isEmpty? LoadingStatus.loading : LoadingStatus.success,
+      status: store.state.showState.loadingStatus,
       shows: shows,
       changeCurrentDate: (newDate) {
         store.dispatch(new ChangeCurrentDateAction(newDate));

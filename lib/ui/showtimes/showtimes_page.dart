@@ -33,18 +33,18 @@ class ShowtimesPage extends StatelessWidget {
     return new StoreConnector<AppState, ShowtimesPageViewModel>(
       converter: (store) => ShowtimesPageViewModel.fromStore(store),
       builder: (BuildContext context, ShowtimesPageViewModel viewModel) {
-        return new LoadingView(
-          status: viewModel.status,
-          loadingContent: new CircularProgressIndicator(),
-          errorContent: new Text('Error'),
-          successContent: new Column(
-            children: <Widget>[
-              new Expanded(
-                child: _buildShowtimeList(viewModel),
+        return new Column(
+          children: <Widget>[
+            new Expanded(
+              child: new LoadingView(
+                status: viewModel.status,
+                loadingContent: new CircularProgressIndicator(),
+                errorContent: new Text('Error'),
+                successContent:  _buildShowtimeList(viewModel),
               ),
-              new ShowtimeDateSelector(),
-            ],
-          ),
+            ),
+            new ShowtimeDateSelector(),
+          ],
         );
       },
     );
