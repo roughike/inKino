@@ -134,8 +134,8 @@ class _MyHomePageState extends State<MyHomePage>
           controller: _controller,
           isScrollable: true,
           tabs: <Tab>[
-            new Tab(text: 'Showtimes'),
             new Tab(text: 'Now in theaters'),
+            new Tab(text: 'Showtimes'),
             new Tab(text: 'Coming soon'),
           ],
         ),
@@ -150,8 +150,8 @@ class _MyHomePageState extends State<MyHomePage>
       body: new TabBarView(
         controller: _controller,
         children: <Widget>[
-          new ShowtimesPage(),
           new EventsPage(EventListType.nowInTheaters),
+          new ShowtimesPage(),
           new EventsPage(EventListType.comingSoon),
         ],
       ),
