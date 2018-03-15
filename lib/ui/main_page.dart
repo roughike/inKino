@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:inkino/data/event.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/ui/events/coming_soon_events_page.dart';
-import 'package:inkino/ui/events/event_grid.dart';
-import 'package:inkino/ui/events/now_playing_events_page.dart';
+import 'package:inkino/ui/events/events_page.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
 
@@ -152,8 +151,8 @@ class _MyHomePageState extends State<MyHomePage>
         controller: _controller,
         children: <Widget>[
           new ShowtimesPage(),
-          new NowPlayingEventsPage(),
-          new ComingSoonEventsPage(),
+          new EventsPage(EventListType.nowInTheaters),
+          new EventsPage(EventListType.comingSoon),
         ],
       ),
     );

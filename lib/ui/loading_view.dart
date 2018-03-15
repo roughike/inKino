@@ -61,10 +61,10 @@ class _LoadingViewState extends State<LoadingView>
 
   @override
   void dispose() {
-    super.dispose();
     _loadingController.dispose();
     _errorController.dispose();
     _successController.dispose();
+    super.dispose();
   }
 
   @override
