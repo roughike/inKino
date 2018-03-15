@@ -4,27 +4,27 @@ import 'package:meta/meta.dart';
 @immutable
 class EventState {
   EventState({
-    @required this.allEventsById,
-    @required this.eventIdsByTheaterId,
+    @required this.nowInTheatersEvents,
+    @required this.comingSoonEvents,
   });
 
-  final Map<String, Event> allEventsById;
-  final Map<String, List<String>> eventIdsByTheaterId;
+  final List<Event> nowInTheatersEvents;
+  final List<Event> comingSoonEvents;
 
   factory EventState.initial() {
     return new EventState(
-      allEventsById: <String, Event>{},
-      eventIdsByTheaterId: <String, List<String>>{},
+      nowInTheatersEvents: <Event>[],
+      comingSoonEvents: <Event>[],
     );
   }
 
   EventState copyWith({
-    Map<String, Event> allEventsById,
-    Map<String, List<String>> eventIdsByTheaterId,
+    List<Event> nowInTheatersEvents,
+    List<Event> comingSoonEvents,
   }) {
     return new EventState(
-      allEventsById: allEventsById ?? this.allEventsById,
-      eventIdsByTheaterId: eventIdsByTheaterId ?? this.eventIdsByTheaterId,
+      nowInTheatersEvents: nowInTheatersEvents ?? this.nowInTheatersEvents,
+      comingSoonEvents: comingSoonEvents ?? this.comingSoonEvents,
     );
   }
 }

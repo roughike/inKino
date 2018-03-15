@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:inkino/data/event.dart';
 import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:intl/intl.dart';
@@ -36,10 +37,14 @@ class FinnkinoApi {
     );
   }
 
-  Future<String> getEvents(Theater theater) async {
+  Future<String> getEvents(Theater theater, EventListType type) async {
+    var listType =
+        type == EventListType.nowInTheaters ? 'NowInTheatres' : 'ComingSoon';
+
     return _performGetRequest(
       kEventsBaseUrl.replace(queryParameters: {
         'area': theater.id,
+        'listType': listType,
       }),
     );
   }

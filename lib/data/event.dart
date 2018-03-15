@@ -2,6 +2,11 @@ import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:inkino/utils.dart';
 
+enum EventListType {
+  nowInTheaters,
+  comingSoon,
+}
+
 class Event {
   Event({
     @required this.id,

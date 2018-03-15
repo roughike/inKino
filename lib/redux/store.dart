@@ -19,7 +19,7 @@ Store<AppState> createStore() {
       // TODO: test the ordering, since it matters.
       new TheaterMiddleware(rootBundle),
       new ShowMiddleware(api),
-      new EventMiddleware(api, cache),
+      new EventMiddleware(api),
     ],
   );
 }

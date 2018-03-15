@@ -30,32 +30,12 @@ List<Show> showsForTheaterSelector(AppState state, Theater theater) {
   return shows;
 }
 
-List<Event> eventsForTheaterSelector(AppState state, Theater theater) {
-  var events = <Event>[];
-  var allEvents = state.eventState.allEventsById;
-  var eventIdsForTheater =
-      theater != null ? state.eventState.eventIdsByTheaterId[theater.id] : [];
-
-  eventIdsForTheater?.forEach((id) {
-    var event = allEvents[id];
-
-    if (event != null) {
-      events.add(event);
-    }
-  });
-
-  if (isSearching(state)) {
-    var query = new RegExp(state.searchQuery, caseSensitive: false);
-    events.removeWhere((event) => !query.hasMatch(event.title));
-  }
-
-  return events;
-}
-
 bool isSearching(AppState state) {
   return state.searchQuery != null && state.searchQuery.isNotEmpty;
 }
 
 Event eventByShowSelector(AppState state, Show show) {
-  return state.eventState.allEventsById[show.eventId];
+  return state.eventState.nowInTheatersEvents
+      .where((event) => event.id == show.eventId)
+      .first;
 }

@@ -2,6 +2,7 @@ import 'package:inkino/data/event.dart';
 import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/data/theater.dart';
+import 'package:meta/meta.dart';
 
 class InitAction {}
 
@@ -50,11 +51,15 @@ class FetchEventsAction {
 }
 
 class RequestingEventsAction {}
-class ReceivedEventsAction {
-  ReceivedEventsAction(this.theater, this.events);
 
-  final Theater theater;
-  final List<Event> events;
+class ReceivedEventsAction {
+  ReceivedEventsAction({
+    @required this.nowInTheatersEvents,
+    @required this.comingSoonEvents,
+  });
+
+  final List<Event> nowInTheatersEvents;
+  final List<Event> comingSoonEvents;
 }
 
 class SearchQueryChangedAction {
