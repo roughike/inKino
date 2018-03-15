@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/loading_status.dart';
 import 'package:inkino/ui/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
@@ -40,7 +41,7 @@ class ShowtimesPage extends StatelessWidget {
                 status: viewModel.status,
                 loadingContent: new CircularProgressIndicator(),
                 errorContent: new Text('Error'),
-                successContent:  _buildShowtimeList(viewModel),
+                successContent: _buildShowtimeList(viewModel),
               ),
             ),
             new ShowtimeDateSelector(),
