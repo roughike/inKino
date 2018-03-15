@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/event.dart';
@@ -15,7 +17,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  static final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> scaffoldKey =
+      new GlobalKey<ScaffoldState>();
 
   TabController _controller;
   TextEditingController _searchQuery;
@@ -46,12 +49,16 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildTitle(BuildContext context) {
+    var horizontalTitleAligment =
+        Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.start;
+
     return new InkWell(
       onTap: () => scaffoldKey.currentState.openDrawer(),
       child: new Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: horizontalTitleAligment,
           children: <Widget>[
             new Text('inKino'),
             new StoreConnector<AppState, Theater>(
@@ -129,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage>
       key: scaffoldKey,
       appBar: new AppBar(
         leading: _isSearching ? new BackButton() : null,
-        title: _isSearching? _buildSearchField() : _buildTitle(context),
+        title: _isSearching ? _buildSearchField() : _buildTitle(context),
         bottom: new TabBar(
           controller: _controller,
           isScrollable: true,
