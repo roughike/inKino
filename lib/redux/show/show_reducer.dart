@@ -9,6 +9,7 @@ final showReducer = combineTypedReducers([
   new ReducerBinding<ShowState, ChangeCurrentDateAction>(_changeDate),
   new ReducerBinding<ShowState, RequestingShowsAction>(_requestingShows),
   new ReducerBinding<ShowState, ReceivedShowsAction>(_receivedShows),
+  new ReducerBinding<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
 ]);
 
 ShowState _receivedDates(ShowState state, ReceivedScheduleDatesAction action) {
@@ -44,4 +45,8 @@ ShowState _receivedShows(ShowState state, ReceivedShowsAction action) {
     allShowsById: showsById,
     showIdsByTheaterId: showIdsByTheaterId,
   );
+}
+
+ShowState _errorLoadingShows(ShowState state, ErrorLoadingShowsAction action) {
+  return state.copyWith(loadingStatus: LoadingStatus.error);
 }

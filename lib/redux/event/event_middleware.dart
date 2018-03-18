@@ -27,19 +27,23 @@ class EventMiddleware extends MiddlewareClass<AppState> {
   ) async {
     next(new RequestingEventsAction());
 
-    var inTheatersEvents = await api.getEvents(
-      newTheater,
-      EventListType.nowInTheaters,
-    );
+    try {
+      var inTheatersEvents = await api.getEvents(
+        newTheater,
+        EventListType.nowInTheaters,
+      );
 
-    var comingSoonEvents = await api.getEvents(
-      newTheater,
-      EventListType.comingSoon,
-    );
+      var comingSoonEvents = await api.getEvents(
+        newTheater,
+        EventListType.comingSoon,
+      );
 
-    next(new ReceivedEventsAction(
-      nowInTheatersEvents: Event.parseAll(inTheatersEvents),
-      comingSoonEvents: Event.parseAll(comingSoonEvents),
-    ));
+      next(new ReceivedEventsAction(
+        nowInTheatersEvents: Event.parseAll(inTheatersEvents),
+        comingSoonEvents: Event.parseAll(comingSoonEvents),
+      ));
+    } catch (e) {
+      next(new ErrorLoadingEventsAction());
+    }
   }
 }

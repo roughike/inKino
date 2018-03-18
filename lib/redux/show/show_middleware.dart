@@ -21,8 +21,12 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     if (action is InitCompleteAction || action is ChangeCurrentTheaterAction) {
       final Theater currentTheater = action.selectedTheater;
 
-      await _fetchScheduleDates(currentTheater, next);
-      await _fetchShows(currentTheater, null, next);
+      try {
+        await _fetchScheduleDates(currentTheater, next);
+        await _fetchShows(currentTheater, null, next);
+      } catch (e) {
+        next(new ErrorLoadingShowsAction());
+      }
     } else if (action is ChangeCurrentDateAction) {
       await _fetchShows(store.state.theaterState.currentTheater, action.date, next);
     }

@@ -110,14 +110,17 @@ class _LoadingViewState extends State<LoadingView>
         new _TransitionAnimation(
           controller: _loadingController,
           child: widget.loadingContent,
+          isVisible: widget.status == LoadingStatus.loading,
         ),
         new _TransitionAnimation(
           controller: _errorController,
           child: widget.errorContent,
+          isVisible: widget.status == LoadingStatus.error,
         ),
         new _TransitionAnimation(
           controller: _successController,
           child: widget.successContent,
+          isVisible: widget.status == LoadingStatus.success,
         ),
       ],
     );
@@ -128,6 +131,7 @@ class _TransitionAnimation extends StatelessWidget {
   _TransitionAnimation({
     @required this.controller,
     @required this.child,
+    @required this.isVisible,
   })  : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
@@ -151,6 +155,7 @@ class _TransitionAnimation extends StatelessWidget {
 
   final AnimationController controller;
   final Widget child;
+  final bool isVisible;
 
   final Animation<double> _opacity;
   final Animation<double> _yTranslation;
@@ -160,15 +165,18 @@ class _TransitionAnimation extends StatelessWidget {
     return new AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, _) {
-        return new Transform(
-          transform: new Matrix4.translationValues(
-            0.0,
-            _yTranslation.value,
-            0.0,
-          ),
-          child: new Opacity(
-            opacity: _opacity.value,
-            child: child,
+        return new IgnorePointer(
+          ignoring: !isVisible,
+          child: new Transform(
+            transform: new Matrix4.translationValues(
+              0.0,
+              _yTranslation.value,
+              0.0,
+            ),
+            child: new Opacity(
+              opacity: _opacity.value,
+              child: child,
+            ),
           ),
         );
       },

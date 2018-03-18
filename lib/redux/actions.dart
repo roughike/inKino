@@ -26,6 +26,8 @@ class ChangeCurrentDateAction {
   final ScheduleDate date;
 }
 
+class ErrorLoadingShowsAction {}
+
 class ReceivedScheduleDatesAction {
   ReceivedScheduleDatesAction(this.dates);
   final List<ScheduleDate> dates;
@@ -61,6 +63,8 @@ class ReceivedEventsAction {
   final List<Event> nowInTheatersEvents;
   final List<Event> comingSoonEvents;
 }
+
+class ErrorLoadingEventsAction {}
 
 class SearchQueryChangedAction {
   SearchQueryChangedAction(this.query);
