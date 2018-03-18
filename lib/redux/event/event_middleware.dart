@@ -15,9 +15,18 @@ class EventMiddleware extends MiddlewareClass<AppState> {
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     next(action);
 
-    if (action is InitCompleteAction || action is ChangeCurrentTheaterAction) {
-      final Theater currentTheater = action.selectedTheater;
-      await _fetchEvents(currentTheater, next);
+    if (action is InitCompleteAction ||
+        action is ChangeCurrentTheaterAction ||
+        action is RefreshEventsAction) {
+      Theater theater;
+
+      if (action is RefreshEventsAction) {
+        theater = store.state.theaterState.currentTheater;
+      } else {
+        action.selectedTheater;
+      }
+
+      await _fetchEvents(theater, next);
     }
   }
 

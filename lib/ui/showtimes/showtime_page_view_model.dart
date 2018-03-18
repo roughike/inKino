@@ -14,6 +14,7 @@ class ShowtimesPageViewModel {
     @required this.selectedDate,
     @required this.shows,
     @required this.changeCurrentDate,
+    @required this.refreshShowtimes,
   });
 
   final LoadingStatus status;
@@ -21,6 +22,7 @@ class ShowtimesPageViewModel {
   final ScheduleDate selectedDate;
   final List<Show> shows;
   final Function(ScheduleDate) changeCurrentDate;
+  final Function refreshShowtimes;
 
   static ShowtimesPageViewModel fromStore(Store<AppState> store) {
     var shows = showsForTheaterSelector(
@@ -36,6 +38,7 @@ class ShowtimesPageViewModel {
       changeCurrentDate: (newDate) {
         store.dispatch(new ChangeCurrentDateAction(newDate));
       },
+      refreshShowtimes: () => store.dispatch(new RefreshShowsAction()),
     );
   }
 }

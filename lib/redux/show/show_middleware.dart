@@ -18,17 +18,26 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     next(action);
 
-    if (action is InitCompleteAction || action is ChangeCurrentTheaterAction) {
-      final Theater currentTheater = action.selectedTheater;
+    if (action is InitCompleteAction ||
+        action is ChangeCurrentTheaterAction ||
+        action is RefreshShowsAction) {
+      Theater theater;
+
+      if (action is RefreshShowsAction) {
+        theater = store.state.theaterState.currentTheater;
+      } else {
+        theater = action.selectedTheater;
+      }
 
       try {
-        await _fetchScheduleDates(currentTheater, next);
-        await _fetchShows(currentTheater, null, next);
+        await _fetchScheduleDates(theater, next);
+        await _fetchShows(theater, null, next);
       } catch (e) {
         next(new ErrorLoadingShowsAction());
       }
     } else if (action is ChangeCurrentDateAction) {
-      await _fetchShows(store.state.theaterState.currentTheater, action.date, next);
+      await _fetchShows(
+          store.state.theaterState.currentTheater, action.date, next);
     }
   }
 

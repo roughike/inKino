@@ -40,9 +40,7 @@ class ShowtimesPage extends StatelessWidget {
             child: new LoadingView(
               status: viewModel.status,
               loadingContent: new CircularProgressIndicator(),
-              errorContent: new ErrorView(
-                onRetry: () {},
-              ),
+              errorContent: new ErrorView(onRetry: viewModel.refreshShowtimes),
               successContent: _buildShowtimeList(viewModel),
             ),
           ),

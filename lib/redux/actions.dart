@@ -26,6 +26,8 @@ class ChangeCurrentDateAction {
   final ScheduleDate date;
 }
 
+class RefreshEventsAction {}
+
 class ErrorLoadingShowsAction {}
 
 class ReceivedScheduleDatesAction {
@@ -39,6 +41,8 @@ class FetchShowsAction {
 }
 
 class RequestingShowsAction {}
+
+class RefreshShowsAction {}
 
 class ReceivedShowsAction {
   ReceivedShowsAction(this.theater, this.shows);

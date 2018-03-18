@@ -20,7 +20,7 @@ class EventsPage extends StatelessWidget {
           loadingContent: new CircularProgressIndicator(),
           errorContent: new ErrorView(
             description: 'Error loading events.',
-            onRetry: () {},
+            onRetry: viewModel.refreshEvents,
           ),
           successContent: new EventGrid(viewModel.events),
         );
