@@ -10,7 +10,7 @@ import 'package:inkino/redux/selectors.dart';
 class ShowtimesPageViewModel {
   ShowtimesPageViewModel({
     @required this.status,
-    @required this.availableDates,
+    @required this.dates,
     @required this.selectedDate,
     @required this.shows,
     @required this.changeCurrentDate,
@@ -18,23 +18,18 @@ class ShowtimesPageViewModel {
   });
 
   final LoadingStatus status;
-  final List<ScheduleDate> availableDates;
-  final ScheduleDate selectedDate;
+  final List<DateTime> dates;
+  final DateTime selectedDate;
   final List<Show> shows;
-  final Function(ScheduleDate) changeCurrentDate;
+  final Function(DateTime) changeCurrentDate;
   final Function refreshShowtimes;
 
   static ShowtimesPageViewModel fromStore(Store<AppState> store) {
-    var shows = showsForTheaterSelector(
-      store.state,
-      store.state.theaterState.currentTheater,
-    );
-
     return new ShowtimesPageViewModel(
-      availableDates: store.state.showState.availableDates.take(7).toList(),
       selectedDate: store.state.showState.selectedDate,
+      dates: store.state.showState.dates,
       status: store.state.showState.loadingStatus,
-      shows: shows,
+      shows: store.state.showState.shows,
       changeCurrentDate: (newDate) {
         store.dispatch(new ChangeCurrentDateAction(newDate));
       },

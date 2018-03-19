@@ -1,14 +1,11 @@
 import 'dart:async';
 
-import 'package:inkino/data/file_cache.dart';
 import 'package:inkino/data/finnkino_api.dart';
-import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:redux/redux.dart';
-import 'package:inkino/redux/selectors.dart';
 
 class ShowMiddleware extends MiddlewareClass<AppState> {
   ShowMiddleware(this.api);
@@ -18,44 +15,37 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     next(action);
 
+    Theater theater;
+    DateTime date;
+
     if (action is InitCompleteAction ||
         action is ChangeCurrentTheaterAction ||
         action is RefreshShowsAction) {
-      Theater theater;
-
       if (action is RefreshShowsAction) {
         theater = store.state.theaterState.currentTheater;
       } else {
         theater = action.selectedTheater;
       }
-
-      try {
-        await _fetchScheduleDates(theater, next);
-        await _fetchShows(theater, null, next);
-      } catch (e) {
-        next(new ErrorLoadingShowsAction());
-      }
     } else if (action is ChangeCurrentDateAction) {
-      await _fetchShows(
-          store.state.theaterState.currentTheater, action.date, next);
+      theater = store.state.theaterState.currentTheater;
+      date = action.date;
     }
-  }
 
-  Future<Null> _fetchScheduleDates(
-    Theater currentTheater,
-    NextDispatcher next,
-  ) async {
-    var dates = await api.getScheduleDates(currentTheater);
-    next(new ReceivedScheduleDatesAction(ScheduleDate.parseAll(dates)));
+    await _fetchShows(theater, date, next);
   }
 
   Future<Null> _fetchShows(
     Theater newTheater,
-    ScheduleDate currentDate,
+    DateTime currentDate,
     NextDispatcher next,
   ) async {
     next(new RequestingShowsAction());
-    var shows = await api.getSchedule(newTheater, currentDate);
-    next(new ReceivedShowsAction(newTheater, Show.parseAll(shows)));
+
+    try {
+      var shows = await api.getSchedule(newTheater, currentDate);
+      next(new ReceivedShowsAction(newTheater, Show.parseAll(shows)));
+    } catch (e) {
+      next(new ErrorLoadingShowsAction());
+    }
   }
 }

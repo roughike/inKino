@@ -6,7 +6,10 @@ import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 import 'package:intl/intl.dart';
 
 class ShowtimeDateSelector extends StatelessWidget {
-  Widget _buildDateItem(ScheduleDate date, ShowtimesPageViewModel viewModel) {
+  ShowtimeDateSelector(this.viewModel);
+  final ShowtimesPageViewModel viewModel;
+
+  Widget _buildDateItem(DateTime date) {
     var color = date == viewModel.selectedDate
         ? Colors.white
         : Colors.white.withOpacity(0.4);
@@ -22,14 +25,14 @@ class ShowtimeDateSelector extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(
-                new DateFormat('E').format(date.dateTime),
+                new DateFormat('E').format(date),
                 style: new TextStyle(
                   fontSize: 12.0,
                   color: color,
                 ),
               ),
               new Text(
-                date.dateTime.day.toString(),
+                date.day.toString(),
                 style: new TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.w500,
@@ -48,17 +51,12 @@ class ShowtimeDateSelector extends StatelessWidget {
     return new Container(
       height: 56.0,
       color: const Color(0xFF222222),
-      child: new StoreConnector<AppState, ShowtimesPageViewModel>(
-        converter: (store) => ShowtimesPageViewModel.fromStore(store),
-        builder: (BuildContext context, ShowtimesPageViewModel viewModel) {
-          return new ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: viewModel.availableDates.length,
-            itemBuilder: (BuildContext context, int index) {
-              var date = viewModel.availableDates[index];
-              return _buildDateItem(date, viewModel);
-            },
-          );
+      child: new ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: viewModel.dates.length,
+        itemBuilder: (BuildContext context, int index) {
+          var date = viewModel.dates[index];
+          return _buildDateItem(date);
         },
       ),
     );

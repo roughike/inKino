@@ -3,30 +3,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:inkino/data/event.dart';
-import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:intl/intl.dart';
 
 class FinnkinoApi {
-  static final Uri kScheduleDatesBaseUrl =
-      new Uri.https('www.finnkino.fi', '/en/xml/ScheduleDates');
   static final Uri kScheduleBaseUrl =
       new Uri.https('www.finnkino.fi', '/en/xml/Schedule');
   static final Uri kEventsBaseUrl =
       new Uri.https('www.finnkino.fi', '/en/xml/Events');
 
-  Future<String> getScheduleDates(Theater theater) async {
-    return _performGetRequest(
-      kScheduleDatesBaseUrl.replace(
-        queryParameters: {
-          'area': theater.id,
-        },
-      ),
-    );
-  }
-
-  Future<String> getSchedule(Theater theater, ScheduleDate date) async {
-    var thing = date?.dateTime ?? new DateTime.now();
+  Future<String> getSchedule(Theater theater, DateTime date) async {
+    var thing = date ?? new DateTime.now();
     var dt = new DateFormat('dd.MM.yyyy').format(thing);
 
     return _performGetRequest(
@@ -54,6 +41,6 @@ class FinnkinoApi {
     var request = await httpClient.getUrl(uri);
     var response = await request.close();
 
-    return await response.transform(UTF8.decoder).join();
+    return response.transform(UTF8.decoder).join();
   }
 }

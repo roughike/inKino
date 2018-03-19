@@ -23,10 +23,12 @@ class EventMiddleware extends MiddlewareClass<AppState> {
       if (action is RefreshEventsAction) {
         theater = store.state.theaterState.currentTheater;
       } else {
-        action.selectedTheater;
+        theater = action.selectedTheater;
       }
 
-      await _fetchEvents(theater, next);
+      if (theater != null) {
+        await _fetchEvents(theater, next);
+      }
     }
   }
 

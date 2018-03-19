@@ -14,13 +14,9 @@ AppState appState({
 }
 
 AppState showState({
-  Map<String, Show> allShowsById,
-  Map<String, List<String>> showIdsByTheaterId,
+  List<Show> shows,
 }) {
   return appState().copyWith(
-    showState: appState().showState.copyWith(
-          allShowsById: allShowsById,
-          showIdsByTheaterId: showIdsByTheaterId,
-        ),
+    showState: appState().showState.copyWith(shows: shows),
   );
 }
