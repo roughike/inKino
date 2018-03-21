@@ -1,11 +1,9 @@
-import 'package:inkino/data/schedule_date.dart';
 import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/loading_status.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
-import 'package:inkino/redux/selectors.dart';
 
 class ShowtimesPageViewModel {
   ShowtimesPageViewModel({

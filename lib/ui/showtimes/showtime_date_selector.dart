@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:inkino/data/schedule_date.dart';
-import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 import 'package:intl/intl.dart';
 
