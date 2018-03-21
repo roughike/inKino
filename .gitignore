@@ -9,3 +9,5 @@ ios/.generated/
 packages
 pubspec.lock
 .flutter-plugins
+
+android/google-play-service-account.json
