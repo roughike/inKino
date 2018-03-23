@@ -122,13 +122,12 @@ class EventDetailsPage extends StatelessWidget {
           ),
         ],
       ),
+      new StorylineWidget(event),
     ];
 
     if (event.actors.isNotEmpty) {
       content.add(new ActorScroller(event.actors));
     }
-
-    content.add(new StorylineWidget(event));
 
     return new Scaffold(
       body: new SingleChildScrollView(
