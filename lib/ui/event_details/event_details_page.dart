@@ -134,6 +134,7 @@ class EventDetailsPage extends StatelessWidget {
 
     return new Scaffold(
       body: new SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 32.0),
         child: new Column(children: content),
       ),
     );
