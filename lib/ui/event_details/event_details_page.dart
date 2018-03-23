@@ -122,8 +122,11 @@ class EventDetailsPage extends StatelessWidget {
           ),
         ],
       ),
-      new StorylineWidget(event),
     ];
+
+    if (event.hasSynopsis) {
+      content.add(new StorylineWidget(event));
+    }
 
     if (event.actors.isNotEmpty) {
       content.add(new ActorScroller(event.actors));
