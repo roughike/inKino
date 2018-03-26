@@ -19,7 +19,7 @@ class _StorylineWidgetState extends State<StorylineWidget> {
   }
 
   Widget _buildCaption() {
-    var action = _isExpanded? 'contract' : 'expand';
+    var action = _isExpanded? 'collapse' : 'expand';
 
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
