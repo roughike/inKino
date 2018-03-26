@@ -1,4 +1,3 @@
-import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/loading_status.dart';
 import 'package:inkino/redux/show/show_state.dart';

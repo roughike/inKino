@@ -2,6 +2,7 @@ import 'package:inkino/data/show.dart';
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/loading_status.dart';
+import 'package:inkino/redux/selectors.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
@@ -27,7 +28,7 @@ class ShowtimesPageViewModel {
       selectedDate: store.state.showState.selectedDate,
       dates: store.state.showState.dates,
       status: store.state.showState.loadingStatus,
-      shows: store.state.showState.shows,
+      shows: showsSelector(store.state),
       changeCurrentDate: (newDate) {
         store.dispatch(new ChangeCurrentDateAction(newDate));
       },

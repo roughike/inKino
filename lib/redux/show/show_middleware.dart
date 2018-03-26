@@ -15,19 +15,24 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     next(action);
 
-    Theater theater;
+    if (action is InitCompleteAction ||
+        action is ChangeCurrentTheaterAction ||
+        action is RefreshShowsAction ||
+        action is ChangeCurrentDateAction) {
+      _handleShowsUpdate(store, action, next);
+    }
+  }
+
+  Future<Null> _handleShowsUpdate(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
+    Theater theater = store.state.theaterState.currentTheater;
     DateTime date;
 
     if (action is InitCompleteAction ||
         action is ChangeCurrentTheaterAction ||
         action is RefreshShowsAction) {
-      if (action is RefreshShowsAction) {
-        theater = store.state.theaterState.currentTheater;
-      } else {
-        theater = action.selectedTheater;
-      }
+      theater = action.selectedTheater;
     } else if (action is ChangeCurrentDateAction) {
-      theater = store.state.theaterState.currentTheater;
       date = action.date;
     }
 
@@ -45,6 +50,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
       var shows = await api.getSchedule(newTheater, currentDate);
       next(new ReceivedShowsAction(newTheater, Show.parseAll(shows)));
     } catch (e) {
+      print(e);
       next(new ErrorLoadingShowsAction());
     }
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/redux/loading_status.dart';
 import 'package:inkino/ui/error_view.dart';
 import 'package:inkino/ui/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
