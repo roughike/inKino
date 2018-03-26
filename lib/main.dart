@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/ui/main_page.dart';
@@ -6,14 +8,16 @@ import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/store.dart';
 import 'package:redux/redux.dart';
 
-void main() {
+Future<Null> main() async {
   MaterialPageRoute.debugEnableFadingRoutes = true;
 
-  runApp(new InKinoApp());
+  var store = await createStore();
+  runApp(new InKinoApp(store));
 }
 
 class InKinoApp extends StatefulWidget {
-  final Store<AppState> store = createStore();
+  InKinoApp(this.store);
+  final Store<AppState> store;
 
   @override
   _InKinoAppState createState() => new _InKinoAppState();

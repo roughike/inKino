@@ -10,6 +10,7 @@ dependencies:
   url_launcher: ^2.0.1
   path_provider: ^0.3.1
   connectivity: ^0.2.1
+  shared_preferences: ^0.4.0
 
 dev_dependencies:
   flutter_test:

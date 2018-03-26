@@ -6,15 +6,22 @@ import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/theater.dart';
 import 'package:redux/redux.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TheaterMiddleware extends MiddlewareClass<AppState> {
+  static const String _kDefaultTheaterId = 'default_theater_id';
+
   final AssetBundle bundle;
-  TheaterMiddleware(this.bundle);
+  final SharedPreferences preferences;
+
+  TheaterMiddleware(this.bundle, this.preferences);
 
   @override
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     if (action is InitAction) {
       await _init(store, action, next);
+    } else if (action is ChangeCurrentTheaterAction) {
+      await _changeCurrentTheater(store, action, next);
     } else {
       next(action);
     }
@@ -25,11 +32,31 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     InitAction action,
     NextDispatcher next,
   ) async {
-    var theaterXml =
-        await bundle.loadString(OtherAssets.preloadedTheaters);
+    var theaterXml = await bundle.loadString(OtherAssets.preloadedTheaters);
     var theaters = Theater.parseAll(theaterXml);
-    var currentTheater = theaters.first; // TODO: Store default in SharedPrefs.
+    var currentTheater = _getDefaultTheater(theaters);
 
     next(new InitCompleteAction(theaters, currentTheater));
+  }
+
+  Future<Null> _changeCurrentTheater(
+    Store<AppState> store,
+    ChangeCurrentTheaterAction action,
+    NextDispatcher next,
+  ) async {
+    preferences.setString(_kDefaultTheaterId, action.selectedTheater.id);
+    next(action);
+  }
+
+  Theater _getDefaultTheater(List<Theater> allTheaters) {
+    var persistedTheaterId = preferences.getString(_kDefaultTheaterId);
+
+    if (persistedTheaterId != null) {
+      return allTheaters.singleWhere((theater) {
+        return theater.id == persistedTheaterId;
+      });
+    }
+
+    return allTheaters.first;
   }
 }
