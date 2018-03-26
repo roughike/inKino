@@ -17,16 +17,18 @@ class EventGrid extends StatelessWidget {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var crossAxisChildCount = isPortrait ? 2 : 4;
 
-    return new GridView.builder(
-      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisChildCount,
-        childAspectRatio: 2 / 3,
+    return new Scrollbar(
+      child: new GridView.builder(
+        gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisChildCount,
+          childAspectRatio: 2 / 3,
+        ),
+        itemCount: events.length,
+        itemBuilder: (BuildContext context, int index) {
+          var event = events[index];
+          return new EventGridItem(event);
+        },
       ),
-      itemCount: events.length,
-      itemBuilder: (BuildContext context, int index) {
-        var event = events[index];
-        return new EventGridItem(event);
-      },
     );
   }
 

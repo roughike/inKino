@@ -17,23 +17,25 @@ class ShowtimesPage extends StatelessWidget {
       );
     }
 
-    return new ListView.builder(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      itemCount: viewModel.shows.length,
-      itemBuilder: (BuildContext context, int index) {
-        var show = viewModel.shows[index];
-        var useAlternateBackground = index % 2 == 0;
+    return new Scrollbar(
+      child: new ListView.builder(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        itemCount: viewModel.shows.length,
+        itemBuilder: (BuildContext context, int index) {
+          var show = viewModel.shows[index];
+          var useAlternateBackground = index % 2 == 0;
 
-        return new Column(
-          children: <Widget>[
-            new ShowtimeListTile(show, useAlternateBackground),
-            new Divider(
-              height: 1.0,
-              color: Colors.black.withOpacity(0.25),
-            ),
-          ],
-        );
-      },
+          return new Column(
+            children: <Widget>[
+              new ShowtimeListTile(show, useAlternateBackground),
+              new Divider(
+                height: 1.0,
+                color: Colors.black.withOpacity(0.25),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 
