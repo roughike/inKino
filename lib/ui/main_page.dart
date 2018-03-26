@@ -49,8 +49,21 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildTitle(BuildContext context) {
-    var horizontalTitleAligment =
+    var horizontalTitleAlignment =
         Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.start;
+
+    var subtitle = new StoreConnector<AppState, Theater>(
+      converter: (store) => store.state.theaterState.currentTheater,
+      builder: (BuildContext context, Theater currentTheater) {
+        return new Text(
+          currentTheater?.name ?? '',
+          style: new TextStyle(
+            fontSize: 12.0,
+            color: Colors.white70,
+          ),
+        );
+      },
+    );
 
     return new InkWell(
       onTap: () => scaffoldKey.currentState.openDrawer(),
@@ -58,21 +71,10 @@ class _MyHomePageState extends State<MyHomePage>
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: horizontalTitleAligment,
+          crossAxisAlignment: horizontalTitleAlignment,
           children: <Widget>[
             new Text('inKino'),
-            new StoreConnector<AppState, Theater>(
-              converter: (store) => store.state.theaterState.currentTheater,
-              builder: (BuildContext context, Theater currentTheater) {
-                return new Text(
-                  currentTheater?.name ?? '',
-                  style: new TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.white70,
-                  ),
-                );
-              },
-            ),
+            subtitle,
           ],
         ),
       ),
