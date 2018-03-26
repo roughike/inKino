@@ -11,6 +11,7 @@ class Event {
   Event({
     @required this.id,
     @required this.title,
+    @required this.originalTitle,
     @required this.genres,
     @required this.directors,
     @required this.actors,
@@ -23,6 +24,7 @@ class Event {
 
   final String id;
   final String title;
+  final String originalTitle;
   final String genres;
   final List<String> directors;
   final List<String> actors;
@@ -42,6 +44,7 @@ class Event {
       events.add(new Event(
         id: tagContents(node, 'ID'),
         title: tagContents(node, 'Title'),
+        originalTitle: tagContents(node, 'OriginalTitle'),
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
         actors: _parseActors(node.findAllElements('Actor')),

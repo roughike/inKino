@@ -79,7 +79,7 @@ class ShowtimeListTile extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           var store = new StoreProvider.of(context).store;
-          var event = eventByShowSelector(store.state, show);
+          var event = eventForShowSelector(store.state, show);
 
           Navigator.push(
             context,
