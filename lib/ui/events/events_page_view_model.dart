@@ -10,12 +10,12 @@ class EventsPageViewModel {
   EventsPageViewModel({
     @required this.status,
     @required this.events,
-    @required this.refreshEventsCallback,
+    @required this.refreshEvents,
   });
 
   final LoadingStatus status;
   final List<Event> events;
-  final Function refreshEventsCallback;
+  final Function refreshEvents;
 
   static EventsPageViewModel fromStore(
     Store<AppState> store,
@@ -24,7 +24,7 @@ class EventsPageViewModel {
     return new EventsPageViewModel(
       status: store.state.eventState.loadingStatus,
       events: eventsSelector(store.state, type),
-      refreshEventsCallback: () => store.dispatch(new RefreshEventsAction()),
+      refreshEvents: () => store.dispatch(new RefreshEventsAction()),
     );
   }
 }

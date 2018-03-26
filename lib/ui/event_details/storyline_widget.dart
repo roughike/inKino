@@ -10,7 +10,14 @@ class StorylineWidget extends StatefulWidget {
 }
 
 class _StorylineWidgetState extends State<StorylineWidget> {
+  bool _isExpandable;
   bool _isExpanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpandable = widget.event.shortSynopsis != widget.event.synopsis;
+  }
 
   void _toggleExpandedState() {
     setState(() {
@@ -19,31 +26,36 @@ class _StorylineWidgetState extends State<StorylineWidget> {
   }
 
   Widget _buildCaption() {
-    var action = _isExpanded? 'collapse' : 'expand';
+    var content = <Widget>[
+      new Text(
+        'Storyline',
+        style: new TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    ];
+
+    if (_isExpandable) {
+      var action = _isExpanded ? 'collapse' : 'expand';
+
+      content.add(new Padding(
+        padding: const EdgeInsets.only(left: 4.0),
+        child: new Text(
+          '[touch to $action]',
+          style: new TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
+          ),
+        ),
+      ));
+    }
 
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
-      children: <Widget>[
-        new Text(
-          'Storyline',
-          style: new TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        new Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: new Text(
-            '[touch to $action]',
-            style: new TextStyle(
-              fontSize: 12.0,
-              fontWeight: FontWeight.w600,
-              color: Colors.black54,
-            ),
-          ),
-        ),
-      ],
+      children: content,
     );
   }
 
@@ -53,9 +65,8 @@ class _StorylineWidgetState extends State<StorylineWidget> {
       child: new AnimatedCrossFade(
         firstChild: new Text(widget.event.shortSynopsis),
         secondChild: new Text(widget.event.synopsis),
-        crossFadeState: _isExpanded
-            ? CrossFadeState.showSecond
-            : CrossFadeState.showFirst,
+        crossFadeState:
+            _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: kThemeAnimationDuration,
       ),
     );
@@ -66,7 +77,7 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     return new Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: new InkWell(
-        onTap: _toggleExpandedState,
+        onTap: _isExpandable? _toggleExpandedState : null,
         child: new Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
