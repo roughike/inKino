@@ -9,6 +9,14 @@ import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 
 class ShowtimesPage extends StatelessWidget {
   Widget _buildShowtimeList(ShowtimesPageViewModel viewModel) {
+    if (viewModel.shows.isEmpty) {
+      return new InfoMessageWidget(
+        title: 'All empty!',
+        description: 'Didn\'t find any showtimes at\nall. ¯\\_(ツ)_/¯',
+        onActionButtonTapped: viewModel.refreshShowtimes,
+      );
+    }
+
     return new ListView.builder(
       padding: const EdgeInsets.only(bottom: 8.0),
       itemCount: viewModel.shows.length,

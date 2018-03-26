@@ -29,8 +29,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     DateTime date;
 
     if (action is InitCompleteAction ||
-        action is ChangeCurrentTheaterAction ||
-        action is RefreshShowsAction) {
+        action is ChangeCurrentTheaterAction) {
       theater = action.selectedTheater;
     } else if (action is ChangeCurrentDateAction) {
       date = action.date;

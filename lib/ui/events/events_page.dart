@@ -22,7 +22,10 @@ class EventsPage extends StatelessWidget {
             description: 'Error loading events.',
             onRetry: viewModel.refreshEvents,
           ),
-          successContent: new EventGrid(viewModel.events),
+          successContent: new EventGrid(
+            events: viewModel.events,
+            onReloadCallback: viewModel.refreshEvents,
+          ),
         );
       },
     );

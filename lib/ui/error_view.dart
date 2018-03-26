@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class ErrorView extends StatelessWidget {
+class ErrorView extends InfoMessageWidget {
   ErrorView({
-    this.title,
-    this.description,
-    @required this.onRetry,
+    String title,
+    String description,
+    @required VoidCallback onRetry,
+  })
+      : super(
+          title: title ?? 'Oops!',
+          description:
+              description ?? 'There was an error while\nloading movies.',
+          onActionButtonTapped: onRetry,
+        );
+}
+
+class InfoMessageWidget extends StatelessWidget {
+  InfoMessageWidget({
+    @required this.title,
+    @required this.description,
+    this.onActionButtonTapped,
   });
 
   final String title;
   final String description;
-  final VoidCallback onRetry;
+  final VoidCallback onActionButtonTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +47,21 @@ class ErrorView extends StatelessWidget {
             new Padding(
               padding: const EdgeInsets.only(top: 16.0),
               child: new Text(
-                title ?? 'Oops!',
+                title,
                 style: new TextStyle(fontSize: 24.0),
               ),
             ),
             new Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: new Text(
-                description ?? 'There was an error while\nloading movies.',
+                description,
                 textAlign: TextAlign.center,
               ),
             ),
             new Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: new FlatButton(
-                onPressed: onRetry,
+                onPressed: onActionButtonTapped,
                 child: new Text(
                   'TRY AGAIN',
                   style: new TextStyle(color: theme.primaryColor),
