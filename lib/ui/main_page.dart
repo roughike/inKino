@@ -100,6 +100,29 @@ class _MyHomePageState extends State<MyHomePage>
     store.dispatch(new SearchQueryChangedAction(newQuery));
   }
 
+  List<Widget> _buildActions() {
+    if (_isSearching) {
+      return <Widget>[
+        new IconButton(
+          icon: new Icon(Icons.clear),
+          onPressed: () {
+            setState(() {
+              _searchQuery.clear();
+              _updateSearchQuery(null);
+            });
+          },
+        ),
+      ];
+    }
+
+    return <Widget>[
+      new IconButton(
+        icon: new Icon(Icons.search),
+        onPressed: _startSearch,
+      ),
+    ];
+  }
+
   Widget _buildDrawer() {
     var textTheme = Theme.of(context).textTheme;
     var drawerHeader = new Container(
@@ -148,12 +171,7 @@ class _MyHomePageState extends State<MyHomePage>
             new Tab(text: 'Coming soon'),
           ],
         ),
-        actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.search),
-            onPressed: _startSearch,
-          ),
-        ],
+        actions: _buildActions(),
       ),
       drawer: _buildDrawer(),
       body: new TabBarView(
