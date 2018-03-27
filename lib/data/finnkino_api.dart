@@ -24,14 +24,19 @@ class FinnkinoApi {
     );
   }
 
-  Future<String> getEvents(Theater theater, EventListType type) async {
-    var listType =
-        type == EventListType.nowInTheaters ? 'NowInTheatres' : 'ComingSoon';
-
+  Future<String> getNowInTheatersEvents(Theater theater) async {
     return _performGetRequest(
       kEventsBaseUrl.replace(queryParameters: {
         'area': theater.id,
-        'listType': listType,
+        'listType': 'NowInTheatres',
+      }),
+    );
+  }
+
+  Future<String> getUpcomingEvents() async {
+    return _performGetRequest(
+      kEventsBaseUrl.replace(queryParameters: {
+        'listType': 'ComingSoon',
       }),
     );
   }

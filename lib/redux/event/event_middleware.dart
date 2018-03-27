@@ -39,15 +39,8 @@ class EventMiddleware extends MiddlewareClass<AppState> {
     next(new RequestingEventsAction());
 
     try {
-      var inTheatersEvents = await api.getEvents(
-        newTheater,
-        EventListType.nowInTheaters,
-      );
-
-      var comingSoonEvents = await api.getEvents(
-        newTheater,
-        EventListType.comingSoon,
-      );
+      var inTheatersEvents = await api.getNowInTheatersEvents(newTheater);
+      var comingSoonEvents = await api.getUpcomingEvents();
 
       next(new ReceivedEventsAction(
         nowInTheatersEvents: Event.parseAll(inTheatersEvents),
