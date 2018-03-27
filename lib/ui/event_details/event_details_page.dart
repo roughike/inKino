@@ -51,7 +51,7 @@ class EventDetailsPage extends StatelessWidget {
       new Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: new Text(
-          '${event.lengthInMinutes}min | ${event.genres}',
+          '${event.lengthInMinutes}min | ${event.genres.split(', ').take(4).join(', ')}',
           style: new TextStyle(
             fontSize: 12.0,
             fontWeight: FontWeight.w600,
