@@ -12,7 +12,7 @@ class ShowtimesPage extends StatelessWidget {
     if (viewModel.shows.isEmpty) {
       return new InfoMessageWidget(
         title: 'All empty!',
-        description: 'Didn\'t find any showtimes at\nall. ¯\\_(ツ)_/¯',
+        description: 'Didn\'t find any movies\nabout to start for today. ¯\\_(ツ)_/¯',
         onActionButtonTapped: viewModel.refreshShowtimes,
       );
     }
