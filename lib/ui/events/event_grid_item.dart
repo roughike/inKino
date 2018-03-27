@@ -2,10 +2,61 @@ import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_poster.dart';
+import 'package:meta/meta.dart';
 
 class EventGridItem extends StatelessWidget {
-  EventGridItem(this.event);
+  EventGridItem({
+    @required this.event,
+    @required this.onTapped,
+  });
+
   final Event event;
+  final VoidCallback onTapped;
+
+  BoxDecoration _buildGradientBackground() {
+    return new BoxDecoration(
+      gradient: new LinearGradient(
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+        stops: <double>[
+          0.0,
+          0.7,
+          0.7,
+        ],
+        colors: <Color>[
+          Colors.black,
+          Colors.transparent,
+          Colors.transparent,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextualInfo() {
+    return new Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        new Text(
+          event.title,
+          style: new TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16.0,
+          ),
+        ),
+        new Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: new Text(
+            event.genres,
+            style: new TextStyle(
+              fontSize: 12.0,
+              color: Colors.white70,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,62 +70,18 @@ class EventGridItem extends StatelessWidget {
             child: new EventPoster(url: event.images.portraitMedium),
           ),
           new Container(
-            decoration: new BoxDecoration(
-              gradient: new LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                stops: <double>[
-                  0.0,
-                  0.7,
-                  0.7,
-                ],
-                colors: <Color>[
-                  Colors.black,
-                  Colors.transparent,
-                  Colors.transparent,
-                ],
-              ),
-            ),
+            decoration: _buildGradientBackground(),
             padding: const EdgeInsets.only(
               bottom: 16.0,
               left: 16.0,
               right: 16.0,
             ),
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(
-                  event.title,
-                  style: new TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.0,
-                  ),
-                ),
-                new Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: new Text(
-                    event.genres,
-                    style: new TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.white70,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: _buildTextualInfo(),
           ),
           new Material(
             color: Colors.transparent,
             child: new InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (_) => new EventDetailsPage(event),
-                  ),
-                );
-              },
+              onTap: onTapped,
               child: new Container(),
             ),
           ),

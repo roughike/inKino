@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
 import 'package:inkino/ui/error_view.dart';
+import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_grid_item.dart';
 import 'package:meta/meta.dart';
 
@@ -12,6 +13,15 @@ class EventGrid extends StatelessWidget {
 
   final List<Event> events;
   final VoidCallback onReloadCallback;
+
+  void _openEventDetails(BuildContext context, Event event) {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (_) => new EventDetailsPage(event),
+      ),
+    );
+  }
 
   Widget _buildContent(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
@@ -28,7 +38,10 @@ class EventGrid extends StatelessWidget {
           itemCount: events.length,
           itemBuilder: (BuildContext context, int index) {
             var event = events[index];
-            return new EventGridItem(event);
+            return new EventGridItem(
+              event: event,
+              onTapped: () => _openEventDetails(context, event),
+            );
           },
         ),
       ),
