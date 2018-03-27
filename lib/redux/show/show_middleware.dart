@@ -28,8 +28,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     Theater theater = store.state.theaterState.currentTheater;
     DateTime date;
 
-    if (action is InitCompleteAction ||
-        action is ChangeCurrentTheaterAction) {
+    if (action is InitCompleteAction || action is ChangeCurrentTheaterAction) {
       theater = action.selectedTheater;
     } else if (action is ChangeCurrentDateAction) {
       date = action.date;
@@ -46,8 +45,14 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     next(new RequestingShowsAction());
 
     try {
-      var shows = await api.getSchedule(newTheater, currentDate);
-      next(new ReceivedShowsAction(newTheater, Show.parseAll(shows)));
+      var showsXml = await api.getSchedule(newTheater, currentDate);
+      var shows = Show.parseAll(showsXml);
+      var nowWithPadding = new DateTime.now().subtract(const Duration(minutes: 15));
+      var relevantShows = shows.where((show) {
+        return show.start.isAfter(nowWithPadding);
+      }).toList();
+
+      next(new ReceivedShowsAction(newTheater, relevantShows));
     } catch (e) {
       print(e);
       next(new ErrorLoadingShowsAction());
