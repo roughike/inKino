@@ -14,36 +14,6 @@ class TheaterList extends StatelessWidget {
   final Widget header;
   final VoidCallback onTheaterTapped;
 
-  Widget _buildTheatersSubhead(BuildContext context) {
-    return new Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        header,
-        new Row(
-          children: [
-            new Expanded(
-              child: new Container(
-                color: Theme.of(context).canvasColor,
-                padding: const EdgeInsets.only(
-                  top: 16.0,
-                  left: 16.0,
-                  bottom: 16.0,
-                ),
-                child: new Text(
-                  'Theaters',
-                  style: new TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Stack(
@@ -63,7 +33,7 @@ class TheaterList extends StatelessWidget {
               itemCount: viewModel.theaters.length + 1,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
-                  return _buildTheatersSubhead(context);
+                  return header;
                 }
 
                 var theater = viewModel.theaters[index - 1];
