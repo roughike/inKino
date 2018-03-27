@@ -38,22 +38,30 @@ class Event {
 
   static List<Event> parseAll(String xmlString) {
     var events = <Event>[];
+    var alreadyPresentImageFileNames = <String>[];
     var document = xml.parse(xmlString);
 
     document.findAllElements('Event').forEach((node) {
-      events.add(new Event(
-        id: tagContents(node, 'ID'),
-        title: tagContents(node, 'Title'),
-        originalTitle: tagContents(node, 'OriginalTitle'),
-        genres: tagContents(node, 'Genres'),
-        directors: _parseDirectors(node.findAllElements('Director')),
-        actors: _parseActors(node.findAllElements('Actor')),
-        lengthInMinutes: tagContents(node, 'LengthInMinutes'),
-        shortSynopsis: tagContents(node, 'ShortSynopsis'),
-        synopsis: tagContents(node, 'Synopsis'),
-        images: EventImageData.parseAll(node.findElements('Images')),
-        youtubeTrailers: _parseTrailers(node.findAllElements('EventVideo')),
-      ));
+      var images = EventImageData.parseAll(node.findElements('Images'));
+      var imgFileName = images.anyAvailableImage?.split('/')?.last ?? null;
+
+      if (imgFileName == null || !alreadyPresentImageFileNames.contains(imgFileName)) {
+        events.add(new Event(
+          id: tagContents(node, 'ID'),
+          title: tagContents(node, 'Title'),
+          originalTitle: tagContents(node, 'OriginalTitle'),
+          genres: tagContents(node, 'Genres'),
+          directors: _parseDirectors(node.findAllElements('Director')),
+          actors: _parseActors(node.findAllElements('Actor')),
+          lengthInMinutes: tagContents(node, 'LengthInMinutes'),
+          shortSynopsis: tagContents(node, 'ShortSynopsis'),
+          synopsis: tagContents(node, 'Synopsis'),
+          images: images,
+          youtubeTrailers: _parseTrailers(node.findAllElements('EventVideo')),
+        ));
+
+        alreadyPresentImageFileNames.add(imgFileName);
+      }
     });
 
     return events;
@@ -110,6 +118,13 @@ class EventImageData {
   final String portraitLarge;
   final String landscapeSmall;
   final String landscapeBig;
+
+  String get anyAvailableImage =>
+      portraitSmall ??
+      portraitMedium ??
+      portraitLarge ??
+      landscapeSmall ??
+      landscapeBig;
 
   EventImageData.empty()
       : portraitSmall = null,
