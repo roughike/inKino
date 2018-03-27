@@ -8,6 +8,7 @@ class Show {
     @required this.eventId,
     @required this.title,
     @required this.originalTitle,
+    @required this.url,
     @required this.presentationMethod,
     @required this.theaterAndAuditorium,
     @required this.start,
@@ -18,6 +19,7 @@ class Show {
   final String eventId;
   final String title;
   final String originalTitle;
+  final String url;
   final String presentationMethod;
   final String theaterAndAuditorium;
   final DateTime start;
@@ -33,6 +35,7 @@ class Show {
         eventId: tagContents(node, 'EventID'),
         title: tagContents(node, 'Title'),
         originalTitle: tagContents(node, 'OriginalTitle'),
+        url: tagContents(node, 'ShowURL'),
         presentationMethod: tagContents(node, 'PresentationMethod'),
         theaterAndAuditorium: tagContents(node, 'TheatreAndAuditorium'),
         start: DateTime.parse(tagContents(node, 'dttmShowStart')),

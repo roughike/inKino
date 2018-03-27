@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/event.dart';
+import 'package:inkino/data/show.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_header.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  EventDetailsPage(this.event);
+  static final weekdayFormat = new DateFormat("E 'at' hh:mm");
+
+  EventDetailsPage(
+    this.event, {
+    this.show,
+  });
+
   final Event event;
+  final Show show;
 
   Widget _buildEventPortraitAndInfo() {
     return new Row(
@@ -123,6 +132,29 @@ class EventDetailsPage extends StatelessWidget {
         ],
       ),
     ];
+
+    if (show != null) {
+      content.add(new Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: new ListTile(
+          dense: true,
+          title: new Text(
+            weekdayFormat.format(show.start),
+            style: new TextStyle(fontWeight: FontWeight.w500),
+          ),
+          subtitle: new Text(show.theaterAndAuditorium),
+          trailing: new FlatButton(
+            onPressed: () async {
+              if (await canLaunch(show.url)) {
+                await launch(show.url);
+              }
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: new Text('Tickets'),
+          ),
+        ),
+      ));
+    }
 
     if (event.hasSynopsis) {
       content.add(new StorylineWidget(event));

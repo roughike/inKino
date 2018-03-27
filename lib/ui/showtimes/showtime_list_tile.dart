@@ -18,7 +18,7 @@ class ShowtimeListTile extends StatelessWidget {
 
   Widget _buildShowtimesInfo() {
     return new Column(
-      children: [
+      children: <Widget>[
         new Text(
           hoursAndMins.format(show.start),
           style: new TextStyle(fontSize: 20.0),
@@ -84,7 +84,7 @@ class ShowtimeListTile extends StatelessWidget {
           Navigator.push(
             context,
             new MaterialPageRoute(
-              builder: (_) => new EventDetailsPage(event),
+              builder: (_) => new EventDetailsPage(event, show: show),
             ),
           );
         },

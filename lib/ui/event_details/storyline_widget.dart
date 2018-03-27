@@ -74,22 +74,19 @@ class _StorylineWidgetState extends State<StorylineWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.only(top: 16.0),
-      child: new InkWell(
-        onTap: _isExpandable? _toggleExpandedState : null,
-        child: new Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 12.0,
-          ),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildCaption(),
-              _buildContent(),
-            ],
-          ),
+    return new InkWell(
+      onTap: _isExpandable ? _toggleExpandedState : null,
+      child: new Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 12.0,
+        ),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _buildCaption(),
+            _buildContent(),
+          ],
         ),
       ),
     );
