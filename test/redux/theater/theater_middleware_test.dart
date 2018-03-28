@@ -18,7 +18,7 @@ void main() {
 
     setUp(() {
       mockAssetBundle = new MockAssetBundle();
-      sut = new TheaterMiddleware(mockAssetBundle);
+      //sut = new TheaterMiddleware(mockAssetBundle);
 
       log.clear();
     });
