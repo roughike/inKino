@@ -1,3 +1,4 @@
+import 'package:inkino/data/actor.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:inkino/utils.dart';
@@ -27,7 +28,7 @@ class Event {
   final String originalTitle;
   final String genres;
   final List<String> directors;
-  final List<String> actors;
+  final List<Actor> actors;
   final String lengthInMinutes;
   final String shortSynopsis;
   final String synopsis;
@@ -71,13 +72,13 @@ class Event {
     return directors;
   }
 
-  static List<String> _parseActors(Iterable<xml.XmlElement> nodes) {
-    var actors = <String>[];
+  static List<Actor> _parseActors(Iterable<xml.XmlElement> nodes) {
+    var actors = <Actor>[];
 
     nodes.forEach((node) {
       var first = tagContents(node, 'FirstName');
       var last = tagContents(node, 'LastName');
-      actors.add('$first $last');
+      actors.add(new Actor(name: '$first $last'));
     });
 
     return actors;

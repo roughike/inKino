@@ -195,7 +195,7 @@ class EventDetailsPage extends StatelessWidget {
     }
 
     if (event.actors.isNotEmpty) {
-      content.add(new ActorScroller(event.actors));
+      content.add(new ActorScroller(event));
     }
 
     return new Scaffold(
