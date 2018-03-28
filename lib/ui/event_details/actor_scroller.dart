@@ -46,7 +46,7 @@ class ActorScroller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      padding: const EdgeInsets.only(top: 24.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
