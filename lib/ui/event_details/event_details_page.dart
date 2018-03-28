@@ -157,7 +157,10 @@ class EventDetailsPage extends StatelessWidget {
     }
 
     if (event.hasSynopsis) {
-      content.add(new StorylineWidget(event));
+      content.add(new Padding(
+        padding: new EdgeInsets.only(top: show == null? 12.0 : 0.0),
+        child: new StorylineWidget(event),
+      ));
     }
 
     if (event.actors.isNotEmpty) {
