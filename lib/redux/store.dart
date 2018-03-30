@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:inkino/data/file_cache.dart';
-import 'package:inkino/data/finnkino_api.dart';
+import 'package:inkino/data/networking/finnkino_api.dart';
 import 'package:inkino/redux/app/app_reducer.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/event/event_middleware.dart';

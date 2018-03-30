@@ -1,4 +1,4 @@
-import 'package:inkino/data/show.dart';
+import 'package:inkino/data/models/show.dart';
 import 'package:inkino/redux/loading_status.dart';
 import 'package:meta/meta.dart';
 

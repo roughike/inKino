@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
-import 'package:inkino/data/event.dart';
+import 'package:inkino/data/models/event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventHeader extends StatelessWidget {
