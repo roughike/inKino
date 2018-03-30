@@ -71,7 +71,7 @@ class EventDetailsPage extends StatelessWidget {
 
     if (event.directors.isNotEmpty) {
       var directorInfo = new Row(
-        children: [
+        children: <Widget>[
           new Text(
             'Director:',
             style: new TextStyle(
