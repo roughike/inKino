@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:inkino/data/event.dart';
+import 'package:inkino/data/models/event.dart';
 import 'package:test/test.dart';
 
 void main() {

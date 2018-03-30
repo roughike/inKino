@@ -1,6 +1,6 @@
 import 'package:inkino/redux/actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/data/theater.dart';
+import 'package:inkino/data/models/theater.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 import 'package:inkino/redux/selectors.dart';

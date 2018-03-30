@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/data/event.dart';
-import 'package:inkino/data/show.dart';
+import 'package:inkino/data/models/event.dart';
+import 'package:inkino/data/models/show.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_header.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';

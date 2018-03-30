@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/data/event.dart';
+import 'package:inkino/data/models/event.dart';
 
 class StorylineWidget extends StatefulWidget {
   StorylineWidget(this.event);

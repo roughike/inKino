@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:inkino/data/theater.dart';
+import 'package:inkino/data/models/theater.dart';
 import 'package:test/test.dart';
 
 void main() {

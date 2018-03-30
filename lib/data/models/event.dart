@@ -1,4 +1,4 @@
-import 'package:inkino/data/actor.dart';
+import 'package:inkino/data/models/actor.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:inkino/utils.dart';

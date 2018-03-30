@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:inkino/data/event.dart';
-import 'package:inkino/data/theater.dart';
+import 'package:inkino/data/models/event.dart';
+import 'package:inkino/data/models/theater.dart';
 import 'package:intl/intl.dart';
 
 class FinnkinoApi {

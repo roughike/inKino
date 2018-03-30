@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:inkino/data/actor.dart';
-import 'package:inkino/data/event.dart';
-import 'package:inkino/data/tmdb_api.dart';
+import 'package:inkino/data/models/actor.dart';
+import 'package:inkino/data/models/event.dart';
+import 'package:inkino/data/networking/tmdb_api.dart';
 
 class ActorScroller extends StatefulWidget {
   ActorScroller(this.event);
