@@ -47,9 +47,9 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     try {
       var showsXml = await api.getSchedule(newTheater, currentDate);
       var shows = Show.parseAll(showsXml);
-      var nowWithPadding = new DateTime.now().subtract(const Duration(minutes: 15));
+      var now = new DateTime.now();
       var relevantShows = shows.where((show) {
-        return show.start.isAfter(nowWithPadding);
+        return show.start.isAfter(now);
       }).toList();
 
       next(new ReceivedShowsAction(newTheater, relevantShows));
