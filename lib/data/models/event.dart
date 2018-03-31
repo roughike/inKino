@@ -1,4 +1,5 @@
 import 'package:inkino/data/models/actor.dart';
+import 'package:inkino/event_name_cleaner.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:inkino/utils.dart';
@@ -12,7 +13,9 @@ class Event {
   Event({
     @required this.id,
     @required this.title,
+    @required this.cleanedUpTitle,
     @required this.originalTitle,
+    @required this.cleanedUpOriginalTitle,
     @required this.genres,
     @required this.directors,
     @required this.actors,
@@ -25,7 +28,9 @@ class Event {
 
   final String id;
   final String title;
+  final String cleanedUpTitle;
   final String originalTitle;
+  final String cleanedUpOriginalTitle;
   final String genres;
   final List<String> directors;
   final List<Actor> actors;
@@ -42,10 +47,15 @@ class Event {
     var document = xml.parse(xmlString);
 
     document.findAllElements('Event').forEach((node) {
+      var title = tagContents(node, 'Title');
+      var originalTitle = tagContents(node, 'OriginalTitle');
+
       events.add(new Event(
         id: tagContents(node, 'ID'),
-        title: tagContents(node, 'Title'),
-        originalTitle: tagContents(node, 'OriginalTitle'),
+        title: title,
+        cleanedUpTitle: EventNameCleaner.cleanup(title),
+        originalTitle: originalTitle,
+        cleanedUpOriginalTitle: EventNameCleaner.cleanup(originalTitle),
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
         actors: _parseActors(node.findAllElements('Actor')),
