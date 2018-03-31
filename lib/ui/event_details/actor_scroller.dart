@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
+import 'package:inkino/assets.dart';
 
 class ActorScroller extends StatefulWidget {
   ActorScroller(this.event);
@@ -16,12 +17,13 @@ class ActorScroller extends StatefulWidget {
 }
 
 class _ActorScrollerState extends State<ActorScroller> {
-  List<Actor> actors;
+  bool _avatarsLoaded = false;
+  List<Actor> _actors;
 
   @override
   void initState() {
     super.initState();
-    actors = widget.event.actors;
+    _actors = widget.event.actors;
     _fetchAvatars();
   }
 
@@ -32,7 +34,8 @@ class _ActorScrollerState extends State<ActorScroller> {
     );
 
     setState(() {
-      actors = actorsWithAvatars;
+      _actors = actorsWithAvatars;
+      _avatarsLoaded = true;
     });
   }
 
@@ -40,9 +43,9 @@ class _ActorScrollerState extends State<ActorScroller> {
     return new ListView.builder(
       padding: const EdgeInsets.only(left: 16.0),
       scrollDirection: Axis.horizontal,
-      itemCount: actors.length,
+      itemCount: _actors.length,
       itemBuilder: (BuildContext context, int index) {
-        var actor = actors[index];
+        var actor = _actors[index];
         return _buildActorListItem(actor);
       },
     );
@@ -61,23 +64,30 @@ class _ActorScrollerState extends State<ActorScroller> {
               color: Theme.of(context).primaryColor,
               shape: BoxShape.circle,
             ),
-            child: actor.avatarUrl == null
-                ? new Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 26.0,
-                  )
-                : new ClipOval(
-                    child: new Image.network(
-                      actor.avatarUrl,
-                      fit: BoxFit.cover,
-                    ),
+            child: new Stack(
+              alignment: Alignment.center,
+              fit: StackFit.expand,
+              children: <Widget>[
+                new Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 26.0,
+                ),
+                new ClipOval(
+                  child: new FadeInImage.assetNetwork(
+                    placeholder: ImageAssets.transparentImage,
+                    image: actor.avatarUrl ?? '',
+                    fit: BoxFit.cover,
+                    fadeInDuration: const Duration(milliseconds: 250),
                   ),
+                ),
+              ],
+            ),
           ),
           new Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: new Text(
-              actor.name,
+              _avatarsLoaded? actor.name : 'Loading...',
               style: new TextStyle(fontSize: 12.0),
               textAlign: TextAlign.center,
             ),
