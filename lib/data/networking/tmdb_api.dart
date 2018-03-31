@@ -12,7 +12,7 @@ class TMDBApi {
 
   Future<List<Actor>> findAvatarsForActors(
       Event event, List<Actor> actors) async {
-    int movieId = await _findMovieId(event.originalTitle);
+    int movieId = await _findMovieId(event.cleanedUpOriginalTitle);
 
     if (movieId != null) {
       return _getActorAvatars(movieId);
