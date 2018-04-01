@@ -1,8 +1,8 @@
-import 'package:inkino/redux/common_actions.dart';
+import 'package:inkino/redux/app/app_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/redux/theater/theater_reducer.dart';
-import 'package:inkino/redux/show/show_reducer.dart';
 import 'package:inkino/redux/event/event_reducer.dart';
+import 'package:inkino/redux/show/show_reducer.dart';
+import 'package:inkino/redux/theater/theater_reducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   return new AppState(
