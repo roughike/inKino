@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
-import 'package:inkino/utils.dart';
+import 'package:inkino/utils/xml_utils.dart';
 
 class Show {
   Show({
