@@ -1,9 +1,9 @@
-import 'package:inkino/redux/common_actions.dart';
-import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/common_actions.dart';
+import 'package:inkino/redux/theater/theater_selectors.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
-import 'package:inkino/redux/selectors.dart';
 
 class TheaterListViewModel {
   TheaterListViewModel({
@@ -29,11 +29,11 @@ class TheaterListViewModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is TheaterListViewModel &&
-              runtimeType == other.runtimeType &&
-              currentTheater == other.currentTheater &&
-              theaters == other.theaters &&
-              changeCurrentTheater == other.changeCurrentTheater;
+      other is TheaterListViewModel &&
+          runtimeType == other.runtimeType &&
+          currentTheater == other.currentTheater &&
+          theaters == other.theaters &&
+          changeCurrentTheater == other.changeCurrentTheater;
 
   @override
   int get hashCode =>
