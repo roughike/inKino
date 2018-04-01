@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:inkino/data/networking/finnkino_api.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
-import 'package:inkino/redux/actions.dart';
+import 'package:inkino/data/networking/finnkino_api.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/show/show_actions.dart';
 import 'package:redux/redux.dart';
 
 class ShowMiddleware extends MiddlewareClass<AppState> {

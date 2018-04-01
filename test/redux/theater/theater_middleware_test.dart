@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:inkino/redux/actions.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/theater/theater_middleware.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
