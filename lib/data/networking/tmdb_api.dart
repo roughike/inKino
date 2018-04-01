@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 
@@ -21,14 +20,6 @@ class TMDBApi {
     return actors;
   }
 
-  Future<String> _performGetRequest(Uri uri) async {
-    var httpClient = new HttpClient();
-    var request = await httpClient.getUrl(uri);
-    var response = await request.close();
-
-    return response.transform(UTF8.decoder).join();
-  }
-
   Future<int> _findMovieId(String movieTitle) async {
     var searchUri = new Uri.https(
       baseUrl,
@@ -39,7 +30,8 @@ class TMDBApi {
       },
     );
 
-    var movieSearchJson = JSON.decode(await _performGetRequest(searchUri));
+    var response = await http.get(searchUri);
+    var movieSearchJson = JSON.decode(response.body);
     List<Map<String, dynamic>> searchResults = movieSearchJson['results'];
 
     if (searchResults.isNotEmpty) {
@@ -56,10 +48,16 @@ class TMDBApi {
       <String, String>{'api_key': apiKey},
     );
 
-    var movieActors = JSON.decode(await _performGetRequest(actorUri));
+    var response = await http.get(actorUri);
+    var movieActors = JSON.decode(response.body);
+
+    return _parseActorAvatars(movieActors['cast']);
+  }
+
+  List<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
     var actorsWithAvatars = <Actor>[];
 
-    movieActors['cast'].forEach((castMember) {
+    movieCast.forEach((castMember) {
       var pp = castMember['profile_path'];
       var profilePath =
           pp != null ? 'https://image.tmdb.org/t/p/w200$pp' : null;
