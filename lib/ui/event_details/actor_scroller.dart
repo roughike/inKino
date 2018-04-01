@@ -117,7 +117,7 @@ class _ActorScrollerState extends State<ActorScroller> {
           new Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: new SizedBox.fromSize(
-              size: new Size.fromHeight(96.0),
+              size: new Size.fromHeight(110.0),
               child: _buildActorList(),
             ),
           ),
