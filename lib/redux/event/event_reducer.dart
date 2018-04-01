@@ -1,6 +1,6 @@
 import 'package:inkino/redux/event/event_actions.dart';
 import 'package:inkino/redux/event/event_state.dart';
-import 'package:inkino/redux/loading_status.dart';
+import 'package:inkino/data/models/loading_status.dart';
 import 'package:redux/redux.dart';
 
 final eventReducer = combineTypedReducers([

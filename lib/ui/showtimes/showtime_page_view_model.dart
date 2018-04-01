@@ -1,9 +1,8 @@
+import 'package:inkino/data/models/loading_status.dart';
 import 'package:inkino/data/models/show.dart';
-import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/redux/loading_status.dart';
-import 'package:inkino/redux/selectors.dart';
 import 'package:inkino/redux/show/show_actions.dart';
+import 'package:inkino/redux/show/show_selectors.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 

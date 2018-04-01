@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/redux/loading_status.dart';
+import 'package:inkino/data/models/loading_status.dart';
 import 'package:meta/meta.dart';
 
 class LoadingView extends StatefulWidget {
