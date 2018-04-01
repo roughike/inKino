@@ -1,8 +1,8 @@
 import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/event_name_cleaner.dart';
+import 'package:inkino/utils/event_name_cleaner.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
-import 'package:inkino/utils.dart';
+import 'package:inkino/utils/xml_utils.dart';
 
 enum EventListType {
   nowInTheaters,
