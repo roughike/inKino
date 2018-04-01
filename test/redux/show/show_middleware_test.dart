@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:inkino/data/models/theater.dart';
-import 'package:inkino/redux/actions.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/show/show_middleware.dart';
 import 'package:mockito/mockito.dart';

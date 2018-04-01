@@ -1,4 +1,4 @@
-import 'package:inkino/redux/actions.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:redux/redux.dart';
 import 'package:inkino/redux/theater/theater_state.dart';
 
