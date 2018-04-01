@@ -19,8 +19,3 @@ class ChangeCurrentTheaterAction {
   ChangeCurrentTheaterAction(this.selectedTheater);
   final Theater selectedTheater;
 }
-
-class SearchQueryChangedAction {
-  SearchQueryChangedAction(this.query);
-  final String query;
-}
