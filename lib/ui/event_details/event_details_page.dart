@@ -139,35 +139,37 @@ class EventDetailsPage extends StatelessWidget {
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            new Row(
-              children: <Widget>[
-                new Icon(
-                  Icons.schedule,
-                  color: Colors.black87,
-                ),
-                new Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      new Text(
-                        weekdayFormat.format(show.start),
-                        style: new TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
-                      new Text(
-                        show.theaterAndAuditorium,
-                        style: new TextStyle(
-                          color: Colors.black54,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
+            new Expanded(
+              child: new Row(
+                children: <Widget>[
+                  new Icon(
+                    Icons.schedule,
+                    color: Colors.black87,
                   ),
-                ),
-              ],
+                  new Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Text(
+                          weekdayFormat.format(show.start),
+                          style: new TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
+                        new Text(
+                          show.theaterAndAuditorium,
+                          style: new TextStyle(
+                            color: Colors.black54,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             new Padding(
               padding: const EdgeInsets.only(left: 8.0),
@@ -179,7 +181,7 @@ class EventDetailsPage extends StatelessWidget {
                 },
                 color: Theme.of(context).accentColor,
                 textColor: Colors.white,
-                child: new Text('Buy Tickets'),
+                child: new Text('Tickets'),
               ),
             ),
           ],
