@@ -3,14 +3,11 @@ import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_header.dart';
+import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
-  static final weekdayFormat = new DateFormat("E 'at' hh:mma");
-
   EventDetailsPage(
     this.event, {
     this.show,
@@ -18,6 +15,32 @@ class EventDetailsPage extends StatelessWidget {
 
   final Event event;
   final Show show;
+
+  Widget _buildHeader(BuildContext context) {
+    return new Stack(
+      children: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.only(bottom: 118.0),
+          child: new EventHeader(event),
+        ),
+        new Positioned(
+          top: MediaQuery.of(context).padding.top,
+          left: 4.0,
+          child: new Material(
+            type: MaterialType.circle,
+            color: Colors.transparent,
+            child: new BackButton(color: Colors.white.withOpacity(0.9)),
+          ),
+        ),
+        new Positioned(
+          left: 16.0,
+          right: 16.0,
+          bottom: 0.0,
+          child: _buildEventPortraitAndInfo(),
+        ),
+      ],
+    );
+  }
 
   Widget _buildEventPortraitAndInfo() {
     return new Row(
@@ -49,7 +72,23 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   Widget _buildEventInfo() {
-    var content = <Widget>[
+    var content = <Widget>[]..addAll(_buildTitleAndLengthInMinutes());
+
+    if (event.directors.isNotEmpty) {
+      content.add(new Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: _buildDirectorInfo(),
+      ));
+    }
+
+    return new Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: content,
+    );
+  }
+
+  List<Widget> _buildTitleAndLengthInMinutes() {
+    return <Widget>[
       new Text(
         event.title,
         style: new TextStyle(
@@ -68,130 +107,54 @@ class EventDetailsPage extends StatelessWidget {
         ),
       ),
     ];
+  }
 
-    if (event.directors.isNotEmpty) {
-      var directorInfo = new Row(
-        children: <Widget>[
-          new Text(
-            'Director:',
+  Widget _buildDirectorInfo() {
+    return new Row(
+      children: <Widget>[
+        new Text(
+          'Director:',
+          style: new TextStyle(
+            fontSize: 12.0,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        new Padding(
+          padding: const EdgeInsets.only(left: 4.0),
+          child: new Text(
+            event.directors.first,
             style: new TextStyle(
               fontSize: 12.0,
               color: Colors.black87,
-              fontWeight: FontWeight.w600,
             ),
           ),
-          new Padding(
-            padding: const EdgeInsets.only(left: 4.0),
-            child: new Text(
-              event.directors.first,
-              style: new TextStyle(
-                fontSize: 12.0,
-                color: Colors.black87,
-              ),
-            ),
-          ),
-        ],
-      );
-
-      content.add(new Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: directorInfo,
-      ));
-    }
-
-    return new Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: content,
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     var content = <Widget>[
-      new Stack(
-        children: <Widget>[
-          new Padding(
-            padding: const EdgeInsets.only(bottom: 118.0),
-            child: new EventHeader(event),
-          ),
-          new Positioned(
-            top: MediaQuery.of(context).padding.top,
-            left: 4.0,
-            child: new Material(
-              type: MaterialType.circle,
-              color: Colors.transparent,
-              child: new BackButton(color: Colors.white.withOpacity(0.9)),
-            ),
-          ),
-          new Positioned(
-            left: 16.0,
-            right: 16.0,
-            bottom: 0.0,
-            child: _buildEventPortraitAndInfo(),
-          ),
-        ],
-      ),
+      _buildHeader(context),
     ];
 
     if (show != null) {
       content.add(new Padding(
-        padding: const EdgeInsets.only(top: 24.0, bottom: 8.0, left: 16.0, right: 16.0),
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            new Expanded(
-              child: new Row(
-                children: <Widget>[
-                  new Icon(
-                    Icons.schedule,
-                    color: Colors.black87,
-                  ),
-                  new Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        new Text(
-                          weekdayFormat.format(show.start),
-                          style: new TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                        new Text(
-                          show.theaterAndAuditorium,
-                          style: new TextStyle(
-                            color: Colors.black54,
-                            fontSize: 12.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            new Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: new RaisedButton(
-                onPressed: () async {
-                  if (await canLaunch(show.url)) {
-                    await launch(show.url);
-                  }
-                },
-                color: Theme.of(context).accentColor,
-                textColor: Colors.white,
-                child: new Text('Tickets'),
-              ),
-            ),
-          ],
+        padding: const EdgeInsets.only(
+          top: 24.0,
+          bottom: 8.0,
+          left: 16.0,
+          right: 16.0,
         ),
+        child: new ShowtimeInformation(show),
       ));
     }
 
     if (event.hasSynopsis) {
       content.add(new Padding(
-        padding: new EdgeInsets.only(top: show == null? 12.0 : 0.0),
+        padding: new EdgeInsets.only(top: show == null ? 12.0 : 0.0),
         child: new StorylineWidget(event),
       ));
     }
