@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
+import 'package:inkino/data/networking/http_utils.dart';
 
 class TMDBApi {
   static final String apiKey = '<YOUR_API_KEY_HERE>';
@@ -30,8 +31,8 @@ class TMDBApi {
       },
     );
 
-    var response = await http.get(searchUri);
-    var movieSearchJson = JSON.decode(response.body);
+    var response = await getRequest(searchUri);
+    var movieSearchJson = JSON.decode(response);
     List<Map<String, dynamic>> searchResults = movieSearchJson['results'];
 
     if (searchResults.isNotEmpty) {
@@ -48,8 +49,8 @@ class TMDBApi {
       <String, String>{'api_key': apiKey},
     );
 
-    var response = await http.get(actorUri);
-    var movieActors = JSON.decode(response.body);
+    var response = await getRequest(actorUri);
+    var movieActors = JSON.decode(response);
 
     return _parseActorAvatars(movieActors['cast']);
   }
