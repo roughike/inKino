@@ -7,7 +7,7 @@ import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/http_utils.dart';
 
 class TMDBApi {
-  static final String apiKey = '<YOUR_API_KEY_HERE>';
+  static final String apiKey = '49a380e638f1a16af9deb353fe640d51';
   static final String baseUrl = 'api.themoviedb.org';
 
   Future<List<Actor>> findAvatarsForActors(
