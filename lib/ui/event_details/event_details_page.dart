@@ -125,14 +125,9 @@ class EventDetailsPage extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    var content = <Widget>[
-      _buildHeader(context),
-    ];
-
+  Widget _buildShowtimeInformation() {
     if (show != null) {
-      content.add(new Padding(
+      return new Padding(
         padding: const EdgeInsets.only(
           top: 24.0,
           bottom: 8.0,
@@ -140,19 +135,41 @@ class EventDetailsPage extends StatelessWidget {
           right: 16.0,
         ),
         child: new ShowtimeInformation(show),
-      ));
+      );
     }
 
+    return null;
+  }
+
+  Widget _buildSynopsis() {
     if (event.hasSynopsis) {
-      content.add(new Padding(
+      return new Padding(
         padding: new EdgeInsets.only(top: show == null ? 12.0 : 0.0),
         child: new StorylineWidget(event),
-      ));
+      );
     }
 
-    if (event.actors.isNotEmpty) {
-      content.add(new ActorScroller(event));
+    return null;
+  }
+
+  Widget _buildActorScroller() =>
+      event.actors.isNotEmpty ? new ActorScroller(event) : null;
+
+  void _addIfNonNull(Widget child, List<Widget> children) {
+    if (child != null) {
+      children.add(child);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var content = <Widget>[
+      _buildHeader(context),
+    ];
+
+    _addIfNonNull(_buildShowtimeInformation(), content);
+    _addIfNonNull(_buildSynopsis(), content);
+    _addIfNonNull(_buildActorScroller(), content);
 
     return new Scaffold(
       body: new Stack(
