@@ -78,7 +78,10 @@ class _ActorScrollerState extends State<ActorScroller> {
                 new ClipOval(
                   child: new FadeInImage.assetNetwork(
                     placeholder: ImageAssets.transparentImage,
-                    image: actor.avatarUrl ?? '',
+                    // FIXME: The example.com here is a hack to not make the
+                    // FadeInImage crash when there's no avatar url for
+                    // the actor.
+                    image: actor.avatarUrl ?? 'https://example.com',
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 250),
                   ),
@@ -89,7 +92,7 @@ class _ActorScrollerState extends State<ActorScroller> {
           new Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: new Text(
-              _avatarsLoaded? actor.name : 'Loading...',
+              _avatarsLoaded ? actor.name : 'Loading...',
               style: new TextStyle(fontSize: 12.0),
               textAlign: TextAlign.center,
             ),
