@@ -16,47 +16,41 @@ class TheaterList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
-      children: <Widget>[
-        new Align(
-          alignment: Alignment.topCenter,
-          child: new Container(
-            height: 300.0,
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-        new StoreConnector<AppState, TheaterListViewModel>(
-          distinct: true,
-          converter: (store) => TheaterListViewModel.fromStore(store),
-          builder: (BuildContext context, TheaterListViewModel viewModel) {
-            return new ListView.builder(
-              itemCount: viewModel.theaters.length + 1,
-              itemBuilder: (BuildContext context, int index) {
-                if (index == 0) {
-                  return header;
-                }
+    var statusBarHeight = MediaQuery.of(context).padding.vertical;
 
-                var theater = viewModel.theaters[index - 1];
-                var isSelected = viewModel.currentTheater.id == theater.id;
+    return new Transform(
+      transform: new Matrix4.translationValues(0.0, -statusBarHeight, 0.0),
+      child: new StoreConnector<AppState, TheaterListViewModel>(
+        distinct: true,
+        converter: (store) => TheaterListViewModel.fromStore(store),
+        builder: (BuildContext context, TheaterListViewModel viewModel) {
+          return new ListView.builder(
+            itemCount: viewModel.theaters.length + 1,
+            itemBuilder: (BuildContext context, int index) {
+              if (index == 0) {
+                return header;
+              }
 
-                return new Material(
-                  color: isSelected
-                      ? const Color(0xFFEEEEEE)
-                      : Theme.of(context).canvasColor,
-                  child: new ListTile(
-                    onTap: () {
-                      viewModel.changeCurrentTheater(theater);
-                      onTheaterTapped();
-                    },
-                    selected: isSelected,
-                    title: new Text(theater.name),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      ],
+              var theater = viewModel.theaters[index - 1];
+              var isSelected = viewModel.currentTheater.id == theater.id;
+
+              return new Material(
+                color: isSelected
+                    ? const Color(0xFFEEEEEE)
+                    : Theme.of(context).canvasColor,
+                child: new ListTile(
+                  onTap: () {
+                    viewModel.changeCurrentTheater(theater);
+                    onTheaterTapped();
+                  },
+                  selected: isSelected,
+                  title: new Text(theater.name),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
