@@ -31,8 +31,8 @@ List<Event> _eventsWithSearchQuery(AppState state, List<Event> original) {
   var searchQuery = new RegExp(state.searchQuery, caseSensitive: false);
 
   return original.where((event) {
-    return event.title.contains(searchQuery) ||
-        event.originalTitle.contains(searchQuery);
+    return event.cleanedUpTitle.contains(searchQuery) ||
+        event.cleanedUpOriginalTitle.contains(searchQuery);
   }).toList();
 }
 
