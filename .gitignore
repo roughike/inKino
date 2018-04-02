@@ -11,3 +11,4 @@ pubspec.lock
 .flutter-plugins
 
 android/google-play-service-account.json
+android/key.properties
