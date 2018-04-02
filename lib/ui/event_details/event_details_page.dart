@@ -333,12 +333,12 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildStatusBarBackground() {
-    var statusBarMaxHeight = MediaQuery.of(context).padding.vertical;
+    var statusBarMaxHeight = MediaQuery.of(context).padding.top;
     var statusBarHeight = max(
         0.0,
         min(
           statusBarMaxHeight,
-          _scrollOffset - 175.0 + (statusBarMaxHeight * 4.5),
+          _scrollOffset - 175.0 + (statusBarMaxHeight * 4),
         ));
     var statusBarColor = Theme.of(context).primaryColor;
 
