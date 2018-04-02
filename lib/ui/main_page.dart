@@ -106,6 +106,12 @@ class _MyHomePageState extends State<MyHomePage>
         new IconButton(
           icon: new Icon(Icons.clear),
           onPressed: () {
+            if (_searchQuery == null || _searchQuery.text.isEmpty) {
+              // Stop searching.
+              Navigator.pop(context);
+              return;
+            }
+
             setState(() {
               _searchQuery.clear();
               _updateSearchQuery(null);
