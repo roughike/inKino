@@ -27,11 +27,13 @@ class _ActorScrollerState extends State<ActorScroller> {
     _fetchAvatars();
   }
 
-  Future<void> _fetchAvatars() async {
+  Future<Null> _fetchAvatars() async {
     var actorsWithAvatars = await widget.api.findAvatarsForActors(
       widget.event,
       widget.event.actors,
     );
+
+    if (!mounted) return;
 
     setState(() {
       _actors = actorsWithAvatars;

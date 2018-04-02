@@ -42,8 +42,6 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   void _scrollListener() {
-    if (!mounted) return;
-
     setState(() {
       _scrollOffset = _scrollController.offset;
     });
