@@ -1,9 +1,6 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/event.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EventHeader extends StatelessWidget {
   EventHeader(
@@ -61,36 +58,6 @@ class EventHeader extends StatelessWidget {
     return null;
   }
 
-  Widget _buildPlayButton() {
-    if (event.youtubeTrailers.isNotEmpty) {
-      return new DecoratedBox(
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.black26,
-        ),
-        child: new Material(
-          type: MaterialType.circle,
-          color: Colors.transparent,
-          child: new IconButton(
-            padding: EdgeInsets.zero,
-            icon: new Icon(Icons.play_circle_outline),
-            iconSize: 42.0,
-            color: Colors.white.withOpacity(0.8),
-            onPressed: () async {
-              var url = event.youtubeTrailers.first;
-
-              if (await canLaunch(url)) {
-                await launch(url);
-              }
-            },
-          ),
-        ),
-      );
-    }
-
-    return null;
-  }
-
   void _addIfNonNull(Widget child, List<Widget> children) {
     if (child != null) {
       children.add(child);
@@ -104,7 +71,6 @@ class EventHeader extends StatelessWidget {
     ];
 
     _addIfNonNull(_buildBackdropPhoto(context), content);
-    _addIfNonNull(_buildPlayButton(), content);
 
     return new Stack(
       alignment: Alignment.center,

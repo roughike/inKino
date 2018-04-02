@@ -1,15 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
+import 'package:inkino/data/models/event.dart';
 import 'package:meta/meta.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventPoster extends StatelessWidget {
   EventPoster({
-    @required this.url,
+    @required this.event,
     this.size,
+    this.displayPlayButton = false,
   });
 
-  final String url;
+  final Event event;
   final Size size;
+  final bool displayPlayButton;
+
+  Widget _buildPlayButton() {
+    if (displayPlayButton && event.youtubeTrailers.isNotEmpty) {
+      return new DecoratedBox(
+        decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.black38,
+        ),
+        child: new Material(
+          type: MaterialType.circle,
+          color: Colors.transparent,
+          child: new IconButton(
+            padding: EdgeInsets.zero,
+            icon: new Icon(Icons.play_circle_outline),
+            iconSize: 42.0,
+            color: Colors.white.withOpacity(0.8),
+            onPressed: () async {
+              var url = event.youtubeTrailers.first;
+
+              if (await canLaunch(url)) {
+                await launch(url);
+              }
+            },
+          ),
+        ),
+      );
+    }
+
+    return new Container();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +78,13 @@ class EventPoster extends StatelessWidget {
           ),
           new FadeInImage.assetNetwork(
             placeholder: ImageAssets.transparentImage,
-            image: url ?? '',
+            image: event.images.portraitMedium ?? 'http://example.com',
             width: size?.width,
             height: size?.height,
             fadeInDuration: const Duration(milliseconds: 300),
             fit: BoxFit.cover,
           ),
+          _buildPlayButton(),
         ],
       ),
     );

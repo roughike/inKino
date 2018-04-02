@@ -100,12 +100,17 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   Widget _buildPortraitPhoto() {
     return new Padding(
       padding: const EdgeInsets.all(6.0),
-      child: new Hero(
-        tag: widget.event.id,
-        child: new EventPoster(
-          url: widget.event.images.portraitMedium,
-          size: new Size(100.0, 150.0),
-        ),
+      child: new Stack(
+        children: <Widget>[
+          new Hero(
+            tag: widget.event.id,
+            child: new EventPoster(
+              event: widget.event,
+              size: new Size(100.0, 150.0),
+              displayPlayButton: true,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -227,9 +232,8 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
     var overlayOpacity = max(
         0.0, min(1.0, 2.0 - (unconstrainedBackdropHeight / kToolbarHeight)));
-    var backdropFinalBlur = backdropExpandBlur == 0.0
-        ? overlayOpacity * 5.0
-        : backdropExpandBlur;
+    var backdropFinalBlur =
+        backdropExpandBlur == 0.0 ? overlayOpacity * 5.0 : backdropExpandBlur;
 
     if (_scrollOffset < 0) {
       overlayOpacity = max(0.0, min(1.0, -(_scrollOffset / 150)));
