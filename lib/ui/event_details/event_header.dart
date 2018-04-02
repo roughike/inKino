@@ -14,7 +14,7 @@ class EventHeader extends StatelessWidget {
   final Event event;
   final double height;
 
-  Widget _buildPlaceholderBackground() {
+  Widget _buildPlaceholderBackground(BuildContext context) {
     return new Container(
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
@@ -26,6 +26,7 @@ class EventHeader extends StatelessWidget {
           ],
         ),
       ),
+      width: MediaQuery.of(context).size.width,
       height: height,
       child: new Center(
         child: new Icon(
@@ -99,7 +100,7 @@ class EventHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var content = <Widget>[
-      _buildPlaceholderBackground(),
+      _buildPlaceholderBackground(context),
     ];
 
     _addIfNonNull(_buildBackdropPhoto(context), content);
