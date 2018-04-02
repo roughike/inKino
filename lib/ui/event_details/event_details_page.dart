@@ -319,11 +319,14 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     return new Positioned(
       top: MediaQuery.of(context).padding.top,
       left: 4.0,
-      child: new Material(
-        type: MaterialType.circle,
-        color: Colors.transparent,
-        child: new BackButton(
-          color: Colors.white.withOpacity(opacity * 0.9),
+      child: new IgnorePointer(
+        ignoring: opacity == 0.0,
+        child: new Material(
+          type: MaterialType.circle,
+          color: Colors.transparent,
+          child: new BackButton(
+            color: Colors.white.withOpacity(opacity * 0.9),
+          ),
         ),
       ),
     );
