@@ -77,44 +77,35 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   Widget _buildHeader(BuildContext context) {
     return new Stack(
       children: <Widget>[
+        // Transparent container that makes the space for the backdrop photo.
         new Container(
           height: 175.0,
           margin: const EdgeInsets.only(bottom: 118.0),
         ),
         new Positioned(
-          left: 16.0,
-          right: 16.0,
+          left: 10.0,
           bottom: 0.0,
-          child: _buildEventPortraitAndInfo(),
+          child: _buildPortraitPhoto(),
         ),
-      ],
-    );
-  }
-
-  Widget _buildEventPortraitAndInfo() {
-    return new Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _buildPortraitPhoto(),
-        new Expanded(
-          child: new Padding(
-            padding: const EdgeInsets.only(
-              left: 16.0,
-              top: 48.0,
-            ),
-            child: _buildEventInfo(),
-          ),
+        new Positioned(
+          top: 186.0,
+          left: 132.0,
+          right: 16.0,
+          child: _buildEventInfo(),
         ),
       ],
     );
   }
 
   Widget _buildPortraitPhoto() {
-    return new Hero(
-      tag: widget.event.id,
-      child: new EventPoster(
-        url: widget.event.images.portraitMedium,
-        size: new Size(100.0, 150.0),
+    return new Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: new Hero(
+        tag: widget.event.id,
+        child: new EventPoster(
+          url: widget.event.images.portraitMedium,
+          size: new Size(100.0, 150.0),
+        ),
       ),
     );
   }
@@ -267,7 +258,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 decoration: new BoxDecoration(
                   boxShadow: <BoxShadow>[
                     new BoxShadow(
-                      color: Colors.black54,
+                      color: Colors.black38,
                       blurRadius: 5.0,
                       spreadRadius: 3.0,
                     ),
@@ -311,7 +302,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var opacity = 1.0;
 
     if (_scrollOffset > 80.0) {
-      opacity = max(0.0, min(1.0, 1.0 - ((_scrollOffset - 80.0) / 10)));
+      opacity = max(0.0, min(1.0, 1.0 - ((_scrollOffset - 80.0) / 5)));
     } else if (_scrollOffset < 0.0) {
       opacity = max(0.0, min(1.0, 1.0 - (_scrollOffset / -40)));
     }
@@ -335,7 +326,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         0.0,
         min(
           statusBarMaxHeight,
-          _scrollOffset - 175.0 + (statusBarMaxHeight * 3.5),
+          _scrollOffset - 175.0 + (statusBarMaxHeight * 4.5),
         ));
     var statusBarColor = Theme.of(context).primaryColor;
 
