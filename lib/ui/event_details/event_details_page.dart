@@ -19,18 +19,9 @@ class EventDetailsPage extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     return new Stack(
       children: <Widget>[
-        new Padding(
-          padding: const EdgeInsets.only(bottom: 118.0),
-          child: new EventHeader(event),
-        ),
-        new Positioned(
-          top: MediaQuery.of(context).padding.top,
-          left: 4.0,
-          child: new Material(
-            type: MaterialType.circle,
-            color: Colors.transparent,
-            child: new BackButton(color: Colors.white.withOpacity(0.9)),
-          ),
+        new Container(
+          height: 175.0,
+          margin: const EdgeInsets.only(bottom: 118.0),
         ),
         new Positioned(
           left: 16.0,
@@ -164,9 +155,23 @@ class EventDetailsPage extends StatelessWidget {
     }
 
     return new Scaffold(
-      body: new SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 32.0),
-        child: new Column(children: content),
+      body: new Stack(
+        children: <Widget>[
+          new EventHeader(event),
+          new Positioned(
+            top: MediaQuery.of(context).padding.top,
+            left: 4.0,
+            child: new Material(
+              type: MaterialType.circle,
+              color: Colors.transparent,
+              child: new BackButton(color: Colors.white.withOpacity(0.9)),
+            ),
+          ),
+          new SingleChildScrollView(
+            padding: const EdgeInsets.only(bottom: 32.0),
+            child: new Column(children: content),
+          ),
+        ],
       ),
     );
   }
