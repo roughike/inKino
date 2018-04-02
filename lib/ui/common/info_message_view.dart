@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class ErrorView extends InfoMessageWidget {
+class ErrorView extends InfoMessageView {
   ErrorView({
     String title,
     String description,
@@ -15,8 +15,8 @@ class ErrorView extends InfoMessageWidget {
         );
 }
 
-class InfoMessageWidget extends StatelessWidget {
-  InfoMessageWidget({
+class InfoMessageView extends StatelessWidget {
+  InfoMessageView({
     @required this.title,
     @required this.description,
     this.onActionButtonTapped,
@@ -68,11 +68,14 @@ class InfoMessageWidget extends StatelessWidget {
       ));
     }
 
-    return new Container(
-      child: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: content,
+    return new SingleChildScrollView(
+      child: new Container(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: content,
+          ),
         ),
       ),
     );

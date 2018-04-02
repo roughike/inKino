@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/redux/app/app_state.dart';
-import 'package:inkino/ui/common/error_view.dart';
+import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
@@ -10,7 +10,7 @@ import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 class ShowtimesPage extends StatelessWidget {
   Widget _buildShowtimeList(ShowtimesPageViewModel viewModel) {
     if (viewModel.shows.isEmpty) {
-      return new InfoMessageWidget(
+      return new InfoMessageView(
         title: 'All empty!',
         description:
             'Didn\'t find any movies\nabout to start for today. ¯\\_(ツ)_/¯',
