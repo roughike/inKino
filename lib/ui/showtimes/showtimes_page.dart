@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/redux/app/app_state.dart';
@@ -49,7 +52,9 @@ class ShowtimesPage extends StatelessWidget {
             new Expanded(
               child: new LoadingView(
                 status: viewModel.status,
-                loadingContent: new CircularProgressIndicator(),
+                loadingContent: Platform.isIOS
+                    ? new CupertinoActivityIndicator()
+                    : new CircularProgressIndicator(),
                 errorContent: new ErrorView(
                   onRetry: viewModel.refreshShowtimes,
                 ),
