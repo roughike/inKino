@@ -66,7 +66,7 @@ class EventGridItem extends StatelessWidget {
         children: <Widget>[
           new Hero(
             tag: event.id,
-            child: new EventPoster(url: event.images.portraitMedium),
+            child: new EventPoster(event: event),
           ),
           new Container(
             decoration: _buildGradientBackground(),
