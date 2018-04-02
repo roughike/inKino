@@ -38,7 +38,7 @@ class EventGridItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         new Text(
-          event.title,
+          event.cleanedUpTitle,
           style: new TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
