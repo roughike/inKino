@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/models/event.dart';
@@ -17,7 +20,9 @@ class EventsPage extends StatelessWidget {
       builder: (BuildContext context, EventsPageViewModel viewModel) {
         return new LoadingView(
           status: viewModel.status,
-          loadingContent: new CircularProgressIndicator(),
+          loadingContent: Platform.isIOS
+              ? new CupertinoActivityIndicator()
+              : new CircularProgressIndicator(),
           errorContent: new ErrorView(
             description: 'Error loading events.',
             onRetry: viewModel.refreshEvents,
