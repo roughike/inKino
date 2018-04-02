@@ -9,12 +9,10 @@ class EventHeader extends StatelessWidget {
   EventHeader(
     this.event,
     this.height,
-    this.blur,
   );
 
   final Event event;
   final double height;
-  final double blur;
 
   Widget _buildPlaceholderBackground() {
     return new Container(
@@ -48,25 +46,13 @@ class EventHeader extends StatelessWidget {
       return new SizedBox(
         width: screenWidth,
         height: height,
-        child: new Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            new FadeInImage.assetNetwork(
-              placeholder: ImageAssets.transparentImage,
-              image: photoUrl,
-              width: screenWidth,
-              height: height,
-              fadeInDuration: const Duration(milliseconds: 300),
-              fit: BoxFit.cover,
-            ),
-            new BackdropFilter(
-              filter: new ui.ImageFilter.blur(
-                sigmaX: blur,
-                sigmaY: blur,
-              ),
-              child: new Container(color: Colors.black.withOpacity(0.02)),
-            ),
-          ],
+        child: new FadeInImage.assetNetwork(
+          placeholder: ImageAssets.transparentImage,
+          image: photoUrl,
+          width: screenWidth,
+          height: height,
+          fadeInDuration: const Duration(milliseconds: 300),
+          fit: BoxFit.cover,
         ),
       );
     }

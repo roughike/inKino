@@ -30,19 +30,21 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   @override
   void initState() {
     super.initState();
-
     _scrollController = new ScrollController();
-    _scrollController.addListener(() {
-      setState(() {
-        _scrollOffset = _scrollController.offset;
-      });
-    });
+    _scrollController.addListener(_scrollListener);
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _scrollOffset = _scrollController.offset;
+    });
   }
 
   Widget _buildHeader(BuildContext context) {
@@ -190,31 +192,55 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     }
   }
 
-  List<Widget> _buildEventBackdrop() {
+  double _headerOffset(double backdropHeight) {
+    if (backdropHeight < 72.0) {
+      return -(72.0 - backdropHeight);
+    }
+
+    return 0.0;
+  }
+
+  Widget _buildEventBackdrop() {
     var unconstrainedBackdropHeight = 175.0 + (-_scrollOffset);
-    var backdropHeight = max(kToolbarHeight, unconstrainedBackdropHeight);
-    var backdropBlur = max(0.0, min(13.0, -_scrollOffset / 10));
+    var backdropHeight = max(72.0, unconstrainedBackdropHeight);
+    var backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
     var overlayOpacity = max(
         0.0, min(1.0, 1.5 - (unconstrainedBackdropHeight / kToolbarHeight)));
+    var backdropFinalBlur =
+        backdropExpandBlur == 0.0 ? overlayOpacity * 4.0 : backdropExpandBlur;
 
-    return <Widget>[
-      new EventHeader(
-        widget.event,
-        backdropHeight,
-        backdropBlur,
+    return new Positioned(
+      top: _headerOffset(unconstrainedBackdropHeight),
+      child: new Stack(
+        children: <Widget>[
+          new EventHeader(
+            widget.event,
+            backdropHeight,
+          ),
+          new BackdropFilter(
+            filter: new ui.ImageFilter.blur(
+              sigmaX: backdropFinalBlur,
+              sigmaY: backdropFinalBlur,
+            ),
+            child: new Container(
+              width: 1000.0,
+              height: backdropHeight,
+              decoration: new BoxDecoration(
+                color: Colors.black.withOpacity(overlayOpacity * 0.75),
+              ),
+            ),
+          ),
+        ],
       ),
-      new Container(
-        height: backdropHeight,
-        decoration: new BoxDecoration(
-          color: Colors.white.withOpacity(overlayOpacity),
-        ),
-      ),
-    ];
+    );
   }
 
   Widget _buildStatusbarBackground() {
     var statusbarMaxHeight = MediaQuery.of(context).padding.vertical;
-    var statusbarHeight = max(0.0, min(statusbarMaxHeight, _scrollOffset - 175.0 + statusbarMaxHeight + 56.0));
+    var statusbarHeight = max(
+        0.0,
+        min(statusbarMaxHeight,
+            _scrollOffset - 175.0 + (statusbarMaxHeight * 2.0)));
     var statusbarColor = Theme.of(context).primaryColor;
 
     return new Container(
@@ -237,7 +263,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       backgroundColor: Colors.white,
       body: new Stack(
         children: <Widget>[]
-          ..addAll(_buildEventBackdrop())
+          ..add(_buildEventBackdrop())
           ..addAll(
             <Widget>[
               new CustomScrollView(
