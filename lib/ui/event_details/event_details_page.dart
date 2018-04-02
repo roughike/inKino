@@ -159,6 +159,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   Widget _buildDirectorInfo() {
     return new Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         new Text(
           'Director:',
@@ -168,13 +169,15 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        new Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: new Text(
-            widget.event.directors.first,
-            style: new TextStyle(
-              fontSize: 12.0,
-              color: Colors.black87,
+        new Expanded(
+          child: new Padding(
+            padding: const EdgeInsets.only(left: 4.0),
+            child: new Text(
+              widget.event.directors.first,
+              style: new TextStyle(
+                fontSize: 12.0,
+                color: Colors.black87,
+              ),
             ),
           ),
         ),
