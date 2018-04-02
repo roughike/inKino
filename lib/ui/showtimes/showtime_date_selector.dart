@@ -19,13 +19,16 @@ class ShowtimeDateSelector extends StatelessWidget {
         child: new Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              new Text(
-                new DateFormat('E').format(date),
-                style: new TextStyle(
-                  fontSize: 12.0,
-                  color: color,
+              new Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: new Text(
+                  new DateFormat('E').format(date),
+                  style: new TextStyle(
+                    fontSize: 12.0,
+                    color: color,
+                  ),
                 ),
               ),
               new Text(
@@ -46,7 +49,7 @@ class ShowtimeDateSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: 56.0,
+      height: 56.0 + MediaQuery.of(context).padding.bottom,
       color: const Color(0xFF222222),
       child: new ListView.builder(
         scrollDirection: Axis.horizontal,
