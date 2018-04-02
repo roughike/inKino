@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
       controller: _searchQuery,
       autofocus: true,
       decoration: const InputDecoration(
-        hintText: 'Search movies...',
+        hintText: 'Search movies & showtimes...',
         border: InputBorder.none,
         hintStyle: const TextStyle(color: Colors.white30),
       ),

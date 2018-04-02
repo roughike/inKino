@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/models/event.dart';
-import 'package:inkino/ui/common/error_view.dart';
+import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_grid_item.dart';
 import 'package:meta/meta.dart';
@@ -51,7 +51,7 @@ class EventGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (events.isEmpty) {
-      return new InfoMessageWidget(
+      return new InfoMessageView(
         title: 'All empty!',
         description: 'Didn\'t find any movies at\nall. ¯\\_(ツ)_/¯',
         onActionButtonTapped: onReloadCallback,
