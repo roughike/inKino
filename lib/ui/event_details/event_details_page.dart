@@ -235,6 +235,39 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
+  Widget _buildContent() {
+    var content = <Widget>[
+      _buildHeader(context),
+    ];
+
+    _addIfNonNull(_buildShowtimeInformation(), content);
+    _addIfNonNull(_buildSynopsis(), content);
+    _addIfNonNull(_buildActorScroller(), content);
+
+    return new CustomScrollView(
+      controller: _scrollController,
+      slivers: <Widget>[
+        new SliverList(
+          delegate: new SliverChildListDelegate(content),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBackButton() {
+    return new Positioned(
+      top: MediaQuery.of(context).padding.top,
+      left: 4.0,
+      child: new Material(
+        type: MaterialType.circle,
+        color: Colors.transparent,
+        child: new BackButton(
+          color: Colors.white.withOpacity(0.9),
+        ),
+      ),
+    );
+  }
+
   Widget _buildStatusbarBackground() {
     var statusbarMaxHeight = MediaQuery.of(context).padding.vertical;
     var statusbarHeight = max(
@@ -251,41 +284,15 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var content = <Widget>[
-      _buildHeader(context),
-    ];
-
-    _addIfNonNull(_buildShowtimeInformation(), content);
-    _addIfNonNull(_buildSynopsis(), content);
-    _addIfNonNull(_buildActorScroller(), content);
-
     return new Scaffold(
       backgroundColor: Colors.white,
       body: new Stack(
-        children: <Widget>[]
-          ..add(_buildEventBackdrop())
-          ..addAll(
-            <Widget>[
-              new CustomScrollView(
-                controller: _scrollController,
-                slivers: <Widget>[
-                  new SliverList(
-                    delegate: new SliverChildListDelegate(content),
-                  ),
-                ],
-              ),
-              new Positioned(
-                top: MediaQuery.of(context).padding.top,
-                left: 4.0,
-                child: new Material(
-                  type: MaterialType.circle,
-                  color: Colors.transparent,
-                  child: new BackButton(color: Colors.white.withOpacity(0.9)),
-                ),
-              ),
-            ],
-          )
-          ..add(_buildStatusbarBackground()),
+        children: <Widget>[
+          _buildEventBackdrop(),
+          _buildBackButton(),
+          _buildContent(),
+          _buildStatusbarBackground(),
+        ],
       ),
     );
   }
