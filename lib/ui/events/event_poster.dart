@@ -6,29 +6,23 @@ class EventPoster extends StatelessWidget {
   EventPoster({
     @required this.url,
     this.size,
-    this.useShadow = false,
   });
 
   final String url;
   final Size size;
-  final bool useShadow;
 
   @override
   Widget build(BuildContext context) {
-    var shadows = <BoxShadow>[];
-
-    if (useShadow) {
-      shadows.add(new BoxShadow(
-        offset: const Offset(1.0, 1.0),
-        spreadRadius: 1.0,
-        blurRadius: 2.0,
-        color: Colors.black38,
-      ));
-    }
-
     return new Container(
       decoration: new BoxDecoration(
-        boxShadow: shadows,
+        boxShadow: <BoxShadow>[
+          new BoxShadow(
+            offset: const Offset(1.0, 1.0),
+            spreadRadius: 1.0,
+            blurRadius: 2.0,
+            color: Colors.black38,
+          ),
+        ],
         gradient: new LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,

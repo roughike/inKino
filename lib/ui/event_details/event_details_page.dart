@@ -88,7 +88,6 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       child: new EventPoster(
         url: widget.event.images.portraitMedium,
         size: new Size(100.0, 150.0),
-        useShadow: true,
       ),
     );
   }
@@ -289,8 +288,10 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var statusBarMaxHeight = MediaQuery.of(context).padding.vertical;
     var statusBarHeight = max(
         0.0,
-        min(statusBarMaxHeight,
-            _scrollOffset - 175.0 + (statusBarMaxHeight * 3.5)));
+        min(
+          statusBarMaxHeight,
+          _scrollOffset - 175.0 + (statusBarMaxHeight * 3.5),
+        ));
     var statusBarColor = Theme.of(context).primaryColor;
 
     return new Container(
