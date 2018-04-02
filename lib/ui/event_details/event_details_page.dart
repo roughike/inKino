@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
@@ -7,7 +10,7 @@ import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
 
-class EventDetailsPage extends StatelessWidget {
+class EventDetailsPage extends StatefulWidget {
   EventDetailsPage(
     this.event, {
     this.show,
@@ -15,6 +18,32 @@ class EventDetailsPage extends StatelessWidget {
 
   final Event event;
   final Show show;
+
+  @override
+  _EventDetailsPageState createState() => new _EventDetailsPageState();
+}
+
+class _EventDetailsPageState extends State<EventDetailsPage> {
+  ScrollController _scrollController;
+  double _scrollOffset = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController = new ScrollController();
+    _scrollController.addListener(() {
+      setState(() {
+        _scrollOffset = _scrollController.offset;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   Widget _buildHeader(BuildContext context) {
     return new Stack(
@@ -53,9 +82,9 @@ class EventDetailsPage extends StatelessWidget {
 
   Widget _buildPortraitPhoto() {
     return new Hero(
-      tag: event.id,
+      tag: widget.event.id,
       child: new EventPoster(
-        url: event.images.portraitMedium,
+        url: widget.event.images.portraitMedium,
         size: new Size(100.0, 150.0),
         useShadow: true,
       ),
@@ -65,7 +94,7 @@ class EventDetailsPage extends StatelessWidget {
   Widget _buildEventInfo() {
     var content = <Widget>[]..addAll(_buildTitleAndLengthInMinutes());
 
-    if (event.directors.isNotEmpty) {
+    if (widget.event.directors.isNotEmpty) {
       content.add(new Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: _buildDirectorInfo(),
@@ -81,7 +110,7 @@ class EventDetailsPage extends StatelessWidget {
   List<Widget> _buildTitleAndLengthInMinutes() {
     return <Widget>[
       new Text(
-        event.title,
+        widget.event.title,
         style: new TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w800,
@@ -90,7 +119,7 @@ class EventDetailsPage extends StatelessWidget {
       new Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: new Text(
-          '${event.lengthInMinutes}min | ${event.genres.split(', ').take(4).join(', ')}',
+          '${widget.event.lengthInMinutes}min | ${widget.event.genres.split(', ').take(4).join(', ')}',
           style: new TextStyle(
             fontSize: 12.0,
             fontWeight: FontWeight.w600,
@@ -114,7 +143,7 @@ class EventDetailsPage extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(left: 4.0),
           child: new Text(
-            event.directors.first,
+            widget.event.directors.first,
             style: new TextStyle(
               fontSize: 12.0,
               color: Colors.black87,
@@ -126,7 +155,7 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   Widget _buildShowtimeInformation() {
-    if (show != null) {
+    if (widget.show != null) {
       return new Padding(
         padding: const EdgeInsets.only(
           top: 24.0,
@@ -134,7 +163,7 @@ class EventDetailsPage extends StatelessWidget {
           left: 16.0,
           right: 16.0,
         ),
-        child: new ShowtimeInformation(show),
+        child: new ShowtimeInformation(widget.show),
       );
     }
 
@@ -142,10 +171,10 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   Widget _buildSynopsis() {
-    if (event.hasSynopsis) {
+    if (widget.event.hasSynopsis) {
       return new Padding(
-        padding: new EdgeInsets.only(top: show == null ? 12.0 : 0.0),
-        child: new StorylineWidget(event),
+        padding: new EdgeInsets.only(top: widget.show == null ? 12.0 : 0.0),
+        child: new StorylineWidget(widget.event),
       );
     }
 
@@ -153,12 +182,45 @@ class EventDetailsPage extends StatelessWidget {
   }
 
   Widget _buildActorScroller() =>
-      event.actors.isNotEmpty ? new ActorScroller(event) : null;
+      widget.event.actors.isNotEmpty ? new ActorScroller(widget.event) : null;
 
   void _addIfNonNull(Widget child, List<Widget> children) {
     if (child != null) {
       children.add(child);
     }
+  }
+
+  List<Widget> _buildEventBackdrop() {
+    var unconstrainedBackdropHeight = 175.0 + (-_scrollOffset);
+    var backdropHeight = max(kToolbarHeight, unconstrainedBackdropHeight);
+    var backdropBlur = max(0.0, min(13.0, -_scrollOffset / 10));
+    var overlayOpacity = max(
+        0.0, min(1.0, 1.5 - (unconstrainedBackdropHeight / kToolbarHeight)));
+
+    return <Widget>[
+      new EventHeader(
+        widget.event,
+        backdropHeight,
+        backdropBlur,
+      ),
+      new Container(
+        height: backdropHeight,
+        decoration: new BoxDecoration(
+          color: Colors.white.withOpacity(overlayOpacity),
+        ),
+      ),
+    ];
+  }
+
+  Widget _buildStatusbarBackground() {
+    var statusbarMaxHeight = MediaQuery.of(context).padding.vertical;
+    var statusbarHeight = max(0.0, min(statusbarMaxHeight, _scrollOffset - 175.0 + statusbarMaxHeight + 56.0));
+    var statusbarColor = Theme.of(context).primaryColor;
+
+    return new Container(
+      height: statusbarHeight,
+      color: statusbarColor,
+    );
   }
 
   @override
@@ -172,23 +234,32 @@ class EventDetailsPage extends StatelessWidget {
     _addIfNonNull(_buildActorScroller(), content);
 
     return new Scaffold(
+      backgroundColor: Colors.white,
       body: new Stack(
-        children: <Widget>[
-          new EventHeader(event),
-          new Positioned(
-            top: MediaQuery.of(context).padding.top,
-            left: 4.0,
-            child: new Material(
-              type: MaterialType.circle,
-              color: Colors.transparent,
-              child: new BackButton(color: Colors.white.withOpacity(0.9)),
-            ),
-          ),
-          new SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: 32.0),
-            child: new Column(children: content),
-          ),
-        ],
+        children: <Widget>[]
+          ..addAll(_buildEventBackdrop())
+          ..addAll(
+            <Widget>[
+              new CustomScrollView(
+                controller: _scrollController,
+                slivers: <Widget>[
+                  new SliverList(
+                    delegate: new SliverChildListDelegate(content),
+                  ),
+                ],
+              ),
+              new Positioned(
+                top: MediaQuery.of(context).padding.top,
+                left: 4.0,
+                child: new Material(
+                  type: MaterialType.circle,
+                  color: Colors.transparent,
+                  child: new BackButton(color: Colors.white.withOpacity(0.9)),
+                ),
+              ),
+            ],
+          )
+          ..add(_buildStatusbarBackground()),
       ),
     );
   }

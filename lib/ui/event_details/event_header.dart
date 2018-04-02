@@ -1,11 +1,20 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventHeader extends StatelessWidget {
-  EventHeader(this.event);
+  EventHeader(
+    this.event,
+    this.height,
+    this.blur,
+  );
+
   final Event event;
+  final double height;
+  final double blur;
 
   Widget _buildPlaceholderBackground() {
     return new Container(
@@ -19,7 +28,7 @@ class EventHeader extends StatelessWidget {
           ],
         ),
       ),
-      height: 175.0,
+      height: height,
       child: new Center(
         child: new Icon(
           Icons.theaters,
@@ -34,13 +43,31 @@ class EventHeader extends StatelessWidget {
     var photoUrl = event.images.landscapeBig ?? event.images.landscapeSmall;
 
     if (photoUrl != null) {
-      return new FadeInImage.assetNetwork(
-        placeholder: ImageAssets.transparentImage,
-        image: photoUrl,
-        width: MediaQuery.of(context).size.width,
-        height: 175.0,
-        fadeInDuration: const Duration(milliseconds: 300),
-        fit: BoxFit.cover,
+      var screenWidth = MediaQuery.of(context).size.width;
+
+      return new SizedBox(
+        width: screenWidth,
+        height: height,
+        child: new Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            new FadeInImage.assetNetwork(
+              placeholder: ImageAssets.transparentImage,
+              image: photoUrl,
+              width: screenWidth,
+              height: height,
+              fadeInDuration: const Duration(milliseconds: 300),
+              fit: BoxFit.cover,
+            ),
+            new BackdropFilter(
+              filter: new ui.ImageFilter.blur(
+                sigmaX: blur,
+                sigmaY: blur,
+              ),
+              child: new Container(color: Colors.black.withOpacity(0.02)),
+            ),
+          ],
+        ),
       );
     }
 
