@@ -15,7 +15,7 @@ List<Event> eventsSelector(AppState state, EventListType type) {
     return uniqueEvents;
   }
 
-  return _eventsWithSearchQuery(state, events);
+  return _eventsWithSearchQuery(state, uniqueEvents);
 }
 
 List<Event> _uniqueEvents(List<Event> original) {
