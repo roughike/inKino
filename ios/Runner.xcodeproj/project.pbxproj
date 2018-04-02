@@ -183,7 +183,7 @@
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = MJ9CWTUK4S;
+						DevelopmentTeam = 9U3A2H2X3Y;
 					};
 				};
 			};
@@ -439,7 +439,7 @@
 			buildSettings = {
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MJ9CWTUK4S;
+				DEVELOPMENT_TEAM = 9U3A2H2X3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -451,7 +451,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roughike.inkino;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roughike.inkino.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -462,7 +462,7 @@
 			buildSettings = {
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MJ9CWTUK4S;
+				DEVELOPMENT_TEAM = 9U3A2H2X3Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -474,7 +474,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.roughike.inkino;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roughike.inkino.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
