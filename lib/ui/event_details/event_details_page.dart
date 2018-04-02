@@ -204,7 +204,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var backdropHeight = max(80.0, unconstrainedBackdropHeight);
     var backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
     var overlayOpacity = max(
-        0.0, min(1.0, 1.5 - (unconstrainedBackdropHeight / kToolbarHeight)));
+        0.0, min(1.0, 2.0 - (unconstrainedBackdropHeight / kToolbarHeight)));
     var backdropFinalBlur =
         backdropExpandBlur == 0.0 ? overlayOpacity * 5.0 : backdropExpandBlur;
 
@@ -226,7 +226,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 width: MediaQuery.of(context).size.width,
                 height: backdropHeight,
                 decoration: new BoxDecoration(
-                  color: Colors.black.withOpacity(overlayOpacity * 0.75),
+                  color: Colors.black.withOpacity(overlayOpacity * 0.4),
                 ),
               ),
             ),
