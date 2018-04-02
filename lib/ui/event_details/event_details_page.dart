@@ -291,6 +291,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     _addIfNonNull(_buildSynopsis(), content);
     _addIfNonNull(_buildActorScroller(), content);
 
+    // Some padding for the bottom.
+    content.add(new Container(height: 32.0));
+
     return new CustomScrollView(
       controller: _scrollController,
       slivers: <Widget>[
