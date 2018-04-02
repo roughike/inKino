@@ -217,17 +217,6 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
               widget.event,
               backdropHeight,
             ),
-            new Positioned(
-              top: MediaQuery.of(context).padding.top,
-              left: 4.0,
-              child: new Material(
-                type: MaterialType.circle,
-                color: Colors.transparent,
-                child: new BackButton(
-                  color: Colors.white.withOpacity(0.9),
-                ),
-              ),
-            ),
             new BackdropFilter(
               filter: new ui.ImageFilter.blur(
                 sigmaX: backdropFinalBlur,
@@ -284,6 +273,28 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
+  Widget _buildBackButton() {
+    var opacity = 1.0;
+
+    if (_scrollOffset > 80.0) {
+      opacity = max(0.0, min(1.0, 1.0 - ((_scrollOffset - 80.0) / 10)));
+    } else if (_scrollOffset < 0.0) {
+      opacity = max(0.0, min(1.0, 1.0 - (_scrollOffset / -40)));
+    }
+
+    return new Positioned(
+      top: MediaQuery.of(context).padding.top,
+      left: 4.0,
+      child: new Material(
+        type: MaterialType.circle,
+        color: Colors.transparent,
+        child: new BackButton(
+          color: Colors.white.withOpacity(opacity * 0.9),
+        ),
+      ),
+    );
+  }
+
   Widget _buildStatusBarBackground() {
     var statusBarMaxHeight = MediaQuery.of(context).padding.vertical;
     var statusBarHeight = max(
@@ -308,6 +319,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         children: <Widget>[
           _buildEventBackdrop(),
           _buildContent(),
+          _buildBackButton(),
           _buildStatusBarBackground(),
         ],
       ),
