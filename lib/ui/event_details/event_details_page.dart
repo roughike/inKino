@@ -227,8 +227,13 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
     var overlayOpacity = max(
         0.0, min(1.0, 2.0 - (unconstrainedBackdropHeight / kToolbarHeight)));
-    var backdropFinalBlur =
-        backdropExpandBlur == 0.0 ? overlayOpacity * 5.0 : backdropExpandBlur;
+    var backdropFinalBlur = backdropExpandBlur == 0.0
+        ? overlayOpacity * 5.0
+        : backdropExpandBlur;
+
+    if (_scrollOffset < 0) {
+      overlayOpacity = max(0.0, min(1.0, -(_scrollOffset / 150)));
+    }
 
     return new Positioned(
       top: _headerOffset(unconstrainedBackdropHeight),
