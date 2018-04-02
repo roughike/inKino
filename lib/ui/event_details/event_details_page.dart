@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
+import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_header.dart';
 import 'package:inkino/ui/event_details/showtime_information.dart';
@@ -24,14 +27,24 @@ class EventDetailsPage extends StatefulWidget {
 }
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
+  // TODO: Possibly refactor the actor avatar loading to a more appropriate
+  // place.
+  static final TMDBApi api = new TMDBApi();
+
   ScrollController _scrollController;
   double _scrollOffset = 0.0;
+
+  bool _avatarsLoaded = false;
+  List<Actor> _actors;
 
   @override
   void initState() {
     super.initState();
     _scrollController = new ScrollController();
     _scrollController.addListener(_scrollListener);
+
+    _actors = widget.event.actors;
+    _fetchActorAvatars();
   }
 
   @override
@@ -44,6 +57,20 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   void _scrollListener() {
     setState(() {
       _scrollOffset = _scrollController.offset;
+    });
+  }
+
+  Future<Null> _fetchActorAvatars() async {
+    var actorsWithAvatars = await api.findAvatarsForActors(
+      widget.event,
+      widget.event.actors,
+    );
+
+    if (!mounted) return;
+
+    setState(() {
+      _actors = actorsWithAvatars;
+      _avatarsLoaded = true;
     });
   }
 
@@ -182,8 +209,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     return null;
   }
 
-  Widget _buildActorScroller() =>
-      widget.event.actors.isNotEmpty ? new ActorScroller(widget.event) : null;
+  Widget _buildActorScroller() => widget.event.actors.isNotEmpty
+      ? new ActorScroller(_actors, _avatarsLoaded)
+      : null;
 
   void _addIfNonNull(Widget child, List<Widget> children) {
     if (child != null) {

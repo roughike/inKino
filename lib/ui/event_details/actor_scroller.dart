@@ -7,47 +7,23 @@ import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/assets.dart';
 
 class ActorScroller extends StatefulWidget {
-  ActorScroller(this.event);
+  ActorScroller(this.actors, this.avatarsLoaded);
 
-  final Event event;
-  final TMDBApi api = new TMDBApi();
+  final List<Actor> actors;
+  final bool avatarsLoaded;
 
   @override
   _ActorScrollerState createState() => new _ActorScrollerState();
 }
 
 class _ActorScrollerState extends State<ActorScroller> {
-  bool _avatarsLoaded = false;
-  List<Actor> _actors;
-
-  @override
-  void initState() {
-    super.initState();
-    _actors = widget.event.actors;
-    _fetchAvatars();
-  }
-
-  Future<Null> _fetchAvatars() async {
-    var actorsWithAvatars = await widget.api.findAvatarsForActors(
-      widget.event,
-      widget.event.actors,
-    );
-
-    if (!mounted) return;
-
-    setState(() {
-      _actors = actorsWithAvatars;
-      _avatarsLoaded = true;
-    });
-  }
-
   Widget _buildActorList() {
     return new ListView.builder(
       padding: const EdgeInsets.only(left: 16.0),
       scrollDirection: Axis.horizontal,
-      itemCount: _actors.length,
+      itemCount: widget.actors.length,
       itemBuilder: (BuildContext context, int index) {
-        var actor = _actors[index];
+        var actor = widget.actors[index];
         return _buildActorListItem(actor);
       },
     );
@@ -92,7 +68,7 @@ class _ActorScrollerState extends State<ActorScroller> {
           new Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: new Text(
-              _avatarsLoaded ? actor.name : 'Loading...',
+              widget.avatarsLoaded ? actor.name : 'Loading...',
               style: new TextStyle(fontSize: 12.0),
               textAlign: TextAlign.center,
             ),
