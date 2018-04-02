@@ -78,7 +78,7 @@ class _ActorScrollerState extends State<ActorScroller> {
                 new ClipOval(
                   child: new FadeInImage.assetNetwork(
                     placeholder: ImageAssets.transparentImage,
-                    image: actor.avatarUrl ?? 'http://example.com/',
+                    image: actor.avatarUrl ?? '',
                     fit: BoxFit.cover,
                     fadeInDuration: const Duration(milliseconds: 250),
                   ),
