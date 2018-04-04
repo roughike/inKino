@@ -6,10 +6,12 @@ import 'package:inkino/data/networking/finnkino_api.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/show/show_actions.dart';
+import 'package:inkino/utils/clock.dart';
 import 'package:redux/redux.dart';
 
 class ShowMiddleware extends MiddlewareClass<AppState> {
   ShowMiddleware(this.api);
+
   final FinnkinoApi api;
 
   @override
@@ -20,7 +22,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
         action is ChangeCurrentTheaterAction ||
         action is RefreshShowsAction ||
         action is ChangeCurrentDateAction) {
-      _handleShowsUpdate(store, action, next);
+      await _handleShowsUpdate(store, action, next);
     }
   }
 
@@ -35,28 +37,30 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
       date = action.date;
     }
 
-    await _fetchShows(theater, date, next);
+    next(new RequestingShowsAction());
+
+    try {
+      var shows = await _fetchShows(theater, date, next);
+      next(new ReceivedShowsAction(theater, shows));
+    } catch(e) {
+      next(new ErrorLoadingShowsAction());
+    }
   }
 
-  Future<Null> _fetchShows(
+  Future<List<Show>> _fetchShows(
     Theater newTheater,
     DateTime currentDate,
     NextDispatcher next,
   ) async {
-    next(new RequestingShowsAction());
+    var showsXml = await api.getSchedule(newTheater, currentDate);
+    var shows = Show.parseAll(showsXml);
+    var now = Clock.getCurrentTime();
 
-    try {
-      var showsXml = await api.getSchedule(newTheater, currentDate);
-      var shows = Show.parseAll(showsXml);
-      var now = new DateTime.now();
-      var relevantShows = shows.where((show) {
-        return show.start.isAfter(now);
-      }).toList();
+    // Return only show times that haven't started yet.
+    var relevantShows = shows.where((show) {
+      return show.start.isAfter(now);
+    }).toList();
 
-      next(new ReceivedShowsAction(newTheater, relevantShows));
-    } catch (e) {
-      print(e);
-      next(new ErrorLoadingShowsAction());
-    }
+    return relevantShows;
   }
 }
