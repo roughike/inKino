@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/http_utils.dart';
+import 'package:inkino/tmdb_config.dart';
 
 class TMDBApi {
-  static final String apiKey = '<YOUR_API_KEY_HERE>';
   static final String baseUrl = 'api.themoviedb.org';
 
   Future<List<Actor>> findAvatarsForActors(
@@ -26,7 +26,7 @@ class TMDBApi {
       baseUrl,
       '3/search/movie',
       <String, String>{
-        'api_key': apiKey,
+        'api_key': TMDBConfig.apiKey,
         'query': movieTitle,
       },
     );
@@ -46,7 +46,7 @@ class TMDBApi {
     var actorUri = new Uri.https(
       baseUrl,
       '3/movie/$movieId/credits',
-      <String, String>{'api_key': apiKey},
+      <String, String>{'api_key': TMDBConfig.apiKey},
     );
 
     var response = await getRequest(actorUri);
