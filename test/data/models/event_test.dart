@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 void main() {
   group('Event model', () {
     test('parsing tests', () {
-      var events = new File('test_assets/events.xml').readAsStringSync();
+      var events = new File('test_assets/now_in_theaters_events.xml').readAsStringSync();
 
       List<Event> deserialized = Event.parseAll(events);
       expect(deserialized.length, 3);

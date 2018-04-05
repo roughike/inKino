@@ -9,7 +9,7 @@ import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TheaterMiddleware extends MiddlewareClass<AppState> {
-  static const String _kDefaultTheaterId = 'default_theater_id';
+  static const String kDefaultTheaterId = 'default_theater_id';
 
   final AssetBundle bundle;
   final SharedPreferences preferences;
@@ -19,16 +19,15 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
   @override
   Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
     if (action is InitAction) {
-      await _init(store, action, next);
+      await _init(action, next);
     } else if (action is ChangeCurrentTheaterAction) {
-      await _changeCurrentTheater(store, action, next);
+      await _changeCurrentTheater(action, next);
     } else {
       next(action);
     }
   }
 
   Future<Null> _init(
-    Store<AppState> store,
     InitAction action,
     NextDispatcher next,
   ) async {
@@ -40,16 +39,15 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
   }
 
   Future<Null> _changeCurrentTheater(
-    Store<AppState> store,
     ChangeCurrentTheaterAction action,
     NextDispatcher next,
   ) async {
-    preferences.setString(_kDefaultTheaterId, action.selectedTheater.id);
+    preferences.setString(kDefaultTheaterId, action.selectedTheater.id);
     next(action);
   }
 
   Theater _getDefaultTheater(List<Theater> allTheaters) {
-    var persistedTheaterId = preferences.getString(_kDefaultTheaterId);
+    var persistedTheaterId = preferences.getString(kDefaultTheaterId);
 
     if (persistedTheaterId != null) {
       return allTheaters.singleWhere((theater) {
