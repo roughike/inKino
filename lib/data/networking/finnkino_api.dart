@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/data/networking/http_utils.dart';
 import 'package:intl/intl.dart';
@@ -12,15 +13,16 @@ class FinnkinoApi {
   static final Uri kEventsBaseUrl =
       new Uri.https('www.finnkino.fi', '/en/xml/Events');
 
-  Future<String> getSchedule(Theater theater, DateTime date) async {
+  Future<List<Show>> getSchedule(Theater theater, DateTime date) async {
     var dt = ddMMyyyy.format(date ?? new DateTime.now());
-
-    return getRequest(
+    var response = await getRequest(
       kScheduleBaseUrl.replace(queryParameters: {
         'area': theater.id,
         'dt': dt,
       }),
     );
+
+    return Show.parseAll(response);
   }
 
   Future<String> getNowInTheatersEvents(Theater theater) async {
