@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/data/networking/finnkino_api.dart';
-import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_actions.dart';
 import 'package:redux/redux.dart';
 
@@ -44,8 +43,8 @@ class EventMiddleware extends MiddlewareClass<AppState> {
       var comingSoonEvents = await api.getUpcomingEvents();
 
       next(new ReceivedEventsAction(
-        nowInTheatersEvents: Event.parseAll(inTheatersEvents),
-        comingSoonEvents: Event.parseAll(comingSoonEvents),
+        nowInTheatersEvents: inTheatersEvents,
+        comingSoonEvents: comingSoonEvents,
       ));
     } catch (e) {
       next(new ErrorLoadingEventsAction());

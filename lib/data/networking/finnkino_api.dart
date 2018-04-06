@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/data/networking/http_utils.dart';
@@ -25,20 +26,24 @@ class FinnkinoApi {
     return Show.parseAll(response);
   }
 
-  Future<String> getNowInTheatersEvents(Theater theater) async {
-    return getRequest(
+  Future<List<Event>> getNowInTheatersEvents(Theater theater) async {
+    var response = await getRequest(
       kEventsBaseUrl.replace(queryParameters: {
         'area': theater.id,
         'listType': 'NowInTheatres',
       }),
     );
+
+    return Event.parseAll(response);
   }
 
-  Future<String> getUpcomingEvents() async {
-    return getRequest(
+  Future<List<Event>> getUpcomingEvents() async {
+    var response = await getRequest(
       kEventsBaseUrl.replace(queryParameters: {
         'listType': 'ComingSoon',
       }),
     );
+
+    return Event.parseAll(response);
   }
 }

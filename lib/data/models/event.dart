@@ -11,19 +11,19 @@ enum EventListType {
 
 class Event {
   Event({
-    @required this.id,
-    @required this.title,
-    @required this.cleanedUpTitle,
-    @required this.originalTitle,
-    @required this.cleanedUpOriginalTitle,
-    @required this.genres,
-    @required this.directors,
-    @required this.actors,
-    @required this.lengthInMinutes,
-    @required this.shortSynopsis,
-    @required this.synopsis,
-    @required this.images,
-    @required this.youtubeTrailers,
+    this.id,
+    this.title,
+    this.cleanedUpTitle,
+    this.originalTitle,
+    this.cleanedUpOriginalTitle,
+    this.genres,
+    this.directors,
+    this.actors,
+    this.lengthInMinutes,
+    this.shortSynopsis,
+    this.synopsis,
+    this.images,
+    this.youtubeTrailers,
   });
 
   final String id;

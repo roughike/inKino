@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_actions.dart';
@@ -19,11 +20,17 @@ void main() {
     MockFinnkinoApi mockFinnkinoApi;
     EventMiddleware sut;
 
-    Future<String> _nowInTheatersEventsXml() =>
-        new File('test_assets/now_in_theaters_events.xml').readAsString();
+    List<Event> nowInTheatersEvents = <Event>[
+      new Event(),
+      new Event(),
+      new Event(),
+    ];
 
-    Future<String> _upcomingEventsXml() =>
-        new File('test_assets/upcoming_events.xml').readAsString();
+    List<Event> upcomingEvents = <Event>[
+      new Event(),
+      new Event(),
+      new Event(),
+    ];
 
     setUp(() {
       mockFinnkinoApi = new MockFinnkinoApi();
@@ -38,9 +45,8 @@ void main() {
       'when called with InitCompleteAction, should dispatch a ReceivedEventsAction with now playing and upcoming events',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(any))
-            .thenReturn(_nowInTheatersEventsXml());
-        when(mockFinnkinoApi.getUpcomingEvents())
-            .thenReturn(_upcomingEventsXml());
+            .thenReturn(nowInTheatersEvents);
+        when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
 
         await sut.call(null, new InitCompleteAction(null, theater), next);
 
@@ -49,8 +55,8 @@ void main() {
         expect(actionLog[1], new isInstanceOf<RequestingEventsAction>());
 
         final ReceivedEventsAction action = actionLog[2];
-        expect(action.nowInTheatersEvents.length, 3);
-        expect(action.comingSoonEvents.length, 4);
+        expect(action.nowInTheatersEvents, nowInTheatersEvents);
+        expect(action.comingSoonEvents, upcomingEvents);
       },
     );
 
@@ -58,9 +64,8 @@ void main() {
       'when called with ChangeCurrentTheaterAction, should request events for the new theater',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(any))
-            .thenReturn(_nowInTheatersEventsXml());
-        when(mockFinnkinoApi.getUpcomingEvents())
-            .thenReturn(_upcomingEventsXml());
+            .thenReturn(nowInTheatersEvents);
+        when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
 
         await sut.call(
           null,
