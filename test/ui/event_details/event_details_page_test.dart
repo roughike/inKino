@@ -49,7 +49,7 @@ void main() {
         home: new eventDetails.EventDetailsPage(
           new Event(
             id: '1',
-            cleanedUpTitle: 'Test Title',
+            title: 'Test Title',
             genres: 'Test Genres',
             directors: <String>[],
             actors: <Actor>[],
