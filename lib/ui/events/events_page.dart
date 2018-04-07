@@ -17,22 +17,30 @@ class EventsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new StoreConnector(
       converter: (store) => EventsPageViewModel.fromStore(store, listType),
-      builder: (BuildContext context, EventsPageViewModel viewModel) {
-        return new LoadingView(
-          status: viewModel.status,
-          loadingContent: Platform.isIOS
-              ? new CupertinoActivityIndicator()
-              : new CircularProgressIndicator(),
-          errorContent: new ErrorView(
-            description: 'Error loading events.',
-            onRetry: viewModel.refreshEvents,
-          ),
-          successContent: new EventGrid(
-            events: viewModel.events,
-            onReloadCallback: viewModel.refreshEvents,
-          ),
-        );
-      },
+      builder: (_, viewModel) => new EventsPageContent(viewModel),
+    );
+  }
+}
+
+class EventsPageContent extends StatelessWidget {
+  EventsPageContent(this.viewModel);
+  final EventsPageViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return new LoadingView(
+      status: viewModel.status,
+      loadingContent: Platform.isIOS
+          ? new CupertinoActivityIndicator()
+          : new CircularProgressIndicator(),
+      errorContent: new ErrorView(
+        description: 'Error loading events.',
+        onRetry: viewModel.refreshEvents,
+      ),
+      successContent: new EventGrid(
+        events: viewModel.events,
+        onReloadCallback: viewModel.refreshEvents,
+      ),
     );
   }
 }
