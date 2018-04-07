@@ -7,6 +7,7 @@ import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/app/app_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/events/events_page.dart';
+import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
 
@@ -182,7 +183,10 @@ class _MyHomePageState extends State<MyHomePage>
         controller: _controller,
         children: <Widget>[
           new EventsPage(EventListType.nowInTheaters),
-          new ShowtimesPage(),
+          new StoreConnector(
+            converter: (store) => ShowtimesPageViewModel.fromStore(store),
+            builder: (_, viewModel) => new ShowtimesPage(viewModel),
+          ),
           new EventsPage(EventListType.comingSoon),
         ],
       ),

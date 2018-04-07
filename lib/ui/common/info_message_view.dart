@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class ErrorView extends InfoMessageView {
+  static final Key tryAgainButtonKey = new Key('tryAgainButton');
+
   ErrorView({
     String title,
     String description,
     @required VoidCallback onRetry,
   })
       : super(
+          actionButtonKey: tryAgainButtonKey,
           title: title ?? 'Oops!',
           description:
               description ?? 'There was an error while\nloading movies.',
@@ -17,11 +20,15 @@ class ErrorView extends InfoMessageView {
 
 class InfoMessageView extends StatelessWidget {
   InfoMessageView({
+    Key key,
+    this.actionButtonKey,
     @required this.title,
     @required this.description,
     this.onActionButtonTapped,
-  });
+  })
+      : super(key: key);
 
+  final Key actionButtonKey;
   final String title;
   final String description;
   final VoidCallback onActionButtonTapped;
@@ -55,10 +62,10 @@ class InfoMessageView extends StatelessWidget {
       ),
     ];
 
-    if (onActionButtonTapped != null) {
       content.add(new Padding(
         padding: const EdgeInsets.only(top: 12.0),
         child: new FlatButton(
+          key: actionButtonKey,
           onPressed: onActionButtonTapped,
           child: new Text(
             'TRY AGAIN',
@@ -66,7 +73,6 @@ class InfoMessageView extends StatelessWidget {
           ),
         ),
       ));
-    }
 
     return new SingleChildScrollView(
       child: new Container(
