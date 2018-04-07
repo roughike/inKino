@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/assets.dart';
+import 'package:inkino/data/models/actor.dart';
 
 class ActorScroller extends StatefulWidget {
   ActorScroller(this.actors, this.avatarsLoaded);
@@ -35,36 +31,7 @@ class _ActorScrollerState extends State<ActorScroller> {
       padding: const EdgeInsets.only(right: 16.0),
       child: new Column(
         children: <Widget>[
-          new Container(
-            width: 56.0,
-            height: 56.0,
-            decoration: new BoxDecoration(
-              color: Theme.of(context).primaryColor,
-              shape: BoxShape.circle,
-            ),
-            child: new Stack(
-              alignment: Alignment.center,
-              fit: StackFit.expand,
-              children: <Widget>[
-                new Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 26.0,
-                ),
-                new ClipOval(
-                  child: new FadeInImage.assetNetwork(
-                    placeholder: ImageAssets.transparentImage,
-                    // FIXME: The example.com here is a hack to not make the
-                    // FadeInImage crash when there's no avatar url for
-                    // the actor.
-                    image: actor.avatarUrl ?? 'https://example.com',
-                    fit: BoxFit.cover,
-                    fadeInDuration: const Duration(milliseconds: 250),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _buildActorAvatar(actor),
           new Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: new Text(
@@ -73,6 +40,43 @@ class _ActorScrollerState extends State<ActorScroller> {
               textAlign: TextAlign.center,
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActorAvatar(Actor actor) {
+    var fallbackIcon = new Icon(
+      Icons.person,
+      color: Colors.white,
+      size: 26.0,
+    );
+
+    var avatarImage = new ClipOval(
+      child: new FadeInImage.assetNetwork(
+        placeholder: ImageAssets.transparentImage,
+        // FIXME: The example.com here is a hack to not make the
+        // FadeInImage crash when there's no avatar url for
+        // the actor.
+        image: actor.avatarUrl ?? 'https://example.com',
+        fit: BoxFit.cover,
+        fadeInDuration: const Duration(milliseconds: 250),
+      ),
+    );
+
+    return new Container(
+      width: 56.0,
+      height: 56.0,
+      decoration: new BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        shape: BoxShape.circle,
+      ),
+      child: new Stack(
+        alignment: Alignment.center,
+        fit: StackFit.expand,
+        children: <Widget>[
+          fallbackIcon,
+          avatarImage,
         ],
       ),
     );
