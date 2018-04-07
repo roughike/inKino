@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+// FIXME: This is ugly, but works. Look into doing this with Animations and
+// Tweens instead.
 class EventDetailsScrollEffects {
   static const double kHeaderHeight = 175.0;
 
