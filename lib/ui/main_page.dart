@@ -32,19 +32,27 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _startSearch() {
-    ModalRoute.of(context).addLocalHistoryEntry(new LocalHistoryEntry(
-      onRemove: () {
-        setState(() {
-          _searchQuery.clear();
-          _isSearching = false;
-
-          _updateSearchQuery(null);
-        });
-      },
-    ));
+    ModalRoute
+        .of(context)
+        .addLocalHistoryEntry(new LocalHistoryEntry(onRemove: _stopSearching));
 
     setState(() {
       _isSearching = true;
+    });
+  }
+
+  void _stopSearching() {
+    _clearSearchQuery();
+
+    setState(() {
+      _isSearching = false;
+    });
+  }
+
+  void _clearSearchQuery() {
+    setState(() {
+      _searchQuery.clear();
+      _updateSearchQuery(null);
     });
   }
 
@@ -112,10 +120,7 @@ class _MyHomePageState extends State<MyHomePage>
               return;
             }
 
-            setState(() {
-              _searchQuery.clear();
-              _updateSearchQuery(null);
-            });
+            _clearSearchQuery();
           },
         ),
       ];
@@ -166,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage>
       appBar: new AppBar(
         leading: _isSearching ? new BackButton() : null,
         title: _isSearching ? _buildSearchField() : _buildTitle(context),
+        actions: _buildActions(),
         bottom: new TabBar(
           controller: _controller,
           isScrollable: true,
@@ -175,7 +181,6 @@ class _MyHomePageState extends State<MyHomePage>
             new Tab(text: 'Coming soon'),
           ],
         ),
-        actions: _buildActions(),
       ),
       drawer: _buildDrawer(),
       body: new TabBarView(
