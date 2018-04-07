@@ -21,9 +21,9 @@ class ErrorView extends InfoMessageView {
 class InfoMessageView extends StatelessWidget {
   InfoMessageView({
     Key key,
-    this.actionButtonKey,
     @required this.title,
     @required this.description,
+    this.actionButtonKey,
     this.onActionButtonTapped,
   })
       : super(key: key);
@@ -62,6 +62,7 @@ class InfoMessageView extends StatelessWidget {
       ),
     ];
 
+    if (onActionButtonTapped != null) {
       content.add(new Padding(
         padding: const EdgeInsets.only(top: 12.0),
         child: new FlatButton(
@@ -73,6 +74,7 @@ class InfoMessageView extends StatelessWidget {
           ),
         ),
       ));
+    }
 
     return new SingleChildScrollView(
       child: new Container(

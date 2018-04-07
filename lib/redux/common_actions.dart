@@ -1,7 +1,4 @@
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
-import 'package:meta/meta.dart';
 
 class InitAction {}
 

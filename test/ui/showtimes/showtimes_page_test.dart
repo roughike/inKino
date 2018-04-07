@@ -22,6 +22,7 @@ void main() {
       when(mockViewModel.dates).thenReturn(<DateTime>[]);
       when(mockViewModel.selectedDate).thenReturn(new DateTime(2018));
       when(mockViewModel.shows).thenReturn(<Show>[]);
+      when(mockViewModel.refreshShowtimes).thenReturn(() {});
     });
 
     Future<Null> _buildShowtimesPage(WidgetTester tester) {
