@@ -11,6 +11,30 @@ class ShowtimeDateSelector extends StatelessWidget {
         ? Colors.white
         : Colors.white.withOpacity(0.4);
 
+    var content = new Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: new Text(
+            new DateFormat('E').format(date),
+            style: new TextStyle(
+              fontSize: 12.0,
+              color: color,
+            ),
+          ),
+        ),
+        new Text(
+          date.day.toString(),
+          style: new TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+            color: color,
+          ),
+        ),
+      ],
+    );
+
     return new Material(
       color: Colors.transparent,
       child: new InkWell(
@@ -18,29 +42,7 @@ class ShowtimeDateSelector extends StatelessWidget {
         radius: 56.0,
         child: new Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              new Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: new Text(
-                  new DateFormat('E').format(date),
-                  style: new TextStyle(
-                    fontSize: 12.0,
-                    color: color,
-                  ),
-                ),
-              ),
-              new Text(
-                date.day.toString(),
-                style: new TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w500,
-                  color: color,
-                ),
-              ),
-            ],
-          ),
+          child: content,
         ),
       ),
     );
