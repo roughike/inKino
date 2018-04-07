@@ -128,6 +128,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   List<Widget> _buildTitleAndLengthInMinutes() {
+    var length = '${widget.event.lengthInMinutes} min';
+    var genres = widget.event.genres.split(', ').take(4).join(', ');
+
     return <Widget>[
       new Text(
         widget.event.title,
@@ -139,7 +142,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       new Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: new Text(
-          '${widget.event.lengthInMinutes}min | ${widget.event.genres.split(', ').take(4).join(', ')}',
+          '$length | $genres',
           style: new TextStyle(
             fontSize: 12.0,
             fontWeight: FontWeight.w600,

@@ -64,10 +64,7 @@ class EventGridItem extends StatelessWidget {
       child: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Hero(
-            tag: event.id,
-            child: new EventPoster(event: event),
-          ),
+          new EventPoster(event: event),
           new Container(
             decoration: _buildGradientBackground(),
             padding: const EdgeInsets.only(
