@@ -154,16 +154,9 @@ class _MyHomePageState extends State<MyHomePage>
     );
 
     return new Drawer(
-      child: new StoreConnector<AppState, TheaterListViewModel>(
-        distinct: true,
-        converter: (store) => TheaterListViewModel.fromStore(store),
-        builder: (BuildContext context, TheaterListViewModel viewModel) {
-          return new TheaterList(
-            header: drawerHeader,
-            onTheaterTapped: () => Navigator.pop(context),
-            viewModel: viewModel,
-          );
-        },
+      child: new TheaterList(
+        header: drawerHeader,
+        onTheaterTapped: () => Navigator.pop(context),
       ),
     );
   }

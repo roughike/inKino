@@ -27,7 +27,7 @@ void main() {
 
     Future<Null> _buildTheaterList(WidgetTester tester) {
       return tester.pumpWidget(new MaterialApp(
-        home: new TheaterList(
+        home: new TheaterListContent(
           header: new Container(),
           onTheaterTapped: () {
             theaterTappedCallbackCalled = true;
