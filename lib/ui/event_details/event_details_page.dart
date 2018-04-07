@@ -9,7 +9,7 @@ import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';
-import 'package:inkino/ui/event_details/event_header.dart';
+import 'package:inkino/ui/event_details/event_backdrop_photo.dart';
 import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
@@ -223,48 +223,11 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   Widget _buildEventBackdrop() {
     return new Positioned(
       top: _scrollEffects.headerOffset,
-      child: new ClipRect(
-        child: new Stack(
-          children: <Widget>[
-            new EventHeader(
-              widget.event,
-              _scrollEffects.backdropHeight,
-            ),
-            new BackdropFilter(
-              filter: new ui.ImageFilter.blur(
-                sigmaX: _scrollEffects.backdropFinalBlur,
-                sigmaY: _scrollEffects.backdropFinalBlur,
-              ),
-              child: new Container(
-                width: MediaQuery.of(context).size.width,
-                height: _scrollEffects.backdropHeight,
-                decoration: new BoxDecoration(
-                  color: Colors.black.withOpacity(
-                    _scrollEffects.overlayOpacity * 0.4,
-                  ),
-                ),
-              ),
-            ),
-            new Positioned(
-              bottom: -8.0,
-              child: new DecoratedBox(
-                decoration: new BoxDecoration(
-                  boxShadow: <BoxShadow>[
-                    new BoxShadow(
-                      color: Colors.black38,
-                      blurRadius: 5.0,
-                      spreadRadius: 3.0,
-                    ),
-                  ],
-                ),
-                child: new SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 10.0,
-                ),
-              ),
-            ),
-          ],
-        ),
+      child: new EventBackdropPhoto(
+        event: widget.event,
+        height: _scrollEffects.backdropHeight,
+        overlayBlur: _scrollEffects.backdropFinalBlur,
+        blurOverlayOpacity: _scrollEffects.overlayOpacity,
       ),
     );
   }
