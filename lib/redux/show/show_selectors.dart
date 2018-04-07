@@ -8,6 +8,10 @@ List<Show> showsSelector(AppState state) {
     return shows;
   }
 
+  return _showsWithSearchQuery(state, shows);
+}
+
+List<Show> _showsWithSearchQuery(AppState state, List<Show> shows) {
   var searchQuery = new RegExp(state.searchQuery, caseSensitive: false);
 
   return shows.where((show) {

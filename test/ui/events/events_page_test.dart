@@ -47,6 +47,8 @@ void main() {
     setUp(() {
       observer = new NavigatorPushObserver();
       mockViewModel = new MockEventsPageViewModel();
+      when(mockViewModel.refreshEvents).thenReturn(() {});
+
       createHttpClient = createMockImageHttpClient;
     });
 
