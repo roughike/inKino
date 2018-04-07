@@ -9,7 +9,7 @@ ios/.generated/
 packages
 pubspec.lock
 .flutter-plugins
-lib/tmdb_config.dart
+//lib/tmdb_config.dart
 
 android/google-play-service-account.json
 android/key.properties
