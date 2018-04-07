@@ -21,7 +21,7 @@ List<Event> eventsSelector(AppState state, EventListType type) {
 List<Event> _uniqueEvents(List<Event> original) {
   var uniqueEventMap = new LinkedHashMap<String, Event>();
   original.forEach((event) {
-    uniqueEventMap[event.cleanedUpOriginalTitle] = event;
+    uniqueEventMap[event.originalTitle] = event;
   });
 
   return uniqueEventMap.values.toList();
@@ -31,8 +31,8 @@ List<Event> _eventsWithSearchQuery(AppState state, List<Event> original) {
   var searchQuery = new RegExp(state.searchQuery, caseSensitive: false);
 
   return original.where((event) {
-    return event.cleanedUpTitle.contains(searchQuery) ||
-        event.cleanedUpOriginalTitle.contains(searchQuery);
+    return event.title.contains(searchQuery) ||
+        event.originalTitle.contains(searchQuery);
   }).toList();
 }
 

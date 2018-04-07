@@ -137,7 +137,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   List<Widget> _buildTitleAndLengthInMinutes() {
     return <Widget>[
       new Text(
-        widget.event.cleanedUpTitle,
+        widget.event.title,
         style: new TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w800,
