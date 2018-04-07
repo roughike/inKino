@@ -1,5 +1,7 @@
 # inkino
 
+<img src="https://raw.githubusercontent.com/roughike/inKino/master/screenshots/now_in_theaters.png" width="48%" /> <img src="https://raw.githubusercontent.com/roughike/inKino/master/screenshots/event_details.png" width="48%" />
+
 ## Building the project
 
 To get the project to build, you need to add the following file:
