@@ -11,19 +11,19 @@ enum EventListType {
 
 class Event {
   Event({
-    @required this.id,
-    @required this.title,
-    @required this.cleanedUpTitle,
-    @required this.originalTitle,
-    @required this.cleanedUpOriginalTitle,
-    @required this.genres,
-    @required this.directors,
-    @required this.actors,
-    @required this.lengthInMinutes,
-    @required this.shortSynopsis,
-    @required this.synopsis,
-    @required this.images,
-    @required this.youtubeTrailers,
+    this.id,
+    this.title,
+    this.cleanedUpTitle,
+    this.originalTitle,
+    this.cleanedUpOriginalTitle,
+    this.genres,
+    this.directors,
+    this.actors,
+    this.lengthInMinutes,
+    this.shortSynopsis,
+    this.synopsis,
+    this.images,
+    this.youtubeTrailers,
   });
 
   final String id;
@@ -40,7 +40,9 @@ class Event {
   final EventImageData images;
   final List<String> youtubeTrailers;
 
-  bool get hasSynopsis => shortSynopsis.isNotEmpty && synopsis.isNotEmpty;
+  bool get hasSynopsis =>
+      (shortSynopsis != null && shortSynopsis.isNotEmpty) ||
+      (synopsis != null && synopsis.isNotEmpty);
 
   static List<Event> parseAll(String xmlString) {
     var events = <Event>[];

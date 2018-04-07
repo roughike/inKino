@@ -6,6 +6,9 @@ import 'package:inkino/ui/events/event_grid_item.dart';
 import 'package:meta/meta.dart';
 
 class EventGrid extends StatelessWidget {
+  static final Key emptyViewKey = new Key('emptyView');
+  static final Key contentKey = new Key('content');
+
   EventGrid({
     @required this.events,
     @required this.onReloadCallback,
@@ -28,6 +31,7 @@ class EventGrid extends StatelessWidget {
     var crossAxisChildCount = isPortrait ? 2 : 4;
 
     return new Container(
+      key: contentKey,
       color: const Color(0xFF222222),
       child: new Scrollbar(
         child: new GridView.builder(
@@ -52,6 +56,7 @@ class EventGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     if (events.isEmpty) {
       return new InfoMessageView(
+        key: emptyViewKey,
         title: 'All empty!',
         description: 'Didn\'t find any movies at\nall. ¯\\_(ツ)_/¯',
         onActionButtonTapped: onReloadCallback,

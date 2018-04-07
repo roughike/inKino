@@ -1,18 +1,17 @@
-import 'package:meta/meta.dart';
-import 'package:xml/xml.dart' as xml;
 import 'package:inkino/utils/xml_utils.dart';
+import 'package:xml/xml.dart' as xml;
 
 class Show {
   Show({
-    @required this.id,
-    @required this.eventId,
-    @required this.title,
-    @required this.originalTitle,
-    @required this.url,
-    @required this.presentationMethod,
-    @required this.theaterAndAuditorium,
-    @required this.start,
-    @required this.end,
+    this.id,
+    this.eventId,
+    this.title,
+    this.originalTitle,
+    this.url,
+    this.presentationMethod,
+    this.theaterAndAuditorium,
+    this.start,
+    this.end,
   });
 
   final String id;

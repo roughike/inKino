@@ -52,8 +52,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     DateTime currentDate,
     NextDispatcher next,
   ) async {
-    var showsXml = await api.getSchedule(newTheater, currentDate);
-    var shows = Show.parseAll(showsXml);
+    var shows = await api.getSchedule(newTheater, currentDate);
     var now = Clock.getCurrentTime();
 
     // Return only show times that haven't started yet.

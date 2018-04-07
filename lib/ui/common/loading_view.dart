@@ -3,6 +3,10 @@ import 'package:inkino/data/loading_status.dart';
 import 'package:meta/meta.dart';
 
 class LoadingView extends StatefulWidget {
+  static final Key loadingContentKey = new ValueKey('loading');
+  static final Key errorContentKey = new ValueKey('error');
+  static final Key successContentKey = new ValueKey('success');
+
   LoadingView({
     @required this.status,
     @required this.loadingContent,
@@ -16,14 +20,18 @@ class LoadingView extends StatefulWidget {
   final Widget successContent;
 
   @override
-  _LoadingViewState createState() => new _LoadingViewState();
+  LoadingViewState createState() => new LoadingViewState();
 }
 
-class _LoadingViewState extends State<LoadingView>
+class LoadingViewState extends State<LoadingView>
     with TickerProviderStateMixin {
   AnimationController _loadingController;
   AnimationController _errorController;
   AnimationController _successController;
+
+  bool get loadingContentVisible => _loadingController.value == 1.0;
+  bool get errorContentVisible => _errorController.value == 1.0;
+  bool get successContentVisible => _successController.value == 1.0;
 
   Widget firstChild;
   Widget secondChild;
@@ -108,16 +116,19 @@ class _LoadingViewState extends State<LoadingView>
       alignment: Alignment.center,
       children: <Widget>[
         new _TransitionAnimation(
+          key: LoadingView.loadingContentKey,
           controller: _loadingController,
           child: widget.loadingContent,
           isVisible: widget.status == LoadingStatus.loading,
         ),
         new _TransitionAnimation(
+          key: LoadingView.errorContentKey,
           controller: _errorController,
           child: widget.errorContent,
           isVisible: widget.status == LoadingStatus.error,
         ),
         new _TransitionAnimation(
+          key: LoadingView.successContentKey,
           controller: _successController,
           child: widget.successContent,
           isVisible: widget.status == LoadingStatus.success,
@@ -129,10 +140,12 @@ class _LoadingViewState extends State<LoadingView>
 
 class _TransitionAnimation extends StatelessWidget {
   _TransitionAnimation({
+    @required Key key,
     @required this.controller,
     @required this.child,
     @required this.isVisible,
-  })  : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
+  })
+      : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
             curve: new Interval(
@@ -151,7 +164,8 @@ class _TransitionAnimation extends StatelessWidget {
               curve: Curves.ease,
             ),
           ),
-        );
+        ),
+        super(key: key);
 
   final AnimationController controller;
   final Widget child;
