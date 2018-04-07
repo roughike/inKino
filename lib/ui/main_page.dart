@@ -191,10 +191,7 @@ class _MyHomePageState extends State<MyHomePage>
         controller: _controller,
         children: <Widget>[
           new EventsPage(EventListType.nowInTheaters),
-          new StoreConnector(
-            converter: (store) => ShowtimesPageViewModel.fromStore(store),
-            builder: (_, viewModel) => new ShowtimesPage(viewModel),
-          ),
+          new ShowtimesPage(),
           new EventsPage(EventListType.comingSoon),
         ],
       ),

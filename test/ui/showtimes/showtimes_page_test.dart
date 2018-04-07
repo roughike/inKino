@@ -4,6 +4,7 @@ import 'package:inkino/data/loading_status.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
+import 'package:inkino/ui/showtimes/showtime_list.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
 import 'package:mockito/mockito.dart';
@@ -26,7 +27,7 @@ void main() {
     Future<Null> _buildShowtimesPage(WidgetTester tester) {
       return tester.pumpWidget(
         new MaterialApp(
-          home: new ShowtimesPage(mockViewModel),
+          home: new ShowtimesPageContent(mockViewModel),
         ),
       );
     }
@@ -39,8 +40,8 @@ void main() {
 
         await _buildShowtimesPage(tester);
 
-        expect(find.byKey(ShowtimesPage.emptyViewKey), findsOneWidget);
-        expect(find.byKey(ShowtimesPage.contentKey), findsNothing);
+        expect(find.byKey(ShowtimeList.emptyViewKey), findsOneWidget);
+        expect(find.byKey(ShowtimeList.contentKey), findsNothing);
 
         LoadingViewState state = tester.state(find.byType(LoadingView));
         expect(state.errorContentVisible, isFalse);
@@ -62,8 +63,8 @@ void main() {
 
       await _buildShowtimesPage(tester);
 
-      expect(find.byKey(ShowtimesPage.contentKey), findsOneWidget);
-      expect(find.byKey(ShowtimesPage.emptyViewKey), findsNothing);
+      expect(find.byKey(ShowtimeList.contentKey), findsOneWidget);
+      expect(find.byKey(ShowtimeList.emptyViewKey), findsNothing);
       expect(find.text('Show title'), findsOneWidget);
 
       LoadingViewState state = tester.state(find.byType(LoadingView));
