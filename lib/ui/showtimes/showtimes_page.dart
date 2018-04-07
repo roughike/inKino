@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
+import 'package:inkino/ui/common/platform_adaptive_progress_indicator.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
 import 'package:inkino/ui/showtimes/showtime_list.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
@@ -31,9 +32,7 @@ class ShowtimesPageContent extends StatelessWidget {
         new Expanded(
           child: new LoadingView(
             status: viewModel.status,
-            loadingContent: Platform.isIOS
-                ? new CupertinoActivityIndicator()
-                : new CircularProgressIndicator(),
+            loadingContent: new PlatformAdaptiveProgressIndicator(),
             errorContent: new ErrorView(onRetry: viewModel.refreshShowtimes),
             successContent: new ShowtimeList(viewModel.shows),
           ),
