@@ -10,7 +10,7 @@ class EventNameCleaner {
   ///
   /// For more, see test/event_name_cleaner_test.dart.
   static final RegExp _pattern = new RegExp(
-      r"(\s([23]D$|\(([23]D|dub|orig|spanish).*))");
+      r"(\s([23]D$|\(([23]D|dub|orig|spanish|swe).*))");
 
   static String cleanup(String name) {
     var matches = _pattern.allMatches(name);

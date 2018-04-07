@@ -18,6 +18,7 @@ void main() {
       expect(EventNameCleaner.cleanup('Avengers: Infinity War (3D dub)'), 'Avengers: Infinity War');
       expect(EventNameCleaner.cleanup('Avengers: Infinity War (3D orig)'), 'Avengers: Infinity War');
       expect(EventNameCleaner.cleanup('Avengers: Infinity War (3D spanish)'), 'Avengers: Infinity War');
+      expect(EventNameCleaner.cleanup('Avengers: Infinity War (swe)'), 'Avengers: Infinity War');
 
       // These should stay the same
       expect(EventNameCleaner.cleanup('BPM (beats per minute)'), 'BPM (beats per minute)');
