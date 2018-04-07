@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:inkino/data/models/actor.dart';
@@ -8,12 +6,18 @@ import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
-import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';
 import 'package:inkino/ui/event_details/event_backdrop_photo.dart';
+import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';
 import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
 import 'package:inkino/utils/widget_utils.dart';
+import 'package:meta/meta.dart';
+
+// TODO: Possibly refactor the actor avatar loading to a more appropriate
+// place.
+@visibleForTesting
+TMDBApi tmdbApi = new TMDBApi();
 
 class EventDetailsPage extends StatefulWidget {
   EventDetailsPage(
@@ -29,10 +33,6 @@ class EventDetailsPage extends StatefulWidget {
 }
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
-  // TODO: Possibly refactor the actor avatar loading to a more appropriate
-  // place.
-  static final TMDBApi api = new TMDBApi();
-
   ScrollController _scrollController;
   EventDetailsScrollEffects _scrollEffects;
 
@@ -64,7 +64,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Future<Null> _fetchActorAvatars() async {
-    var actorsWithAvatars = await api.findAvatarsForActors(
+    var actorsWithAvatars = await tmdbApi.findAvatarsForActors(
       widget.event,
       widget.event.actors,
     );
@@ -103,17 +103,10 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   Widget _buildPortraitPhoto() {
     return new Padding(
       padding: const EdgeInsets.all(6.0),
-      child: new Stack(
-        children: <Widget>[
-          new Hero(
-            tag: widget.event.id,
-            child: new EventPoster(
-              event: widget.event,
-              size: new Size(100.0, 150.0),
-              displayPlayButton: true,
-            ),
-          ),
-        ],
+      child: new EventPoster(
+        event: widget.event,
+        size: new Size(100.0, 150.0),
+        displayPlayButton: true,
       ),
     );
   }

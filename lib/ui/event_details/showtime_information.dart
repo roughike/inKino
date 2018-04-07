@@ -3,7 +3,14 @@ import 'package:inkino/data/models/show.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+Function(String) launchTicketsUrl = (url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  }
+};
+
 class ShowtimeInformation extends StatelessWidget {
+  static final Key ticketsButtonKey = new Key('ticketsButton');
   static final weekdayFormat = new DateFormat("E 'at' hh:mma");
 
   ShowtimeInformation(this.show);
@@ -53,11 +60,8 @@ class ShowtimeInformation extends StatelessWidget {
         new Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: new RaisedButton(
-            onPressed: () async {
-              if (await canLaunch(show.url)) {
-                await launch(show.url);
-              }
-            },
+            key: ticketsButtonKey,
+            onPressed: () => launchTicketsUrl(show.url),
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
             child: new Text('Tickets'),

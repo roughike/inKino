@@ -4,7 +4,15 @@ import 'package:inkino/data/models/event.dart';
 import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+Function(String) launchTrailerVideo = (url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  }
+};
+
 class EventPoster extends StatelessWidget {
+  static final Key playButtonKey = new Key('playButton');
+
   EventPoster({
     @required this.event,
     this.size,
@@ -26,16 +34,14 @@ class EventPoster extends StatelessWidget {
           type: MaterialType.circle,
           color: Colors.transparent,
           child: new IconButton(
+            key: playButtonKey,
             padding: EdgeInsets.zero,
             icon: new Icon(Icons.play_circle_outline),
             iconSize: 42.0,
             color: Colors.white.withOpacity(0.8),
             onPressed: () async {
               var url = event.youtubeTrailers.first;
-
-              if (await canLaunch(url)) {
-                await launch(url);
-              }
+              launchTrailerVideo(url);
             },
           ),
         ),
