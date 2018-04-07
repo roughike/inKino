@@ -8,6 +8,7 @@ import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
+import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';
 import 'package:inkino/ui/event_details/event_header.dart';
 import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
@@ -32,7 +33,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   static final TMDBApi api = new TMDBApi();
 
   ScrollController _scrollController;
-  double _scrollOffset = 0.0;
+  EventDetailsScrollEffects _scrollEffects;
 
   bool _avatarsLoaded = false;
   List<Actor> _actors;
@@ -42,6 +43,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     super.initState();
     _scrollController = new ScrollController();
     _scrollController.addListener(_scrollListener);
+    _scrollEffects = new EventDetailsScrollEffects();
 
     _actors = widget.event.actors;
     _fetchActorAvatars();
@@ -56,7 +58,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   void _scrollListener() {
     setState(() {
-      _scrollOffset = _scrollController.offset;
+      _scrollEffects.updateScrollOffset(context, _scrollController.offset);
     });
   }
 
@@ -218,46 +220,28 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     }
   }
 
-  double _headerOffset(double backdropHeight) {
-    if (backdropHeight < 80.0) {
-      return -(80.0 - backdropHeight);
-    }
-
-    return 0.0;
-  }
-
   Widget _buildEventBackdrop() {
-    var unconstrainedBackdropHeight = 175.0 + (-_scrollOffset);
-    var backdropHeight = max(80.0, unconstrainedBackdropHeight);
-    var backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
-    var overlayOpacity = max(
-        0.0, min(1.0, 2.0 - (unconstrainedBackdropHeight / kToolbarHeight)));
-    var backdropFinalBlur =
-        backdropExpandBlur == 0.0 ? overlayOpacity * 5.0 : backdropExpandBlur;
-
-    if (_scrollOffset < 0) {
-      overlayOpacity = max(0.0, min(1.0, -(_scrollOffset / 150)));
-    }
-
     return new Positioned(
-      top: _headerOffset(unconstrainedBackdropHeight),
+      top: _scrollEffects.headerOffset,
       child: new ClipRect(
         child: new Stack(
           children: <Widget>[
             new EventHeader(
               widget.event,
-              backdropHeight,
+              _scrollEffects.backdropHeight,
             ),
             new BackdropFilter(
               filter: new ui.ImageFilter.blur(
-                sigmaX: backdropFinalBlur,
-                sigmaY: backdropFinalBlur,
+                sigmaX: _scrollEffects.backdropFinalBlur,
+                sigmaY: _scrollEffects.backdropFinalBlur,
               ),
               child: new Container(
                 width: MediaQuery.of(context).size.width,
-                height: backdropHeight,
+                height: _scrollEffects.backdropHeight,
                 decoration: new BoxDecoration(
-                  color: Colors.black.withOpacity(overlayOpacity * 0.4),
+                  color: Colors.black.withOpacity(
+                    _scrollEffects.overlayOpacity * 0.4,
+                  ),
                 ),
               ),
             ),
@@ -285,7 +269,36 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildBackButton() {
+    return new Positioned(
+      top: MediaQuery.of(context).padding.top,
+      left: 4.0,
+      child: new IgnorePointer(
+        ignoring: _scrollEffects.backButtonOpacity == 0.0,
+        child: new Material(
+          type: MaterialType.circle,
+          color: Colors.transparent,
+          child: new BackButton(
+            color: Colors.white.withOpacity(
+              _scrollEffects.backButtonOpacity * 0.9,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatusBarBackground() {
+    var statusBarColor = Theme.of(context).primaryColor;
+
+    return new Container(
+      height: _scrollEffects.statusBarHeight,
+      color: statusBarColor,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var content = <Widget>[
       _buildHeader(context),
     ];
@@ -297,65 +310,17 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     // Some padding for the bottom.
     content.add(new Container(height: 32.0));
 
-    return new CustomScrollView(
-      controller: _scrollController,
-      slivers: <Widget>[
-        new SliverList(
-          delegate: new SliverChildListDelegate(content),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildBackButton() {
-    var opacity = 1.0;
-
-    if (_scrollOffset > 80.0) {
-      opacity = max(0.0, min(1.0, 1.0 - ((_scrollOffset - 80.0) / 5)));
-    } else if (_scrollOffset < 0.0) {
-      opacity = max(0.0, min(1.0, 1.0 - (_scrollOffset / -40)));
-    }
-
-    return new Positioned(
-      top: MediaQuery.of(context).padding.top,
-      left: 4.0,
-      child: new IgnorePointer(
-        ignoring: opacity == 0.0,
-        child: new Material(
-          type: MaterialType.circle,
-          color: Colors.transparent,
-          child: new BackButton(
-            color: Colors.white.withOpacity(opacity * 0.9),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatusBarBackground() {
-    var statusBarMaxHeight = MediaQuery.of(context).padding.top;
-    var statusBarHeight = max(
-        0.0,
-        min(
-          statusBarMaxHeight,
-          _scrollOffset - 175.0 + (statusBarMaxHeight * 4),
-        ));
-    var statusBarColor = Theme.of(context).primaryColor;
-
-    return new Container(
-      height: statusBarHeight,
-      color: statusBarColor,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.white,
       body: new Stack(
         children: <Widget>[
           _buildEventBackdrop(),
-          _buildContent(),
+          new CustomScrollView(
+            controller: _scrollController,
+            slivers: <Widget>[
+              new SliverList(delegate: new SliverChildListDelegate(content)),
+            ],
+          ),
           _buildBackButton(),
           _buildStatusBarBackground(),
         ],
