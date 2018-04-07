@@ -13,9 +13,7 @@ class Event {
   Event({
     this.id,
     this.title,
-    this.cleanedUpTitle,
     this.originalTitle,
-    this.cleanedUpOriginalTitle,
     this.genres,
     this.directors,
     this.actors,
@@ -28,9 +26,7 @@ class Event {
 
   final String id;
   final String title;
-  final String cleanedUpTitle;
   final String originalTitle;
-  final String cleanedUpOriginalTitle;
   final String genres;
   final List<String> directors;
   final List<Actor> actors;
@@ -54,10 +50,8 @@ class Event {
 
       events.add(new Event(
         id: tagContents(node, 'ID'),
-        title: title,
-        cleanedUpTitle: EventNameCleaner.cleanup(title),
-        originalTitle: originalTitle,
-        cleanedUpOriginalTitle: EventNameCleaner.cleanup(originalTitle),
+        title: EventNameCleaner.cleanup(title),
+        originalTitle: EventNameCleaner.cleanup(originalTitle),
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
         actors: _parseActors(node.findAllElements('Actor')),
