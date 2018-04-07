@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/app/app_state.dart';

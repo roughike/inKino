@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -8,7 +6,6 @@ import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/common/platform_adaptive_progress_indicator.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
 import 'package:inkino/ui/showtimes/showtime_list.dart';
-import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 
 class ShowtimesPage extends StatelessWidget {

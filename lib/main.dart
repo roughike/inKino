@@ -2,13 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:inkino/ui/main_page.dart';
-import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/store.dart';
+import 'package:inkino/ui/main_page.dart';
 import 'package:redux/redux.dart';
 
 Future<Null> main() async {
+  // ignore: deprecated_member_use
   MaterialPageRoute.debugEnableFadingRoutes = true;
 
   var store = await createStore();

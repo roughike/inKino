@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/http_utils.dart';
-
 /// If this has a red underline, it means that you haven't created
 /// the lib/tmdb_config.dart file. Refer to the README for instructions
 /// on how to do so.
 import 'package:inkino/tmdb_config.dart';
+/// If this has a red underline, it means that you haven't created
+/// the lib/tmdb_config.dart file. Refer to the README for instructions
+/// on how to do so.
+
 
 class TMDBApi {
   static final String baseUrl = 'api.themoviedb.org';
@@ -36,7 +38,7 @@ class TMDBApi {
     );
 
     var response = await getRequest(searchUri);
-    var movieSearchJson = JSON.decode(response);
+    var movieSearchJson = json.decode(response);
     List<Map<String, dynamic>> searchResults = movieSearchJson['results'];
 
     if (searchResults.isNotEmpty) {
@@ -54,7 +56,7 @@ class TMDBApi {
     );
 
     var response = await getRequest(actorUri);
-    var movieActors = JSON.decode(response);
+    var movieActors = json.decode(response);
 
     return _parseActorAvatars(movieActors['cast']);
   }
