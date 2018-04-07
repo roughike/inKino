@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
+import 'package:inkino/ui/common/platform_adaptive_progress_indicator.dart';
 import 'package:inkino/ui/events/event_grid.dart';
 import 'package:inkino/ui/events/events_page_view_model.dart';
 import 'package:inkino/ui/common/loading_view.dart';
@@ -30,9 +31,7 @@ class EventsPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return new LoadingView(
       status: viewModel.status,
-      loadingContent: Platform.isIOS
-          ? new CupertinoActivityIndicator()
-          : new CircularProgressIndicator(),
+      loadingContent: new PlatformAdaptiveProgressIndicator(),
       errorContent: new ErrorView(
         description: 'Error loading events.',
         onRetry: viewModel.refreshEvents,

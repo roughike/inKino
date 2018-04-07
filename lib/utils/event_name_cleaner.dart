@@ -17,8 +17,9 @@ class EventNameCleaner {
     var hasNoise = matches.isNotEmpty;
 
     if (hasNoise) {
-      var shit = matches.first.group(1);
-      return name.replaceFirst(shit, '');
+      // "noise" means (2D dub), (3D dub), etc.
+      var noise = matches.first.group(1);
+      return name.replaceFirst(noise, '');
     }
 
     return name;
