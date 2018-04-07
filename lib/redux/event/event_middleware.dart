@@ -18,18 +18,20 @@ class EventMiddleware extends MiddlewareClass<AppState> {
     if (action is InitCompleteAction ||
         action is ChangeCurrentTheaterAction ||
         action is RefreshEventsAction) {
-      Theater theater;
-
-      if (action is RefreshEventsAction) {
-        theater = store.state.theaterState.currentTheater;
-      } else {
-        theater = action.selectedTheater;
-      }
+      var theater = _determineTheater(action, store);
 
       if (theater != null) {
         await _fetchEvents(theater, next);
       }
     }
+  }
+
+  Theater _determineTheater(dynamic action, Store<AppState> store) {
+    if (action is RefreshEventsAction) {
+      return store.state.theaterState.currentTheater;
+    }
+
+    return action.selectedTheater;
   }
 
   Future<Null> _fetchEvents(
