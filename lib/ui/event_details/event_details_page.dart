@@ -221,8 +221,8 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       child: new EventBackdropPhoto(
         event: widget.event,
         height: _scrollEffects.backdropHeight,
-        overlayBlur: _scrollEffects.backdropBlur,
-        blurOverlayOpacity: _scrollEffects.overlayOpacity,
+        overlayBlur: _scrollEffects.backdropOverlayBlur,
+        blurOverlayOpacity: _scrollEffects.backdropOverlayOpacity,
       ),
     );
   }
