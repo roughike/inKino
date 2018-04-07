@@ -40,7 +40,9 @@ class Event {
   final EventImageData images;
   final List<String> youtubeTrailers;
 
-  bool get hasSynopsis => shortSynopsis.isNotEmpty && synopsis.isNotEmpty;
+  bool get hasSynopsis =>
+      (shortSynopsis != null && shortSynopsis.isNotEmpty) ||
+      (synopsis != null && synopsis.isNotEmpty);
 
   static List<Event> parseAll(String xmlString) {
     var events = <Event>[];

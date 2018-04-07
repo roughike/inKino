@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/loading_status.dart';
+import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
+import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_grid.dart';
 import 'package:inkino/ui/events/events_page.dart';
 import 'package:inkino/ui/events/events_page_view_model.dart';
@@ -32,7 +34,10 @@ void main() {
         id: '1',
         cleanedUpTitle: 'Test Title',
         genres: 'Test Genres',
+        directors: <String>[],
+        actors: <Actor>[],
         images: new EventImageData.empty(),
+        youtubeTrailers: <String>[],
       ),
     ];
 
@@ -98,11 +103,11 @@ void main() {
         observer.reset();
         expect(observer.lastPushedRoute, isNull);
 
-        // FIXME: This is currently a little fuzzy, but works.
-        // Ideally, we would test that the route really is EventDetailsPage
-        // and not some random one.
         await tester.tap(find.text('Test Title'));
+        await tester.pumpAndSettle();
+
         expect(observer.lastPushedRoute, isNotNull);
+        expect(find.byType(EventDetailsPage), findsOneWidget);
       },
     );
 
