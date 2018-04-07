@@ -10,6 +10,7 @@ packages
 pubspec.lock
 .flutter-plugins
 lib/tmdb_config.dart
+ios/Podfile.lock
 
 android/google-play-service-account.json
 android/key.properties
