@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/event.dart';
+import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
 
 import 'dart:ui' as ui;
@@ -23,18 +24,12 @@ class EventBackdropPhoto extends StatelessWidget {
       _buildPlaceholderBackground(context),
     ];
 
-    _addIfNonNull(_buildBackdropPhoto(context), content);
+    addIfNonNull(_buildBackdropPhoto(context), content);
 
     return new Stack(
       alignment: Alignment.center,
       children: content,
     );
-  }
-
-  void _addIfNonNull(Widget child, List<Widget> children) {
-    if (child != null) {
-      children.add(child);
-    }
   }
 
   Widget _buildPlaceholderBackground(BuildContext context) {

@@ -13,6 +13,7 @@ import 'package:inkino/ui/event_details/event_backdrop_photo.dart';
 import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
+import 'package:inkino/utils/widget_utils.dart';
 
 class EventDetailsPage extends StatefulWidget {
   EventDetailsPage(
@@ -214,19 +215,13 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       ? new ActorScroller(_actors, _avatarsLoaded)
       : null;
 
-  void _addIfNonNull(Widget child, List<Widget> children) {
-    if (child != null) {
-      children.add(child);
-    }
-  }
-
   Widget _buildEventBackdrop() {
     return new Positioned(
       top: _scrollEffects.headerOffset,
       child: new EventBackdropPhoto(
         event: widget.event,
         height: _scrollEffects.backdropHeight,
-        overlayBlur: _scrollEffects.backdropFinalBlur,
+        overlayBlur: _scrollEffects.backdropBlur,
         blurOverlayOpacity: _scrollEffects.overlayOpacity,
       ),
     );
@@ -266,9 +261,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       _buildHeader(context),
     ];
 
-    _addIfNonNull(_buildShowtimeInformation(), content);
-    _addIfNonNull(_buildSynopsis(), content);
-    _addIfNonNull(_buildActorScroller(), content);
+    addIfNonNull(_buildShowtimeInformation(), content);
+    addIfNonNull(_buildSynopsis(), content);
+    addIfNonNull(_buildActorScroller(), content);
 
     // Some padding for the bottom.
     content.add(new Container(height: 32.0));
