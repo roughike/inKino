@@ -10,6 +10,7 @@ import 'package:inkino/ui/events/events_page.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
+import 'package:inkino/ui/theater_list/theater_list_view_model.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -153,9 +154,16 @@ class _MyHomePageState extends State<MyHomePage>
     );
 
     return new Drawer(
-      child: new TheaterList(
-        header: drawerHeader,
-        onTheaterTapped: () => Navigator.pop(context),
+      child: new StoreConnector<AppState, TheaterListViewModel>(
+        distinct: true,
+        converter: (store) => TheaterListViewModel.fromStore(store),
+        builder: (BuildContext context, TheaterListViewModel viewModel) {
+          return new TheaterList(
+            header: drawerHeader,
+            onTheaterTapped: () => Navigator.pop(context),
+            viewModel: viewModel,
+          );
+        },
       ),
     );
   }
