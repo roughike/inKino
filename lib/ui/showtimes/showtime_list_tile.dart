@@ -16,6 +16,18 @@ class ShowtimeListTile extends StatelessWidget {
   final Show show;
   final bool useAlternateBackground;
 
+  void _navigateToEventDetails(BuildContext context) {
+    var store = new StoreProvider.of(context).store;
+    var event = eventForShowSelector(store.state, show);
+
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (_) => new EventDetailsPage(event, show: show),
+      ),
+    );
+  }
+
   Widget _buildShowtimesInfo() {
     return new Column(
       children: <Widget>[
@@ -35,37 +47,47 @@ class ShowtimeListTile extends StatelessWidget {
   }
 
   Widget _buildDetailedInfo() {
-    return new Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        new Text(
-          show.title,
-          style: new TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14.0,
-          ),
+    var presentationMethodInfo = new Container(
+      decoration: new BoxDecoration(
+        color: Colors.black.withOpacity(0.1),
+        borderRadius: new BorderRadius.circular(4.0),
+      ),
+      margin: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+        vertical: 2.0,
+      ),
+      child: new Text(
+        show.presentationMethod,
+        style: new TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12.0,
         ),
-        new Padding(
-          padding: const EdgeInsets.only(top: 4.0),
-          child: new Text(show.theaterAndAuditorium),
-        ),
-        new Container(
-          decoration: new BoxDecoration(
-            color: Colors.black.withOpacity(0.1),
-            borderRadius: new BorderRadius.circular(4.0),
-          ),
-          margin: const EdgeInsets.only(top: 8.0),
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-          child: new Text(
-            show.presentationMethod,
-            style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12.0,
+      ),
+    );
+
+    return new Expanded(
+      child: new Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new Text(
+              show.title,
+              style: new TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0,
+              ),
             ),
-          ),
+            new Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: new Text(show.theaterAndAuditorium),
+            ),
+            presentationMethodInfo,
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -77,31 +99,13 @@ class ShowtimeListTile extends StatelessWidget {
     return new Material(
       color: backgroundColor,
       child: new InkWell(
-        onTap: () {
-          var store = new StoreProvider.of(context).store;
-          var event = eventForShowSelector(store.state, show);
-
-          Navigator.push(
-            context,
-            new MaterialPageRoute(
-              builder: (_) => new EventDetailsPage(event, show: show),
-            ),
-          );
-        },
+        onTap: () => _navigateToEventDetails(context),
         child: new Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-            vertical: 16.0,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           child: new Row(
             children: <Widget>[
               _buildShowtimesInfo(),
-              new Expanded(
-                child: new Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: _buildDetailedInfo(),
-                ),
-              ),
+              _buildDetailedInfo(),
             ],
           ),
         ),
