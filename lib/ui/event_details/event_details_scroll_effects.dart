@@ -9,11 +9,9 @@ class EventDetailsScrollEffects {
 
   double _scrollOffset;
 
-  double unconstrainedBackdropHeight;
   double backdropHeight;
-  double backdropExpandBlur;
   double overlayOpacity;
-  double backdropFinalBlur;
+  double backdropBlur;
   double headerOffset;
 
   double backButtonOpacity;
@@ -28,16 +26,17 @@ class EventDetailsScrollEffects {
   }
 
   void _calculateBackdropValues() {
-    unconstrainedBackdropHeight = 175.0 + (-_scrollOffset);
+    var unconstrainedBackdropHeight = 175.0 + (-_scrollOffset);
+    var backdropOverscrollBlur = max(0.0, min(20.0, -_scrollOffset / 6));
+
     backdropHeight = max(80.0, unconstrainedBackdropHeight);
-    backdropExpandBlur = max(0.0, min(20.0, -_scrollOffset / 6));
     overlayOpacity = max(
       0.0,
       min(1.0, 2.0 - (unconstrainedBackdropHeight / kToolbarHeight)),
     );
 
-    backdropFinalBlur =
-        backdropExpandBlur == 0.0 ? overlayOpacity * 5.0 : backdropExpandBlur;
+    backdropBlur =
+        backdropOverscrollBlur == 0.0 ? overlayOpacity * 5.0 : backdropOverscrollBlur;
 
     if (_scrollOffset < 0) {
       overlayOpacity = max(
