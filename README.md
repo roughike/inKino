@@ -11,7 +11,7 @@ While I built inKino for my own needs, it is also intented to showcase good app 
 The source code is **100% Dart**, and everything resides in the [/lib](https://github.com/roughike/inKino/tree/development/lib) folder.
 
 <div>
-<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/master/screenshots/google_play.png' height='40px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/master/screenshots/app_store.png' height='40px'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/development/screenshots/google_play.png' height='40px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/development/screenshots/app_store.png' height='40px'/></a>
 </div>
 
 ## Building the project
