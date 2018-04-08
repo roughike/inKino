@@ -1,7 +1,7 @@
 # inKino - a showtime browser for Finnkino cinemas
 
 <div>
-<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='56px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/master/screenshots/app_store.png' height='56px'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/master/screenshots/google_play.png' height='40px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/master/screenshots/app_store.png' height='40px'/></a>
 </div>
 
 <img src="https://github.com/roughike/inKino/blob/master/screenshots/now_in_theaters.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/master/screenshots/showtimes.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/master/screenshots/event_details.png" width="33%" />
