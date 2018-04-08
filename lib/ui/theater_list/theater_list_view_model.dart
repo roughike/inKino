@@ -29,11 +29,11 @@ class TheaterListViewModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TheaterListViewModel &&
-          runtimeType == other.runtimeType &&
-          currentTheater == other.currentTheater &&
-          theaters == other.theaters &&
-          changeCurrentTheater == other.changeCurrentTheater;
+          other is TheaterListViewModel &&
+              runtimeType == other.runtimeType &&
+              currentTheater == other.currentTheater &&
+              theaters == other.theaters &&
+              changeCurrentTheater == other.changeCurrentTheater;
 
   @override
   int get hashCode =>
