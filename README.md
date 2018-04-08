@@ -4,7 +4,7 @@
 
 ## What is inKino?
 
-inKino is a minimal app for browsing movies and showtimes for [Finnkino](https://finnkino.fi/) cinemas. It's made with [Flutter](https://flutter.io/), uses [flutter_redux](https://github.com/brianegan/flutter_redux),  and has an extensive set of unit and widget tests. It also has smooth transition animations and handles offline use cases gracefully.
+inKino is a minimal app for browsing movies and showtimes for [Finnkino](https://finnkino.fi/) cinemas. It's made with [Flutter](https://flutter.io/), uses [flutter_redux](https://github.com/brianegan/flutter_redux),  and has an [extensive set of unit and widget tests](https://github.com/roughike/inKino/tree/master/test). It also has smooth transition animations and handles offline use cases gracefully.
 
 While I built inKino for my own needs, it is also intented to showcase good app structure and a clean, well-organized Flutter codebase. 
 
