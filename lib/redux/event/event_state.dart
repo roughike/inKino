@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/loading_status.dart';
+import 'package:inkino/data/models/event.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -33,4 +33,19 @@ class EventState {
       comingSoonEvents: comingSoonEvents ?? this.comingSoonEvents,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is EventState &&
+              runtimeType == other.runtimeType &&
+              loadingStatus == other.loadingStatus &&
+              nowInTheatersEvents == other.nowInTheatersEvents &&
+              comingSoonEvents == other.comingSoonEvents;
+
+  @override
+  int get hashCode =>
+      loadingStatus.hashCode ^
+      nowInTheatersEvents.hashCode ^
+      comingSoonEvents.hashCode;
 }

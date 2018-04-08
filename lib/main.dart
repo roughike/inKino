@@ -41,7 +41,7 @@ class _InKinoAppState extends State<InKinoApp> {
           primaryColor: new Color(0xFF1C306D),
           accentColor: new Color(0xFFFFAD32),
         ),
-        home: new MyHomePage(),
+        home: new MainPage(),
       ),
     );
   }

@@ -12,6 +12,7 @@ class ShowtimesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector(
+      distinct: true,
       converter: (store) => ShowtimesPageViewModel.fromStore(store),
       builder: (_, viewModel) => new ShowtimesPageContent(viewModel),
     );

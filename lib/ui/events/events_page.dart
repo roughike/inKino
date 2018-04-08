@@ -15,6 +15,7 @@ class EventsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector(
+      distinct: true,
       converter: (store) => EventsPageViewModel.fromStore(store, listType),
       builder: (_, viewModel) => new EventsPageContent(viewModel),
     );

@@ -35,4 +35,25 @@ class ShowtimesPageViewModel {
       refreshShowtimes: () => store.dispatch(new RefreshShowsAction()),
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is ShowtimesPageViewModel &&
+              runtimeType == other.runtimeType &&
+              status == other.status &&
+              dates == other.dates &&
+              selectedDate == other.selectedDate &&
+              shows == other.shows &&
+              changeCurrentDate == other.changeCurrentDate &&
+              refreshShowtimes == other.refreshShowtimes;
+
+  @override
+  int get hashCode =>
+      status.hashCode ^
+      dates.hashCode ^
+      selectedDate.hashCode ^
+      shows.hashCode ^
+      changeCurrentDate.hashCode ^
+      refreshShowtimes.hashCode;
 }
