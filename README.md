@@ -4,13 +4,13 @@
 
 ## What is inKino?
 
-<div>
-<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/master/screenshots/google_play.png' height='40px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/master/screenshots/app_store.png' height='40px'/></a>
-</div>
-
 inKino is a minimal app for browsing movies and showtimes for Finnkino cinemas. It's made with [Flutter](https://flutter.io/), uses `flutter_redux`,  and has an extensive set of unit and widget tests. It also has smooth transition animations and handles offline use cases gracefully.
 
 While I built inKino for my own needs, it is also intented to showcase good app structure and a clean, well-organized Flutter codebase. 
+
+<div>
+<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/master/screenshots/google_play.png' height='40px'/></a> <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/master/screenshots/app_store.png' height='40px'/></a>
+</div>
 
 ## Building the project
 
