@@ -1,8 +1,23 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart' as http;
-import 'package:flutter/foundation.dart';
+
+/// This replaces the built-in HTTP client with a mocked one. The mocked client
+/// will always return a transparent image.
+///
+/// This is a workaround needed for widget tests that use network images,
+/// otherwise the test will crash.
+///
+/// For more context:
+///
+/// * https://github.com/flutter/flutter/issues/13433
+/// * https://github.com/flutter/flutter_markdown/pull/17
+void mockAllImageResponses() {
+  createHttpClient = createMockImageHttpClient;
+}
 
 ValueGetter<http.Client> createMockImageHttpClient = () {
   return new http.MockClient((http.BaseRequest request) {
