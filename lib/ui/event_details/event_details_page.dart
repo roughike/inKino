@@ -1,10 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
-import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_backdrop_photo.dart';
 import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';
@@ -12,12 +8,6 @@ import 'package:inkino/ui/event_details/showtime_information.dart';
 import 'package:inkino/ui/event_details/storyline_widget.dart';
 import 'package:inkino/ui/events/event_poster.dart';
 import 'package:inkino/utils/widget_utils.dart';
-import 'package:meta/meta.dart';
-
-// TODO: Possibly refactor the actor avatar loading to a more appropriate
-// place.
-@visibleForTesting
-TMDBApi tmdbApi = new TMDBApi();
 
 class EventDetailsPage extends StatefulWidget {
   EventDetailsPage(
@@ -36,18 +26,12 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   ScrollController _scrollController;
   EventDetailsScrollEffects _scrollEffects;
 
-  bool _avatarsLoaded = false;
-  List<Actor> _actors;
-
   @override
   void initState() {
     super.initState();
     _scrollController = new ScrollController();
     _scrollController.addListener(_scrollListener);
     _scrollEffects = new EventDetailsScrollEffects();
-
-    _actors = widget.event.actors;
-    _fetchActorAvatars();
   }
 
   @override
@@ -60,20 +44,6 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   void _scrollListener() {
     setState(() {
       _scrollEffects.updateScrollOffset(context, _scrollController.offset);
-    });
-  }
-
-  Future<Null> _fetchActorAvatars() async {
-    var actorsWithAvatars = await tmdbApi.findAvatarsForActors(
-      widget.event,
-      widget.event.actors,
-    );
-
-    if (!mounted) return;
-
-    setState(() {
-      _actors = actorsWithAvatars;
-      _avatarsLoaded = true;
     });
   }
 
@@ -207,9 +177,8 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     return null;
   }
 
-  Widget _buildActorScroller() => widget.event.actors.isNotEmpty
-      ? new ActorScroller(_actors, _avatarsLoaded)
-      : null;
+  Widget _buildActorScroller() =>
+      widget.event.actors.isNotEmpty ? new ActorScroller(widget.event) : null;
 
   Widget _buildEventBackdrop() {
     return new Positioned(
