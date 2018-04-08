@@ -58,7 +58,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
             style: textTheme.display1.copyWith(color: Colors.white70),
           ),
           new Text(
-            'v1.0.0',
+            'v1.0.1', // TODO: figure out a way to get this dynamically
             style: textTheme.body2.copyWith(color: Colors.white),
           ),
         ],
