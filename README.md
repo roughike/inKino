@@ -1,6 +1,6 @@
 # inkino
 
-<img src="https://github.com/roughike/inKino/blob/master/screenshots/now_in_theaters.png" width="48%" /> <img src="https://github.com/roughike/inKino/blob/master/screenshots/event_details.png" width="48%" />
+<img src="https://github.com/roughike/inKino/blob/master/screenshots/now_in_theaters.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/master/screenshots/showtimes.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/master/screenshots/event_details.png" width="33%" />
 
 ## Building the project
 
