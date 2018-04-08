@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/loading_status.dart';
+import 'package:inkino/data/models/show.dart';
 import 'package:inkino/utils/clock.dart';
 import 'package:meta/meta.dart';
 
@@ -46,4 +46,21 @@ class ShowState {
       shows: shows ?? this.shows,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is ShowState &&
+              runtimeType == other.runtimeType &&
+              loadingStatus == other.loadingStatus &&
+              dates == other.dates &&
+              selectedDate == other.selectedDate &&
+              shows == other.shows;
+
+  @override
+  int get hashCode =>
+      loadingStatus.hashCode ^
+      dates.hashCode ^
+      selectedDate.hashCode ^
+      shows.hashCode;
 }

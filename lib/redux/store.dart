@@ -17,6 +17,7 @@ Future<Store<AppState>> createStore() async {
   return new Store(
     appReducer,
     initialState: new AppState.initial(),
+    distinct: true,
     middleware: [
       new TheaterMiddleware(rootBundle, prefs),
       new ShowMiddleware(api),

@@ -39,4 +39,21 @@ class AppState {
       eventState: eventState ?? this.eventState,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is AppState &&
+              runtimeType == other.runtimeType &&
+              searchQuery == other.searchQuery &&
+              theaterState == other.theaterState &&
+              showState == other.showState &&
+              eventState == other.eventState;
+
+  @override
+  int get hashCode =>
+      searchQuery.hashCode ^
+      theaterState.hashCode ^
+      showState.hashCode ^
+      eventState.hashCode;
 }
