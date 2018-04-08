@@ -1,8 +1,8 @@
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/utils/event_name_cleaner.dart';
+import 'package:inkino/utils/xml_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
-import 'package:inkino/utils/xml_utils.dart';
 
 enum EventListType {
   nowInTheaters,
@@ -29,12 +29,13 @@ class Event {
   final String originalTitle;
   final String genres;
   final List<String> directors;
-  final List<Actor> actors;
   final String lengthInMinutes;
   final String shortSynopsis;
   final String synopsis;
   final EventImageData images;
   final List<String> youtubeTrailers;
+
+  List<Actor> actors;
 
   bool get hasSynopsis =>
       (shortSynopsis != null && shortSynopsis.isNotEmpty) ||

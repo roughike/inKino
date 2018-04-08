@@ -1,51 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/actor.dart';
+import 'package:inkino/data/models/event.dart';
+import 'package:inkino/redux/app/app_actions.dart';
+import 'package:inkino/redux/app/app_selectors.dart';
+import 'package:inkino/redux/app/app_state.dart';
 
-class ActorScroller extends StatefulWidget {
-  ActorScroller(this.actors, this.avatarsLoaded);
-
-  final List<Actor> actors;
-  final bool avatarsLoaded;
+class ActorScroller extends StatelessWidget {
+  ActorScroller(this.event);
+  final Event event;
 
   @override
-  _ActorScrollerState createState() => new _ActorScrollerState();
+  Widget build(BuildContext context) {
+    return new StoreConnector<AppState, List<Actor>>(
+      onInit: (store) => store.dispatch(new FetchActorAvatarsAction(event)),
+      converter: (store) => actorsForEventSelector(store.state, event),
+      builder: (_, actors) => new ActorScrollerContent(actors),
+    );
+  }
 }
 
-class _ActorScrollerState extends State<ActorScroller> {
-  Widget _buildActorList() {
+class ActorScrollerContent extends StatelessWidget {
+  ActorScrollerContent(this.actors);
+  final List<Actor> actors;
+
+  Widget _buildActorList(BuildContext context) {
     return new ListView.builder(
       padding: const EdgeInsets.only(left: 16.0),
       scrollDirection: Axis.horizontal,
-      itemCount: widget.actors.length,
+      itemCount: actors.length,
       itemBuilder: (BuildContext context, int index) {
-        var actor = widget.actors[index];
-        return _buildActorListItem(actor);
+        var actor = actors[index];
+        return _buildActorListItem(context, actor);
       },
     );
   }
 
-  Widget _buildActorListItem(Actor actor) {
+  Widget _buildActorListItem(BuildContext context, Actor actor) {
+    var actorName = new Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: new Text(
+        actor.name,
+        style: new TextStyle(fontSize: 12.0),
+        textAlign: TextAlign.center,
+      ),
+    );
+
     return new Container(
       width: 90.0,
       padding: const EdgeInsets.only(right: 16.0),
       child: new Column(
         children: <Widget>[
-          _buildActorAvatar(actor),
-          new Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: new Text(
-              widget.avatarsLoaded ? actor.name : 'Loading...',
-              style: new TextStyle(fontSize: 12.0),
-              textAlign: TextAlign.center,
-            ),
-          ),
+          _buildActorAvatar(context, actor),
+          actorName,
         ],
       ),
     );
   }
 
-  Widget _buildActorAvatar(Actor actor) {
+  Widget _buildActorAvatar(BuildContext context, Actor actor) {
     var fallbackIcon = new Icon(
       Icons.person,
       color: Colors.white,
@@ -103,7 +117,7 @@ class _ActorScrollerState extends State<ActorScroller> {
             padding: const EdgeInsets.only(top: 16.0),
             child: new SizedBox.fromSize(
               size: new Size.fromHeight(110.0),
-              child: _buildActorList(),
+              child: _buildActorList(context),
             ),
           ),
         ],

@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
-import 'package:inkino/data/networking/tmdb_api.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart'
     as eventDetails;
 import 'package:inkino/ui/event_details/showtime_information.dart';
@@ -13,24 +12,16 @@ import 'package:inkino/ui/event_details/showtime_information.dart'
 import 'package:inkino/ui/events/event_poster.dart';
 import 'package:inkino/ui/events/event_poster.dart' as eventPoster;
 import 'package:meta/meta.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../test_utils.dart';
 
-class MockTMDBApi extends Mock implements TMDBApi {}
-
 void main() {
   group('EventDetailsPage', () {
-    MockTMDBApi mockTMDBApi;
-
     String lastLaunchedTicketsUrl;
     String lastLaunchedTrailerUrl;
 
     setUp(() {
       createHttpClient = createMockImageHttpClient;
-      mockTMDBApi = new MockTMDBApi();
-      eventDetails.tmdbApi = mockTMDBApi;
-
       showtimeInfo.launchTicketsUrl = (url) => lastLaunchedTicketsUrl = url;
       eventPoster.launchTrailerVideo = (url) => lastLaunchedTrailerUrl = url;
     });
