@@ -1,10 +1,10 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
-
-import 'dart:ui' as ui;
 
 class EventBackdropPhoto extends StatelessWidget {
   EventBackdropPhoto({
@@ -34,6 +34,8 @@ class EventBackdropPhoto extends StatelessWidget {
 
   Widget _buildPlaceholderBackground(BuildContext context) {
     return new Container(
+      width: MediaQuery.of(context).size.width,
+      height: height,
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
           begin: Alignment.bottomCenter,
@@ -44,8 +46,6 @@ class EventBackdropPhoto extends StatelessWidget {
           ],
         ),
       ),
-      width: MediaQuery.of(context).size.width,
-      height: height,
       child: new Center(
         child: new Icon(
           Icons.theaters,

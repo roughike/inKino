@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+@visibleForTesting
 Function(String) launchTicketsUrl = (url) async {
   if (await canLaunch(url)) {
     await launch(url);

@@ -4,11 +4,12 @@ import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/event/event_reducer.dart';
 import 'package:inkino/redux/show/show_reducer.dart';
 import 'package:inkino/redux/theater/theater_reducer.dart';
+import 'package:redux/redux.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   return new AppState(
     searchQuery: _searchQueryReducer(state.searchQuery, action),
-    actorsByName: _actorReducer(state.actorsByName, action),
+    actorsByName: actorReducer(state.actorsByName, action),
     theaterState: theaterReducer(state.theaterState, action),
     showState: showReducer(state.showState, action),
     eventState: eventReducer(state.eventState, action),
@@ -23,25 +24,28 @@ String _searchQueryReducer(String searchQuery, action) {
   return searchQuery;
 }
 
-Map<String, Actor> _actorReducer(Map<String, Actor> actorsByName, action) {
-  if (action is ActorsUpdatedAction) {
-    var actors = <String, Actor>{}..addAll(actorsByName);
-    action.actors.forEach((actor) {
-      actors.putIfAbsent(actor.name, () => new Actor(name: actor.name));
-    });
+final actorReducer = combineTypedReducers<Map<String, Actor>>([
+  new ReducerBinding<Map<String, Actor>, ActorsUpdatedAction>(_actorsUpdated),
+  new ReducerBinding<Map<String, Actor>, ReceivedActorAvatarsAction>(_receivedAvatars),
+]);
 
-    return actors;
-  } else if (action is ReceivedActorAvatarsAction) {
-    var actorsWithAvatars = <String, Actor>{}..addAll(actorsByName);
-    action.actors.forEach((actor) {
-      actorsWithAvatars[actor.name] = new Actor(
-        name: actor.name,
-        avatarUrl: actor.avatarUrl,
-      );
-    });
+Map<String, Actor> _actorsUpdated(Map<String, Actor> actorsByName, action) {
+  var actors = <String, Actor>{}..addAll(actorsByName);
+  action.actors.forEach((actor) {
+    actors.putIfAbsent(actor.name, () => new Actor(name: actor.name));
+  });
 
-    return actorsWithAvatars;
-  }
+  return actors;
+}
 
-  return actorsByName;
+Map<String, Actor> _receivedAvatars(Map<String, Actor> actorsByName, action) {
+  var actorsWithAvatars = <String, Actor>{}..addAll(actorsByName);
+  action.actors.forEach((actor) {
+    actorsWithAvatars[actor.name] = new Actor(
+      name: actor.name,
+      avatarUrl: actor.avatarUrl,
+    );
+  });
+
+  return actorsWithAvatars;
 }

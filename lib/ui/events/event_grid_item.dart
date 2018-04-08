@@ -17,11 +17,7 @@ class EventGridItem extends StatelessWidget {
       gradient: new LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        stops: <double>[
-          0.0,
-          0.7,
-          0.7,
-        ],
+        stops: <double>[0.0, 0.7, 0.7],
         colors: <Color>[
           Colors.black,
           Colors.transparent,

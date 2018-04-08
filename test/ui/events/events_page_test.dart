@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/loading_status.dart';
 import 'package:inkino/data/models/actor.dart';
@@ -45,11 +44,11 @@ void main() {
     EventsPageViewModel mockViewModel;
 
     setUp(() {
+      mockAllImageResponses();
+
       observer = new NavigatorPushObserver();
       mockViewModel = new MockEventsPageViewModel();
       when(mockViewModel.refreshEvents).thenReturn(() {});
-
-      createHttpClient = createMockImageHttpClient;
     });
 
     Future<Null> _buildEventsPage(WidgetTester tester) {

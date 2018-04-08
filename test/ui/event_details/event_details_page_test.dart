@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
@@ -21,7 +20,8 @@ void main() {
     String lastLaunchedTrailerUrl;
 
     setUp(() {
-      createHttpClient = createMockImageHttpClient;
+      mockAllImageResponses();
+
       showtimeInfo.launchTicketsUrl = (url) => lastLaunchedTicketsUrl = url;
       eventPoster.launchTrailerVideo = (url) => lastLaunchedTrailerUrl = url;
     });
