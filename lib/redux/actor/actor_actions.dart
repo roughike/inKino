@@ -1,11 +1,6 @@
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 
-class SearchQueryChangedAction {
-  SearchQueryChangedAction(this.query);
-  final String query;
-}
-
 class FetchActorAvatarsAction {
   FetchActorAvatarsAction(this.event);
   final Event event;

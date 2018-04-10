@@ -1,5 +1,5 @@
 import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/redux/app/app_actions.dart';
+import 'package:inkino/redux/actor/actor_actions.dart';
 import 'package:inkino/redux/app/app_reducer.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:test/test.dart';

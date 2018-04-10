@@ -1,8 +1,8 @@
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
-import 'package:inkino/redux/app/app_actions.dart';
-import 'package:inkino/redux/app/app_middleware.dart';
+import 'package:inkino/redux/actor/actor_actions.dart';
+import 'package:inkino/redux/actor/actor_middleware.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -34,11 +34,11 @@ void main() {
     final Function(dynamic) next = (action) => actionLog.add(action);
 
     MockTMDBApi mockTMDBApi;
-    AppMiddleware sut;
+    ActorMiddleware sut;
 
     setUp(() {
       mockTMDBApi = new MockTMDBApi();
-      sut = new AppMiddleware(mockTMDBApi);
+      sut = new ActorMiddleware(mockTMDBApi);
     });
 
     tearDown(() {
