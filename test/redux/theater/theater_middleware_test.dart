@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/theater/theater_middleware.dart';

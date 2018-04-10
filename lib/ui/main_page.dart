@@ -105,7 +105,7 @@ class _MainPageState extends State<MainPage>
   }
 
   void _updateSearchQuery(String newQuery) {
-    var store = new StoreProvider.of(context).store;
+    var store = StoreProvider.of<AppState>(context);
     store.dispatch(new SearchQueryChangedAction(newQuery));
   }
 

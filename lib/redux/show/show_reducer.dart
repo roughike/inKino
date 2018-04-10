@@ -4,12 +4,12 @@ import 'package:inkino/redux/show/show_actions.dart';
 import 'package:inkino/redux/show/show_state.dart';
 import 'package:redux/redux.dart';
 
-final showReducer = combineTypedReducers([
-  new ReducerBinding<ShowState, ChangeCurrentTheaterAction>(_changeTheater),
-  new ReducerBinding<ShowState, ChangeCurrentDateAction>(_changeDate),
-  new ReducerBinding<ShowState, RequestingShowsAction>(_requestingShows),
-  new ReducerBinding<ShowState, ReceivedShowsAction>(_receivedShows),
-  new ReducerBinding<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
+final showReducer = combineReducers<ShowState>([
+  new TypedReducer<ShowState, ChangeCurrentTheaterAction>(_changeTheater),
+  new TypedReducer<ShowState, ChangeCurrentDateAction>(_changeDate),
+  new TypedReducer<ShowState, RequestingShowsAction>(_requestingShows),
+  new TypedReducer<ShowState, ReceivedShowsAction>(_receivedShows),
+  new TypedReducer<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
 ]);
 
 ShowState _changeTheater(ShowState state, _) {

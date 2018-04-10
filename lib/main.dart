@@ -33,7 +33,7 @@ class _InKinoAppState extends State<InKinoApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider(
+    return new StoreProvider<AppState>(
       store: widget.store,
       child: new MaterialApp(
         title: 'inKino',

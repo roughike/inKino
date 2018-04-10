@@ -5,11 +5,11 @@ import 'package:inkino/redux/event/event_actions.dart';
 import 'package:inkino/redux/event/event_state.dart';
 import 'package:redux/redux.dart';
 
-final eventReducer = combineTypedReducers([
-  new ReducerBinding<EventState, RequestingEventsAction>(_requestingEvents),
-  new ReducerBinding<EventState, ReceivedEventsAction>(_receivedEvents),
-  new ReducerBinding<EventState, ErrorLoadingEventsAction>(_errorLoadingEvents),
-  new ReducerBinding<EventState, UpdateActorsForEventAction>(
+final eventReducer = combineReducers<EventState>([
+  new TypedReducer<EventState, RequestingEventsAction>(_requestingEvents),
+  new TypedReducer<EventState, ReceivedEventsAction>(_receivedEvents),
+  new TypedReducer<EventState, ErrorLoadingEventsAction>(_errorLoadingEvents),
+  new TypedReducer<EventState, UpdateActorsForEventAction>(
       _updateActorsForEvent),
 ]);
 

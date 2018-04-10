@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/models/show.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/event/event_selectors.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +18,7 @@ class ShowtimeListTile extends StatelessWidget {
   final bool useAlternateBackground;
 
   void _navigateToEventDetails(BuildContext context) {
-    var store = new StoreProvider.of(context).store;
+    var store = StoreProvider.of<AppState>(context);
     var event = eventForShowSelector(store.state, show);
 
     Navigator.push(

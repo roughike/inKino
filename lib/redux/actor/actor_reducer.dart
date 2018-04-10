@@ -2,9 +2,9 @@ import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/redux/actor/actor_actions.dart';
 import 'package:redux/redux.dart';
 
-final actorReducer = combineTypedReducers<Map<String, Actor>>([
-  new ReducerBinding<Map<String, Actor>, ActorsUpdatedAction>(_actorsUpdated),
-  new ReducerBinding<Map<String, Actor>, ReceivedActorAvatarsAction>(_receivedAvatars),
+final actorReducer = combineReducers<Map<String, Actor>>([
+  new TypedReducer<Map<String, Actor>, ActorsUpdatedAction>(_actorsUpdated),
+  new TypedReducer<Map<String, Actor>, ReceivedActorAvatarsAction>(_receivedAvatars),
 ]);
 
 Map<String, Actor> _actorsUpdated(Map<String, Actor> actorsByName, action) {

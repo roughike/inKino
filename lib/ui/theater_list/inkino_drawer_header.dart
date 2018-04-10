@@ -95,7 +95,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
         onTap: () {
           showDialog(
             context: context,
-            child: _buildAboutDialog(context),
+            builder: (BuildContext context) => _buildAboutDialog(context),
           );
         },
         child: new Padding(
