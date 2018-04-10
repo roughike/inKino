@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:inkino/data/models/theater.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('Theater model', () {
     test('parsing test', () {
-      var theaters = new File('test_assets/theaters.xml').readAsStringSync();
-
-      List<Theater> deserialized = Theater.parseAll(theaters);
+      List<Theater> deserialized = Theater.parseAll(theatersXml);
       expect(deserialized.length, 3);
 
       expect(deserialized[0].id, '1029');
@@ -22,3 +18,19 @@ void main() {
     });
   });
 }
+
+const String theatersXml = '''<?xml version="1.0"?>
+<TheatreAreas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <TheatreArea>
+        <ID>1029</ID>
+        <Name>Valitse alue/teatteri</Name>
+    </TheatreArea>
+    <TheatreArea>
+        <ID>001</ID>
+        <Name>Gotham: THEATER ONE</Name>
+    </TheatreArea>
+    <TheatreArea>
+        <ID>002</ID>
+        <Name>Gotham: THEATER TWO</Name>
+    </TheatreArea>
+</TheatreAreas>''';
