@@ -1,5 +1,7 @@
 # inKino - a showtime browser for Finnkino cinemas
 
+[![Build Status](https://travis-ci.org/roughike/inKino.svg?branch=development)](https://travis-ci.org/roughike/inKino) [![Coverage Status](https://coveralls.io/repos/github/roughike/inKino/badge.svg?branch=development)](https://coveralls.io/github/roughike/inKino?branch=development)
+
 <img src="https://github.com/roughike/inKino/blob/development/screenshots/now_in_theaters.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/development/screenshots/showtimes.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/development/screenshots/event_details.png" width="33%" />
 
 ## What is inKino?
