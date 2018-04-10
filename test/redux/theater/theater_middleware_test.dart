@@ -18,9 +18,6 @@ void main() {
     MockPreferences mockPreferences;
     TheaterMiddleware middleware;
 
-    Future<String> _theaterXml() =>
-        new File('test_assets/theaters.xml').readAsString();
-
     setUp(() {
       mockAssetBundle = new MockAssetBundle();
       mockPreferences = new MockPreferences();
@@ -34,7 +31,7 @@ void main() {
     group('called with InitAction', () {
       test('loads the preloaded theaters', () async {
         // Given
-        when(mockAssetBundle.loadString(any)).thenReturn(_theaterXml());
+        when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
 
         // When
         await middleware.call(null, new InitAction(), next);
@@ -46,7 +43,7 @@ void main() {
 
       test('when a persisted theater id exists, uses that as a default',
           () async {
-        when(mockAssetBundle.loadString(any)).thenReturn(_theaterXml());
+        when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
 
@@ -61,7 +58,7 @@ void main() {
       test(
         'when no persisted theater id, uses the first theater as a default',
         () async {
-          when(mockAssetBundle.loadString(any)).thenReturn(_theaterXml());
+          when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
 
@@ -79,7 +76,8 @@ void main() {
       'when called with ChangeCurrentTheaterAction, persists and dispatches the same action',
       () async {
         var theater = new Theater(id: 'test-123', name: 'Test Theater');
-        await middleware.call(null, new ChangeCurrentTheaterAction(theater), next);
+        await middleware.call(
+            null, new ChangeCurrentTheaterAction(theater), next);
 
         verify(mockPreferences.setString(
             TheaterMiddleware.kDefaultTheaterId, 'test-123'));
@@ -90,3 +88,19 @@ void main() {
     );
   });
 }
+
+const String theatersXml = '''<?xml version="1.0"?>
+<TheatreAreas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <TheatreArea>
+        <ID>1029</ID>
+        <Name>Valitse alue/teatteri</Name>
+    </TheatreArea>
+    <TheatreArea>
+        <ID>001</ID>
+        <Name>Gotham: THEATER ONE</Name>
+    </TheatreArea>
+    <TheatreArea>
+        <ID>002</ID>
+        <Name>Gotham: THEATER TWO</Name>
+    </TheatreArea>
+</TheatreAreas>''';
