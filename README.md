@@ -23,3 +23,7 @@ While the project should build on older versions as well, it's currently built w
 ## Contributing
 
 Contributions are welcome! However, if it's going to be a major change, please create an issue first. Before starting to work on something, please comment on a specific issue and say you'd like to work on it.
+
+## Thanks
+
+Special thanks to [Thibaud Colas](https://twitter.com/thibaud_colas), [Alessandro Aime](https://twitter.com/aimealessandro) and [Juho Rautioaho](https://github.com/Jraut) for giving their extra pair of eyes for reviewing the source code.
