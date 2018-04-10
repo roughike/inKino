@@ -68,7 +68,7 @@ void main() {
 
     test('FetchActorAvatarsAction - handles errors silently', () async {
       when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
-          .thenAnswer((_) => new Future.error(new Error()));
+          .thenAnswer((_) => new Future.value(new Error()));
 
       await middleware.call(null, new FetchActorAvatarsAction(event), next);
     });
