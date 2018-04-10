@@ -84,7 +84,7 @@ class EventPoster extends StatelessWidget {
       ),
       new FadeInImage.assetNetwork(
         placeholder: ImageAssets.transparentImage,
-        image: event.images.portraitMedium ?? 'http://example.com',
+        image: event.images.portraitMedium ?? '',
         width: size?.width,
         height: size?.height,
         fadeInDuration: const Duration(milliseconds: 300),

@@ -69,10 +69,7 @@ class ActorScrollerContent extends StatelessWidget {
     var avatarImage = new ClipOval(
       child: new FadeInImage.assetNetwork(
         placeholder: ImageAssets.transparentImage,
-        // FIXME: The example.com here is a hack to not make the
-        // FadeInImage crash when there's no avatar url for
-        // the actor.
-        image: actor.avatarUrl ?? 'https://example.com',
+        image: actor.avatarUrl ?? '',
         fit: BoxFit.cover,
         fadeInDuration: const Duration(milliseconds: 250),
       ),

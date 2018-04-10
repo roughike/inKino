@@ -36,7 +36,7 @@ class TMDBApi {
 
     var response = await getRequest(searchUri);
     var movieSearchJson = json.decode(response);
-    List<Map<String, dynamic>> searchResults = movieSearchJson['results'];
+    var searchResults = movieSearchJson['results'];
 
     if (searchResults.isNotEmpty) {
       return searchResults.first['id'];
@@ -55,7 +55,8 @@ class TMDBApi {
     var response = await getRequest(actorUri);
     var movieActors = json.decode(response);
 
-    return _parseActorAvatars(movieActors['cast']);
+    return _parseActorAvatars(
+        (movieActors['cast'] as List).cast<Map<String, dynamic>>());
   }
 
   List<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
