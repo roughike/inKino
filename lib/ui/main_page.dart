@@ -8,6 +8,7 @@ import 'package:inkino/redux/app/app_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/events/events_page.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
+import 'package:inkino/ui/theater_list/inkino_drawer_header.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
 
 class MainPage extends StatefulWidget {
@@ -134,36 +135,6 @@ class _MainPageState extends State<MainPage>
     ];
   }
 
-  Widget _buildDrawer() {
-    var textTheme = Theme.of(context).textTheme;
-    var drawerHeader = new Container(
-      color: Theme.of(context).primaryColor,
-      constraints: new BoxConstraints.expand(height: 175.0),
-      padding: const EdgeInsets.all(16.0),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          new Text(
-            'inKino',
-            style: textTheme.display1.copyWith(color: Colors.white70),
-          ),
-          new Text(
-            'v1.0.0',
-            style: textTheme.body2.copyWith(color: Colors.white),
-          ),
-        ],
-      ),
-    );
-
-    return new Drawer(
-      child: new TheaterList(
-        header: drawerHeader,
-        onTheaterTapped: () => Navigator.pop(context),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -182,7 +153,12 @@ class _MainPageState extends State<MainPage>
           ],
         ),
       ),
-      drawer: _buildDrawer(),
+      drawer: new Drawer(
+        child: new TheaterList(
+          header: new InKinoDrawerHeader(),
+          onTheaterTapped: () => Navigator.pop(context),
+        ),
+      ),
       body: new TabBarView(
         controller: _controller,
         children: <Widget>[
