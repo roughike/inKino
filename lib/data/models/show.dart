@@ -26,14 +26,14 @@ class Show {
   final DateTime end;
 
   static List<Show> parseAll(String xmlString) {
-    var shows = <Show>[];
     var document = xml.parse(xmlString);
+    var shows = document.findAllElements('Show');
 
-    document.findAllElements('Show').forEach((node) {
+    return shows.map((node) {
       var title = tagContents(node, 'Title');
       var originalTitle = tagContents(node, 'OriginalTitle');
 
-      shows.add(new Show(
+      return new Show(
         id: tagContents(node, 'ID'),
         eventId: tagContents(node, 'EventID'),
         title: EventNameCleaner.cleanup(title),
@@ -43,9 +43,7 @@ class Show {
         theaterAndAuditorium: tagContents(node, 'TheatreAndAuditorium'),
         start: DateTime.parse(tagContents(node, 'dttmShowStart')),
         end: DateTime.parse(tagContents(node, 'dttmShowEnd')),
-      ));
-    });
-
-    return shows;
+      );
+    }).toList();
   }
 }

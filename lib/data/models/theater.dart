@@ -19,10 +19,10 @@ class Theater {
   final String name;
 
   static List<Theater> parseAll(String xmlString) {
-    var theaters = <Theater>[];
     var document = xml.parse(xmlString);
+    var theaters = document.findAllElements('TheatreArea');
 
-    document.findAllElements('TheatreArea').forEach((node) {
+    return theaters.map((node) {
       var id = tagContents(node, 'ID');
       var normalizedName = _normalize(tagContents(node, 'Name'));
 
@@ -30,13 +30,11 @@ class Theater {
         normalizedName = 'All theaters';
       }
 
-      theaters.add(new Theater(
+      return new Theater(
         id: id,
         name: normalizedName,
-      ));
-    });
-
-    return theaters;
+      );
+    }).toList();
   }
 
   static _normalize(String text) {
