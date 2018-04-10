@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/loading_status.dart';
@@ -44,7 +46,7 @@ void main() {
     EventsPageViewModel mockViewModel;
 
     setUp(() {
-      mockAllImageResponses();
+      io.HttpOverrides.global = new TestHttpOverrides();
 
       observer = new NavigatorPushObserver();
       mockViewModel = new MockEventsPageViewModel();

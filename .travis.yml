@@ -10,12 +10,15 @@ addons:
       - fonts-droid
 
 before_script:
+  - cd lib
+  - mv tmdb_config.dart.sample tmdb_config.dart
+  - cd ..
   - git clone https://github.com/flutter/flutter.git -b beta --depth 1
   - ./flutter/bin/flutter doctor
   - gem install coveralls-lcov
 
 script:
-  - ./flutter/bin/flutter test --coverage
+  - ./flutter/bin/flutter test --coverage --no-preview-dart-2
 
 after_success:
   - coveralls-lcov coverage/lcov.info
