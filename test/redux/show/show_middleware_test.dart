@@ -20,7 +20,7 @@ void main() {
 
     MockFinnkinoApi mockFinnkinoApi;
     MockStore mockStore;
-    ShowMiddleware sut;
+    ShowMiddleware middleware;
 
     AppState _theaterState({Theater currentTheater}) {
       return new AppState.initial().copyWith(
@@ -33,7 +33,7 @@ void main() {
     setUp(() {
       mockFinnkinoApi = new MockFinnkinoApi();
       mockStore = new MockStore();
-      sut = new ShowMiddleware(mockFinnkinoApi);
+      middleware = new ShowMiddleware(mockFinnkinoApi);
 
       // Given
       when(mockStore.state).thenReturn(_theaterState(currentTheater: theater));
@@ -58,7 +58,7 @@ void main() {
         ]);
 
         // When
-        await sut.call(mockStore, new InitCompleteAction(null, theater), next);
+        await middleware.call(mockStore, new InitCompleteAction(null, theater), next);
 
         // Then
         verify(mockFinnkinoApi.getSchedule(theater, null));
@@ -84,7 +84,7 @@ void main() {
         ]);
 
         // When
-        await sut.call(
+        await middleware.call(
             mockStore, new ChangeCurrentDateAction(startOf2018), next);
 
         // Then
@@ -106,7 +106,7 @@ void main() {
         when(mockFinnkinoApi.getSchedule(any, any)).thenReturn(new Error());
 
         // When
-        await sut.call(mockStore, new InitCompleteAction(null, theater), next);
+        await middleware.call(mockStore, new InitCompleteAction(null, theater), next);
 
         // Then
         expect(actionLog.length, 3);

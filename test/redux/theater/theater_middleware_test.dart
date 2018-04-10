@@ -16,7 +16,7 @@ void main() {
 
     MockAssetBundle mockAssetBundle;
     MockPreferences mockPreferences;
-    TheaterMiddleware sut;
+    TheaterMiddleware middleware;
 
     Future<String> _theaterXml() =>
         new File('test_assets/theaters.xml').readAsString();
@@ -24,7 +24,7 @@ void main() {
     setUp(() {
       mockAssetBundle = new MockAssetBundle();
       mockPreferences = new MockPreferences();
-      sut = new TheaterMiddleware(mockAssetBundle, mockPreferences);
+      middleware = new TheaterMiddleware(mockAssetBundle, mockPreferences);
     });
 
     tearDown(() {
@@ -37,7 +37,7 @@ void main() {
         when(mockAssetBundle.loadString(any)).thenReturn(_theaterXml());
 
         // When
-        await sut.call(null, new InitAction(), next);
+        await middleware.call(null, new InitAction(), next);
 
         // Then
         final InitCompleteAction action = log.single;
@@ -50,7 +50,7 @@ void main() {
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
 
-        await sut.call(null, new InitAction(), next);
+        await middleware.call(null, new InitAction(), next);
 
         final InitCompleteAction action = log.single;
         Theater theater = action.selectedTheater;
@@ -65,7 +65,7 @@ void main() {
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
 
-          await sut.call(null, new InitAction(), next);
+          await middleware.call(null, new InitAction(), next);
 
           final InitCompleteAction action = log.single;
           Theater theater = action.selectedTheater;
@@ -79,7 +79,7 @@ void main() {
       'when called with ChangeCurrentTheaterAction, persists and dispatches the same action',
       () async {
         var theater = new Theater(id: 'test-123', name: 'Test Theater');
-        await sut.call(null, new ChangeCurrentTheaterAction(theater), next);
+        await middleware.call(null, new ChangeCurrentTheaterAction(theater), next);
 
         verify(mockPreferences.setString(
             TheaterMiddleware.kDefaultTheaterId, 'test-123'));

@@ -34,11 +34,11 @@ void main() {
     final Function(dynamic) next = (action) => actionLog.add(action);
 
     MockTMDBApi mockTMDBApi;
-    ActorMiddleware sut;
+    ActorMiddleware middleware;
 
     setUp(() {
       mockTMDBApi = new MockTMDBApi();
-      sut = new ActorMiddleware(mockTMDBApi);
+      middleware = new ActorMiddleware(mockTMDBApi);
     });
 
     tearDown(() {
@@ -48,7 +48,7 @@ void main() {
     test('FetchActorAvatarsAction - successful API request', () async {
       when(mockTMDBApi.findAvatarsForActors(any, any))
           .thenReturn(actorsWithAvatars);
-      await sut.call(null, new FetchActorAvatarsAction(event), next);
+      await middleware.call(null, new FetchActorAvatarsAction(event), next);
 
       expect(actionLog.length, 4);
       expect(actionLog[0], new isInstanceOf<FetchActorAvatarsAction>());
@@ -68,7 +68,7 @@ void main() {
       when(mockTMDBApi.findAvatarsForActors(any, any))
           .thenReturn(new Error());
 
-      await sut.call(null, new FetchActorAvatarsAction(event), next);
+      await middleware.call(null, new FetchActorAvatarsAction(event), next);
     });
   });
 }

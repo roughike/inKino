@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
-import 'package:inkino/data/networking/http_utils.dart';
+import 'package:inkino/utils/http_utils.dart';
 import 'package:intl/intl.dart';
 
 class FinnkinoApi {

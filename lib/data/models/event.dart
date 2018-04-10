@@ -42,14 +42,14 @@ class Event {
       (synopsis != null && synopsis.isNotEmpty);
 
   static List<Event> parseAll(String xmlString) {
-    var events = <Event>[];
     var document = xml.parse(xmlString);
+    var events = document.findAllElements('Event');
 
-    document.findAllElements('Event').forEach((node) {
+    return events.map((node) {
       var title = tagContents(node, 'Title');
       var originalTitle = tagContents(node, 'OriginalTitle');
 
-      events.add(new Event(
+      return new Event(
         id: tagContents(node, 'ID'),
         title: EventNameCleaner.cleanup(title),
         originalTitle: EventNameCleaner.cleanup(originalTitle),
@@ -61,46 +61,32 @@ class Event {
         synopsis: tagContents(node, 'Synopsis'),
         images: EventImageData.parseAll(node.findElements('Images')),
         youtubeTrailers: _parseTrailers(node.findAllElements('EventVideo')),
-      ));
-    });
-
-    return events;
+      );
+    }).toList();
   }
 
   static List<String> _parseDirectors(Iterable<xml.XmlElement> nodes) {
-    var directors = <String>[];
-
-    nodes.forEach((node) {
+    return nodes.map((node) {
       var first = tagContents(node, 'FirstName');
       var last = tagContents(node, 'LastName');
-      directors.add('$first $last');
-    });
 
-    return directors;
+      return '$first $last';
+    }).toList();
   }
 
   static List<Actor> _parseActors(Iterable<xml.XmlElement> nodes) {
-    var actors = <Actor>[];
-
-    nodes.forEach((node) {
+    return nodes.map((node) {
       var first = tagContents(node, 'FirstName');
       var last = tagContents(node, 'LastName');
-      actors.add(new Actor(name: '$first $last'));
-    });
 
-    return actors;
+      return new Actor(name: '$first $last');
+    }).toList();
   }
 
   static List<String> _parseTrailers(Iterable<xml.XmlElement> nodes) {
-    var trailers = <String>[];
-
-    nodes.forEach((node) {
-      trailers.add(
-        'https://youtube.com/watch?v=' + tagContents(node, 'Location'),
-      );
-    });
-
-    return trailers;
+    return nodes.map((node) {
+      return 'https://youtube.com/watch?v=' + tagContents(node, 'Location');
+    }).toList();
   }
 }
 
