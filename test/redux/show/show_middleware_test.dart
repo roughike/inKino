@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/app/app_state.dart';
@@ -51,14 +53,16 @@ void main() {
         // passed. As new DateTime(2018) will mean the very first hour and minute
         // in January, all the show times in test assets will be after this date.
         Clock.getCurrentTime = () => startOf2018;
-        when(mockFinnkinoApi.getSchedule(theater, any)).thenReturn(<Show>[
+        when(mockFinnkinoApi.getSchedule(theater, typed(any)))
+            .thenAnswer((_) => new Future.value(<Show>[
           new Show(start: new DateTime(2018, 02, 21)),
           new Show(start: new DateTime(2018, 02, 21)),
           new Show(start: new DateTime(2018, 03, 21)),
-        ]);
+        ]));
 
         // When
-        await middleware.call(mockStore, new InitCompleteAction(null, theater), next);
+        await middleware.call(
+            mockStore, new InitCompleteAction(null, theater), next);
 
         // Then
         verify(mockFinnkinoApi.getSchedule(theater, null));
@@ -77,11 +81,12 @@ void main() {
       () async {
         // Given
         Clock.getCurrentTime = () => new DateTime(2018, 3);
-        when(mockFinnkinoApi.getSchedule(theater, any)).thenReturn(<Show>[
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 03, 21)),
-        ]);
+        when(mockFinnkinoApi.getSchedule(theater, typed(any)))
+            .thenAnswer((_) => new Future.value(<Show>[
+                  new Show(start: new DateTime(2018, 02, 21)),
+                  new Show(start: new DateTime(2018, 02, 21)),
+                  new Show(start: new DateTime(2018, 03, 21)),
+                ]));
 
         // When
         await middleware.call(
@@ -103,10 +108,12 @@ void main() {
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingShowsAction',
       () async {
         // Given
-        when(mockFinnkinoApi.getSchedule(any, any)).thenReturn(new Error());
+        when(mockFinnkinoApi.getSchedule(typed(any), typed(any)))
+            .thenAnswer((_) => new Future.error(new Error()));
 
         // When
-        await middleware.call(mockStore, new InitCompleteAction(null, theater), next);
+        await middleware.call(
+            mockStore, new InitCompleteAction(null, theater), next);
 
         // Then
         expect(actionLog.length, 3);
