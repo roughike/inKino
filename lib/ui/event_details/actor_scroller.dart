@@ -3,8 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
-import 'package:inkino/redux/app/app_actions.dart';
-import 'package:inkino/redux/app/app_selectors.dart';
+import 'package:inkino/redux/actor/actor_actions.dart';
+import 'package:inkino/redux/actor/actor_selectors.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 class ActorScroller extends StatelessWidget {
