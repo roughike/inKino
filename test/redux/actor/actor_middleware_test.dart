@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/networking/tmdb_api.dart';
@@ -46,8 +48,8 @@ void main() {
     });
 
     test('FetchActorAvatarsAction - successful API request', () async {
-      when(mockTMDBApi.findAvatarsForActors(any, any))
-          .thenReturn(actorsWithAvatars);
+      when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
+          .thenAnswer((_) => new Future.value(actorsWithAvatars));
       await middleware.call(null, new FetchActorAvatarsAction(event), next);
 
       expect(actionLog.length, 4);
@@ -65,8 +67,8 @@ void main() {
     });
 
     test('FetchActorAvatarsAction - handles errors silently', () async {
-      when(mockTMDBApi.findAvatarsForActors(any, any))
-          .thenReturn(new Error());
+      when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
+          .thenAnswer((_) => new Future.error(new Error()));
 
       await middleware.call(null, new FetchActorAvatarsAction(event), next);
     });

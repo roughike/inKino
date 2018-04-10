@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
@@ -31,7 +30,7 @@ void main() {
     group('called with InitAction', () {
       test('loads the preloaded theaters', () async {
         // Given
-        when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
+        when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
 
         // When
         await middleware.call(null, new InitAction(), next);
@@ -43,7 +42,7 @@ void main() {
 
       test('when a persisted theater id exists, uses that as a default',
           () async {
-        when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
+        when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
 
@@ -58,7 +57,7 @@ void main() {
       test(
         'when no persisted theater id, uses the first theater as a default',
         () async {
-          when(mockAssetBundle.loadString(any)).thenReturn(theatersXml);
+          when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
 
@@ -89,7 +88,7 @@ void main() {
   });
 }
 
-const String theatersXml = '''<?xml version="1.0"?>
+Future<String> theatersXml() => new Future.value('''<?xml version="1.0"?>
 <TheatreAreas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <TheatreArea>
         <ID>1029</ID>
@@ -103,4 +102,4 @@ const String theatersXml = '''<?xml version="1.0"?>
         <ID>002</ID>
         <Name>Gotham: THEATER TWO</Name>
     </TheatreArea>
-</TheatreAreas>''';
+</TheatreAreas>''');

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
@@ -41,9 +43,9 @@ void main() {
     test(
       'when called with InitCompleteAction, should dispatch a ReceivedEventsAction with now playing and upcoming events',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(any))
-            .thenReturn(nowInTheatersEvents);
-        when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
+        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
+            .thenAnswer((_) => new Future.value(nowInTheatersEvents));
+        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.value(upcomingEvents));
 
         await middleware.call(null, new InitCompleteAction(null, theater), next);
 
@@ -60,9 +62,9 @@ void main() {
     test(
       'when called with ChangeCurrentTheaterAction, should request events for the new theater',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(any))
-            .thenReturn(nowInTheatersEvents);
-        when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
+        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
+            .thenAnswer((_) => new Future.value(nowInTheatersEvents));
+        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.value(upcomingEvents));
 
         await middleware.call(
           null,
@@ -76,7 +78,7 @@ void main() {
         );
 
         Theater captured =
-            verify(mockFinnkinoApi.getNowInTheatersEvents(captureAny))
+            verify(mockFinnkinoApi.getNowInTheatersEvents(typed(captureAny)))
                 .captured
                 .first;
         expect(captured.id, 'changed');
@@ -87,9 +89,9 @@ void main() {
     test(
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingEventsAction',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(any))
-            .thenReturn(new Error());
-        when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(new Error());
+        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
+            .thenAnswer((_) => new Future.error(new Error()));
+        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.error(new Error()));
 
         await middleware.call(null, new InitCompleteAction(null, theater), next);
 

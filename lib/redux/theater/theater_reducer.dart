@@ -2,9 +2,9 @@ import 'package:inkino/redux/common_actions.dart';
 import 'package:redux/redux.dart';
 import 'package:inkino/redux/theater/theater_state.dart';
 
-final theaterReducer = combineTypedReducers<TheaterState>([
-  new ReducerBinding<TheaterState, InitCompleteAction>(_initComplete),
-  new ReducerBinding<TheaterState, ChangeCurrentTheaterAction>(
+final theaterReducer = combineReducers<TheaterState>([
+  new TypedReducer<TheaterState, InitCompleteAction>(_initComplete),
+  new TypedReducer<TheaterState, ChangeCurrentTheaterAction>(
       _currentTheaterChanged),
 ]);
 
