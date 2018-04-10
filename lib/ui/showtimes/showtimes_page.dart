@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/common/platform_adaptive_progress_indicator.dart';
@@ -11,7 +12,7 @@ import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 class ShowtimesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector(
+    return new StoreConnector<AppState, ShowtimesPageViewModel>(
       distinct: true,
       converter: (store) => ShowtimesPageViewModel.fromStore(store),
       builder: (_, viewModel) => new ShowtimesPageContent(viewModel),

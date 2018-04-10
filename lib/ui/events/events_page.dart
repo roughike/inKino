@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/data/models/event.dart';
+import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/common/platform_adaptive_progress_indicator.dart';
@@ -14,7 +15,7 @@ class EventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector(
+    return new StoreConnector<AppState, EventsPageViewModel>(
       distinct: true,
       converter: (store) => EventsPageViewModel.fromStore(store, listType),
       builder: (_, viewModel) => new EventsPageContent(viewModel),
