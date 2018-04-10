@@ -22,3 +22,4 @@ flutter:
   assets:
   - assets/preloaded_data/theaters.xml
   - assets/images/1x1_transparent.png
+  - assets/images/powered_by_tmdb.png
