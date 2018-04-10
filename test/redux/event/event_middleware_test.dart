@@ -15,7 +15,7 @@ void main() {
     final Function(dynamic) next = (action) => actionLog.add(action);
 
     MockFinnkinoApi mockFinnkinoApi;
-    EventMiddleware sut;
+    EventMiddleware middleware;
 
     List<Event> nowInTheatersEvents = <Event>[
       new Event(),
@@ -31,7 +31,7 @@ void main() {
 
     setUp(() {
       mockFinnkinoApi = new MockFinnkinoApi();
-      sut = new EventMiddleware(mockFinnkinoApi);
+      middleware = new EventMiddleware(mockFinnkinoApi);
     });
 
     tearDown(() {
@@ -45,7 +45,7 @@ void main() {
             .thenReturn(nowInTheatersEvents);
         when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
 
-        await sut.call(null, new InitCompleteAction(null, theater), next);
+        await middleware.call(null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
@@ -64,7 +64,7 @@ void main() {
             .thenReturn(nowInTheatersEvents);
         when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(upcomingEvents);
 
-        await sut.call(
+        await middleware.call(
           null,
           new ChangeCurrentTheaterAction(
             new Theater(
@@ -91,7 +91,7 @@ void main() {
             .thenReturn(new Error());
         when(mockFinnkinoApi.getUpcomingEvents()).thenReturn(new Error());
 
-        await sut.call(null, new InitCompleteAction(null, theater), next);
+        await middleware.call(null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
