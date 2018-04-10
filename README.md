@@ -20,7 +20,7 @@ The source code is **100% Dart**, and everything resides in the [/lib](https://g
 
 Before you build: Inside the `/lib` folder, there's a file called **tmdb_config.dart.sample**. Rename it to **tmdb_config.dart** and you'll get rid of the build error.
 
-While the project should build on older versions as well, it's currently built with Flutter `v0.2.8` on the `beta` channel, **opting out of Dart 2** for now.
+The project is currently built using the [latest Flutter Beta 2](https://medium.com/flutter-io/https-medium-com-flutter-io-announcing-flutters-beta-2-c85ba1557d5e), with Dart 2 enabled.
 
 ## Contributing
 
