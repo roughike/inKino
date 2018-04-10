@@ -109,7 +109,7 @@ void main() {
       () async {
         // Given
         when(mockFinnkinoApi.getSchedule(typed(any), typed(any)))
-            .thenAnswer((_) => new Future.error(new Error()));
+            .thenAnswer((_) => new Future.value(new Error()));
 
         // When
         await middleware.call(

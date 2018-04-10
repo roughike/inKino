@@ -45,9 +45,11 @@ void main() {
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
             .thenAnswer((_) => new Future.value(nowInTheatersEvents));
-        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.value(upcomingEvents));
+        when(mockFinnkinoApi.getUpcomingEvents())
+            .thenAnswer((_) => new Future.value(upcomingEvents));
 
-        await middleware.call(null, new InitCompleteAction(null, theater), next);
+        await middleware.call(
+            null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
@@ -64,7 +66,8 @@ void main() {
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
             .thenAnswer((_) => new Future.value(nowInTheatersEvents));
-        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.value(upcomingEvents));
+        when(mockFinnkinoApi.getUpcomingEvents())
+            .thenAnswer((_) => new Future.value(upcomingEvents));
 
         await middleware.call(
           null,
@@ -90,10 +93,12 @@ void main() {
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingEventsAction',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => new Future.error(new Error()));
-        when(mockFinnkinoApi.getUpcomingEvents()).thenAnswer((_) => new Future.error(new Error()));
+            .thenAnswer((_) => new Future.value(new Error()));
+        when(mockFinnkinoApi.getUpcomingEvents())
+            .thenAnswer((_) => new Future.value(new Error()));
 
-        await middleware.call(null, new InitCompleteAction(null, theater), next);
+        await middleware.call(
+            null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
