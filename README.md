@@ -1,5 +1,7 @@
 # inKino - a showtime browser for Finnkino cinemas
 
+[![Build Status](https://travis-ci.org/roughike/inKino.svg?branch=development)](https://travis-ci.org/roughike/inKino) [![Coverage Status](https://coveralls.io/repos/github/roughike/inKino/badge.svg?branch=development)](https://coveralls.io/github/roughike/inKino?branch=development)
+
 <img src="https://github.com/roughike/inKino/blob/development/screenshots/now_in_theaters.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/development/screenshots/showtimes.png" width="33%" /> <img src="https://github.com/roughike/inKino/blob/development/screenshots/event_details.png" width="33%" />
 
 ## What is inKino?
@@ -18,7 +20,7 @@ The source code is **100% Dart**, and everything resides in the [/lib](https://g
 
 Before you build: Inside the `/lib` folder, there's a file called **tmdb_config.dart.sample**. Rename it to **tmdb_config.dart** and you'll get rid of the build error.
 
-While the project should build on older versions as well, it's currently built with Flutter `v0.2.3` on the `beta` channel.
+While the project should build on older versions as well, it's currently built with Flutter `v0.2.8` on the `beta` channel, **opting out of Dart 2** for now.
 
 ## Contributing
 
