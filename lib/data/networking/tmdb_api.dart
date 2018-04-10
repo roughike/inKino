@@ -5,8 +5,8 @@ import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/utils/http_utils.dart';
 
-/// If this has a red underline, it means that you haven't created
-/// the lib/tmdb_config.dart file. Refer to the README for instructions
+/// If this has a red underline, it means that the lib/tmdb_config.dart file
+/// is not present on the project. Refer to the README for instructions
 /// on how to do so.
 import 'package:inkino/tmdb_config.dart';
 

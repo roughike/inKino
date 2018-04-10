@@ -16,23 +16,10 @@ The source code is **100% Dart**, and everything resides in the [/lib](https://g
 
 ## Building the project
 
-While it should work on older versions as well, the project is currently built with Flutter `v0.2.3` on the `beta` channel.
+Before you build: Inside the `/lib` folder, there's a file called **tmdb_config.dart.sample**. Rename it to **tmdb_config.dart** and you'll get rid of the build error.
 
-It won't build unless you add the following file manually:
-
-**lib/tmdb_config.dart**
-
-```dart
-class TMDBConfig {
-  /// The TMDB API is mostly used for loading actor avatars.
-  ///
-  /// Having a real API key here is optional; if this doesn't 
-  /// contain the real API key, the app will still work, but 
-  /// the actor avatars won't load.
-  static final String apiKey = '<YOUR_API_KEY_HERE>';
-}
-```
+While the project should build on older versions as well, it's currently built with Flutter `v0.2.3` on the `beta` channel.
 
 ## Contributing
 
-Contributions are welcome! However, if it's going to be a major change, please create an issue first. 
+Contributions are welcome! However, if it's going to be a major change, please create an issue first. Before starting to work on something, please comment on a specific issue and say you'd like to work on it.
