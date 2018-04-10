@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/data/models/actor.dart';
@@ -20,7 +22,7 @@ void main() {
     String lastLaunchedTrailerUrl;
 
     setUp(() {
-      mockAllImageResponses();
+      io.HttpOverrides.global = new TestHttpOverrides();
 
       showtimeInfo.launchTicketsUrl = (url) => lastLaunchedTicketsUrl = url;
       eventPoster.launchTrailerVideo = (url) => lastLaunchedTrailerUrl = url;
