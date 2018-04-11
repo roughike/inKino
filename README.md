@@ -28,4 +28,4 @@ Contributions are welcome! However, if it's going to be a major change, please c
 
 ## Thanks
 
-Special thanks to [Thibaud Colas](https://twitter.com/thibaud_colas), [Alessandro Aime](https://twitter.com/aimealessandro) and [Juho Rautioaho](https://github.com/Jraut) for giving their extra pair of eyes for reviewing the source code.
+Special thanks to [Thibaud Colas](https://twitter.com/thibaud_colas), [Brian Egan](https://twitter.com/brianegan), [Alessandro Aime](https://twitter.com/aimealessandro) and [Juho Rautioaho](https://github.com/Jraut) for giving their extra pair of eyes for reviewing the source code.
