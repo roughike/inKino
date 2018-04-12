@@ -18,6 +18,8 @@ The source code is **100% Dart**, and everything resides in the [/lib](https://g
 
 ## Building the project
 
+### Renaming the TMDB configuration file
+
 If you try to build the project straight away, you'll get an error complaining that a `tmdb_config.dart` file is missing. To resolve that, run this on your terminal in the project root:
 
 ```bash
@@ -28,9 +30,11 @@ cd lib && mv tmdb_config.dart.sample tmdb_config.dart && cd ..
 
 If you don't trust in random bash scripts copied from the Internet, you can just rename the `tmdb_config.dart.sample` to `tmdb_config.dart` manually.
 
-### The stack
+### The stack & building from source
 
 The project is currently built using the [latest Flutter Beta 2](https://medium.com/flutter-io/https-medium-com-flutter-io-announcing-flutters-beta-2-c85ba1557d5e), with Dart 2 enabled.
+
+To build the project, ensure that you have a recent version of the Flutter SDK installed. Then either run `flutter run` in the project root or use your IDE of choice. To run the tests, run `flutter test` in the project root.
 
 ## Contributing
 
