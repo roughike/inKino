@@ -91,8 +91,8 @@ void main() {
 
         await _buildEventsPage(tester);
 
-        // Building the events page makes the last pushed route non-null,
-        // so we'll reset at this point.
+        // Building the events page should trigger the navigator observer
+        // once.
         verify(observer.didPush(typed(any), typed(any)));
 
         await tester.tap(find.text('Test Title'));
