@@ -16,17 +16,7 @@ import 'package:mockito/mockito.dart';
 import '../../test_utils.dart';
 
 class MockEventsPageViewModel extends Mock implements EventsPageViewModel {}
-
-class NavigatorPushObserver extends NavigatorObserver {
-  Route<dynamic> lastPushedRoute;
-
-  void reset() => lastPushedRoute = null;
-
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
-    lastPushedRoute = route;
-  }
-}
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group('EventGrid', () {
@@ -42,13 +32,13 @@ void main() {
       ),
     ];
 
-    NavigatorPushObserver observer;
+    MockNavigatorObserver observer;
     EventsPageViewModel mockViewModel;
 
     setUp(() {
       io.HttpOverrides.global = new TestHttpOverrides();
 
-      observer = new NavigatorPushObserver();
+      observer = new MockNavigatorObserver();
       mockViewModel = new MockEventsPageViewModel();
       when(mockViewModel.refreshEvents).thenReturn(() {});
     });
@@ -101,15 +91,14 @@ void main() {
 
         await _buildEventsPage(tester);
 
-        // Building the events page makes the last pushed route non-null,
-        // so we'll reset at this point.
-        observer.reset();
-        expect(observer.lastPushedRoute, isNull);
+        // Building the events page should trigger the navigator observer
+        // once.
+        verify(observer.didPush(typed(any), typed(any)));
 
         await tester.tap(find.text('Test Title'));
         await tester.pumpAndSettle();
 
-        expect(observer.lastPushedRoute, isNotNull);
+        verify(observer.didPush(typed(any), typed(any)));
         expect(find.byType(EventDetailsPage), findsOneWidget);
       },
     );
