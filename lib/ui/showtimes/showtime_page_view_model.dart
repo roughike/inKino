@@ -39,14 +39,14 @@ class ShowtimesPageViewModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is ShowtimesPageViewModel &&
-              runtimeType == other.runtimeType &&
-              status == other.status &&
-              dates == other.dates &&
-              selectedDate == other.selectedDate &&
-              shows == other.shows &&
-              changeCurrentDate == other.changeCurrentDate &&
-              refreshShowtimes == other.refreshShowtimes;
+      other is ShowtimesPageViewModel &&
+          runtimeType == other.runtimeType &&
+          status == other.status &&
+          dates == other.dates &&
+          selectedDate == other.selectedDate &&
+          shows == other.shows &&
+          changeCurrentDate == other.changeCurrentDate &&
+          refreshShowtimes == other.refreshShowtimes;
 
   @override
   int get hashCode =>

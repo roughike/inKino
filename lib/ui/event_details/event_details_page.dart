@@ -75,7 +75,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       padding: const EdgeInsets.all(6.0),
       child: new EventPoster(
         event: widget.event,
-        size: new Size(100.0, 150.0),
+        size: const Size(100.0, 150.0),
         displayPlayButton: true,
       ),
     );

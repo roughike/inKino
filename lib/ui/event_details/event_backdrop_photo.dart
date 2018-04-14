@@ -7,7 +7,7 @@ import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
 
 class EventBackdropPhoto extends StatelessWidget {
-  EventBackdropPhoto({
+  const EventBackdropPhoto({
     @required this.event,
     @required this.height,
     @required this.overlayBlur,
@@ -36,18 +36,18 @@ class EventBackdropPhoto extends StatelessWidget {
     return new Container(
       width: MediaQuery.of(context).size.width,
       height: height,
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
+      decoration: const BoxDecoration(
+        gradient: const LinearGradient(
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
-          colors: <Color>[
+          colors: const <Color>[
             const Color(0xFF222222),
             const Color(0xFF424242),
           ],
         ),
       ),
-      child: new Center(
-        child: new Icon(
+      child: const Center(
+        child: const Icon(
           Icons.theaters,
           color: Colors.white30,
           size: 96.0,
@@ -99,9 +99,9 @@ class EventBackdropPhoto extends StatelessWidget {
     return new Positioned(
       bottom: -8.0,
       child: new DecoratedBox(
-        decoration: new BoxDecoration(
-          boxShadow: <BoxShadow>[
-            new BoxShadow(
+        decoration: const BoxDecoration(
+          boxShadow: const <BoxShadow>[
+            const BoxShadow(
               color: Colors.black38,
               blurRadius: 5.0,
               spreadRadius: 3.0,

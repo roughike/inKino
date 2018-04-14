@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class ErrorView extends InfoMessageView {
-  static final Key tryAgainButtonKey = new Key('tryAgainButton');
+  static const Key tryAgainButtonKey = const Key('tryAgainButton');
 
-  ErrorView({
+  const ErrorView({
     String title,
     String description,
     @required VoidCallback onRetry,
-  })
-      : super(
+  }) : super(
           actionButtonKey: tryAgainButtonKey,
           title: title ?? 'Oops!',
           description:
@@ -19,14 +18,13 @@ class ErrorView extends InfoMessageView {
 }
 
 class InfoMessageView extends StatelessWidget {
-  InfoMessageView({
+  const InfoMessageView({
     Key key,
     @required this.title,
     @required this.description,
     this.actionButtonKey,
     this.onActionButtonTapped,
-  })
-      : super(key: key);
+  }) : super(key: key);
 
   final Key actionButtonKey;
   final String title;
@@ -37,8 +35,8 @@ class InfoMessageView extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var content = <Widget>[
-      new CircleAvatar(
-        child: new Icon(
+      const CircleAvatar(
+        child: const Icon(
           Icons.info_outline,
           color: Colors.black54,
           size: 52.0,
@@ -50,7 +48,7 @@ class InfoMessageView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 16.0),
         child: new Text(
           title,
-          style: new TextStyle(fontSize: 24.0),
+          style: const TextStyle(fontSize: 24.0),
         ),
       ),
       new Padding(

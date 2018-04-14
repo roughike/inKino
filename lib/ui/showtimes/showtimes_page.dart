@@ -10,6 +10,8 @@ import 'package:inkino/ui/showtimes/showtime_list.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 
 class ShowtimesPage extends StatelessWidget {
+  const ShowtimesPage();
+
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, ShowtimesPageViewModel>(

@@ -8,7 +8,7 @@ import 'package:inkino/redux/actor/actor_selectors.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 class ActorScroller extends StatelessWidget {
-  ActorScroller(this.event);
+  const ActorScroller(this.event);
   final Event event;
 
   @override
@@ -22,7 +22,7 @@ class ActorScroller extends StatelessWidget {
 }
 
 class ActorScrollerContent extends StatelessWidget {
-  ActorScrollerContent(this.actors);
+  const ActorScrollerContent(this.actors);
   final List<Actor> actors;
 
   Widget _buildActorList(BuildContext context) {
@@ -60,7 +60,7 @@ class ActorScrollerContent extends StatelessWidget {
   }
 
   Widget _buildActorAvatar(BuildContext context, Actor actor) {
-    var fallbackIcon = new Icon(
+    const fallbackIcon = const Icon(
       Icons.person,
       color: Colors.white,
       size: 26.0,
@@ -102,9 +102,9 @@ class ActorScrollerContent extends StatelessWidget {
         children: <Widget>[
           new Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: new Text(
+            child: const Text(
               'Cast',
-              style: new TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.w700,
               ),
@@ -113,7 +113,7 @@ class ActorScrollerContent extends StatelessWidget {
           new Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: new SizedBox.fromSize(
-              size: new Size.fromHeight(110.0),
+              size: const Size.fromHeight(110.0),
               child: _buildActorList(context),
             ),
           ),

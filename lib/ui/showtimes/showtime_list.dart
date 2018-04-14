@@ -33,9 +33,9 @@ class ShowtimeList extends StatelessWidget {
           return new Column(
             children: <Widget>[
               new ShowtimeListTile(show, useAlternateBackground),
-              new Divider(
+              const Divider(
                 height: 1.0,
-                color: Colors.black.withOpacity(0.25),
+                color: const Color(0x40000000),
               ),
             ],
           );

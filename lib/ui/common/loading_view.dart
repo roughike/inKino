@@ -3,11 +3,11 @@ import 'package:inkino/data/loading_status.dart';
 import 'package:meta/meta.dart';
 
 class LoadingView extends StatefulWidget {
-  static final Key loadingContentKey = new ValueKey('loading');
-  static final Key errorContentKey = new ValueKey('error');
-  static final Key successContentKey = new ValueKey('success');
+  static const Key loadingContentKey = const ValueKey('loading');
+  static const Key errorContentKey = const ValueKey('error');
+  static const Key successContentKey = const ValueKey('success');
 
-  LoadingView({
+  const LoadingView({
     @required this.status,
     @required this.loadingContent,
     @required this.errorContent,
@@ -40,17 +40,17 @@ class LoadingViewState extends State<LoadingView>
   void initState() {
     super.initState();
     _loadingController = new AnimationController(
-      duration: new Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 350),
       vsync: this,
     );
 
     _errorController = new AnimationController(
-      duration: new Duration(milliseconds: 350),
+      duration: const Duration(milliseconds: 350),
       vsync: this,
     );
 
     _successController = new AnimationController(
-      duration: new Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
 
@@ -144,11 +144,10 @@ class _TransitionAnimation extends StatelessWidget {
     @required this.controller,
     @required this.child,
     @required this.isVisible,
-  })
-      : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
+  })  : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
           new CurvedAnimation(
             parent: controller,
-            curve: new Interval(
+            curve: const Interval(
               0.000,
               0.650,
               curve: Curves.ease,
@@ -158,7 +157,7 @@ class _TransitionAnimation extends StatelessWidget {
         _yTranslation = new Tween(begin: 40.0, end: 0.0).animate(
           new CurvedAnimation(
             parent: controller,
-            curve: new Interval(
+            curve: const Interval(
               0.000,
               0.650,
               curve: Curves.ease,

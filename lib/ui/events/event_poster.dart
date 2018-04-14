@@ -13,7 +13,7 @@ Function(String) launchTrailerVideo = (url) async {
 };
 
 class EventPoster extends StatelessWidget {
-  static final Key playButtonKey = new Key('playButton');
+  static const Key playButtonKey = const Key('playButton');
 
   EventPoster({
     @required this.event,
@@ -26,19 +26,19 @@ class EventPoster extends StatelessWidget {
   final bool displayPlayButton;
 
   BoxDecoration _buildDecorations() {
-    return new BoxDecoration(
+    return const BoxDecoration(
       boxShadow: <BoxShadow>[
-        new BoxShadow(
+        const BoxShadow(
           offset: const Offset(1.0, 1.0),
           spreadRadius: 1.0,
           blurRadius: 2.0,
           color: Colors.black38,
         ),
       ],
-      gradient: new LinearGradient(
+      gradient: const LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        colors: <Color>[
+        colors: const <Color>[
           const Color(0xFF222222),
           const Color(0xFF424242),
         ],
@@ -49,7 +49,7 @@ class EventPoster extends StatelessWidget {
   Widget _buildPlayButton() {
     if (displayPlayButton && event.youtubeTrailers.isNotEmpty) {
       return new DecoratedBox(
-        decoration: new BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.black38,
         ),
@@ -59,7 +59,7 @@ class EventPoster extends StatelessWidget {
           child: new IconButton(
             key: playButtonKey,
             padding: EdgeInsets.zero,
-            icon: new Icon(Icons.play_circle_outline),
+            icon: const Icon(Icons.play_circle_outline),
             iconSize: 42.0,
             color: Colors.white.withOpacity(0.8),
             onPressed: () {
@@ -71,13 +71,13 @@ class EventPoster extends StatelessWidget {
       );
     }
 
-    return new Container();
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     var content = <Widget>[
-      new Icon(
+      const Icon(
         Icons.local_movies,
         color: Colors.white24,
         size: 72.0,

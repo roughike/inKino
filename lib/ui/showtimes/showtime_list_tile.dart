@@ -38,7 +38,7 @@ class ShowtimeListTile extends StatelessWidget {
         ),
         new Text(
           hoursAndMins.format(show.end),
-          style: new TextStyle(
+          style: const TextStyle(
             fontSize: 14.0,
             color: Colors.black54,
           ),

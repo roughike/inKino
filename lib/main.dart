@@ -38,10 +38,10 @@ class _InKinoAppState extends State<InKinoApp> {
       child: new MaterialApp(
         title: 'inKino',
         theme: new ThemeData(
-          primaryColor: new Color(0xFF1C306D),
-          accentColor: new Color(0xFFFFAD32),
+          primaryColor: const Color(0xFF1C306D),
+          accentColor: const Color(0xFFFFAD32),
         ),
-        home: new MainPage(),
+        home: const MainPage(),
       ),
     );
   }

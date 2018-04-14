@@ -4,6 +4,8 @@ import 'package:inkino/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InKinoDrawerHeader extends StatefulWidget {
+  const InKinoDrawerHeader();
+
   @override
   _InKinoDrawerHeaderState createState() => new _InKinoDrawerHeaderState();
 }
@@ -75,12 +77,12 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
           color: Colors.white70,
           size: 18.0,
         ),
-        new Padding(
+        const Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child: new Text(
+          child: const Text(
             'About',
             textAlign: TextAlign.end,
-            style: new TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 12.0,
             ),
