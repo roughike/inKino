@@ -93,9 +93,9 @@ void main() {
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingEventsAction',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => new Future.value(new Error()));
+            .thenAnswer((_) => new Future.error(new Error()));
         when(mockFinnkinoApi.getUpcomingEvents())
-            .thenAnswer((_) => new Future.value(new Error()));
+            .thenAnswer((_) => new Future.error(new Error()));
 
         await middleware.call(
             null, new InitCompleteAction(null, theater), next);
