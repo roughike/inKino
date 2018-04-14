@@ -48,21 +48,21 @@ class _StorylineWidgetState extends State<StorylineWidget> {
   }
 
   Widget _buildCollapseExpandPrompt() {
-     const captionStyle = const TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.w600,
-        color: Colors.black54,
-      );
-      if (_isExpanded) {
-        return const Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: const Text('[touch to collapse]', style: captionStyle),
-        );
-      }
+    const captionStyle = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.black54,
+    );
+    if (_isExpanded) {
       return const Padding(
         padding: const EdgeInsets.only(left: 4.0),
-        child: const Text('[touch to expand]', style: captionStyle),
+        child: const Text('[touch to collapse]', style: captionStyle),
       );
+    }
+    return const Padding(
+      padding: const EdgeInsets.only(left: 4.0),
+      child: const Text('[touch to expand]', style: captionStyle),
+    );
   }
 
   Widget _buildContent() {
