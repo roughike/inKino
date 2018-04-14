@@ -68,8 +68,8 @@ void main() {
         verify(mockFinnkinoApi.getSchedule(theater, null));
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], new isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
+        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[2];
         expect(receivedShowsAction.shows.length, 3);
@@ -96,8 +96,8 @@ void main() {
         verify(mockFinnkinoApi.getSchedule(theater, startOf2018));
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], new isInstanceOf<ChangeCurrentDateAction>());
-        expect(actionLog[1], new isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[0], const isInstanceOf<ChangeCurrentDateAction>());
+        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[2];
         expect(receivedShowsAction.shows.length, 1);
@@ -117,9 +117,9 @@ void main() {
 
         // Then
         expect(actionLog.length, 3);
-        expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], new isInstanceOf<RequestingShowsAction>());
-        expect(actionLog[2], new isInstanceOf<ErrorLoadingShowsAction>());
+        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
+        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[2], const isInstanceOf<ErrorLoadingShowsAction>());
       },
     );
   });

@@ -26,14 +26,14 @@ class ShowtimeInformation extends StatelessWidget {
         children: <Widget>[
           new Text(
             weekdayFormat.format(show.start),
-            style: new TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
           ),
           new Text(
             show.theaterAndAuditorium,
-            style: new TextStyle(
+            style: const TextStyle(
               color: Colors.black54,
               fontSize: 12.0,
             ),

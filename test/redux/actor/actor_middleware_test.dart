@@ -53,7 +53,7 @@ void main() {
       await middleware.call(null, new FetchActorAvatarsAction(event), next);
 
       expect(actionLog.length, 4);
-      expect(actionLog[0], new isInstanceOf<FetchActorAvatarsAction>());
+      expect(actionLog[0], const isInstanceOf<FetchActorAvatarsAction>());
 
       ActorsUpdatedAction actorsUpdated = actionLog[1];
       expect(actorsUpdated.actors, event.actors);

@@ -34,7 +34,7 @@ class ShowtimeListTile extends StatelessWidget {
       children: <Widget>[
         new Text(
           hoursAndMins.format(show.start),
-          style: new TextStyle(fontSize: 20.0),
+          style: const TextStyle(fontSize: 20.0),
         ),
         new Text(
           hoursAndMins.format(show.end),
@@ -60,7 +60,7 @@ class ShowtimeListTile extends StatelessWidget {
       ),
       child: new Text(
         show.presentationMethod,
-        style: new TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 12.0,
         ),
@@ -76,7 +76,7 @@ class ShowtimeListTile extends StatelessWidget {
           children: <Widget>[
             new Text(
               show.title,
-              style: new TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
               ),

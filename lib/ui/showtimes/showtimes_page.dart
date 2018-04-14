@@ -33,7 +33,7 @@ class ShowtimesPageContent extends StatelessWidget {
         new Expanded(
           child: new LoadingView(
             status: viewModel.status,
-            loadingContent: new PlatformAdaptiveProgressIndicator(),
+            loadingContent: const PlatformAdaptiveProgressIndicator(),
             errorContent: new ErrorView(onRetry: viewModel.refreshShowtimes),
             successContent: new ShowtimeList(viewModel.shows),
           ),

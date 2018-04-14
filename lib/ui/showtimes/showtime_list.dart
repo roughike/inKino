@@ -4,8 +4,8 @@ import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
 
 class ShowtimeList extends StatelessWidget {
-  static final Key emptyViewKey = new Key('emptyView');
-  static final Key contentKey = new Key('content');
+  static const Key emptyViewKey = const Key('emptyView');
+  static const Key contentKey = const Key('content');
 
   ShowtimeList(this.shows);
   final List<Show> shows;
@@ -13,7 +13,7 @@ class ShowtimeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (shows.isEmpty) {
-      return new InfoMessageView(
+      return const InfoMessageView(
         key: emptyViewKey,
         title: 'All empty!',
         description:

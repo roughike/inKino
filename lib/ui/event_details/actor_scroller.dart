@@ -42,7 +42,7 @@ class ActorScrollerContent extends StatelessWidget {
       padding: const EdgeInsets.only(top: 8.0),
       child: new Text(
         actor.name,
-        style: new TextStyle(fontSize: 12.0),
+        style: const TextStyle(fontSize: 12.0),
         textAlign: TextAlign.center,
       ),
     );
@@ -100,7 +100,7 @@ class ActorScrollerContent extends StatelessWidget {
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Padding(
+          const Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: const Text(
               'Cast',
