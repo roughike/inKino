@@ -53,13 +53,14 @@ class ShowtimeDateSelector extends StatelessWidget {
     return new Container(
       height: 56.0 + MediaQuery.of(context).padding.bottom,
       color: const Color(0xFF222222),
-      child: new ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: viewModel.dates.length,
-        itemBuilder: (BuildContext context, int index) {
-          var date = viewModel.dates[index];
-          return _buildDateItem(date);
-        },
+      child: new Center(
+        child: new SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: viewModel.dates.map((date) => _buildDateItem(date)).toList(),
+          ),
+        ),
       ),
     );
   }
