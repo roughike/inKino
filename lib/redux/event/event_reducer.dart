@@ -35,23 +35,24 @@ EventState _updateActorsForEvent(
   var event = action.event;
   event.actors = action.actors;
 
-  var inTheatersEvents = <Event>[]..addAll(state.nowInTheatersEvents);
-  var comingSoonEvents = <Event>[]..addAll(state.comingSoonEvents);
+  return state.copyWith(
+    nowInTheatersEvents: _replaceEventIfFound(state.nowInTheatersEvents, event),
+    comingSoonEvents: _replaceEventIfFound(state.comingSoonEvents, event),
+  );
+}
 
-  var inTheatersMatch = inTheatersEvents.indexWhere((e) => e.id == event.id);
+List<Event> _replaceEventIfFound(
+  List<Event> originalEvents,
+  Event replacement,
+) {
+  var newEvents = <Event>[]..addAll(originalEvents);
+  var positionToReplace = originalEvents.indexWhere((candidate) {
+    return candidate.id == replacement.id;
+  });
 
-  if (inTheatersMatch > -1) {
-    inTheatersEvents[inTheatersMatch] = event;
-  } else {
-    var comingSoonMatch = comingSoonEvents.indexWhere((e) => e.id == event.id);
-
-    if (comingSoonMatch > -1) {
-      comingSoonEvents[comingSoonMatch] = event;
-    }
+  if (positionToReplace > -1) {
+    newEvents[positionToReplace] = replacement;
   }
 
-  return state.copyWith(
-    nowInTheatersEvents: inTheatersEvents,
-    comingSoonEvents: comingSoonEvents,
-  );
+  return newEvents;
 }
