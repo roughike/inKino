@@ -31,15 +31,13 @@ class EventsPageViewModel {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is EventsPageViewModel &&
-              runtimeType == other.runtimeType &&
-              status == other.status &&
-              events == other.events &&
-              refreshEvents == other.refreshEvents;
+      other is EventsPageViewModel &&
+          runtimeType == other.runtimeType &&
+          status == other.status &&
+          events == other.events &&
+          refreshEvents == other.refreshEvents;
 
   @override
   int get hashCode =>
-      status.hashCode ^
-      events.hashCode ^
-      refreshEvents.hashCode;
+      status.hashCode ^ events.hashCode ^ refreshEvents.hashCode;
 }

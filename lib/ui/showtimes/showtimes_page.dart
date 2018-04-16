@@ -10,6 +10,8 @@ import 'package:inkino/ui/showtimes/showtime_list.dart';
 import 'package:inkino/ui/showtimes/showtime_page_view_model.dart';
 
 class ShowtimesPage extends StatelessWidget {
+  const ShowtimesPage();
+
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, ShowtimesPageViewModel>(
@@ -31,7 +33,7 @@ class ShowtimesPageContent extends StatelessWidget {
         new Expanded(
           child: new LoadingView(
             status: viewModel.status,
-            loadingContent: new PlatformAdaptiveProgressIndicator(),
+            loadingContent: const PlatformAdaptiveProgressIndicator(),
             errorContent: new ErrorView(onRetry: viewModel.refreshShowtimes),
             successContent: new ShowtimeList(viewModel.shows),
           ),

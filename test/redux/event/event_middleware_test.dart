@@ -52,8 +52,8 @@ void main() {
             null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], new isInstanceOf<RequestingEventsAction>());
+        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
+        expect(actionLog[1], const isInstanceOf<RequestingEventsAction>());
 
         final ReceivedEventsAction action = actionLog[2];
         expect(action.nowInTheatersEvents, nowInTheatersEvents);
@@ -101,9 +101,9 @@ void main() {
             null, new InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], new isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], new isInstanceOf<RequestingEventsAction>());
-        expect(actionLog[2], new isInstanceOf<ErrorLoadingEventsAction>());
+        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
+        expect(actionLog[1], const isInstanceOf<RequestingEventsAction>());
+        expect(actionLog[2], const isInstanceOf<ErrorLoadingEventsAction>());
       },
     );
   });

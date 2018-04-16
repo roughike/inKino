@@ -75,7 +75,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
       padding: const EdgeInsets.all(6.0),
       child: new EventPoster(
         event: widget.event,
-        size: new Size(100.0, 150.0),
+        size: const Size(100.0, 150.0),
         displayPlayButton: true,
       ),
     );
@@ -104,7 +104,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     return <Widget>[
       new Text(
         widget.event.title,
-        style: new TextStyle(
+        style: const TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w800,
         ),
@@ -113,7 +113,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
         padding: const EdgeInsets.only(top: 8.0),
         child: new Text(
           '$length | $genres',
-          style: new TextStyle(
+          style: const TextStyle(
             fontSize: 12.0,
             fontWeight: FontWeight.w600,
           ),
@@ -126,9 +126,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Text(
+        const Text(
           'Director:',
-          style: new TextStyle(
+          style: const TextStyle(
             fontSize: 12.0,
             color: Colors.black87,
             fontWeight: FontWeight.w600,
@@ -139,7 +139,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
             padding: const EdgeInsets.only(left: 4.0),
             child: new Text(
               widget.event.directors.first,
-              style: new TextStyle(
+              style: const TextStyle(
                 fontSize: 12.0,
                 color: Colors.black87,
               ),

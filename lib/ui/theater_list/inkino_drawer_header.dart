@@ -4,6 +4,8 @@ import 'package:inkino/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InKinoDrawerHeader extends StatefulWidget {
+  const InKinoDrawerHeader();
+
   @override
   _InKinoDrawerHeaderState createState() => new _InKinoDrawerHeaderState();
 }
@@ -11,7 +13,7 @@ class InKinoDrawerHeader extends StatefulWidget {
 class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   static const String flutterUrl = 'https://flutter.io/';
   static const String githubUrl = 'https://github.com/roughike/inKino';
-  static final TextStyle linkStyle = new TextStyle(
+  static const TextStyle linkStyle = const TextStyle(
     color: Colors.blue,
     decoration: TextDecoration.underline,
   );
@@ -70,17 +72,17 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
     var content = new Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
-        new Icon(
+        const Icon(
           Icons.info_outline,
           color: Colors.white70,
           size: 18.0,
         ),
-        new Padding(
+        const Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child: new Text(
+          child: const Text(
             'About',
             textAlign: TextAlign.end,
-            style: new TextStyle(
+            style: const TextStyle(
               color: Colors.white70,
               fontSize: 12.0,
             ),
@@ -108,7 +110,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
 
   Widget _buildAboutDialog(BuildContext context) {
     return new AlertDialog(
-      title: new Text('About inKino'),
+      title: const Text('About inKino'),
       content: new Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +125,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
             Navigator.of(context).pop();
           },
           textColor: Theme.of(context).primaryColor,
-          child: new Text('Okay, got it!'),
+          child: const Text('Okay, got it!'),
         ),
       ],
     );
@@ -134,15 +136,15 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
       text: new TextSpan(
         text: 'inKino is the unofficial Finnkino client that '
             'is minimalistic, fast, and delightful to use.\n\n',
-        style: new TextStyle(color: Colors.black87),
+        style: const TextStyle(color: Colors.black87),
         children: <TextSpan>[
-          new TextSpan(text: 'The app was developed with '),
+          const TextSpan(text: 'The app was developed with '),
           new TextSpan(
             text: 'Flutter',
             recognizer: _flutterTapRecognizer,
             style: linkStyle,
           ),
-          new TextSpan(
+          const TextSpan(
             text: ' and it\'s open source; check out the source '
                 'code yourself from ',
           ),
@@ -151,7 +153,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
             recognizer: _githubTapRecognizer,
             style: linkStyle,
           ),
-          new TextSpan(text: '.'),
+          const TextSpan(text: '.'),
         ],
       ),
     );
@@ -169,12 +171,12 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
               width: 32.0,
             ),
           ),
-          new Expanded(
-            child: new Padding(
+          const Expanded(
+            child: const Padding(
               padding: const EdgeInsets.only(left: 12.0),
-              child: new Text(
+              child: const Text(
                 'This product uses the TMDb API but is not endorsed or certified by TMDb.',
-                style: new TextStyle(fontSize: 12.0),
+                style: const TextStyle(fontSize: 12.0),
               ),
             ),
           ),
@@ -187,7 +189,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   Widget build(BuildContext context) {
     return new Container(
       color: Theme.of(context).primaryColor,
-      constraints: new BoxConstraints.expand(height: 175.0),
+      constraints: const BoxConstraints.expand(height: 175.0),
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,

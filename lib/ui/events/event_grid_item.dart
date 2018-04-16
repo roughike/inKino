@@ -13,12 +13,12 @@ class EventGridItem extends StatelessWidget {
   final VoidCallback onTapped;
 
   BoxDecoration _buildGradientBackground() {
-    return new BoxDecoration(
-      gradient: new LinearGradient(
+    return const BoxDecoration(
+      gradient: const LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        stops: <double>[0.0, 0.7, 0.7],
-        colors: <Color>[
+        stops: const <double>[0.0, 0.7, 0.7],
+        colors: const <Color>[
           Colors.black,
           Colors.transparent,
           Colors.transparent,
@@ -34,7 +34,7 @@ class EventGridItem extends StatelessWidget {
       children: <Widget>[
         new Text(
           event.title,
-          style: new TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
           ),
@@ -43,7 +43,7 @@ class EventGridItem extends StatelessWidget {
           padding: const EdgeInsets.only(top: 4.0),
           child: new Text(
             event.genres,
-            style: new TextStyle(
+            style: const TextStyle(
               fontSize: 12.0,
               color: Colors.white70,
             ),
@@ -56,7 +56,7 @@ class EventGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new DefaultTextStyle(
-      style: new TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       child: new Stack(
         fit: StackFit.expand,
         children: <Widget>[

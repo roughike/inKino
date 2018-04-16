@@ -30,7 +30,8 @@ class EventDetailsScrollEffects {
     var unconstrainedBackdropHeight = kHeaderHeight + (-_scrollOffset);
 
     backdropHeight = max(80.0, unconstrainedBackdropHeight);
-    backdropOverlayOpacity = _calculateOverlayOpacity(unconstrainedBackdropHeight);
+    backdropOverlayOpacity =
+        _calculateOverlayOpacity(unconstrainedBackdropHeight);
     backdropOverlayBlur = _calculateBackdropBlur();
     headerOffset = _calculateHeaderOffset(unconstrainedBackdropHeight);
     backButtonOpacity = _calculateBackButtonOpacity();

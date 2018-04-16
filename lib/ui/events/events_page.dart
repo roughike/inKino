@@ -31,7 +31,7 @@ class EventsPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return new LoadingView(
       status: viewModel.status,
-      loadingContent: new PlatformAdaptiveProgressIndicator(),
+      loadingContent: const PlatformAdaptiveProgressIndicator(),
       errorContent: new ErrorView(
         description: 'Error loading events.',
         onRetry: viewModel.refreshEvents,

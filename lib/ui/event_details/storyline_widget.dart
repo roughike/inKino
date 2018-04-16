@@ -27,9 +27,9 @@ class _StorylineWidgetState extends State<StorylineWidget> {
 
   Widget _buildCaption() {
     var content = <Widget>[
-      new Text(
+      const Text(
         'Storyline',
-        style: new TextStyle(
+        style: const TextStyle(
           fontSize: 16.0,
           fontWeight: FontWeight.w700,
         ),
@@ -37,25 +37,31 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     ];
 
     if (_isExpandable) {
-      var action = _isExpanded ? 'collapse' : 'expand';
-
-      content.add(new Padding(
-        padding: const EdgeInsets.only(left: 4.0),
-        child: new Text(
-          '[touch to $action]',
-          style: new TextStyle(
-            fontSize: 12.0,
-            fontWeight: FontWeight.w600,
-            color: Colors.black54,
-          ),
-        ),
-      ));
+      content.add(_buildCollapseExpandPrompt());
     }
 
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: content,
+    );
+  }
+
+  Widget _buildCollapseExpandPrompt() {
+    const captionStyle = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w600,
+      color: Colors.black54,
+    );
+    if (_isExpanded) {
+      return const Padding(
+        padding: const EdgeInsets.only(left: 4.0),
+        child: const Text('[touch to collapse]', style: captionStyle),
+      );
+    }
+    return const Padding(
+      padding: const EdgeInsets.only(left: 4.0),
+      child: const Text('[touch to expand]', style: captionStyle),
     );
   }
 

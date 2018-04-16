@@ -12,6 +12,8 @@ import 'package:inkino/ui/theater_list/inkino_drawer_header.dart';
 import 'package:inkino/ui/theater_list/theater_list.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage();
+
   @override
   _MainPageState createState() => new _MainPageState();
 }
@@ -66,7 +68,7 @@ class _MainPageState extends State<MainPage>
       builder: (BuildContext context, Theater currentTheater) {
         return new Text(
           currentTheater?.name ?? '',
-          style: new TextStyle(
+          style: const TextStyle(
             fontSize: 12.0,
             color: Colors.white70,
           ),
@@ -82,7 +84,7 @@ class _MainPageState extends State<MainPage>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: horizontalTitleAlignment,
           children: <Widget>[
-            new Text('inKino'),
+            const Text('inKino'),
             subtitle,
           ],
         ),
@@ -99,7 +101,7 @@ class _MainPageState extends State<MainPage>
         border: InputBorder.none,
         hintStyle: const TextStyle(color: Colors.white30),
       ),
-      style: new TextStyle(color: Colors.white, fontSize: 16.0),
+      style: const TextStyle(color: Colors.white, fontSize: 16.0),
       onChanged: _updateSearchQuery,
     );
   }
@@ -113,7 +115,7 @@ class _MainPageState extends State<MainPage>
     if (_isSearching) {
       return <Widget>[
         new IconButton(
-          icon: new Icon(Icons.clear),
+          icon: const Icon(Icons.clear),
           onPressed: () {
             if (_searchQuery == null || _searchQuery.text.isEmpty) {
               // Stop searching.
@@ -129,7 +131,7 @@ class _MainPageState extends State<MainPage>
 
     return <Widget>[
       new IconButton(
-        icon: new Icon(Icons.search),
+        icon: const Icon(Icons.search),
         onPressed: _startSearch,
       ),
     ];
@@ -140,22 +142,22 @@ class _MainPageState extends State<MainPage>
     return new Scaffold(
       key: scaffoldKey,
       appBar: new AppBar(
-        leading: _isSearching ? new BackButton() : null,
+        leading: _isSearching ? const BackButton() : null,
         title: _isSearching ? _buildSearchField() : _buildTitle(context),
         actions: _buildActions(),
         bottom: new TabBar(
           controller: _controller,
           isScrollable: true,
-          tabs: <Tab>[
-            new Tab(text: 'Now in theaters'),
-            new Tab(text: 'Showtimes'),
-            new Tab(text: 'Coming soon'),
+          tabs: const <Tab>[
+            const Tab(text: 'Now in theaters'),
+            const Tab(text: 'Showtimes'),
+            const Tab(text: 'Coming soon'),
           ],
         ),
       ),
       drawer: new Drawer(
         child: new TheaterList(
-          header: new InKinoDrawerHeader(),
+          header: const InKinoDrawerHeader(),
           onTheaterTapped: () => Navigator.pop(context),
         ),
       ),
@@ -163,7 +165,7 @@ class _MainPageState extends State<MainPage>
         controller: _controller,
         children: <Widget>[
           new EventsPage(EventListType.nowInTheaters),
-          new ShowtimesPage(),
+          const ShowtimesPage(),
           new EventsPage(EventListType.comingSoon),
         ],
       ),
