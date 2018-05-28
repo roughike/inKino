@@ -3,9 +3,9 @@ import 'package:inkino/data/loading_status.dart';
 import 'package:meta/meta.dart';
 
 class LoadingView extends StatefulWidget {
-  static const Key loadingContentKey = const ValueKey('loading');
-  static const Key errorContentKey = const ValueKey('error');
-  static const Key successContentKey = const ValueKey('success');
+  static const Key loadingContentKey = ValueKey('loading');
+  static const Key errorContentKey = ValueKey('error');
+  static const Key successContentKey = ValueKey('success');
 
   const LoadingView({
     @required this.status,
@@ -20,7 +20,7 @@ class LoadingView extends StatefulWidget {
   final Widget successContent;
 
   @override
-  LoadingViewState createState() => new LoadingViewState();
+  LoadingViewState createState() => LoadingViewState();
 }
 
 class LoadingViewState extends State<LoadingView>
@@ -39,17 +39,17 @@ class LoadingViewState extends State<LoadingView>
   @override
   void initState() {
     super.initState();
-    _loadingController = new AnimationController(
+    _loadingController = AnimationController(
       duration: const Duration(milliseconds: 350),
       vsync: this,
     );
 
-    _errorController = new AnimationController(
+    _errorController = AnimationController(
       duration: const Duration(milliseconds: 350),
       vsync: this,
     );
 
-    _successController = new AnimationController(
+    _successController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
@@ -112,22 +112,22 @@ class LoadingViewState extends State<LoadingView>
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
+    return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        new _TransitionAnimation(
+        _TransitionAnimation(
           key: LoadingView.loadingContentKey,
           controller: _loadingController,
           child: widget.loadingContent,
           isVisible: widget.status == LoadingStatus.loading,
         ),
-        new _TransitionAnimation(
+        _TransitionAnimation(
           key: LoadingView.errorContentKey,
           controller: _errorController,
           child: widget.errorContent,
           isVisible: widget.status == LoadingStatus.error,
         ),
-        new _TransitionAnimation(
+        _TransitionAnimation(
           key: LoadingView.successContentKey,
           controller: _successController,
           child: widget.successContent,
@@ -144,8 +144,8 @@ class _TransitionAnimation extends StatelessWidget {
     @required this.controller,
     @required this.child,
     @required this.isVisible,
-  })  : _opacity = new Tween(begin: 0.0, end: 1.0).animate(
-          new CurvedAnimation(
+  })  : _opacity = Tween(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
             parent: controller,
             curve: const Interval(
               0.000,
@@ -154,8 +154,8 @@ class _TransitionAnimation extends StatelessWidget {
             ),
           ),
         ),
-        _yTranslation = new Tween(begin: 40.0, end: 0.0).animate(
-          new CurvedAnimation(
+        _yTranslation = Tween(begin: 40.0, end: 0.0).animate(
+          CurvedAnimation(
             parent: controller,
             curve: const Interval(
               0.000,
@@ -175,18 +175,18 @@ class _TransitionAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new AnimatedBuilder(
+    return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, _) {
-        return new IgnorePointer(
+        return IgnorePointer(
           ignoring: !isVisible,
-          child: new Transform(
-            transform: new Matrix4.translationValues(
+          child: Transform(
+            transform: Matrix4.translationValues(
               0.0,
               _yTranslation.value,
               0.0,
             ),
-            child: new Opacity(
+            child: Opacity(
               opacity: _opacity.value,
               child: child,
             ),

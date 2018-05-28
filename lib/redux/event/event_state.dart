@@ -15,7 +15,7 @@ class EventState {
   final List<Event> comingSoonEvents;
 
   factory EventState.initial() {
-    return new EventState(
+    return EventState(
       loadingStatus: LoadingStatus.loading,
       nowInTheatersEvents: <Event>[],
       comingSoonEvents: <Event>[],
@@ -27,7 +27,7 @@ class EventState {
     List<Event> nowInTheatersEvents,
     List<Event> comingSoonEvents,
   }) {
-    return new EventState(
+    return EventState(
       loadingStatus: loadingStatus ?? this.loadingStatus,
       nowInTheatersEvents: nowInTheatersEvents ?? this.nowInTheatersEvents,
       comingSoonEvents: comingSoonEvents ?? this.comingSoonEvents,

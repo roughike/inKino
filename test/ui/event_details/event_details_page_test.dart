@@ -22,7 +22,7 @@ void main() {
     String lastLaunchedTrailerUrl;
 
     setUp(() {
-      io.HttpOverrides.global = new TestHttpOverrides();
+      io.HttpOverrides.global = TestHttpOverrides();
 
       showtimeInfo.launchTicketsUrl = (url) => lastLaunchedTicketsUrl = url;
       eventPoster.launchTrailerVideo = (url) => lastLaunchedTrailerUrl = url;
@@ -38,15 +38,15 @@ void main() {
       @required List<String> trailers,
       @required Show show,
     }) {
-      return tester.pumpWidget(new MaterialApp(
-        home: new eventDetails.EventDetailsPage(
-          new Event(
+      return tester.pumpWidget(MaterialApp(
+        home: eventDetails.EventDetailsPage(
+          Event(
             id: '1',
             title: 'Test Title',
             genres: 'Test Genres',
             directors: <String>[],
             actors: <Actor>[],
-            images: new EventImageData.empty(),
+            images: EventImageData.empty(),
             youtubeTrailers: trailers,
           ),
           show: show,
@@ -69,8 +69,8 @@ void main() {
         await _buildEventDetailsPage(
           tester,
           trailers: <String>[],
-          show: new Show(
-            start: new DateTime(2018),
+          show: Show(
+            start: DateTime(2018),
             theaterAndAuditorium: 'Test theater',
           ),
         );
@@ -93,8 +93,8 @@ void main() {
         await _buildEventDetailsPage(
           tester,
           trailers: <String>[],
-          show: new Show(
-            start: new DateTime(2018),
+          show: Show(
+            start: DateTime(2018),
             theaterAndAuditorium: 'Test theater',
             url: 'https://finnkino.fi/test-tickets-url',
           ),
@@ -111,8 +111,8 @@ void main() {
         await _buildEventDetailsPage(
           tester,
           trailers: <String>['https://youtube.com/?v=test-trailer'],
-          show: new Show(
-            start: new DateTime(2018),
+          show: Show(
+            start: DateTime(2018),
             theaterAndAuditorium: 'Test theater',
           ),
         );

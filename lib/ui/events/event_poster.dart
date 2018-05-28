@@ -48,15 +48,15 @@ class EventPoster extends StatelessWidget {
 
   Widget _buildPlayButton() {
     if (displayPlayButton && event.youtubeTrailers.isNotEmpty) {
-      return new DecoratedBox(
+      return DecoratedBox(
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.black38,
         ),
-        child: new Material(
+        child: Material(
           type: MaterialType.circle,
           color: Colors.transparent,
-          child: new IconButton(
+          child: IconButton(
             key: playButtonKey,
             padding: EdgeInsets.zero,
             icon: const Icon(Icons.play_circle_outline),
@@ -79,7 +79,7 @@ class EventPoster extends StatelessWidget {
       return null;
     }
 
-    return new FadeInImage.assetNetwork(
+    return FadeInImage.assetNetwork(
       placeholder: ImageAssets.transparentImage,
       image: event.images.portraitMedium,
       width: size?.width,
@@ -102,11 +102,11 @@ class EventPoster extends StatelessWidget {
     addIfNonNull(_buildPosterImage(), content);
     addIfNonNull(_buildPlayButton(), content);
 
-    return new Container(
+    return Container(
       decoration: _buildDecorations(),
       width: size?.width,
       height: size?.height,
-      child: new Stack(
+      child: Stack(
         alignment: Alignment.center,
         children: content,
       ),

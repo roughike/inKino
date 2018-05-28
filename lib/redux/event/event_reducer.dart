@@ -6,11 +6,10 @@ import 'package:inkino/redux/event/event_state.dart';
 import 'package:redux/redux.dart';
 
 final eventReducer = combineReducers<EventState>([
-  new TypedReducer<EventState, RequestingEventsAction>(_requestingEvents),
-  new TypedReducer<EventState, ReceivedEventsAction>(_receivedEvents),
-  new TypedReducer<EventState, ErrorLoadingEventsAction>(_errorLoadingEvents),
-  new TypedReducer<EventState, UpdateActorsForEventAction>(
-      _updateActorsForEvent),
+  TypedReducer<EventState, RequestingEventsAction>(_requestingEvents),
+  TypedReducer<EventState, ReceivedEventsAction>(_receivedEvents),
+  TypedReducer<EventState, ErrorLoadingEventsAction>(_errorLoadingEvents),
+  TypedReducer<EventState, UpdateActorsForEventAction>(_updateActorsForEvent),
 ]);
 
 EventState _requestingEvents(EventState state, RequestingEventsAction action) {

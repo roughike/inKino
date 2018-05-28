@@ -12,6 +12,10 @@ import 'package:inkino/utils/http_utils.dart';
 /// is not present on the project. Refer to the README for instructions
 /// on how to do so.
 
+/// If this has a red underline, it means that the lib/tmdb_config.dart file
+/// is not present on the project. Refer to the README for instructions
+/// on how to do so.
+
 
 class TMDBApi {
   static final String baseUrl = 'api.themoviedb.org';
@@ -28,7 +32,7 @@ class TMDBApi {
   }
 
   Future<int> _findMovieId(String movieTitle) async {
-    var searchUri = new Uri.https(
+    var searchUri = Uri.https(
       baseUrl,
       '3/search/movie',
       <String, String>{
@@ -50,7 +54,7 @@ class TMDBApi {
   }
 
   Future<List<Actor>> _getActorAvatars(int movieId) async {
-    var actorUri = new Uri.https(
+    var actorUri = Uri.https(
       baseUrl,
       '3/movie/$movieId/credits',
       <String, String>{'api_key': TMDBConfig.apiKey},
@@ -71,7 +75,7 @@ class TMDBApi {
       var profilePath =
           pp != null ? 'https://image.tmdb.org/t/p/w200$pp' : null;
 
-      actorsWithAvatars.add(new Actor(
+      actorsWithAvatars.add(Actor(
         name: castMember['name'],
         avatarUrl: profilePath,
       ));

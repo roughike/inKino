@@ -36,7 +36,7 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     var theaters = Theater.parseAll(theaterXml);
     var currentTheater = _getDefaultTheater(theaters);
 
-    next(new InitCompleteAction(theaters, currentTheater));
+    next(InitCompleteAction(theaters, currentTheater));
   }
 
   Future<Null> _changeCurrentTheater(

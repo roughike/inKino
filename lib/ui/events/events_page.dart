@@ -15,10 +15,10 @@ class EventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState, EventsPageViewModel>(
+    return StoreConnector<AppState, EventsPageViewModel>(
       distinct: true,
       converter: (store) => EventsPageViewModel.fromStore(store, listType),
-      builder: (_, viewModel) => new EventsPageContent(viewModel),
+      builder: (_, viewModel) => EventsPageContent(viewModel),
     );
   }
 }
@@ -29,14 +29,14 @@ class EventsPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new LoadingView(
+    return LoadingView(
       status: viewModel.status,
       loadingContent: const PlatformAdaptiveProgressIndicator(),
-      errorContent: new ErrorView(
+      errorContent: ErrorView(
         description: 'Error loading events.',
         onRetry: viewModel.refreshEvents,
       ),
-      successContent: new EventGrid(
+      successContent: EventGrid(
         events: viewModel.events,
         onReloadCallback: viewModel.refreshEvents,
       ),

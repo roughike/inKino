@@ -13,10 +13,10 @@ class ActorScroller extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState, List<Actor>>(
-      onInit: (store) => store.dispatch(new FetchActorAvatarsAction(event)),
+    return StoreConnector<AppState, List<Actor>>(
+      onInit: (store) => store.dispatch(FetchActorAvatarsAction(event)),
       converter: (store) => actorsForEventSelector(store.state, event),
-      builder: (_, actors) => new ActorScrollerContent(actors),
+      builder: (_, actors) => ActorScrollerContent(actors),
     );
   }
 }
@@ -26,7 +26,7 @@ class ActorScrollerContent extends StatelessWidget {
   final List<Actor> actors;
 
   Widget _buildActorList(BuildContext context) {
-    return new ListView.builder(
+    return ListView.builder(
       padding: const EdgeInsets.only(left: 16.0),
       scrollDirection: Axis.horizontal,
       itemCount: actors.length,
@@ -38,19 +38,19 @@ class ActorScrollerContent extends StatelessWidget {
   }
 
   Widget _buildActorListItem(BuildContext context, Actor actor) {
-    var actorName = new Padding(
+    var actorName = Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: new Text(
+      child: Text(
         actor.name,
         style: const TextStyle(fontSize: 12.0),
         textAlign: TextAlign.center,
       ),
     );
 
-    return new Container(
+    return Container(
       width: 90.0,
       padding: const EdgeInsets.only(right: 16.0),
-      child: new Column(
+      child: Column(
         children: <Widget>[
           _buildActorAvatar(context, actor),
           actorName,
@@ -69,8 +69,8 @@ class ActorScrollerContent extends StatelessWidget {
     ];
 
     if (actor.avatarUrl != null) {
-      content.add(new ClipOval(
-        child: new FadeInImage.assetNetwork(
+      content.add(ClipOval(
+        child: FadeInImage.assetNetwork(
           placeholder: ImageAssets.transparentImage,
           image: actor.avatarUrl,
           fit: BoxFit.cover,
@@ -79,14 +79,14 @@ class ActorScrollerContent extends StatelessWidget {
       ));
     }
 
-    return new Container(
+    return Container(
       width: 56.0,
       height: 56.0,
-      decoration: new BoxDecoration(
+      decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         shape: BoxShape.circle,
       ),
-      child: new Stack(
+      child: Stack(
         alignment: Alignment.center,
         fit: StackFit.expand,
         children: content,
@@ -96,9 +96,9 @@ class ActorScrollerContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       padding: const EdgeInsets.only(top: 16.0),
-      child: new Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Padding(
@@ -111,9 +111,9 @@ class ActorScrollerContent extends StatelessWidget {
               ),
             ),
           ),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child: new SizedBox.fromSize(
+            child: SizedBox.fromSize(
               size: const Size.fromHeight(110.0),
               child: _buildActorList(context),
             ),

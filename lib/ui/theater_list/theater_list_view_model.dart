@@ -17,11 +17,11 @@ class TheaterListViewModel {
   final Function(Theater) changeCurrentTheater;
 
   static TheaterListViewModel fromStore(Store<AppState> store) {
-    return new TheaterListViewModel(
+    return TheaterListViewModel(
       currentTheater: currentTheaterSelector(store.state),
       theaters: theatersSelector(store.state),
       changeCurrentTheater: (theater) {
-        store.dispatch(new ChangeCurrentTheaterAction(theater));
+        store.dispatch(ChangeCurrentTheaterAction(theater));
       },
     );
   }

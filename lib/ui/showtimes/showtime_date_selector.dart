@@ -11,22 +11,22 @@ class ShowtimeDateSelector extends StatelessWidget {
         ? Colors.white
         : Colors.white.withOpacity(0.4);
 
-    var content = new Column(
+    var content = Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        new Padding(
+        Padding(
           padding: const EdgeInsets.only(top: 10.0),
-          child: new Text(
-            new DateFormat('E').format(date),
-            style: new TextStyle(
+          child: Text(
+            DateFormat('E').format(date),
+            style: TextStyle(
               fontSize: 12.0,
               color: color,
             ),
           ),
         ),
-        new Text(
+        Text(
           date.day.toString(),
-          style: new TextStyle(
+          style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
             color: color,
@@ -35,12 +35,12 @@ class ShowtimeDateSelector extends StatelessWidget {
       ],
     );
 
-    return new Material(
+    return Material(
       color: Colors.transparent,
-      child: new InkWell(
+      child: InkWell(
         onTap: () => viewModel.changeCurrentDate(date),
         radius: 56.0,
-        child: new Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: content,
         ),
@@ -50,15 +50,16 @@ class ShowtimeDateSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       height: 56.0 + MediaQuery.of(context).padding.bottom,
       color: const Color(0xFF222222),
-      child: new Center(
-        child: new SingleChildScrollView(
+      child: Center(
+        child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: new Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: viewModel.dates.map((date) => _buildDateItem(date)).toList(),
+            children:
+                viewModel.dates.map((date) => _buildDateItem(date)).toList(),
           ),
         ),
       ),

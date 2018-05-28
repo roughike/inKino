@@ -14,10 +14,10 @@ class ShowtimesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreConnector<AppState, ShowtimesPageViewModel>(
+    return StoreConnector<AppState, ShowtimesPageViewModel>(
       distinct: true,
       converter: (store) => ShowtimesPageViewModel.fromStore(store),
-      builder: (_, viewModel) => new ShowtimesPageContent(viewModel),
+      builder: (_, viewModel) => ShowtimesPageContent(viewModel),
     );
   }
 }
@@ -28,17 +28,17 @@ class ShowtimesPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new Expanded(
-          child: new LoadingView(
+        Expanded(
+          child: LoadingView(
             status: viewModel.status,
             loadingContent: const PlatformAdaptiveProgressIndicator(),
-            errorContent: new ErrorView(onRetry: viewModel.refreshShowtimes),
-            successContent: new ShowtimeList(viewModel.shows),
+            errorContent: ErrorView(onRetry: viewModel.refreshShowtimes),
+            successContent: ShowtimeList(viewModel.shows),
           ),
         ),
-        new ShowtimeDateSelector(viewModel),
+        ShowtimeDateSelector(viewModel),
       ],
     );
   }

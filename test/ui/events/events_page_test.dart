@@ -21,13 +21,13 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 void main() {
   group('EventGrid', () {
     final List<Event> events = <Event>[
-      new Event(
+      Event(
         id: '1',
         title: 'Test Title',
         genres: 'Test Genres',
         directors: <String>[],
         actors: <Actor>[],
-        images: new EventImageData.empty(),
+        images: EventImageData.empty(),
         youtubeTrailers: <String>[],
       ),
     ];
@@ -36,16 +36,16 @@ void main() {
     EventsPageViewModel mockViewModel;
 
     setUp(() {
-      io.HttpOverrides.global = new TestHttpOverrides();
+      io.HttpOverrides.global = TestHttpOverrides();
 
-      observer = new MockNavigatorObserver();
-      mockViewModel = new MockEventsPageViewModel();
+      observer = MockNavigatorObserver();
+      mockViewModel = MockEventsPageViewModel();
       when(mockViewModel.refreshEvents).thenReturn(() {});
     });
 
     Future<Null> _buildEventsPage(WidgetTester tester) {
-      return tester.pumpWidget(new MaterialApp(
-        home: new EventsPageContent(mockViewModel),
+      return tester.pumpWidget(MaterialApp(
+        home: EventsPageContent(mockViewModel),
         navigatorObservers: <NavigatorObserver>[observer],
       ));
     }

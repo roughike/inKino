@@ -17,18 +17,18 @@ void main() {
     MockShowtimesPageViewModel mockViewModel;
 
     setUp(() {
-      mockViewModel = new MockShowtimesPageViewModel();
+      mockViewModel = MockShowtimesPageViewModel();
       when(mockViewModel.status).thenReturn(LoadingStatus.loading);
       when(mockViewModel.dates).thenReturn(<DateTime>[]);
-      when(mockViewModel.selectedDate).thenReturn(new DateTime(2018));
+      when(mockViewModel.selectedDate).thenReturn(DateTime(2018));
       when(mockViewModel.shows).thenReturn(<Show>[]);
       when(mockViewModel.refreshShowtimes).thenReturn(() {});
     });
 
     Future<Null> _buildShowtimesPage(WidgetTester tester) {
       return tester.pumpWidget(
-        new MaterialApp(
-          home: new ShowtimesPageContent(mockViewModel),
+        MaterialApp(
+          home: ShowtimesPageContent(mockViewModel),
         ),
       );
     }
@@ -53,12 +53,12 @@ void main() {
         (WidgetTester tester) async {
       when(mockViewModel.status).thenReturn(LoadingStatus.success);
       when(mockViewModel.shows).thenReturn(<Show>[
-        new Show(
+        Show(
           title: 'Show title',
           theaterAndAuditorium: 'Auditorium One',
           presentationMethod: '2D',
-          start: new DateTime(2018),
-          end: new DateTime(2018),
+          start: DateTime(2018),
+          end: DateTime(2018),
         ),
       ]);
 

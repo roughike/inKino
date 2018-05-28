@@ -6,7 +6,7 @@ class StorylineWidget extends StatefulWidget {
   final Event event;
 
   @override
-  _StorylineWidgetState createState() => new _StorylineWidgetState();
+  _StorylineWidgetState createState() => _StorylineWidgetState();
 }
 
 class _StorylineWidgetState extends State<StorylineWidget> {
@@ -40,7 +40,7 @@ class _StorylineWidgetState extends State<StorylineWidget> {
       content.add(_buildCollapseExpandPrompt());
     }
 
-    return new Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: content,
@@ -66,11 +66,11 @@ class _StorylineWidgetState extends State<StorylineWidget> {
   }
 
   Widget _buildContent() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: new AnimatedCrossFade(
-        firstChild: new Text(widget.event.shortSynopsis),
-        secondChild: new Text(widget.event.synopsis),
+      child: AnimatedCrossFade(
+        firstChild: Text(widget.event.shortSynopsis),
+        secondChild: Text(widget.event.synopsis),
         crossFadeState:
             _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
         duration: kThemeAnimationDuration,
@@ -80,14 +80,14 @@ class _StorylineWidgetState extends State<StorylineWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return new InkWell(
+    return InkWell(
       onTap: _isExpandable ? _toggleExpandedState : null,
-      child: new Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16.0,
           vertical: 12.0,
         ),
-        child: new Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildCaption(),

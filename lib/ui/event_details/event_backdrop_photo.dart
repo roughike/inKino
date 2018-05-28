@@ -26,14 +26,14 @@ class EventBackdropPhoto extends StatelessWidget {
 
     addIfNonNull(_buildBackdropPhoto(context), content);
 
-    return new Stack(
+    return Stack(
       alignment: Alignment.center,
       children: content,
     );
   }
 
   Widget _buildPlaceholderBackground(BuildContext context) {
-    return new Container(
+    return Container(
       width: MediaQuery.of(context).size.width,
       height: height,
       decoration: const BoxDecoration(
@@ -62,10 +62,10 @@ class EventBackdropPhoto extends StatelessWidget {
     if (photoUrl != null) {
       var screenWidth = MediaQuery.of(context).size.width;
 
-      return new SizedBox(
+      return SizedBox(
         width: screenWidth,
         height: height,
-        child: new FadeInImage.assetNetwork(
+        child: FadeInImage.assetNetwork(
           placeholder: ImageAssets.transparentImage,
           image: photoUrl,
           width: screenWidth,
@@ -80,15 +80,15 @@ class EventBackdropPhoto extends StatelessWidget {
   }
 
   Widget _buildBlurOverlay(BuildContext context) {
-    return new BackdropFilter(
-      filter: new ui.ImageFilter.blur(
+    return BackdropFilter(
+      filter: ui.ImageFilter.blur(
         sigmaX: overlayBlur,
         sigmaY: overlayBlur,
       ),
-      child: new Container(
+      child: Container(
         width: MediaQuery.of(context).size.width,
         height: height,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.black.withOpacity(blurOverlayOpacity * 0.4),
         ),
       ),
@@ -96,9 +96,9 @@ class EventBackdropPhoto extends StatelessWidget {
   }
 
   Widget _buildShadowInset(BuildContext context) {
-    return new Positioned(
+    return Positioned(
       bottom: -8.0,
-      child: new DecoratedBox(
+      child: DecoratedBox(
         decoration: const BoxDecoration(
           boxShadow: const <BoxShadow>[
             const BoxShadow(
@@ -108,7 +108,7 @@ class EventBackdropPhoto extends StatelessWidget {
             ),
           ],
         ),
-        child: new SizedBox(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 10.0,
         ),
@@ -118,8 +118,8 @@ class EventBackdropPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ClipRect(
-      child: new Stack(
+    return ClipRect(
+      child: Stack(
         children: <Widget>[
           _buildBackdropPhotoWithPlaceholder(context),
           _buildBlurOverlay(context),

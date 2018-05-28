@@ -1,8 +1,8 @@
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/redux/common_actions.dart';
-import 'package:inkino/redux/event/event_state.dart';
 import 'package:inkino/redux/event/event_reducer.dart';
+import 'package:inkino/redux/event/event_state.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -10,21 +10,21 @@ void main() {
     test(
       'when called with UpdateActorsForEventAction, should update event actors when it is a now playing event',
       () {
-        var state = new EventState.initial().copyWith(
+        var state = EventState.initial().copyWith(
           nowInTheatersEvents: <Event>[
-            new Event(id: '1'),
-            new Event(id: 'event-to-update'),
-            new Event(id: '2'),
+            Event(id: '1'),
+            Event(id: 'event-to-update'),
+            Event(id: '2'),
           ],
         );
 
         var reducedState = eventReducer(
           state,
-          new UpdateActorsForEventAction(
-            new Event(id: 'event-to-update'),
+          UpdateActorsForEventAction(
+            Event(id: 'event-to-update'),
             <Actor>[
-              new Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
-              new Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
+              Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
+              Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
             ],
           ),
         );
@@ -43,21 +43,21 @@ void main() {
     test(
       'when called with UpdateActorsForEventAction, should update event actors when it is a upcoming event',
       () {
-        var state = new EventState.initial().copyWith(
+        var state = EventState.initial().copyWith(
           comingSoonEvents: <Event>[
-            new Event(id: '1'),
-            new Event(id: 'event-to-update'),
-            new Event(id: '2'),
+            Event(id: '1'),
+            Event(id: 'event-to-update'),
+            Event(id: '2'),
           ],
         );
 
         var reducedState = eventReducer(
           state,
-          new UpdateActorsForEventAction(
-            new Event(id: 'event-to-update'),
+          UpdateActorsForEventAction(
+            Event(id: 'event-to-update'),
             <Actor>[
-              new Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
-              new Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
+              Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
+              Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
             ],
           ),
         );

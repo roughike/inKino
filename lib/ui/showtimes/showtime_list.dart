@@ -4,8 +4,8 @@ import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
 
 class ShowtimeList extends StatelessWidget {
-  static const Key emptyViewKey = const Key('emptyView');
-  static const Key contentKey = const Key('content');
+  static const Key emptyViewKey = Key('emptyView');
+  static const Key contentKey = Key('content');
 
   ShowtimeList(this.shows);
   final List<Show> shows;
@@ -21,18 +21,18 @@ class ShowtimeList extends StatelessWidget {
       );
     }
 
-    return new Scrollbar(
+    return Scrollbar(
       key: contentKey,
-      child: new ListView.builder(
+      child: ListView.builder(
         padding: const EdgeInsets.only(bottom: 8.0),
         itemCount: shows.length,
         itemBuilder: (BuildContext context, int index) {
           var show = shows[index];
           var useAlternateBackground = index % 2 == 0;
 
-          return new Column(
+          return Column(
             children: <Widget>[
-              new ShowtimeListTile(show, useAlternateBackground),
+              ShowtimeListTile(show, useAlternateBackground),
               const Divider(
                 height: 1.0,
                 color: const Color(0x40000000),

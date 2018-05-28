@@ -10,19 +10,19 @@ class MockShowtimesPageViewModel extends Mock
 void main() {
   group('ShowtimeDateSelector', () {
     final List<DateTime> dates = <DateTime>[
-      new DateTime(2018, 1, 1),
-      new DateTime(2018, 1, 2),
+      DateTime(2018, 1, 1),
+      DateTime(2018, 1, 2),
     ];
 
     MockShowtimesPageViewModel mockViewModel;
 
     setUp(() {
-      mockViewModel = new MockShowtimesPageViewModel();
+      mockViewModel = MockShowtimesPageViewModel();
     });
 
     Future<Null> _buildDateSelector(WidgetTester tester) {
-      return tester.pumpWidget(new MaterialApp(
-        home: new ShowtimeDateSelector(mockViewModel),
+      return tester.pumpWidget(MaterialApp(
+        home: ShowtimeDateSelector(mockViewModel),
       ));
     }
 

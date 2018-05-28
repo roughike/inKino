@@ -18,9 +18,9 @@ void main() {
     TheaterMiddleware middleware;
 
     setUp(() {
-      mockAssetBundle = new MockAssetBundle();
-      mockPreferences = new MockPreferences();
-      middleware = new TheaterMiddleware(mockAssetBundle, mockPreferences);
+      mockAssetBundle = MockAssetBundle();
+      mockPreferences = MockPreferences();
+      middleware = TheaterMiddleware(mockAssetBundle, mockPreferences);
     });
 
     tearDown(() {
@@ -34,7 +34,7 @@ void main() {
             .thenAnswer((_) => theatersXml());
 
         // When
-        await middleware.call(null, new InitAction(), next);
+        await middleware.call(null, InitAction(), next);
 
         // Then
         final InitCompleteAction action = log.single;
@@ -48,7 +48,7 @@ void main() {
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
 
-        await middleware.call(null, new InitAction(), next);
+        await middleware.call(null, InitAction(), next);
 
         final InitCompleteAction action = log.single;
         Theater theater = action.selectedTheater;
@@ -64,7 +64,7 @@ void main() {
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
 
-          await middleware.call(null, new InitAction(), next);
+          await middleware.call(null, InitAction(), next);
 
           final InitCompleteAction action = log.single;
           Theater theater = action.selectedTheater;
@@ -77,9 +77,9 @@ void main() {
     test(
       'when called with ChangeCurrentTheaterAction, persists and dispatches the same action',
       () async {
-        var theater = new Theater(id: 'test-123', name: 'Test Theater');
+        var theater = Theater(id: 'test-123', name: 'Test Theater');
         await middleware.call(
-            null, new ChangeCurrentTheaterAction(theater), next);
+            null, ChangeCurrentTheaterAction(theater), next);
 
         verify(mockPreferences.setString(
             TheaterMiddleware.kDefaultTheaterId, 'test-123'));
@@ -91,7 +91,7 @@ void main() {
   });
 }
 
-Future<String> theatersXml() => new Future.value('''<?xml version="1.0"?>
+Future<String> theatersXml() => Future.value('''<?xml version="1.0"?>
 <TheatreAreas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <TheatreArea>
         <ID>1029</ID>

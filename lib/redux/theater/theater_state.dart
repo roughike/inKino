@@ -12,7 +12,7 @@ class TheaterState {
   final List<Theater> theaters;
 
   factory TheaterState.initial() {
-    return new TheaterState(
+    return TheaterState(
       currentTheater: null,
       theaters: <Theater>[],
     );
@@ -22,7 +22,7 @@ class TheaterState {
     Theater currentTheater,
     List<Theater> theaters,
   }) {
-    return new TheaterState(
+    return TheaterState(
       currentTheater: currentTheater ?? this.currentTheater,
       theaters: theaters ?? this.theaters,
     );

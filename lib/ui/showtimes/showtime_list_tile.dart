@@ -7,7 +7,7 @@ import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:intl/intl.dart';
 
 class ShowtimeListTile extends StatelessWidget {
-  static final DateFormat hoursAndMins = new DateFormat('HH:mm');
+  static final DateFormat hoursAndMins = DateFormat('HH:mm');
 
   ShowtimeListTile(
     this.show,
@@ -23,20 +23,20 @@ class ShowtimeListTile extends StatelessWidget {
 
     Navigator.push<Null>(
       context,
-      new MaterialPageRoute(
-        builder: (_) => new EventDetailsPage(event, show: show),
+      MaterialPageRoute(
+        builder: (_) => EventDetailsPage(event, show: show),
       ),
     );
   }
 
   Widget _buildShowtimesInfo() {
-    return new Column(
+    return Column(
       children: <Widget>[
-        new Text(
+        Text(
           hoursAndMins.format(show.start),
           style: const TextStyle(fontSize: 20.0),
         ),
-        new Text(
+        Text(
           hoursAndMins.format(show.end),
           style: const TextStyle(
             fontSize: 14.0,
@@ -48,17 +48,17 @@ class ShowtimeListTile extends StatelessWidget {
   }
 
   Widget _buildDetailedInfo() {
-    var presentationMethodInfo = new Container(
-      decoration: new BoxDecoration(
+    var presentationMethodInfo = Container(
+      decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.1),
-        borderRadius: new BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(4.0),
       ),
       margin: const EdgeInsets.only(top: 8.0),
       padding: const EdgeInsets.symmetric(
         horizontal: 8.0,
         vertical: 2.0,
       ),
-      child: new Text(
+      child: Text(
         show.presentationMethod,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
@@ -67,23 +67,23 @@ class ShowtimeListTile extends StatelessWidget {
       ),
     );
 
-    return new Expanded(
-      child: new Padding(
+    return Expanded(
+      child: Padding(
         padding: const EdgeInsets.only(left: 20.0),
-        child: new Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            new Text(
+            Text(
               show.title,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 14.0,
               ),
             ),
-            new Padding(
+            Padding(
               padding: const EdgeInsets.only(top: 4.0),
-              child: new Text(show.theaterAndAuditorium),
+              child: Text(show.theaterAndAuditorium),
             ),
             presentationMethodInfo,
           ],
@@ -97,13 +97,13 @@ class ShowtimeListTile extends StatelessWidget {
     var backgroundColor =
         useAlternateBackground ? const Color(0xFFF5F5F5) : Colors.white;
 
-    return new Material(
+    return Material(
       color: backgroundColor,
-      child: new InkWell(
+      child: InkWell(
         onTap: () => _navigateToEventDetails(context),
-        child: new Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-          child: new Row(
+          child: Row(
             children: <Widget>[
               _buildShowtimesInfo(),
               _buildDetailedInfo(),

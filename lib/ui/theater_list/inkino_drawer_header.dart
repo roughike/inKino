@@ -7,7 +7,7 @@ class InKinoDrawerHeader extends StatefulWidget {
   const InKinoDrawerHeader();
 
   @override
-  _InKinoDrawerHeaderState createState() => new _InKinoDrawerHeaderState();
+  _InKinoDrawerHeaderState createState() => _InKinoDrawerHeaderState();
 }
 
 class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
@@ -24,9 +24,9 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   @override
   void initState() {
     super.initState();
-    _flutterTapRecognizer = new TapGestureRecognizer()
+    _flutterTapRecognizer = TapGestureRecognizer()
       ..onTap = () => _openUrl(flutterUrl);
-    _githubTapRecognizer = new TapGestureRecognizer()
+    _githubTapRecognizer = TapGestureRecognizer()
       ..onTap = () => _openUrl(githubUrl);
   }
 
@@ -49,17 +49,17 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   Widget _buildAppNameAndVersion(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
 
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: new Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          new Text(
+          Text(
             'inKino',
             style: textTheme.display1.copyWith(color: Colors.white70),
           ),
-          new Text(
+          Text(
             'v1.0.1', // TODO: figure out a way to get this dynamically
             style: textTheme.body2.copyWith(color: Colors.white),
           ),
@@ -69,7 +69,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   }
 
   Widget _buildAboutButton(BuildContext context) {
-    var content = new Row(
+    var content = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         const Icon(
@@ -91,16 +91,16 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
       ],
     );
 
-    return new Material(
+    return Material(
       color: Colors.transparent,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           showDialog<Null>(
             context: context,
             builder: (BuildContext context) => _buildAboutDialog(context),
           );
         },
-        child: new Padding(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: content,
         ),
@@ -109,9 +109,9 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   }
 
   Widget _buildAboutDialog(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       title: const Text('About inKino'),
-      content: new Column(
+      content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -120,7 +120,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
         ],
       ),
       actions: <Widget>[
-        new FlatButton(
+        FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -132,14 +132,14 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   }
 
   Widget _buildAboutText() {
-    return new RichText(
-      text: new TextSpan(
+    return RichText(
+      text: TextSpan(
         text: 'inKino is the unofficial Finnkino client that '
             'is minimalistic, fast, and delightful to use.\n\n',
         style: const TextStyle(color: Colors.black87),
         children: <TextSpan>[
           const TextSpan(text: 'The app was developed with '),
-          new TextSpan(
+          TextSpan(
             text: 'Flutter',
             recognizer: _flutterTapRecognizer,
             style: linkStyle,
@@ -148,7 +148,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
             text: ' and it\'s open source; check out the source '
                 'code yourself from ',
           ),
-          new TextSpan(
+          TextSpan(
             text: 'the GitHub repo',
             recognizer: _githubTapRecognizer,
             style: linkStyle,
@@ -160,23 +160,23 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   }
 
   Widget _buildTMDBAttribution() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.only(top: 16.0),
-      child: new Row(
+      child: Row(
         children: <Widget>[
-          new Padding(
+          Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: new Image.asset(
+            child: Image.asset(
               ImageAssets.poweredByTMDBLogo,
               width: 32.0,
             ),
           ),
           const Expanded(
-            child: const Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: const Text(
+            child: Padding(
+              padding: EdgeInsets.only(left: 12.0),
+              child: Text(
                 'This product uses the TMDb API but is not endorsed or certified by TMDb.',
-                style: const TextStyle(fontSize: 12.0),
+                style: TextStyle(fontSize: 12.0),
               ),
             ),
           ),
@@ -187,10 +187,10 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       color: Theme.of(context).primaryColor,
       constraints: const BoxConstraints.expand(height: 175.0),
-      child: new Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[

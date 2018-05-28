@@ -30,7 +30,7 @@ class Theater {
         normalizedName = 'All theaters';
       }
 
-      return new Theater(
+      return Theater(
         id: id,
         name: normalizedName,
       );

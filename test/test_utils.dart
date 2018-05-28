@@ -26,14 +26,14 @@ class MockHttpHeaders extends Mock implements io.HttpHeaders {}
 
 // Returns a mock HTTP client that responds with an image to all requests.
 MockHttpClient createMockImageHttpClient(io.SecurityContext _) {
-  final MockHttpClient client = new MockHttpClient();
-  final MockHttpClientRequest request = new MockHttpClientRequest();
-  final MockHttpClientResponse response = new MockHttpClientResponse();
-  final MockHttpHeaders headers = new MockHttpHeaders();
+  final MockHttpClient client = MockHttpClient();
+  final MockHttpClientRequest request = MockHttpClientRequest();
+  final MockHttpClientResponse response = MockHttpClientResponse();
+  final MockHttpHeaders headers = MockHttpHeaders();
 
-  when(client.getUrl(typed(any))).thenAnswer((_) => new Future<io.HttpClientRequest>.value(request));
+  when(client.getUrl(typed(any))).thenAnswer((_) => Future<io.HttpClientRequest>.value(request));
   when(request.headers).thenReturn(headers);
-  when(request.close()).thenAnswer((_) => new Future<io.HttpClientResponse>.value(response));
+  when(request.close()).thenAnswer((_) => Future<io.HttpClientResponse>.value(response));
   when(response.contentLength).thenReturn(_transparentImage.length);
   when(response.statusCode).thenReturn(io.HttpStatus.OK);
   when(response.listen(typed(any))).thenAnswer((Invocation invocation) {
@@ -42,7 +42,7 @@ MockHttpClient createMockImageHttpClient(io.SecurityContext _) {
     final void Function(Object, [StackTrace]) onError = invocation.namedArguments[#onError];
     final bool cancelOnError = invocation.namedArguments[#cancelOnError];
 
-    return new Stream<List<int>>.fromIterable(<List<int>>[_transparentImage])
+    return Stream<List<int>>.fromIterable(<List<int>>[_transparentImage])
         .listen(onData, onDone: onDone, onError: onError, cancelOnError: cancelOnError);
   });
 

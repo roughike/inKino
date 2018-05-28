@@ -5,11 +5,11 @@ import 'package:inkino/redux/show/show_state.dart';
 import 'package:redux/redux.dart';
 
 final showReducer = combineReducers<ShowState>([
-  new TypedReducer<ShowState, ChangeCurrentTheaterAction>(_changeTheater),
-  new TypedReducer<ShowState, ChangeCurrentDateAction>(_changeDate),
-  new TypedReducer<ShowState, RequestingShowsAction>(_requestingShows),
-  new TypedReducer<ShowState, ReceivedShowsAction>(_receivedShows),
-  new TypedReducer<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
+  TypedReducer<ShowState, ChangeCurrentTheaterAction>(_changeTheater),
+  TypedReducer<ShowState, ChangeCurrentDateAction>(_changeDate),
+  TypedReducer<ShowState, RequestingShowsAction>(_requestingShows),
+  TypedReducer<ShowState, ReceivedShowsAction>(_receivedShows),
+  TypedReducer<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
 ]);
 
 ShowState _changeTheater(ShowState state, dynamic _) {

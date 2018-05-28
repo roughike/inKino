@@ -14,11 +14,11 @@ class EventGridItem extends StatelessWidget {
 
   BoxDecoration _buildGradientBackground() {
     return const BoxDecoration(
-      gradient: const LinearGradient(
+      gradient: LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        stops: const <double>[0.0, 0.7, 0.7],
-        colors: const <Color>[
+        stops: <double>[0.0, 0.7, 0.7],
+        colors: <Color>[
           Colors.black,
           Colors.transparent,
           Colors.transparent,
@@ -28,20 +28,20 @@ class EventGridItem extends StatelessWidget {
   }
 
   Widget _buildTextualInfo() {
-    return new Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Text(
+        Text(
           event.title,
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
           ),
         ),
-        new Padding(
+        Padding(
           padding: const EdgeInsets.only(top: 4.0),
-          child: new Text(
+          child: Text(
             event.genres,
             style: const TextStyle(
               fontSize: 12.0,
@@ -55,13 +55,13 @@ class EventGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new DefaultTextStyle(
+    return DefaultTextStyle(
       style: const TextStyle(color: Colors.white),
-      child: new Stack(
+      child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new EventPoster(event: event),
-          new Container(
+          EventPoster(event: event),
+          Container(
             decoration: _buildGradientBackground(),
             padding: const EdgeInsets.only(
               bottom: 16.0,
@@ -70,11 +70,11 @@ class EventGridItem extends StatelessWidget {
             ),
             child: _buildTextualInfo(),
           ),
-          new Material(
+          Material(
             color: Colors.transparent,
-            child: new InkWell(
+            child: InkWell(
               onTap: onTapped,
-              child: new Container(),
+              child: Container(),
             ),
           ),
         ],

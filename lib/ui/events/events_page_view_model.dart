@@ -21,10 +21,10 @@ class EventsPageViewModel {
     Store<AppState> store,
     EventListType type,
   ) {
-    return new EventsPageViewModel(
+    return EventsPageViewModel(
       status: store.state.eventState.loadingStatus,
       events: eventsSelector(store.state, type),
-      refreshEvents: () => store.dispatch(new RefreshEventsAction()),
+      refreshEvents: () => store.dispatch(RefreshEventsAction()),
     );
   }
 

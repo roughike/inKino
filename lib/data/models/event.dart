@@ -49,7 +49,7 @@ class Event {
       var title = tagContents(node, 'Title');
       var originalTitle = tagContents(node, 'OriginalTitle');
 
-      return new Event(
+      return Event(
         id: tagContents(node, 'ID'),
         title: EventNameCleaner.cleanup(title),
         originalTitle: EventNameCleaner.cleanup(originalTitle),
@@ -79,7 +79,7 @@ class Event {
       var first = tagContents(node, 'FirstName');
       var last = tagContents(node, 'LastName');
 
-      return new Actor(name: '$first $last');
+      return Actor(name: '$first $last');
     }).toList();
   }
 
@@ -121,12 +121,12 @@ class EventImageData {
 
   static EventImageData parseAll(Iterable<xml.XmlElement> roots) {
     if (roots == null || roots.isEmpty) {
-      return new EventImageData.empty();
+      return EventImageData.empty();
     }
 
     var root = roots.first;
 
-    return new EventImageData(
+    return EventImageData(
       portraitSmall: tagContentsOrNull(root, 'EventSmallImagePortrait'),
       portraitMedium: tagContentsOrNull(root, 'EventMediumImagePortrait'),
       portraitLarge: tagContentsOrNull(root, 'EventLargeImagePortrait'),

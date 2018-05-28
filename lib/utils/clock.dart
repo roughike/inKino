@@ -13,7 +13,7 @@ typedef DateTime DateTimeGetter();
 /// list of all tests that use this class.
 class Clock {
   /// The default date time getter, which returns the current date and time.
-  static final defaultDateTimeGetter = () => new DateTime.now();
+  static final defaultDateTimeGetter = () => DateTime.now();
 
   /// Resets the current mock implementation (if any) for [getCurrentTime]
   /// method back to an implementation that returns the current date and time.

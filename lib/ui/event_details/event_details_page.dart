@@ -19,7 +19,7 @@ class EventDetailsPage extends StatefulWidget {
   final Show show;
 
   @override
-  _EventDetailsPageState createState() => new _EventDetailsPageState();
+  _EventDetailsPageState createState() => _EventDetailsPageState();
 }
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
@@ -29,9 +29,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   @override
   void initState() {
     super.initState();
-    _scrollController = new ScrollController();
+    _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-    _scrollEffects = new EventDetailsScrollEffects();
+    _scrollEffects = EventDetailsScrollEffects();
   }
 
   @override
@@ -48,19 +48,19 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildHeader(BuildContext context) {
-    return new Stack(
+    return Stack(
       children: <Widget>[
         // Transparent container that makes the space for the backdrop photo.
-        new Container(
+        Container(
           height: 175.0,
           margin: const EdgeInsets.only(bottom: 118.0),
         ),
-        new Positioned(
+        Positioned(
           left: 10.0,
           bottom: 0.0,
           child: _buildPortraitPhoto(),
         ),
-        new Positioned(
+        Positioned(
           top: 186.0,
           left: 132.0,
           right: 16.0,
@@ -71,9 +71,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildPortraitPhoto() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(6.0),
-      child: new EventPoster(
+      child: EventPoster(
         event: widget.event,
         size: const Size(100.0, 150.0),
         displayPlayButton: true,
@@ -85,13 +85,13 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var content = <Widget>[]..addAll(_buildTitleAndLengthInMinutes());
 
     if (widget.event.directors.isNotEmpty) {
-      content.add(new Padding(
+      content.add(Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: _buildDirectorInfo(),
       ));
     }
 
-    return new Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: content,
     );
@@ -102,16 +102,16 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     var genres = widget.event.genres.split(', ').take(4).join(', ');
 
     return <Widget>[
-      new Text(
+      Text(
         widget.event.title,
         style: const TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w800,
         ),
       ),
-      new Padding(
+      Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: new Text(
+        child: Text(
           '$length | $genres',
           style: const TextStyle(
             fontSize: 12.0,
@@ -123,7 +123,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildDirectorInfo() {
-    return new Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text(
@@ -134,10 +134,10 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        new Expanded(
-          child: new Padding(
+        Expanded(
+          child: Padding(
             padding: const EdgeInsets.only(left: 4.0),
-            child: new Text(
+            child: Text(
               widget.event.directors.first,
               style: const TextStyle(
                 fontSize: 12.0,
@@ -152,14 +152,14 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   Widget _buildShowtimeInformation() {
     if (widget.show != null) {
-      return new Padding(
+      return Padding(
         padding: const EdgeInsets.only(
           top: 24.0,
           bottom: 8.0,
           left: 16.0,
           right: 16.0,
         ),
-        child: new ShowtimeInformation(widget.show),
+        child: ShowtimeInformation(widget.show),
       );
     }
 
@@ -168,9 +168,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   Widget _buildSynopsis() {
     if (widget.event.hasSynopsis) {
-      return new Padding(
-        padding: new EdgeInsets.only(top: widget.show == null ? 12.0 : 0.0),
-        child: new StorylineWidget(widget.event),
+      return Padding(
+        padding: EdgeInsets.only(top: widget.show == null ? 12.0 : 0.0),
+        child: StorylineWidget(widget.event),
       );
     }
 
@@ -178,12 +178,12 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildActorScroller() =>
-      widget.event.actors.isNotEmpty ? new ActorScroller(widget.event) : null;
+      widget.event.actors.isNotEmpty ? ActorScroller(widget.event) : null;
 
   Widget _buildEventBackdrop() {
-    return new Positioned(
+    return Positioned(
       top: _scrollEffects.headerOffset,
-      child: new EventBackdropPhoto(
+      child: EventBackdropPhoto(
         event: widget.event,
         height: _scrollEffects.backdropHeight,
         overlayBlur: _scrollEffects.backdropOverlayBlur,
@@ -193,15 +193,15 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildBackButton() {
-    return new Positioned(
+    return Positioned(
       top: MediaQuery.of(context).padding.top,
       left: 4.0,
-      child: new IgnorePointer(
+      child: IgnorePointer(
         ignoring: _scrollEffects.backButtonOpacity == 0.0,
-        child: new Material(
+        child: Material(
           type: MaterialType.circle,
           color: Colors.transparent,
-          child: new BackButton(
+          child: BackButton(
             color: Colors.white.withOpacity(
               _scrollEffects.backButtonOpacity * 0.9,
             ),
@@ -214,7 +214,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   Widget _buildStatusBarBackground() {
     var statusBarColor = Theme.of(context).primaryColor;
 
-    return new Container(
+    return Container(
       height: _scrollEffects.statusBarHeight,
       color: statusBarColor,
     );
@@ -231,17 +231,17 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     addIfNonNull(_buildActorScroller(), content);
 
     // Some padding for the bottom.
-    content.add(new Container(height: 32.0));
+    content.add(Container(height: 32.0));
 
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      body: new Stack(
+      body: Stack(
         children: <Widget>[
           _buildEventBackdrop(),
-          new CustomScrollView(
+          CustomScrollView(
             controller: _scrollController,
             slivers: <Widget>[
-              new SliverList(delegate: new SliverChildListDelegate(content)),
+              SliverList(delegate: SliverChildListDelegate(content)),
             ],
           ),
           _buildBackButton(),

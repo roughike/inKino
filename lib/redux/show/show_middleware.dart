@@ -38,13 +38,13 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
       date = action.date;
     }
 
-    next(new RequestingShowsAction());
+    next(RequestingShowsAction());
 
     try {
       var shows = await _fetchShows(theater, date, next);
-      next(new ReceivedShowsAction(theater, shows));
+      next(ReceivedShowsAction(theater, shows));
     } catch (e) {
-      next(new ErrorLoadingShowsAction());
+      next(ErrorLoadingShowsAction());
     }
   }
 
