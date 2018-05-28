@@ -1,6 +1,5 @@
 import 'package:inkino/data/loading_status.dart';
 import 'package:inkino/data/models/show.dart';
-import 'package:inkino/utils/clock.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -18,17 +17,10 @@ class ShowState {
   final List<Show> shows;
 
   factory ShowState.initial() {
-    // TODO: Refactor this to a possibly more appropriate place, but where?
-    var now = Clock.getCurrentTime();
-    var dates = List.generate(
-      7,
-      (index) => now.add(Duration(days: index)),
-    );
-
     return ShowState(
       loadingStatus: LoadingStatus.loading,
-      dates: dates,
-      selectedDate: dates.first,
+      dates: <DateTime>[],
+      selectedDate: null,
       shows: <Show>[],
     );
   }

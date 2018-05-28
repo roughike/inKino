@@ -19,12 +19,23 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
       Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
+    if (action is InitCompleteAction || action is UpdateShowDatesAction) {
+      await _updateShowDates(action, next);
+    }
+
     if (action is InitCompleteAction ||
         action is ChangeCurrentTheaterAction ||
         action is RefreshShowsAction ||
         action is ChangeCurrentDateAction) {
       await _handleShowsUpdate(store, action, next);
     }
+  }
+
+  void _updateShowDates(dynamic action, NextDispatcher next) {
+    var now = Clock.getCurrentTime();
+    var dates = List.generate(7, (index) => now.add(Duration(days: index)));
+
+    next(new ShowDatesUpdatedAction(dates));
   }
 
   Future<Null> _handleShowsUpdate(
