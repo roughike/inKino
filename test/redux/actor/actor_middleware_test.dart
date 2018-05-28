@@ -33,7 +33,7 @@ void main() {
     ];
 
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockTMDBApi mockTMDBApi;
     ActorMiddleware middleware;

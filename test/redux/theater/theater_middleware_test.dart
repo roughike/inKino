@@ -11,7 +11,7 @@ import '../../mocks.dart';
 void main() {
   group('TheaterMiddleware', () {
     final List<dynamic> log = <dynamic>[];
-    final Function(dynamic) next = (action) => log.add(action);
+    final Function(dynamic) next = (dynamic action) => log.add(action);
 
     MockAssetBundle mockAssetBundle;
     MockPreferences mockPreferences;
@@ -30,7 +30,8 @@ void main() {
     group('called with InitAction', () {
       test('loads the preloaded theaters', () async {
         // Given
-        when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
+        when(mockAssetBundle.loadString(typed(any)))
+            .thenAnswer((_) => theatersXml());
 
         // When
         await middleware.call(null, new InitAction(), next);
@@ -42,7 +43,8 @@ void main() {
 
       test('when a persisted theater id exists, uses that as a default',
           () async {
-        when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
+        when(mockAssetBundle.loadString(typed(any)))
+            .thenAnswer((_) => theatersXml());
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
 
@@ -57,7 +59,8 @@ void main() {
       test(
         'when no persisted theater id, uses the first theater as a default',
         () async {
-          when(mockAssetBundle.loadString(typed(any))).thenAnswer((_) => theatersXml());
+          when(mockAssetBundle.loadString(typed(any)))
+              .thenAnswer((_) => theatersXml());
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
 

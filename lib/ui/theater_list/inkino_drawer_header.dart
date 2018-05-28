@@ -95,7 +95,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
       color: Colors.transparent,
       child: new InkWell(
         onTap: () {
-          showDialog(
+          showDialog<Null>(
             context: context,
             builder: (BuildContext context) => _buildAboutDialog(context),
           );

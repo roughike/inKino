@@ -74,6 +74,21 @@ class EventPoster extends StatelessWidget {
     return null;
   }
 
+  Widget _buildPosterImage() {
+    if (event.images.portraitMedium == null) {
+      return null;
+    }
+
+    return new FadeInImage.assetNetwork(
+      placeholder: ImageAssets.transparentImage,
+      image: event.images.portraitMedium,
+      width: size?.width,
+      height: size?.height,
+      fadeInDuration: const Duration(milliseconds: 300),
+      fit: BoxFit.cover,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var content = <Widget>[
@@ -82,16 +97,9 @@ class EventPoster extends StatelessWidget {
         color: Colors.white24,
         size: 72.0,
       ),
-      new FadeInImage.assetNetwork(
-        placeholder: ImageAssets.transparentImage,
-        image: event.images.portraitMedium ?? '',
-        width: size?.width,
-        height: size?.height,
-        fadeInDuration: const Duration(milliseconds: 300),
-        fit: BoxFit.cover,
-      ),
     ];
 
+    addIfNonNull(_buildPosterImage(), content);
     addIfNonNull(_buildPlayButton(), content);
 
     return new Container(

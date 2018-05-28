@@ -21,7 +21,7 @@ class ShowtimeListTile extends StatelessWidget {
     var store = StoreProvider.of<AppState>(context);
     var event = eventForShowSelector(store.state, show);
 
-    Navigator.push(
+    Navigator.push<Null>(
       context,
       new MaterialPageRoute(
         builder: (_) => new EventDetailsPage(event, show: show),

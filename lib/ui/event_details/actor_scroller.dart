@@ -60,20 +60,24 @@ class ActorScrollerContent extends StatelessWidget {
   }
 
   Widget _buildActorAvatar(BuildContext context, Actor actor) {
-    const fallbackIcon = const Icon(
-      Icons.person,
-      color: Colors.white,
-      size: 26.0,
-    );
-
-    var avatarImage = new ClipOval(
-      child: new FadeInImage.assetNetwork(
-        placeholder: ImageAssets.transparentImage,
-        image: actor.avatarUrl ?? '',
-        fit: BoxFit.cover,
-        fadeInDuration: const Duration(milliseconds: 250),
+    var content = <Widget>[
+      const Icon(
+        Icons.person,
+        color: Colors.white,
+        size: 26.0,
       ),
-    );
+    ];
+
+    if (actor.avatarUrl != null) {
+      content.add(new ClipOval(
+        child: new FadeInImage.assetNetwork(
+          placeholder: ImageAssets.transparentImage,
+          image: actor.avatarUrl,
+          fit: BoxFit.cover,
+          fadeInDuration: const Duration(milliseconds: 250),
+        ),
+      ));
+    }
 
     return new Container(
       width: 56.0,
@@ -85,10 +89,7 @@ class ActorScrollerContent extends StatelessWidget {
       child: new Stack(
         alignment: Alignment.center,
         fit: StackFit.expand,
-        children: <Widget>[
-          fallbackIcon,
-          avatarImage,
-        ],
+        children: content,
       ),
     );
   }

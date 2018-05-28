@@ -17,7 +17,7 @@ class FinnkinoApi {
   Future<List<Show>> getSchedule(Theater theater, DateTime date) async {
     var dt = ddMMyyyy.format(date ?? new DateTime.now());
     var response = await getRequest(
-      kScheduleBaseUrl.replace(queryParameters: {
+      kScheduleBaseUrl.replace(queryParameters: <String, String>{
         'area': theater.id,
         'dt': dt,
       }),
@@ -28,7 +28,7 @@ class FinnkinoApi {
 
   Future<List<Event>> getNowInTheatersEvents(Theater theater) async {
     var response = await getRequest(
-      kEventsBaseUrl.replace(queryParameters: {
+      kEventsBaseUrl.replace(queryParameters: <String, String>{
         'area': theater.id,
         'listType': 'NowInTheatres',
       }),
@@ -39,7 +39,7 @@ class FinnkinoApi {
 
   Future<List<Event>> getUpcomingEvents() async {
     var response = await getRequest(
-      kEventsBaseUrl.replace(queryParameters: {
+      kEventsBaseUrl.replace(queryParameters: <String, String>{
         'listType': 'ComingSoon',
       }),
     );

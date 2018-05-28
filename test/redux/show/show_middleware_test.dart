@@ -18,7 +18,7 @@ void main() {
     final DateTime startOf2018 = new DateTime(2018);
     final Theater theater = new Theater(id: 'abc123', name: 'Test Theater');
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockFinnkinoApi mockFinnkinoApi;
     MockStore mockStore;
@@ -55,10 +55,10 @@ void main() {
         Clock.getCurrentTime = () => startOf2018;
         when(mockFinnkinoApi.getSchedule(theater, typed(any)))
             .thenAnswer((_) => new Future.value(<Show>[
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 03, 21)),
-        ]));
+                  new Show(start: new DateTime(2018, 02, 21)),
+                  new Show(start: new DateTime(2018, 02, 21)),
+                  new Show(start: new DateTime(2018, 03, 21)),
+                ]));
 
         // When
         await middleware.call(

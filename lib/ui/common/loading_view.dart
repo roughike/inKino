@@ -94,7 +94,7 @@ class LoadingViewState extends State<LoadingView>
           break;
       }
 
-      reverseAnimation().then((_) {
+      reverseAnimation().then<TickerFuture>((_) {
         switch (widget.status) {
           case LoadingStatus.loading:
             _loadingController.forward();

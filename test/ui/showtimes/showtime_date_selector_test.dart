@@ -49,7 +49,7 @@ void main() {
         await tester.tap(find.text('Tue'));
 
         DateTime newDateTime =
-            verify(mockViewModel.changeCurrentDate(typed(captureAny))).captured.single;
+            verify<DateTime>(mockViewModel.changeCurrentDate(typed(captureAny))).captured.single;
 
         expect(newDateTime.year, 2018);
         expect(newDateTime.month, 1);

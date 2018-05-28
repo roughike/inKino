@@ -11,7 +11,8 @@ class ActorMiddleware extends MiddlewareClass<AppState> {
   final TMDBApi tmdbApi;
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is FetchActorAvatarsAction) {

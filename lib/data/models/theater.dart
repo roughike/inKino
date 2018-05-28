@@ -1,6 +1,6 @@
+import 'package:inkino/utils/xml_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:xml/xml.dart' as xml;
-import 'package:inkino/utils/xml_utils.dart';
 
 final RegExp _nameExpr = new RegExp(r'([A-Z])([A-Z]+)');
 
@@ -37,7 +37,7 @@ class Theater {
     }).toList();
   }
 
-  static _normalize(String text) {
+  static String _normalize(String text) {
     return text.replaceAllMapped(_nameExpr, (match) {
       return '${match.group(1)}${match.group(2).toLowerCase()}';
     });

@@ -14,7 +14,7 @@ void main() {
   group('EventMiddleware', () {
     final Theater theater = new Theater(id: 'test', name: 'Test Theater');
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockFinnkinoApi mockFinnkinoApi;
     EventMiddleware middleware;

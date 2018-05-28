@@ -18,7 +18,7 @@ class EventGrid extends StatelessWidget {
   final VoidCallback onReloadCallback;
 
   void _openEventDetails(BuildContext context, Event event) {
-    Navigator.push(
+    Navigator.push<Null>(
       context,
       new MaterialPageRoute(
         builder: (_) => new EventDetailsPage(event),

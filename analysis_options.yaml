@@ -1,10 +1,6 @@
 analyzer:
   language:
     enableSuperMixins: true
-  # strong-mode:
-    # TODO - enable to make sure preview-dart-2 works 
-    # implicit-dynamic: false
-  
 
 linter:
   rules:

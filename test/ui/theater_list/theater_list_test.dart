@@ -60,10 +60,10 @@ void main() {
 
         await tester.tap(find.text('Test Theater #2'));
 
-        Theater newTheater =
-            verify(mockViewModel.changeCurrentTheater(typed(captureAny)))
-                .captured
-                .first;
+        Theater newTheater = verify<Theater>(
+                mockViewModel.changeCurrentTheater(typed(captureAny)))
+            .captured
+            .first;
         expect(newTheater.id, '2');
         expect(newTheater.name, 'Test Theater #2');
 

@@ -12,7 +12,8 @@ class EventMiddleware extends MiddlewareClass<AppState> {
   final FinnkinoApi api;
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is InitCompleteAction ||
