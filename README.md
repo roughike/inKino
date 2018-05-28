@@ -32,7 +32,7 @@ If you don't trust in random bash scripts copied from the Internet, you can just
 
 ### The stack & building from source
 
-The project is currently built using the [latest Flutter Beta 2](https://medium.com/flutter-io/https-medium-com-flutter-io-announcing-flutters-beta-2-c85ba1557d5e), with Dart 2 enabled.
+The project is currently built using the [latest Flutter Beta 3](https://medium.com/flutter-io/flutter-beta-3-7d88125245dc), with Dart 2 enabled.
 
 To build the project, ensure that you have a recent version of the Flutter SDK installed. Then either run `flutter run` in the project root or use your IDE of choice. To run the tests, run `flutter test` in the project root.
 
