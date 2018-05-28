@@ -26,10 +26,10 @@ void main() {
 
     AppState _theaterState({Theater currentTheater}) {
       return AppState.initial().copyWith(
-        theaterState: TheaterState.initial().copyWith(
-          currentTheater: currentTheater,
-        ),
-      );
+            theaterState: TheaterState.initial().copyWith(
+                  currentTheater: currentTheater,
+                ),
+          );
     }
 
     setUp(() {
@@ -67,11 +67,12 @@ void main() {
         // Then
         verify(mockFinnkinoApi.getSchedule(theater, null));
 
-        expect(actionLog.length, 3);
+        expect(actionLog.length, 4);
         expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
+        expect(actionLog[2], const isInstanceOf<RequestingShowsAction>());
 
-        final ReceivedShowsAction receivedShowsAction = actionLog[2];
+        final ReceivedShowsAction receivedShowsAction = actionLog[3];
         expect(receivedShowsAction.shows.length, 3);
       },
     );
@@ -82,11 +83,13 @@ void main() {
         // Given
         Clock.getCurrentTime = () => DateTime(2018, 3);
         when(mockFinnkinoApi.getSchedule(theater, typed(any)))
-            .thenAnswer((_) => Future.value(<Show>[
-                  Show(start: DateTime(2018, 02, 21)),
-                  Show(start: DateTime(2018, 02, 21)),
-                  Show(start: DateTime(2018, 03, 21)),
-                ]));
+            .thenAnswer((_) => Future.value(
+                  <Show>[
+                    Show(start: DateTime(2018, 02, 21)),
+                    Show(start: DateTime(2018, 02, 21)),
+                    Show(start: DateTime(2018, 03, 21)),
+                  ],
+                ));
 
         // When
         await middleware.call(
@@ -116,10 +119,38 @@ void main() {
             mockStore, InitCompleteAction(null, theater), next);
 
         // Then
-        expect(actionLog.length, 3);
+        expect(actionLog.length, 4);
         expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
-        expect(actionLog[2], const isInstanceOf<ErrorLoadingShowsAction>());
+        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
+        expect(actionLog[2], const isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[3], const isInstanceOf<ErrorLoadingShowsAction>());
+      },
+    );
+
+    test(
+      'when called with UpdateShowDatesAction',
+      () async {
+        Clock.getCurrentTime = () => DateTime(2018, 1, 1);
+
+        await middleware.call(mockStore, UpdateShowDatesAction(), next);
+
+        expect(actionLog.length, 2);
+        expect(actionLog[0], const isInstanceOf<UpdateShowDatesAction>());
+        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
+
+        ShowDatesUpdatedAction action = actionLog[1];
+        expect(
+          action.dates,
+          <DateTime>[
+            DateTime(2018, 1, 1),
+            DateTime(2018, 1, 2),
+            DateTime(2018, 1, 3),
+            DateTime(2018, 1, 4),
+            DateTime(2018, 1, 5),
+            DateTime(2018, 1, 6),
+            DateTime(2018, 1, 7),
+          ],
+        );
       },
     );
   });

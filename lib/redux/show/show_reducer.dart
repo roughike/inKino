@@ -10,6 +10,7 @@ final showReducer = combineReducers<ShowState>([
   TypedReducer<ShowState, RequestingShowsAction>(_requestingShows),
   TypedReducer<ShowState, ReceivedShowsAction>(_receivedShows),
   TypedReducer<ShowState, ErrorLoadingShowsAction>(_errorLoadingShows),
+  TypedReducer<ShowState, ShowDatesUpdatedAction>(_showDatesUpdated),
 ]);
 
 ShowState _changeTheater(ShowState state, dynamic _) {
@@ -33,4 +34,11 @@ ShowState _receivedShows(ShowState state, ReceivedShowsAction action) {
 
 ShowState _errorLoadingShows(ShowState state, ErrorLoadingShowsAction action) {
   return state.copyWith(loadingStatus: LoadingStatus.error);
+}
+
+ShowState _showDatesUpdated(ShowState state, ShowDatesUpdatedAction action) {
+  return state.copyWith(
+    availableDates: action.dates,
+    selectedDate: action.dates.first,
+  );
 }

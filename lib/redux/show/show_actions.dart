@@ -1,6 +1,13 @@
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 
+class UpdateShowDatesAction {}
+
+class ShowDatesUpdatedAction {
+  ShowDatesUpdatedAction(this.dates);
+  final List<DateTime> dates;
+}
+
 class FetchShowsAction {
   FetchShowsAction(this.theater);
   final Theater theater;
