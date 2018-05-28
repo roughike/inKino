@@ -12,7 +12,8 @@ class EventMiddleware extends MiddlewareClass<AppState> {
   final FinnkinoApi api;
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is InitCompleteAction ||
@@ -38,18 +39,18 @@ class EventMiddleware extends MiddlewareClass<AppState> {
     Theater newTheater,
     NextDispatcher next,
   ) async {
-    next(new RequestingEventsAction());
+    next(RequestingEventsAction());
 
     try {
       var inTheatersEvents = await api.getNowInTheatersEvents(newTheater);
       var comingSoonEvents = await api.getUpcomingEvents();
 
-      next(new ReceivedEventsAction(
+      next(ReceivedEventsAction(
         nowInTheatersEvents: inTheatersEvents,
         comingSoonEvents: comingSoonEvents,
       ));
     } catch (e) {
-      next(new ErrorLoadingEventsAction());
+      next(ErrorLoadingEventsAction());
     }
   }
 }

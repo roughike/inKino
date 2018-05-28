@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/data/models/theater.dart';
 import 'package:inkino/data/networking/finnkino_api.dart';
-import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/show/show_actions.dart';
 import 'package:inkino/utils/clock.dart';
 import 'package:redux/redux.dart';
@@ -15,7 +15,8 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
   final FinnkinoApi api;
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is InitCompleteAction ||
@@ -37,13 +38,13 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
       date = action.date;
     }
 
-    next(new RequestingShowsAction());
+    next(RequestingShowsAction());
 
     try {
       var shows = await _fetchShows(theater, date, next);
-      next(new ReceivedShowsAction(theater, shows));
-    } catch(e) {
-      next(new ErrorLoadingShowsAction());
+      next(ReceivedShowsAction(theater, shows));
+    } catch (e) {
+      next(ErrorLoadingShowsAction());
     }
   }
 

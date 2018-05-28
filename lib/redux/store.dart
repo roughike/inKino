@@ -13,19 +13,19 @@ import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Store<AppState>> createStore() async {
-  var tmdbApi = new TMDBApi();
-  var finnkinoApi = new FinnkinoApi();
+  var tmdbApi = TMDBApi();
+  var finnkinoApi = FinnkinoApi();
   var prefs = await SharedPreferences.getInstance();
 
-  return new Store(
+  return Store(
     appReducer,
-    initialState: new AppState.initial(),
+    initialState: AppState.initial(),
     distinct: true,
     middleware: [
-      new ActorMiddleware(tmdbApi),
-      new TheaterMiddleware(rootBundle, prefs),
-      new ShowMiddleware(finnkinoApi),
-      new EventMiddleware(finnkinoApi),
+      ActorMiddleware(tmdbApi),
+      TheaterMiddleware(rootBundle, prefs),
+      ShowMiddleware(finnkinoApi),
+      EventMiddleware(finnkinoApi),
     ],
   );
 }

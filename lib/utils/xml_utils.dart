@@ -4,7 +4,7 @@ String tagContents(xml.XmlElement node, String tagName) {
   var contents = tagContentsOrNull(node, tagName);
 
   if (contents == null) {
-    throw new ArgumentError('Contents for $tagName were unexpectedly null.');
+    throw ArgumentError('Contents for $tagName were unexpectedly null.');
   }
 
   return contents;

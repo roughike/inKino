@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:inkino/assets.dart';
-import 'package:inkino/redux/common_actions.dart';
-import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/redux/app/app_state.dart';
+import 'package:inkino/redux/common_actions.dart';
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +17,8 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
   TheaterMiddleware(this.bundle, this.preferences);
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     if (action is InitAction) {
       await _init(action, next);
     } else if (action is ChangeCurrentTheaterAction) {
@@ -35,7 +36,7 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     var theaters = Theater.parseAll(theaterXml);
     var currentTheater = _getDefaultTheater(theaters);
 
-    next(new InitCompleteAction(theaters, currentTheater));
+    next(InitCompleteAction(theaters, currentTheater));
   }
 
   Future<Null> _changeCurrentTheater(

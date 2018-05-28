@@ -9,13 +9,13 @@ void main() {
     test(
         'when called with ActorsUpdatedAction, should not modify existing actors',
         () {
-      var state = new AppState.initial().copyWith(
+      var state = AppState.initial().copyWith(
         actorsByName: <String, Actor>{
-          'Seth Ladd': new Actor(
+          'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
           ),
-          'Eric Seidel': new Actor(
+          'Eric Seidel': Actor(
             name: 'Eric Seidel',
             avatarUrl: 'https://erics-avatar-url',
           ),
@@ -24,25 +24,25 @@ void main() {
 
       var reducedState = appReducer(
         state,
-        new ActorsUpdatedAction(<Actor>[
-          new Actor(name: 'Seth Ladd', avatarUrl: null),
-          new Actor(name: 'Eric Seidel', avatarUrl: null),
-          new Actor(name: 'Ian Hickson', avatarUrl: null),
+        ActorsUpdatedAction(<Actor>[
+          Actor(name: 'Seth Ladd', avatarUrl: null),
+          Actor(name: 'Eric Seidel', avatarUrl: null),
+          Actor(name: 'Ian Hickson', avatarUrl: null),
         ]),
       );
 
       expect(
         reducedState.actorsByName,
         <String, Actor>{
-          'Seth Ladd': new Actor(
+          'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
           ),
-          'Eric Seidel': new Actor(
+          'Eric Seidel': Actor(
             name: 'Eric Seidel',
             avatarUrl: 'https://erics-avatar-url',
           ),
-          'Ian Hickson': new Actor(
+          'Ian Hickson': Actor(
             name: 'Ian Hickson',
             avatarUrl: null,
           ),
@@ -53,29 +53,29 @@ void main() {
     test(
         'when called with ReceivedActorAvatarsAction, should add urls for actors',
         () {
-      var state = new AppState.initial().copyWith(
+      var state = AppState.initial().copyWith(
         actorsByName: <String, Actor>{
-          'Seth Ladd': new Actor(name: 'Seth Ladd', avatarUrl: null),
-          'Eric Seidel': new Actor(name: 'Eric Seidel', avatarUrl: null),
+          'Seth Ladd': Actor(name: 'Seth Ladd', avatarUrl: null),
+          'Eric Seidel': Actor(name: 'Eric Seidel', avatarUrl: null),
         },
       );
 
       var reducedState = appReducer(
         state,
-        new ReceivedActorAvatarsAction(<Actor>[
-          new Actor(name: 'Seth Ladd', avatarUrl: 'https://seths-avatar-url'),
-          new Actor(name: 'Eric Seidel', avatarUrl: 'https://erics-avatar-url'),
+        ReceivedActorAvatarsAction(<Actor>[
+          Actor(name: 'Seth Ladd', avatarUrl: 'https://seths-avatar-url'),
+          Actor(name: 'Eric Seidel', avatarUrl: 'https://erics-avatar-url'),
         ]),
       );
 
       expect(
         reducedState.actorsByName,
         <String, Actor>{
-          'Seth Ladd': new Actor(
+          'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
           ),
-          'Eric Seidel': new Actor(
+          'Eric Seidel': Actor(
             name: 'Eric Seidel',
             avatarUrl: 'https://erics-avatar-url',
           ),

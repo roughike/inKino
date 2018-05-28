@@ -10,15 +10,15 @@ class MockTheaterListViewModel extends Mock implements TheaterListViewModel {}
 void main() {
   group('TheaterList', () {
     final List<Theater> theaters = <Theater>[
-      new Theater(id: '1', name: 'Test Theater #1'),
-      new Theater(id: '2', name: 'Test Theater #2'),
+      Theater(id: '1', name: 'Test Theater #1'),
+      Theater(id: '2', name: 'Test Theater #2'),
     ];
 
     MockTheaterListViewModel mockViewModel;
     bool theaterTappedCallbackCalled;
 
     setUp(() {
-      mockViewModel = new MockTheaterListViewModel();
+      mockViewModel = MockTheaterListViewModel();
       when(mockViewModel.currentTheater).thenReturn(null);
       when(mockViewModel.theaters).thenReturn(<Theater>[]);
 
@@ -26,9 +26,9 @@ void main() {
     });
 
     Future<Null> _buildTheaterList(WidgetTester tester) {
-      return tester.pumpWidget(new MaterialApp(
-        home: new TheaterListContent(
-          header: new Container(),
+      return tester.pumpWidget(MaterialApp(
+        home: TheaterListContent(
+          header: Container(),
           onTheaterTapped: () {
             theaterTappedCallbackCalled = true;
           },
@@ -60,10 +60,10 @@ void main() {
 
         await tester.tap(find.text('Test Theater #2'));
 
-        Theater newTheater =
-            verify(mockViewModel.changeCurrentTheater(typed(captureAny)))
-                .captured
-                .first;
+        Theater newTheater = verify<Theater>(
+                mockViewModel.changeCurrentTheater(typed(captureAny)))
+            .captured
+            .first;
         expect(newTheater.id, '2');
         expect(newTheater.name, 'Test Theater #2');
 

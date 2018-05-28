@@ -13,34 +13,34 @@ class MockTMDBApi extends Mock implements TMDBApi {}
 
 void main() {
   group('AppMiddleware', () {
-    final Event event = new Event(
+    final Event event = Event(
       id: 'test',
       actors: <Actor>[
-        new Actor(name: 'Seth Ladd'),
-        new Actor(name: 'Eric Seidel'),
+        Actor(name: 'Seth Ladd'),
+        Actor(name: 'Eric Seidel'),
       ],
     );
 
     final List<Actor> actorsWithAvatars = <Actor>[
-      new Actor(
+      Actor(
         name: 'Seth Ladd',
         avatarUrl: 'https://seths-profile-picture',
       ),
-      new Actor(
+      Actor(
         name: 'Eric Seidel',
         avatarUrl: 'https://erics-profile-picture',
       ),
     ];
 
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockTMDBApi mockTMDBApi;
     ActorMiddleware middleware;
 
     setUp(() {
-      mockTMDBApi = new MockTMDBApi();
-      middleware = new ActorMiddleware(mockTMDBApi);
+      mockTMDBApi = MockTMDBApi();
+      middleware = ActorMiddleware(mockTMDBApi);
     });
 
     tearDown(() {
@@ -49,8 +49,8 @@ void main() {
 
     test('FetchActorAvatarsAction - successful API request', () async {
       when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
-          .thenAnswer((_) => new Future.value(actorsWithAvatars));
-      await middleware.call(null, new FetchActorAvatarsAction(event), next);
+          .thenAnswer((_) => Future.value(actorsWithAvatars));
+      await middleware.call(null, FetchActorAvatarsAction(event), next);
 
       expect(actionLog.length, 4);
       expect(actionLog[0], const isInstanceOf<FetchActorAvatarsAction>());
@@ -68,9 +68,9 @@ void main() {
 
     test('FetchActorAvatarsAction - handles errors silently', () async {
       when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
-          .thenAnswer((_) => new Future.value(new Error()));
+          .thenAnswer((_) => Future.value(Error()));
 
-      await middleware.call(null, new FetchActorAvatarsAction(event), next);
+      await middleware.call(null, FetchActorAvatarsAction(event), next);
     });
   });
 }

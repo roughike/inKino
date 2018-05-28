@@ -24,15 +24,15 @@ class ShowtimesPageViewModel {
   final Function refreshShowtimes;
 
   static ShowtimesPageViewModel fromStore(Store<AppState> store) {
-    return new ShowtimesPageViewModel(
+    return ShowtimesPageViewModel(
       selectedDate: store.state.showState.selectedDate,
       dates: store.state.showState.dates,
       status: store.state.showState.loadingStatus,
       shows: showsSelector(store.state),
       changeCurrentDate: (newDate) {
-        store.dispatch(new ChangeCurrentDateAction(newDate));
+        store.dispatch(ChangeCurrentDateAction(newDate));
       },
-      refreshShowtimes: () => store.dispatch(new RefreshShowsAction()),
+      refreshShowtimes: () => store.dispatch(RefreshShowsAction()),
     );
   }
 

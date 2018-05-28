@@ -20,12 +20,12 @@ class ShowState {
   factory ShowState.initial() {
     // TODO: Refactor this to a possibly more appropriate place, but where?
     var now = Clock.getCurrentTime();
-    var dates = new List.generate(
+    var dates = List.generate(
       7,
-      (index) => now.add(new Duration(days: index)),
+      (index) => now.add(Duration(days: index)),
     );
 
-    return new ShowState(
+    return ShowState(
       loadingStatus: LoadingStatus.loading,
       dates: dates,
       selectedDate: dates.first,
@@ -39,7 +39,7 @@ class ShowState {
     DateTime selectedDate,
     List<Show> shows,
   }) {
-    return new ShowState(
+    return ShowState(
       loadingStatus: loadingStatus ?? this.loadingStatus,
       dates: availableDates ?? this.dates,
       selectedDate: selectedDate ?? this.selectedDate,

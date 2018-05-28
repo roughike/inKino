@@ -12,28 +12,28 @@ import '../../mocks.dart';
 
 void main() {
   group('EventMiddleware', () {
-    final Theater theater = new Theater(id: 'test', name: 'Test Theater');
+    final Theater theater = Theater(id: 'test', name: 'Test Theater');
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockFinnkinoApi mockFinnkinoApi;
     EventMiddleware middleware;
 
     List<Event> nowInTheatersEvents = <Event>[
-      new Event(),
-      new Event(),
-      new Event(),
+      Event(),
+      Event(),
+      Event(),
     ];
 
     List<Event> upcomingEvents = <Event>[
-      new Event(),
-      new Event(),
-      new Event(),
+      Event(),
+      Event(),
+      Event(),
     ];
 
     setUp(() {
-      mockFinnkinoApi = new MockFinnkinoApi();
-      middleware = new EventMiddleware(mockFinnkinoApi);
+      mockFinnkinoApi = MockFinnkinoApi();
+      middleware = EventMiddleware(mockFinnkinoApi);
     });
 
     tearDown(() {
@@ -44,12 +44,12 @@ void main() {
       'when called with InitCompleteAction, should dispatch a ReceivedEventsAction with now playing and upcoming events',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => new Future.value(nowInTheatersEvents));
+            .thenAnswer((_) => Future.value(nowInTheatersEvents));
         when(mockFinnkinoApi.getUpcomingEvents())
-            .thenAnswer((_) => new Future.value(upcomingEvents));
+            .thenAnswer((_) => Future.value(upcomingEvents));
 
         await middleware.call(
-            null, new InitCompleteAction(null, theater), next);
+            null, InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
@@ -62,17 +62,17 @@ void main() {
     );
 
     test(
-      'when called with ChangeCurrentTheaterAction, should request events for the new theater',
+      'when called with ChangeCurrentTheaterAction, should request events for the theater',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => new Future.value(nowInTheatersEvents));
+            .thenAnswer((_) => Future.value(nowInTheatersEvents));
         when(mockFinnkinoApi.getUpcomingEvents())
-            .thenAnswer((_) => new Future.value(upcomingEvents));
+            .thenAnswer((_) => Future.value(upcomingEvents));
 
         await middleware.call(
           null,
-          new ChangeCurrentTheaterAction(
-            new Theater(
+          ChangeCurrentTheaterAction(
+            Theater(
               id: 'changed',
               name: 'A newly selected theater',
             ),
@@ -93,12 +93,12 @@ void main() {
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingEventsAction',
       () async {
         when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => new Future.value(new Error()));
+            .thenAnswer((_) => Future.value(Error()));
         when(mockFinnkinoApi.getUpcomingEvents())
-            .thenAnswer((_) => new Future.value(new Error()));
+            .thenAnswer((_) => Future.value(Error()));
 
         await middleware.call(
-            null, new InitCompleteAction(null, theater), next);
+            null, InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
         expect(actionLog[0], const isInstanceOf<InitCompleteAction>());

@@ -18,10 +18,10 @@ class EventGrid extends StatelessWidget {
   final VoidCallback onReloadCallback;
 
   void _openEventDetails(BuildContext context, Event event) {
-    Navigator.push(
+    Navigator.push<Null>(
       context,
-      new MaterialPageRoute(
-        builder: (_) => new EventDetailsPage(event),
+      MaterialPageRoute(
+        builder: (_) => EventDetailsPage(event),
       ),
     );
   }
@@ -30,19 +30,19 @@ class EventGrid extends StatelessWidget {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var crossAxisChildCount = isPortrait ? 2 : 4;
 
-    return new Container(
+    return Container(
       key: contentKey,
       color: const Color(0xFF222222),
-      child: new Scrollbar(
-        child: new GridView.builder(
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+      child: Scrollbar(
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisChildCount,
             childAspectRatio: 2 / 3,
           ),
           itemCount: events.length,
           itemBuilder: (BuildContext context, int index) {
             var event = events[index];
-            return new EventGridItem(
+            return EventGridItem(
               event: event,
               onTapped: () => _openEventDetails(context, event),
             );
@@ -55,7 +55,7 @@ class EventGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (events.isEmpty) {
-      return new InfoMessageView(
+      return InfoMessageView(
         key: emptyViewKey,
         title: 'All empty!',
         description: 'Didn\'t find any movies at\nall. ¯\\_(ツ)_/¯',

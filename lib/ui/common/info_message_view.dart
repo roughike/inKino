@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class ErrorView extends InfoMessageView {
-  static const Key tryAgainButtonKey = const Key('tryAgainButton');
+  static const Key tryAgainButtonKey = Key('tryAgainButton');
 
   const ErrorView({
     String title,
@@ -36,7 +36,7 @@ class InfoMessageView extends StatelessWidget {
     var theme = Theme.of(context);
     var content = <Widget>[
       const CircleAvatar(
-        child: const Icon(
+        child: Icon(
           Icons.info_outline,
           color: Colors.black54,
           size: 52.0,
@@ -44,16 +44,16 @@ class InfoMessageView extends StatelessWidget {
         backgroundColor: Colors.black12,
         radius: 42.0,
       ),
-      new Padding(
+      Padding(
         padding: const EdgeInsets.only(top: 16.0),
-        child: new Text(
+        child: Text(
           title,
           style: const TextStyle(fontSize: 24.0),
         ),
       ),
-      new Padding(
+      Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: new Text(
+        child: Text(
           description,
           textAlign: TextAlign.center,
         ),
@@ -61,24 +61,24 @@ class InfoMessageView extends StatelessWidget {
     ];
 
     if (onActionButtonTapped != null) {
-      content.add(new Padding(
+      content.add(Padding(
         padding: const EdgeInsets.only(top: 12.0),
-        child: new FlatButton(
+        child: FlatButton(
           key: actionButtonKey,
           onPressed: onActionButtonTapped,
-          child: new Text(
+          child: Text(
             'TRY AGAIN',
-            style: new TextStyle(color: theme.primaryColor),
+            style: TextStyle(color: theme.primaryColor),
           ),
         ),
       ));
     }
 
-    return new SingleChildScrollView(
-      child: new Container(
+    return SingleChildScrollView(
+      child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: new Center(
-          child: new Column(
+        child: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: content,
           ),

@@ -13,25 +13,25 @@ Function(String) launchTicketsUrl = (url) async {
 
 class ShowtimeInformation extends StatelessWidget {
   static const Key ticketsButtonKey = const Key('ticketsButton');
-  static final weekdayFormat = new DateFormat("E 'at' hh:mma");
+  static final weekdayFormat = DateFormat("E 'at' hh:mma");
 
   ShowtimeInformation(this.show);
   final Show show;
 
   Widget _buildTimeAndTheaterInformation() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.only(left: 8.0),
-      child: new Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Text(
+          Text(
             weekdayFormat.format(show.start),
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.black,
             ),
           ),
-          new Text(
+          Text(
             show.theaterAndAuditorium,
             style: const TextStyle(
               color: Colors.black54,
@@ -45,11 +45,11 @@ class ShowtimeInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        new Expanded(
-          child: new Row(
+        Expanded(
+          child: Row(
             children: <Widget>[
               const Icon(
                 Icons.schedule,
@@ -59,9 +59,9 @@ class ShowtimeInformation extends StatelessWidget {
             ],
           ),
         ),
-        new Padding(
+        Padding(
           padding: const EdgeInsets.only(left: 8.0),
-          child: new RaisedButton(
+          child: RaisedButton(
             key: ticketsButtonKey,
             onPressed: () => launchTicketsUrl(show.url),
             color: Theme.of(context).accentColor,

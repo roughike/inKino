@@ -3,12 +3,19 @@ import 'dart:convert';
 
 import 'package:inkino/data/models/actor.dart';
 import 'package:inkino/data/models/event.dart';
-import 'package:inkino/utils/http_utils.dart';
-
 /// If this has a red underline, it means that the lib/tmdb_config.dart file
 /// is not present on the project. Refer to the README for instructions
 /// on how to do so.
 import 'package:inkino/tmdb_config.dart';
+import 'package:inkino/utils/http_utils.dart';
+/// If this has a red underline, it means that the lib/tmdb_config.dart file
+/// is not present on the project. Refer to the README for instructions
+/// on how to do so.
+
+/// If this has a red underline, it means that the lib/tmdb_config.dart file
+/// is not present on the project. Refer to the README for instructions
+/// on how to do so.
+
 
 class TMDBApi {
   static final String baseUrl = 'api.themoviedb.org';
@@ -25,7 +32,7 @@ class TMDBApi {
   }
 
   Future<int> _findMovieId(String movieTitle) async {
-    var searchUri = new Uri.https(
+    var searchUri = Uri.https(
       baseUrl,
       '3/search/movie',
       <String, String>{
@@ -35,8 +42,9 @@ class TMDBApi {
     );
 
     var response = await getRequest(searchUri);
-    var movieSearchJson = json.decode(response);
-    var searchResults = movieSearchJson['results'];
+    Map<String, dynamic> movieSearchJson = json.decode(response);
+    var searchResults =
+        (movieSearchJson['results'] as List).cast<Map<String, dynamic>>();
 
     if (searchResults.isNotEmpty) {
       return searchResults.first['id'];
@@ -46,14 +54,14 @@ class TMDBApi {
   }
 
   Future<List<Actor>> _getActorAvatars(int movieId) async {
-    var actorUri = new Uri.https(
+    var actorUri = Uri.https(
       baseUrl,
       '3/movie/$movieId/credits',
       <String, String>{'api_key': TMDBConfig.apiKey},
     );
 
     var response = await getRequest(actorUri);
-    var movieActors = json.decode(response);
+    Map<String, dynamic> movieActors = json.decode(response);
 
     return _parseActorAvatars(
         (movieActors['cast'] as List).cast<Map<String, dynamic>>());
@@ -62,12 +70,12 @@ class TMDBApi {
   List<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
     var actorsWithAvatars = <Actor>[];
 
-    movieCast.forEach((castMember) {
-      var pp = castMember['profile_path'];
+    movieCast.forEach((Map<String, dynamic> castMember) {
+      String pp = castMember['profile_path'];
       var profilePath =
           pp != null ? 'https://image.tmdb.org/t/p/w200$pp' : null;
 
-      actorsWithAvatars.add(new Actor(
+      actorsWithAvatars.add(Actor(
         name: castMember['name'],
         avatarUrl: profilePath,
       ));

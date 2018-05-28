@@ -15,13 +15,13 @@ class MainPage extends StatefulWidget {
   const MainPage();
 
   @override
-  _MainPageState createState() => new _MainPageState();
+  _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   static final GlobalKey<ScaffoldState> scaffoldKey =
-      new GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
 
   TabController _controller;
   TextEditingController _searchQuery;
@@ -30,14 +30,14 @@ class _MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    _controller = new TabController(length: 3, vsync: this);
-    _searchQuery = new TextEditingController();
+    _controller = TabController(length: 3, vsync: this);
+    _searchQuery = TextEditingController();
   }
 
   void _startSearch() {
     ModalRoute
         .of(context)
-        .addLocalHistoryEntry(new LocalHistoryEntry(onRemove: _stopSearching));
+        .addLocalHistoryEntry(LocalHistoryEntry(onRemove: _stopSearching));
 
     setState(() {
       _isSearching = true;
@@ -63,10 +63,10 @@ class _MainPageState extends State<MainPage>
     var horizontalTitleAlignment =
         Platform.isIOS ? CrossAxisAlignment.center : CrossAxisAlignment.start;
 
-    var subtitle = new StoreConnector<AppState, Theater>(
+    var subtitle = StoreConnector<AppState, Theater>(
       converter: (store) => store.state.theaterState.currentTheater,
       builder: (BuildContext context, Theater currentTheater) {
-        return new Text(
+        return Text(
           currentTheater?.name ?? '',
           style: const TextStyle(
             fontSize: 12.0,
@@ -76,11 +76,11 @@ class _MainPageState extends State<MainPage>
       },
     );
 
-    return new InkWell(
+    return InkWell(
       onTap: () => scaffoldKey.currentState.openDrawer(),
-      child: new Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: new Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: horizontalTitleAlignment,
           children: <Widget>[
@@ -93,7 +93,7 @@ class _MainPageState extends State<MainPage>
   }
 
   Widget _buildSearchField() {
-    return new TextField(
+    return TextField(
       controller: _searchQuery,
       autofocus: true,
       decoration: const InputDecoration(
@@ -108,13 +108,13 @@ class _MainPageState extends State<MainPage>
 
   void _updateSearchQuery(String newQuery) {
     var store = StoreProvider.of<AppState>(context);
-    store.dispatch(new SearchQueryChangedAction(newQuery));
+    store.dispatch(SearchQueryChangedAction(newQuery));
   }
 
   List<Widget> _buildActions() {
     if (_isSearching) {
       return <Widget>[
-        new IconButton(
+        IconButton(
           icon: const Icon(Icons.clear),
           onPressed: () {
             if (_searchQuery == null || _searchQuery.text.isEmpty) {
@@ -130,7 +130,7 @@ class _MainPageState extends State<MainPage>
     }
 
     return <Widget>[
-      new IconButton(
+      IconButton(
         icon: const Icon(Icons.search),
         onPressed: _startSearch,
       ),
@@ -139,13 +139,13 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       key: scaffoldKey,
-      appBar: new AppBar(
+      appBar: AppBar(
         leading: _isSearching ? const BackButton() : null,
         title: _isSearching ? _buildSearchField() : _buildTitle(context),
         actions: _buildActions(),
-        bottom: new TabBar(
+        bottom: TabBar(
           controller: _controller,
           isScrollable: true,
           tabs: const <Tab>[
@@ -155,18 +155,18 @@ class _MainPageState extends State<MainPage>
           ],
         ),
       ),
-      drawer: new Drawer(
-        child: new TheaterList(
+      drawer: Drawer(
+        child: TheaterList(
           header: const InKinoDrawerHeader(),
           onTheaterTapped: () => Navigator.pop(context),
         ),
       ),
-      body: new TabBarView(
+      body: TabBarView(
         controller: _controller,
         children: <Widget>[
-          new EventsPage(EventListType.nowInTheaters),
+          EventsPage(EventListType.nowInTheaters),
           const ShowtimesPage(),
-          new EventsPage(EventListType.comingSoon),
+          EventsPage(EventListType.comingSoon),
         ],
       ),
     );

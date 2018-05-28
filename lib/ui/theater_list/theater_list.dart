@@ -17,14 +17,14 @@ class TheaterList extends StatelessWidget {
   Widget build(BuildContext context) {
     var statusBarHeight = MediaQuery.of(context).padding.vertical;
 
-    return new Transform(
+    return Transform(
       // FIXME: A hack for drawing behind the status bar, find a proper solution.
-      transform: new Matrix4.translationValues(0.0, -statusBarHeight, 0.0),
-      child: new StoreConnector<AppState, TheaterListViewModel>(
+      transform: Matrix4.translationValues(0.0, -statusBarHeight, 0.0),
+      child: StoreConnector<AppState, TheaterListViewModel>(
         distinct: true,
         converter: (store) => TheaterListViewModel.fromStore(store),
         builder: (BuildContext context, TheaterListViewModel viewModel) {
-          return new TheaterListContent(
+          return TheaterListContent(
             header: header,
             onTheaterTapped: onTheaterTapped,
             viewModel: viewModel,
@@ -48,7 +48,7 @@ class TheaterListContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
+    return ListView.builder(
       itemCount: viewModel.theaters.length + 1,
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
@@ -61,15 +61,15 @@ class TheaterListContent extends StatelessWidget {
             ? const Color(0xFFEEEEEE)
             : Theme.of(context).canvasColor;
 
-        return new Material(
+        return Material(
           color: backgroundColor,
-          child: new ListTile(
+          child: ListTile(
             onTap: () {
               viewModel.changeCurrentTheater(theater);
               onTheaterTapped();
             },
             selected: isSelected,
-            title: new Text(theater.name),
+            title: Text(theater.name),
           ),
         );
       },

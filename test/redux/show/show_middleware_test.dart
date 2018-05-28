@@ -15,27 +15,27 @@ import '../../mocks.dart';
 
 void main() {
   group('ShowMiddleware', () {
-    final DateTime startOf2018 = new DateTime(2018);
-    final Theater theater = new Theater(id: 'abc123', name: 'Test Theater');
+    final DateTime startOf2018 = DateTime(2018);
+    final Theater theater = Theater(id: 'abc123', name: 'Test Theater');
     final List<dynamic> actionLog = <dynamic>[];
-    final Function(dynamic) next = (action) => actionLog.add(action);
+    final Function(dynamic) next = (dynamic action) => actionLog.add(action);
 
     MockFinnkinoApi mockFinnkinoApi;
     MockStore mockStore;
     ShowMiddleware middleware;
 
     AppState _theaterState({Theater currentTheater}) {
-      return new AppState.initial().copyWith(
-        theaterState: new TheaterState.initial().copyWith(
+      return AppState.initial().copyWith(
+        theaterState: TheaterState.initial().copyWith(
           currentTheater: currentTheater,
         ),
       );
     }
 
     setUp(() {
-      mockFinnkinoApi = new MockFinnkinoApi();
-      mockStore = new MockStore();
-      middleware = new ShowMiddleware(mockFinnkinoApi);
+      mockFinnkinoApi = MockFinnkinoApi();
+      mockStore = MockStore();
+      middleware = ShowMiddleware(mockFinnkinoApi);
 
       // Given
       when(mockStore.state).thenReturn(_theaterState(currentTheater: theater));
@@ -50,19 +50,19 @@ void main() {
       'when called with InitCompleteAction, should dispatch a ReceivedShowsAction with all shows',
       () async {
         // The middleware filters shows based on if the showtime has already
-        // passed. As new DateTime(2018) will mean the very first hour and minute
+        // passed. As DateTime(2018) will mean the very first hour and minute
         // in January, all the show times in test assets will be after this date.
         Clock.getCurrentTime = () => startOf2018;
         when(mockFinnkinoApi.getSchedule(theater, typed(any)))
-            .thenAnswer((_) => new Future.value(<Show>[
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 02, 21)),
-          new Show(start: new DateTime(2018, 03, 21)),
-        ]));
+            .thenAnswer((_) => Future.value(<Show>[
+                  Show(start: DateTime(2018, 02, 21)),
+                  Show(start: DateTime(2018, 02, 21)),
+                  Show(start: DateTime(2018, 03, 21)),
+                ]));
 
         // When
         await middleware.call(
-            mockStore, new InitCompleteAction(null, theater), next);
+            mockStore, InitCompleteAction(null, theater), next);
 
         // Then
         verify(mockFinnkinoApi.getSchedule(theater, null));
@@ -80,17 +80,17 @@ void main() {
       'when called with ChangeCurrentDateAction, should dispatch a ReceivedShowsAction with only relevant shows',
       () async {
         // Given
-        Clock.getCurrentTime = () => new DateTime(2018, 3);
+        Clock.getCurrentTime = () => DateTime(2018, 3);
         when(mockFinnkinoApi.getSchedule(theater, typed(any)))
-            .thenAnswer((_) => new Future.value(<Show>[
-                  new Show(start: new DateTime(2018, 02, 21)),
-                  new Show(start: new DateTime(2018, 02, 21)),
-                  new Show(start: new DateTime(2018, 03, 21)),
+            .thenAnswer((_) => Future.value(<Show>[
+                  Show(start: DateTime(2018, 02, 21)),
+                  Show(start: DateTime(2018, 02, 21)),
+                  Show(start: DateTime(2018, 03, 21)),
                 ]));
 
         // When
         await middleware.call(
-            mockStore, new ChangeCurrentDateAction(startOf2018), next);
+            mockStore, ChangeCurrentDateAction(startOf2018), next);
 
         // Then
         verify(mockFinnkinoApi.getSchedule(theater, startOf2018));
@@ -109,11 +109,11 @@ void main() {
       () async {
         // Given
         when(mockFinnkinoApi.getSchedule(typed(any), typed(any)))
-            .thenAnswer((_) => new Future.value(new Error()));
+            .thenAnswer((_) => Future.value(Error()));
 
         // When
         await middleware.call(
-            mockStore, new InitCompleteAction(null, theater), next);
+            mockStore, InitCompleteAction(null, theater), next);
 
         // Then
         expect(actionLog.length, 3);

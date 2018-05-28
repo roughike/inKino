@@ -33,7 +33,7 @@ class Show {
       var title = tagContents(node, 'Title');
       var originalTitle = tagContents(node, 'OriginalTitle');
 
-      return new Show(
+      return Show(
         id: tagContents(node, 'ID'),
         eventId: tagContents(node, 'EventID'),
         title: EventNameCleaner.cleanup(title),

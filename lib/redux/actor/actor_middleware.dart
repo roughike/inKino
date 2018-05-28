@@ -11,11 +11,12 @@ class ActorMiddleware extends MiddlewareClass<AppState> {
   final TMDBApi tmdbApi;
 
   @override
-  Future<Null> call(Store<AppState> store, action, NextDispatcher next) async {
+  Future<Null> call(
+      Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is FetchActorAvatarsAction) {
-      next(new ActorsUpdatedAction(action.event.actors));
+      next(ActorsUpdatedAction(action.event.actors));
 
       try {
         var actorsWithAvatars = await tmdbApi.findAvatarsForActors(
@@ -26,8 +27,8 @@ class ActorMiddleware extends MiddlewareClass<AppState> {
         // TMDB API might have a more comprehensive list of actors than the
         // Finnkino API, so we update the event with the actors we get from
         // the TMDB API.
-        next(new UpdateActorsForEventAction(action.event, actorsWithAvatars));
-        next(new ReceivedActorAvatarsAction(actorsWithAvatars));
+        next(UpdateActorsForEventAction(action.event, actorsWithAvatars));
+        next(ReceivedActorAvatarsAction(actorsWithAvatars));
       } catch (e) {
         // We don't need to handle this. If fetching actor avatars
         // fails, we don't care: the UI just simply won't display

@@ -13,7 +13,7 @@ Future<Null> main() async {
   MaterialPageRoute.debugEnableFadingRoutes = true;
 
   var store = await createStore();
-  runApp(new InKinoApp(store));
+  runApp(InKinoApp(store));
 }
 
 class InKinoApp extends StatefulWidget {
@@ -21,23 +21,23 @@ class InKinoApp extends StatefulWidget {
   final Store<AppState> store;
 
   @override
-  _InKinoAppState createState() => new _InKinoAppState();
+  _InKinoAppState createState() => _InKinoAppState();
 }
 
 class _InKinoAppState extends State<InKinoApp> {
   @override
   void initState() {
     super.initState();
-    widget.store.dispatch(new InitAction());
+    widget.store.dispatch(InitAction());
   }
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider<AppState>(
+    return StoreProvider<AppState>(
       store: widget.store,
-      child: new MaterialApp(
+      child: MaterialApp(
         title: 'inKino',
-        theme: new ThemeData(
+        theme: ThemeData(
           primaryColor: const Color(0xFF1C306D),
           accentColor: const Color(0xFFFFAD32),
         ),

@@ -21,12 +21,12 @@ class AppState {
   final EventState eventState;
 
   factory AppState.initial() {
-    return new AppState(
+    return AppState(
       searchQuery: null,
       actorsByName: <String, Actor>{},
-      theaterState: new TheaterState.initial(),
-      showState: new ShowState.initial(),
-      eventState: new EventState.initial(),
+      theaterState: TheaterState.initial(),
+      showState: ShowState.initial(),
+      eventState: EventState.initial(),
     );
   }
 
@@ -37,7 +37,7 @@ class AppState {
     ShowState showState,
     EventState eventState,
   }) {
-    return new AppState(
+    return AppState(
       searchQuery: searchQuery ?? this.searchQuery,
       actorsByName: actorsByName ?? this.actorsByName,
       theaterState: theaterState ?? this.theaterState,
