@@ -37,7 +37,10 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     ];
 
     if (_isExpandable) {
-      content.add(_buildCollapseExpandPrompt());
+      content.add(Padding(
+        padding: const EdgeInsets.only(left: 4.0),
+        child: _buildExpandCollapsePrompt(),
+      ));
     }
 
     return Row(
@@ -47,34 +50,27 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     );
   }
 
-  Widget _buildCollapseExpandPrompt() {
+  Widget _buildExpandCollapsePrompt() {
     const captionStyle = const TextStyle(
       fontSize: 12.0,
       fontWeight: FontWeight.w600,
       color: Colors.black54,
     );
+
     if (_isExpanded) {
-      return const Padding(
-        padding: const EdgeInsets.only(left: 4.0),
-        child: const Text('[touch to collapse]', style: captionStyle),
-      );
+      return const Text('[touch to collapse]', style: captionStyle);
     }
-    return const Padding(
-      padding: const EdgeInsets.only(left: 4.0),
-      child: const Text('[touch to expand]', style: captionStyle),
-    );
+
+    return const Text('[touch to expand]', style: captionStyle);
   }
 
   Widget _buildContent() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: AnimatedCrossFade(
-        firstChild: Text(widget.event.shortSynopsis),
-        secondChild: Text(widget.event.synopsis),
-        crossFadeState:
-            _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-        duration: kThemeAnimationDuration,
-      ),
+    return AnimatedCrossFade(
+      firstChild: Text(widget.event.shortSynopsis),
+      secondChild: Text(widget.event.synopsis),
+      crossFadeState:
+          _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+      duration: kThemeAnimationDuration,
     );
   }
 
@@ -91,6 +87,7 @@ class _StorylineWidgetState extends State<StorylineWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildCaption(),
+            const SizedBox(height: 8.0),
             _buildContent(),
           ],
         ),

@@ -14,14 +14,12 @@ class ShowtimeDateSelector extends StatelessWidget {
     var content = Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Text(
-            DateFormat('E').format(date),
-            style: TextStyle(
-              fontSize: 12.0,
-              color: color,
-            ),
+        const SizedBox(height: 10.0),
+        Text(
+          DateFormat('E').format(date),
+          style: TextStyle(
+            fontSize: 12.0,
+            color: color,
           ),
         ),
         Text(

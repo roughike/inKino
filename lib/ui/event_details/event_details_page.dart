@@ -82,7 +82,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildEventInfo() {
-    var content = <Widget>[]..addAll(_buildTitleAndLengthInMinutes());
+    var content = <Widget>[]..addAll(
+        _buildTitleAndLengthInMinutes(),
+      );
 
     if (widget.event.directors.isNotEmpty) {
       content.add(Padding(
@@ -109,14 +111,12 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
           fontWeight: FontWeight.w800,
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Text(
-          '$length | $genres',
-          style: const TextStyle(
-            fontSize: 12.0,
-            fontWeight: FontWeight.w600,
-          ),
+      const SizedBox(height: 8.0),
+      Text(
+        '$length | $genres',
+        style: const TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w600,
         ),
       ),
     ];
@@ -134,15 +134,13 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
             fontWeight: FontWeight.w600,
           ),
         ),
+        const SizedBox(width: 4.0),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 4.0),
-            child: Text(
-              widget.event.directors.first,
-              style: const TextStyle(
-                fontSize: 12.0,
-                color: Colors.black87,
-              ),
+          child: Text(
+            widget.event.directors.first,
+            style: const TextStyle(
+              fontSize: 12.0,
+              color: Colors.black87,
             ),
           ),
         ),
@@ -231,7 +229,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
     addIfNonNull(_buildActorScroller(), content);
 
     // Some padding for the bottom.
-    content.add(Container(height: 32.0));
+    content.add(const SizedBox(height: 32.0));
 
     return Scaffold(
       backgroundColor: Colors.white,

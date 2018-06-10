@@ -38,13 +38,10 @@ class ActorScrollerContent extends StatelessWidget {
   }
 
   Widget _buildActorListItem(BuildContext context, Actor actor) {
-    var actorName = Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Text(
-        actor.name,
-        style: const TextStyle(fontSize: 12.0),
-        textAlign: TextAlign.center,
-      ),
+    var actorName = Text(
+      actor.name,
+      style: const TextStyle(fontSize: 12.0),
+      textAlign: TextAlign.center,
     );
 
     return Container(
@@ -53,6 +50,7 @@ class ActorScrollerContent extends StatelessWidget {
       child: Column(
         children: <Widget>[
           _buildActorAvatar(context, actor),
+          const SizedBox(height: 8.0),
           actorName,
         ],
       ),
@@ -111,12 +109,10 @@ class ActorScrollerContent extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: SizedBox.fromSize(
-              size: const Size.fromHeight(110.0),
-              child: _buildActorList(context),
-            ),
+          const SizedBox(height: 16.0),
+          SizedBox.fromSize(
+            size: const Size.fromHeight(110.0),
+            child: _buildActorList(context),
           ),
         ],
       ),

@@ -77,15 +77,13 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
           color: Colors.white70,
           size: 18.0,
         ),
-        const Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: const Text(
-            'About',
-            textAlign: TextAlign.end,
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 12.0,
-            ),
+        const SizedBox(width: 8.0),
+        const Text(
+          'About',
+          textAlign: TextAlign.end,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 12.0,
           ),
         ),
       ],
@@ -116,6 +114,7 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _buildAboutText(),
+          const SizedBox(height: 16.0),
           _buildTMDBAttribution(),
         ],
       ),
@@ -160,28 +159,20 @@ class _InKinoDrawerHeaderState extends State<InKinoDrawerHeader> {
   }
 
   Widget _buildTMDBAttribution() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
-      child: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Image.asset(
-              ImageAssets.poweredByTMDBLogo,
-              width: 32.0,
-            ),
+    return Row(
+      children: <Widget>[
+        Image.asset(
+          ImageAssets.poweredByTMDBLogo,
+          width: 32.0,
+        ),
+        const SizedBox(width: 12.0),
+        const Expanded(
+          child: Text(
+            'This product uses the TMDb API but is not endorsed or certified by TMDb.',
+            style: TextStyle(fontSize: 12.0),
           ),
-          const Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 12.0),
-              child: Text(
-                'This product uses the TMDb API but is not endorsed or certified by TMDb.',
-                style: TextStyle(fontSize: 12.0),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
