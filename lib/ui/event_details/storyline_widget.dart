@@ -37,7 +37,10 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     ];
 
     if (_isExpandable) {
-      content.add(_buildExpandCollapsePrompt());
+      content.add(Padding(
+        padding: const EdgeInsets.only(left: 4.0),
+        child: _buildExpandCollapsePrompt(),
+      ));
     }
 
     return Row(
@@ -55,16 +58,10 @@ class _StorylineWidgetState extends State<StorylineWidget> {
     );
 
     if (_isExpanded) {
-      return const Padding(
-        padding: const EdgeInsets.only(left: 4.0),
-        child: const Text('[touch to collapse]', style: captionStyle),
-      );
+      return const Text('[touch to collapse]', style: captionStyle);
     }
 
-    return const Padding(
-      padding: const EdgeInsets.only(left: 4.0),
-      child: const Text('[touch to expand]', style: captionStyle),
-    );
+    return const Text('[touch to expand]', style: captionStyle);
   }
 
   Widget _buildContent() {
