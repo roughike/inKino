@@ -39,14 +39,12 @@ class EventGridItem extends StatelessWidget {
             fontSize: 16.0,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0),
-          child: Text(
-            event.genres,
-            style: const TextStyle(
-              fontSize: 12.0,
-              color: Colors.white70,
-            ),
+        const SizedBox(height: 4.0),
+        Text(
+          event.genres,
+          style: const TextStyle(
+            fontSize: 12.0,
+            color: Colors.white70,
           ),
         ),
       ],

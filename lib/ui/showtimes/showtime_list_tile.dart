@@ -68,26 +68,21 @@ class ShowtimeListTile extends StatelessWidget {
     );
 
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              show.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            show.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 14.0,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(show.theaterAndAuditorium),
-            ),
-            presentationMethodInfo,
-          ],
-        ),
+          ),
+          const SizedBox(height: 4.0),
+          Text(show.theaterAndAuditorium),
+          presentationMethodInfo,
+        ],
       ),
     );
   }
@@ -106,6 +101,7 @@ class ShowtimeListTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               _buildShowtimesInfo(),
+              const SizedBox(width: 20.0),
               _buildDetailedInfo(),
             ],
           ),

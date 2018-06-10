@@ -19,27 +19,24 @@ class ShowtimeInformation extends StatelessWidget {
   final Show show;
 
   Widget _buildTimeAndTheaterInformation() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            weekdayFormat.format(show.start),
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          weekdayFormat.format(show.start),
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
           ),
-          Text(
-            show.theaterAndAuditorium,
-            style: const TextStyle(
-              color: Colors.black54,
-              fontSize: 12.0,
-            ),
+        ),
+        Text(
+          show.theaterAndAuditorium,
+          style: const TextStyle(
+            color: Colors.black54,
+            fontSize: 12.0,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -55,19 +52,18 @@ class ShowtimeInformation extends StatelessWidget {
                 Icons.schedule,
                 color: Colors.black87,
               ),
+              const SizedBox(width: 8.0),
               _buildTimeAndTheaterInformation(),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: RaisedButton(
-            key: ticketsButtonKey,
-            onPressed: () => launchTicketsUrl(show.url),
-            color: Theme.of(context).accentColor,
-            textColor: Colors.white,
-            child: const Text('Tickets'),
-          ),
+        const SizedBox(width: 8.0),
+        RaisedButton(
+          key: ticketsButtonKey,
+          onPressed: () => launchTicketsUrl(show.url),
+          color: Theme.of(context).accentColor,
+          textColor: Colors.white,
+          child: const Text('Tickets'),
         ),
       ],
     );

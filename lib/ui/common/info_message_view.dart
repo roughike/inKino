@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
 
 class ErrorView extends InfoMessageView {
@@ -31,9 +32,26 @@ class InfoMessageView extends StatelessWidget {
   final String description;
   final VoidCallback onActionButtonTapped;
 
+  Widget _buildActionButton(BuildContext context) {
+    if (onActionButtonTapped == null) {
+      return null;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: FlatButton(
+        key: actionButtonKey,
+        onPressed: onActionButtonTapped,
+        child: Text(
+          'TRY AGAIN',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     var content = <Widget>[
       const CircleAvatar(
         child: Icon(
@@ -44,35 +62,19 @@ class InfoMessageView extends StatelessWidget {
         backgroundColor: Colors.black12,
         radius: 42.0,
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 24.0),
-        ),
+      const SizedBox(height: 16.0),
+      Text(
+        title,
+        style: const TextStyle(fontSize: 24.0),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Text(
-          description,
-          textAlign: TextAlign.center,
-        ),
+      const SizedBox(height: 8.0),
+      Text(
+        description,
+        textAlign: TextAlign.center,
       ),
     ];
 
-    if (onActionButtonTapped != null) {
-      content.add(Padding(
-        padding: const EdgeInsets.only(top: 12.0),
-        child: FlatButton(
-          key: actionButtonKey,
-          onPressed: onActionButtonTapped,
-          child: Text(
-            'TRY AGAIN',
-            style: TextStyle(color: theme.primaryColor),
-          ),
-        ),
-      ));
-    }
+    addIfNonNull(_buildActionButton(context), content);
 
     return SingleChildScrollView(
       child: Container(
