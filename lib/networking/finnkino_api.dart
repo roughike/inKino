@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:inkino/models/event.dart';
 import 'package:inkino/models/show.dart';
 import 'package:inkino/models/theater.dart';
+import 'package:inkino/networking/event_parser.dart';
+import 'package:inkino/networking/show_parser.dart';
 import 'package:inkino/utils/http_utils.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +25,7 @@ class FinnkinoApi {
       }),
     );
 
-    return Show.parseAll(response);
+    return ShowParser.parse(response);
   }
 
   Future<List<Event>> getNowInTheatersEvents(Theater theater) async {
@@ -34,7 +36,7 @@ class FinnkinoApi {
       }),
     );
 
-    return Event.parseAll(response);
+    return EventParser.parse(response);
   }
 
   Future<List<Event>> getUpcomingEvents() async {
@@ -44,6 +46,6 @@ class FinnkinoApi {
       }),
     );
 
-    return Event.parseAll(response);
+    return EventParser.parse(response);
   }
 }

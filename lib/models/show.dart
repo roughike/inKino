@@ -1,7 +1,3 @@
-import 'package:inkino/utils/event_name_cleaner.dart';
-import 'package:inkino/utils/xml_utils.dart';
-import 'package:xml/xml.dart' as xml;
-
 class Show {
   Show({
     this.id,
@@ -25,42 +21,20 @@ class Show {
   final DateTime start;
   final DateTime end;
 
-  static List<Show> parseAll(String xmlString) {
-    var document = xml.parse(xmlString);
-    var shows = document.findAllElements('Show');
-
-    return shows.map((node) {
-      var title = tagContents(node, 'Title');
-      var originalTitle = tagContents(node, 'OriginalTitle');
-
-      return Show(
-        id: tagContents(node, 'ID'),
-        eventId: tagContents(node, 'EventID'),
-        title: EventNameCleaner.cleanup(title),
-        originalTitle: EventNameCleaner.cleanup(originalTitle),
-        url: tagContents(node, 'ShowURL'),
-        presentationMethod: tagContents(node, 'PresentationMethod'),
-        theaterAndAuditorium: tagContents(node, 'TheatreAndAuditorium'),
-        start: DateTime.parse(tagContents(node, 'dttmShowStart')),
-        end: DateTime.parse(tagContents(node, 'dttmShowEnd')),
-      );
-    }).toList();
-  }
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Show &&
-              runtimeType == other.runtimeType &&
-              id == other.id &&
-              eventId == other.eventId &&
-              title == other.title &&
-              originalTitle == other.originalTitle &&
-              url == other.url &&
-              presentationMethod == other.presentationMethod &&
-              theaterAndAuditorium == other.theaterAndAuditorium &&
-              start == other.start &&
-              end == other.end;
+      other is Show &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          eventId == other.eventId &&
+          title == other.title &&
+          originalTitle == other.originalTitle &&
+          url == other.url &&
+          presentationMethod == other.presentationMethod &&
+          theaterAndAuditorium == other.theaterAndAuditorium &&
+          start == other.start &&
+          end == other.end;
 
   @override
   int get hashCode =>

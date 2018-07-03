@@ -1,10 +1,11 @@
 import 'package:inkino/models/event.dart';
+import 'package:inkino/networking/event_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Event model', () {
+  group('EventParser', () {
     test('parsing tests', () {
-      List<Event> deserialized = Event.parseAll(eventsXml);
+      List<Event> deserialized = EventParser.parse(eventsXml);
       expect(deserialized.length, 3);
 
       var paris1517 = deserialized.first;
