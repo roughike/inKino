@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
 /// If this has a red underline, it means that the lib/tmdb_config.dart file
 /// is not present on the project. Refer to the README for instructions
 /// on how to do so.
@@ -12,9 +12,6 @@ import 'package:inkino/utils/http_utils.dart';
 /// is not present on the project. Refer to the README for instructions
 /// on how to do so.
 
-/// If this has a red underline, it means that the lib/tmdb_config.dart file
-/// is not present on the project. Refer to the README for instructions
-/// on how to do so.
 
 
 class TMDBApi {

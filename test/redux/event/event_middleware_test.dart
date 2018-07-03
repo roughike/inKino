@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_actions.dart';
 import 'package:inkino/redux/event/event_middleware.dart';

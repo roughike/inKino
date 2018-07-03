@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:inkino/data/loading_status.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/loading_status.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_list.dart';

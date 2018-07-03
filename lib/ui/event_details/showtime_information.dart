@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/show.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:inkino/data/networking/finnkino_api.dart';
+import 'package:inkino/networking/finnkino_api.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:mockito/mockito.dart';
 import 'package:redux/redux.dart';

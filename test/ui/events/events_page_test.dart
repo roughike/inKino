@@ -2,9 +2,9 @@ import 'dart:io' as io;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:inkino/data/loading_status.dart';
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/loading_status.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';

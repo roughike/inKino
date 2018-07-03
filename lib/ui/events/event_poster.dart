@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/event.dart';
 import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';

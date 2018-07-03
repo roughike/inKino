@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/event.dart';
 import 'package:inkino/ui/events/event_poster.dart';
 import 'package:meta/meta.dart';
 

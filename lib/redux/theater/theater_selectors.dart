@@ -1,4 +1,4 @@
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/theater.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 Theater currentTheaterSelector(AppState state) =>

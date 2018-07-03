@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/networking/tmdb_api.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/networking/tmdb_api.dart';
 import 'package:inkino/redux/actor/actor_actions.dart';
 import 'package:inkino/redux/actor/actor_middleware.dart';
 import 'package:inkino/redux/common_actions.dart';

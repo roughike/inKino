@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:inkino/data/networking/finnkino_api.dart';
-import 'package:inkino/data/networking/tmdb_api.dart';
+import 'package:inkino/networking/finnkino_api.dart';
+import 'package:inkino/networking/tmdb_api.dart';
 import 'package:inkino/redux/actor/actor_middleware.dart';
 import 'package:inkino/redux/app/app_reducer.dart';
 import 'package:inkino/redux/app/app_state.dart';

@@ -2,9 +2,9 @@ import 'dart:io' as io;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart'
     as eventDetails;
 import 'package:inkino/ui/event_details/showtime_information.dart';

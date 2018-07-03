@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_reducer.dart';
 import 'package:inkino/redux/event/event_state.dart';
