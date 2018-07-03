@@ -1,7 +1,7 @@
 import 'dart:collection';
 
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 List<Event> eventsSelector(AppState state, EventListType type) {

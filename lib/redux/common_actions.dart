@@ -1,6 +1,6 @@
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/theater.dart';
 
 class InitAction {}
 

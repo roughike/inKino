@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:inkino/data/networking/tmdb_api.dart';
+import 'package:inkino/networking/tmdb_api.dart';
 import 'package:inkino/redux/actor/actor_actions.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/common_actions.dart';

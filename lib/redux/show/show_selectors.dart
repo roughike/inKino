@@ -1,4 +1,4 @@
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 List<Show> showsSelector(AppState state) {

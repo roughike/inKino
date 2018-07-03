@@ -1,4 +1,4 @@
-import 'package:inkino/data/loading_status.dart';
+import 'package:inkino/models/loading_status.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/show/show_actions.dart';
 import 'package:inkino/redux/show/show_state.dart';

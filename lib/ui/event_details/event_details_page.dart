@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/ui/event_details/actor_scroller.dart';
 import 'package:inkino/ui/event_details/event_backdrop_photo.dart';
 import 'package:inkino/ui/event_details/event_details_scroll_effects.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/show.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/event/event_selectors.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';

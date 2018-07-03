@@ -1,5 +1,5 @@
-import 'package:inkino/data/loading_status.dart';
-import 'package:inkino/data/models/show.dart';
+import 'package:inkino/models/loading_status.dart';
+import 'package:inkino/models/show.dart';
 import 'package:meta/meta.dart';
 
 @immutable

@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:inkino/assets.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/event.dart';
 import 'package:inkino/utils/widget_utils.dart';
 import 'package:meta/meta.dart';
 
