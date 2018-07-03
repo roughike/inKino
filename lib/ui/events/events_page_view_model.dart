@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:inkino/data/loading_status.dart';
 import 'package:inkino/data/models/event.dart';
 import 'package:inkino/redux/app/app_state.dart';
@@ -34,10 +35,8 @@ class EventsPageViewModel {
       other is EventsPageViewModel &&
           runtimeType == other.runtimeType &&
           status == other.status &&
-          events == other.events &&
-          refreshEvents == other.refreshEvents;
+          const IterableEquality().equals(events, other.events);
 
   @override
-  int get hashCode =>
-      status.hashCode ^ events.hashCode ^ refreshEvents.hashCode;
+  int get hashCode => status.hashCode ^ const IterableEquality().hash(events);
 }

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:inkino/data/loading_status.dart';
 import 'package:inkino/data/models/show.dart';
 import 'package:inkino/redux/app/app_state.dart';
@@ -42,18 +43,14 @@ class ShowtimesPageViewModel {
       other is ShowtimesPageViewModel &&
           runtimeType == other.runtimeType &&
           status == other.status &&
-          dates == other.dates &&
+          const IterableEquality().equals(dates, other.dates) &&
           selectedDate == other.selectedDate &&
-          shows == other.shows &&
-          changeCurrentDate == other.changeCurrentDate &&
-          refreshShowtimes == other.refreshShowtimes;
+          const IterableEquality().equals(shows, other.shows);
 
   @override
   int get hashCode =>
       status.hashCode ^
-      dates.hashCode ^
+      const IterableEquality().hash(dates) ^
       selectedDate.hashCode ^
-      shows.hashCode ^
-      changeCurrentDate.hashCode ^
-      refreshShowtimes.hashCode;
+      const IterableEquality().hash(shows);
 }

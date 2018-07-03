@@ -88,6 +88,37 @@ class Event {
       return 'https://youtube.com/watch?v=' + tagContents(node, 'Location');
     }).toList();
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Event &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              title == other.title &&
+              originalTitle == other.originalTitle &&
+              genres == other.genres &&
+              directors == other.directors &&
+              lengthInMinutes == other.lengthInMinutes &&
+              shortSynopsis == other.shortSynopsis &&
+              synopsis == other.synopsis &&
+              images == other.images &&
+              youtubeTrailers == other.youtubeTrailers &&
+              actors == other.actors;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      title.hashCode ^
+      originalTitle.hashCode ^
+      genres.hashCode ^
+      directors.hashCode ^
+      lengthInMinutes.hashCode ^
+      shortSynopsis.hashCode ^
+      synopsis.hashCode ^
+      images.hashCode ^
+      youtubeTrailers.hashCode ^
+      actors.hashCode;
 }
 
 class EventImageData {
@@ -134,4 +165,23 @@ class EventImageData {
       landscapeBig: tagContentsOrNull(root, 'EventLargeImageLandscape'),
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is EventImageData &&
+              runtimeType == other.runtimeType &&
+              portraitSmall == other.portraitSmall &&
+              portraitMedium == other.portraitMedium &&
+              portraitLarge == other.portraitLarge &&
+              landscapeSmall == other.landscapeSmall &&
+              landscapeBig == other.landscapeBig;
+
+  @override
+  int get hashCode =>
+      portraitSmall.hashCode ^
+      portraitMedium.hashCode ^
+      portraitLarge.hashCode ^
+      landscapeSmall.hashCode ^
+      landscapeBig.hashCode;
 }
