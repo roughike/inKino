@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/show.dart';
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/show.dart';
+import 'package:inkino/models/theater.dart';
 
 class UpdateShowDatesAction {}
 

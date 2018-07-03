@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/theater.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/theater/theater_middleware.dart';
 import 'package:mockito/mockito.dart';

@@ -1,5 +1,5 @@
-import 'package:inkino/data/loading_status.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/loading_status.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_actions.dart';
 import 'package:inkino/redux/event/event_state.dart';

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:inkino/data/models/event.dart';
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/theater.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/search/search_actions.dart';
 import 'package:inkino/ui/events/events_page.dart';

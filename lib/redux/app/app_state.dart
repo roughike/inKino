@@ -1,4 +1,4 @@
-import 'package:inkino/data/models/actor.dart';
+import 'package:inkino/models/actor.dart';
 import 'package:inkino/redux/event/event_state.dart';
 import 'package:inkino/redux/show/show_state.dart';
 import 'package:inkino/redux/theater/theater_state.dart';

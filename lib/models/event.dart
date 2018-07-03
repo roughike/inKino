@@ -1,4 +1,4 @@
-import 'package:inkino/data/models/actor.dart';
+import 'package:inkino/models/actor.dart';
 import 'package:inkino/utils/event_name_cleaner.dart';
 import 'package:inkino/utils/xml_utils.dart';
 import 'package:meta/meta.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:inkino/data/models/theater.dart';
-import 'package:inkino/data/networking/finnkino_api.dart';
+import 'package:inkino/models/theater.dart';
+import 'package:inkino/networking/finnkino_api.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:inkino/redux/event/event_actions.dart';

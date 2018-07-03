@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
 
 class FetchActorAvatarsAction {
   FetchActorAvatarsAction(this.event);

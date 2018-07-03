@@ -1,5 +1,5 @@
-import 'package:inkino/data/models/actor.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/actor.dart';
+import 'package:inkino/models/event.dart';
 import 'package:inkino/redux/app/app_state.dart';
 
 List<Actor> actorsForEventSelector(AppState state, Event event) {
