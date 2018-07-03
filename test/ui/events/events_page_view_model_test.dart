@@ -1,5 +1,5 @@
-import 'package:inkino/data/loading_status.dart';
-import 'package:inkino/data/models/event.dart';
+import 'package:inkino/models/event.dart';
+import 'package:inkino/models/loading_status.dart';
 import 'package:inkino/ui/events/events_page_view_model.dart';
 import 'package:test/test.dart';
 

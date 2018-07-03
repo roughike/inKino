@@ -1,4 +1,4 @@
-import 'package:inkino/data/models/theater.dart';
+import 'package:inkino/models/theater.dart';
 import 'package:inkino/ui/theater_list/theater_list_view_model.dart';
 import 'package:test/test.dart';
 
