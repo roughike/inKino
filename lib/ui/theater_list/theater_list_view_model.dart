@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:inkino/models/theater.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/common_actions.dart';
@@ -32,12 +33,10 @@ class TheaterListViewModel {
       other is TheaterListViewModel &&
           runtimeType == other.runtimeType &&
           currentTheater == other.currentTheater &&
-          theaters == other.theaters &&
-          changeCurrentTheater == other.changeCurrentTheater;
+          const IterableEquality().equals(theaters, other.theaters);
 
   @override
   int get hashCode =>
       currentTheater.hashCode ^
-      theaters.hashCode ^
-      changeCurrentTheater.hashCode;
+      const IterableEquality().hash(theaters);
 }

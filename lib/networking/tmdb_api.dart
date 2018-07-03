@@ -12,6 +12,10 @@ import 'package:inkino/utils/http_utils.dart';
 /// is not present on the project. Refer to the README for instructions
 /// on how to do so.
 
+/// If this has a red underline, it means that the lib/tmdb_config.dart file
+/// is not present on the project. Refer to the README for instructions
+/// on how to do so.
+
 
 
 class TMDBApi {
