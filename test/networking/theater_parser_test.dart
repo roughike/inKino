@@ -1,10 +1,11 @@
 import 'package:inkino/models/theater.dart';
+import 'package:inkino/networking/theater_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Theater model', () {
+  group('TheaterParser', () {
     test('parsing test', () {
-      List<Theater> deserialized = Theater.parseAll(theatersXml);
+      List<Theater> deserialized = TheaterParser.parse(theatersXml);
       expect(deserialized.length, 3);
 
       expect(deserialized[0].id, '1029');

@@ -1,10 +1,11 @@
 import 'package:inkino/models/show.dart';
+import 'package:inkino/networking/show_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Show model', () {
+  group('ShowParser', () {
     test('parsing test', () {
-      List<Show> deserialized = Show.parseAll(showsXml);
+      List<Show> deserialized = ShowParser.parse(showsXml);
       expect(deserialized.length, 3);
 
       var jumanji = deserialized.first;

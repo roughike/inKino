@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/models/theater.dart';
+import 'package:inkino/networking/theater_parser.dart';
 import 'package:inkino/redux/app/app_state.dart';
 import 'package:inkino/redux/common_actions.dart';
 import 'package:redux/redux.dart';
@@ -33,7 +34,7 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     NextDispatcher next,
   ) async {
     var theaterXml = await bundle.loadString(OtherAssets.preloadedTheaters);
-    var theaters = Theater.parseAll(theaterXml);
+    var theaters = TheaterParser.parse(theaterXml);
     var currentTheater = _getDefaultTheater(theaters);
 
     next(InitCompleteAction(theaters, currentTheater));
