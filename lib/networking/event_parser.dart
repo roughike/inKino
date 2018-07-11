@@ -17,6 +17,7 @@ class EventParser {
         id: tagContents(node, 'ID'),
         title: EventNameCleaner.cleanup(title),
         originalTitle: EventNameCleaner.cleanup(originalTitle),
+        productionYear: int.parse(tagContents(node, 'ProductionYear')),
         genres: tagContents(node, 'Genres'),
         directors: _parseDirectors(node.findAllElements('Director')),
         actors: _parseActors(node.findAllElements('Actor')),
