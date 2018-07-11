@@ -32,7 +32,7 @@ class TMDBApi {
     return actors;
   }
 
-  Future<int> _findMovieId(String movieTitle, int movieYear) async {
+  Future<int> _findMovieId(String movieTitle, String movieYear) async {
     var searchUri = Uri.https(
       baseUrl,
       '3/search/movie',

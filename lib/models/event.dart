@@ -25,7 +25,7 @@ class Event {
   final String id;
   final String title;
   final String originalTitle;
-  final int productionYear;
+  final String productionYear;
   final String genres;
   final List<String> directors;
   final String lengthInMinutes;
