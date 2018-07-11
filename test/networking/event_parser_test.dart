@@ -12,6 +12,7 @@ void main() {
       expect(paris1517.id, '302535');
       expect(paris1517.title, '15:17 Pariisiin');
       expect(paris1517.originalTitle, 'The 15:17 to Paris');
+      expect(paris1517.productionYear, 2018);
       expect(paris1517.genres, 'Draama, Jännitys');
       expect(paris1517.directors.length, 1);
       expect(paris1517.directors.first, 'Clint Eastwood');
