@@ -11,6 +11,7 @@ class Event {
     this.id,
     this.title,
     this.originalTitle,
+    this.productionYear,
     this.genres,
     this.directors,
     this.actors,
@@ -24,6 +25,7 @@ class Event {
   final String id;
   final String title;
   final String originalTitle;
+  final String productionYear;
   final String genres;
   final List<String> directors;
   final String lengthInMinutes;
@@ -46,6 +48,7 @@ class Event {
           id == other.id &&
           title == other.title &&
           originalTitle == other.originalTitle &&
+          productionYear == other.productionYear &&
           genres == other.genres &&
           directors == other.directors &&
           lengthInMinutes == other.lengthInMinutes &&
@@ -60,6 +63,7 @@ class Event {
       id.hashCode ^
       title.hashCode ^
       originalTitle.hashCode ^
+      productionYear.hashCode ^
       genres.hashCode ^
       directors.hashCode ^
       lengthInMinutes.hashCode ^
