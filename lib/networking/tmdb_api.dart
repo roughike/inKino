@@ -23,7 +23,7 @@ class TMDBApi {
 
   Future<List<Actor>> findAvatarsForActors(
       Event event, List<Actor> actors) async {
-    int movieId = await _findMovieId(event.originalTitle);
+    int movieId = await _findMovieId(event.originalTitle, event.productionYear);
 
     if (movieId != null) {
       return _getActorAvatars(movieId);
@@ -32,13 +32,14 @@ class TMDBApi {
     return actors;
   }
 
-  Future<int> _findMovieId(String movieTitle) async {
+  Future<int> _findMovieId(String movieTitle, String movieYear) async {
     var searchUri = Uri.https(
       baseUrl,
       '3/search/movie',
       <String, String>{
         'api_key': TMDBConfig.apiKey,
         'query': movieTitle,
+        'year': movieYear,
       },
     );
 
