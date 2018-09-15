@@ -7,6 +7,8 @@ import 'package:inkino/redux/show/show_selectors.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
+typedef void DateChangeCallback(DateTime newDate);
+
 class ShowtimesPageViewModel {
   ShowtimesPageViewModel({
     @required this.status,
@@ -21,7 +23,7 @@ class ShowtimesPageViewModel {
   final List<DateTime> dates;
   final DateTime selectedDate;
   final List<Show> shows;
-  final Function(DateTime) changeCurrentDate;
+  final DateChangeCallback changeCurrentDate;
   final Function refreshShowtimes;
 
   static ShowtimesPageViewModel fromStore(Store<AppState> store) {

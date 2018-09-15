@@ -53,7 +53,7 @@ void main() {
         // passed. As DateTime(2018) will mean the very first hour and minute
         // in January, all the show times in test assets will be after this date.
         Clock.getCurrentTime = () => startOf2018;
-        when(mockFinnkinoApi.getSchedule(theater, typed(any)))
+        when(mockFinnkinoApi.getSchedule(theater, any))
             .thenAnswer((_) => Future.value(<Show>[
                   Show(start: DateTime(2018, 02, 21)),
                   Show(start: DateTime(2018, 02, 21)),
@@ -68,9 +68,9 @@ void main() {
         verify(mockFinnkinoApi.getSchedule(theater, null));
 
         expect(actionLog.length, 4);
-        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
-        expect(actionLog[2], const isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[0], const TypeMatcher<InitCompleteAction>());
+        expect(actionLog[1], const TypeMatcher<ShowDatesUpdatedAction>());
+        expect(actionLog[2], const TypeMatcher<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[3];
         expect(receivedShowsAction.shows.length, 3);
@@ -82,7 +82,7 @@ void main() {
       () async {
         // Given
         Clock.getCurrentTime = () => DateTime(2018, 3);
-        when(mockFinnkinoApi.getSchedule(theater, typed(any)))
+        when(mockFinnkinoApi.getSchedule(theater, any))
             .thenAnswer((_) => Future.value(
                   <Show>[
                     Show(start: DateTime(2018, 02, 21)),
@@ -99,8 +99,8 @@ void main() {
         verify(mockFinnkinoApi.getSchedule(theater, startOf2018));
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], const isInstanceOf<ChangeCurrentDateAction>());
-        expect(actionLog[1], const isInstanceOf<RequestingShowsAction>());
+        expect(actionLog[0], const TypeMatcher<ChangeCurrentDateAction>());
+        expect(actionLog[1], const TypeMatcher<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[2];
         expect(receivedShowsAction.shows.length, 1);
@@ -111,8 +111,8 @@ void main() {
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingShowsAction',
       () async {
         // Given
-        when(mockFinnkinoApi.getSchedule(typed(any), typed(any)))
-            .thenAnswer((_) => Future.value(Error()));
+        when(mockFinnkinoApi.getSchedule(any, any))
+            .thenAnswer((_) => Future.error(Error()));
 
         // When
         await middleware.call(
@@ -120,10 +120,10 @@ void main() {
 
         // Then
         expect(actionLog.length, 4);
-        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
-        expect(actionLog[2], const isInstanceOf<RequestingShowsAction>());
-        expect(actionLog[3], const isInstanceOf<ErrorLoadingShowsAction>());
+        expect(actionLog[0], const TypeMatcher<InitCompleteAction>());
+        expect(actionLog[1], const TypeMatcher<ShowDatesUpdatedAction>());
+        expect(actionLog[2], const TypeMatcher<RequestingShowsAction>());
+        expect(actionLog[3], const TypeMatcher<ErrorLoadingShowsAction>());
       },
     );
 
@@ -135,8 +135,8 @@ void main() {
         await middleware.call(mockStore, UpdateShowDatesAction(), next);
 
         expect(actionLog.length, 2);
-        expect(actionLog[0], const isInstanceOf<UpdateShowDatesAction>());
-        expect(actionLog[1], const isInstanceOf<ShowDatesUpdatedAction>());
+        expect(actionLog[0], const TypeMatcher<UpdateShowDatesAction>());
+        expect(actionLog[1], const TypeMatcher<ShowDatesUpdatedAction>());
 
         ShowDatesUpdatedAction action = actionLog[1];
         expect(

@@ -43,7 +43,7 @@ void main() {
     test(
       'when called with InitCompleteAction, should dispatch a ReceivedEventsAction with now playing and upcoming events',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
+        when(mockFinnkinoApi.getNowInTheatersEvents(any))
             .thenAnswer((_) => Future.value(nowInTheatersEvents));
         when(mockFinnkinoApi.getUpcomingEvents())
             .thenAnswer((_) => Future.value(upcomingEvents));
@@ -52,8 +52,8 @@ void main() {
             null, InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<RequestingEventsAction>());
+        expect(actionLog[0], const TypeMatcher<InitCompleteAction>());
+        expect(actionLog[1], const TypeMatcher<RequestingEventsAction>());
 
         final ReceivedEventsAction action = actionLog[2];
         expect(action.nowInTheatersEvents, nowInTheatersEvents);
@@ -64,7 +64,7 @@ void main() {
     test(
       'when called with ChangeCurrentTheaterAction, should request events for the theater',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
+        when(mockFinnkinoApi.getNowInTheatersEvents(any))
             .thenAnswer((_) => Future.value(nowInTheatersEvents));
         when(mockFinnkinoApi.getUpcomingEvents())
             .thenAnswer((_) => Future.value(upcomingEvents));
@@ -81,7 +81,7 @@ void main() {
         );
 
         Theater captured =
-            verify(mockFinnkinoApi.getNowInTheatersEvents(typed(captureAny)))
+            verify(mockFinnkinoApi.getNowInTheatersEvents(captureAny))
                 .captured
                 .first;
         expect(captured.id, 'changed');
@@ -92,18 +92,18 @@ void main() {
     test(
       'when InitCompleteAction results in an error, should dispatch an ErrorLoadingEventsAction',
       () async {
-        when(mockFinnkinoApi.getNowInTheatersEvents(typed(any)))
-            .thenAnswer((_) => Future.value(Error()));
+        when(mockFinnkinoApi.getNowInTheatersEvents(any))
+            .thenAnswer((_) => Future.error(Error()));
         when(mockFinnkinoApi.getUpcomingEvents())
-            .thenAnswer((_) => Future.value(Error()));
+            .thenAnswer((_) => Future.error(Error()));
 
         await middleware.call(
             null, InitCompleteAction(null, theater), next);
 
         expect(actionLog.length, 3);
-        expect(actionLog[0], const isInstanceOf<InitCompleteAction>());
-        expect(actionLog[1], const isInstanceOf<RequestingEventsAction>());
-        expect(actionLog[2], const isInstanceOf<ErrorLoadingEventsAction>());
+        expect(actionLog[0], const TypeMatcher<InitCompleteAction>());
+        expect(actionLog[1], const TypeMatcher<RequestingEventsAction>());
+        expect(actionLog[2], const TypeMatcher<ErrorLoadingEventsAction>());
       },
     );
   });

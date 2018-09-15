@@ -42,18 +42,17 @@ void main() {
     testWidgets(
       'when tapping a date, calls changeCurrentDate on the viewmodel with new date',
       (WidgetTester tester) async {
+        DateTime date;
+
         when(mockViewModel.dates).thenReturn(dates);
+        when(mockViewModel.changeCurrentDate).thenReturn((newDate) => date = newDate);
 
         await _buildDateSelector(tester);
-
         await tester.tap(find.text('Tue'));
 
-        DateTime newDateTime =
-            verify<DateTime>(mockViewModel.changeCurrentDate(typed(captureAny))).captured.single;
-
-        expect(newDateTime.year, 2018);
-        expect(newDateTime.month, 1);
-        expect(newDateTime.day, 2);
+        expect(date.year, 2018);
+        expect(date.month, 1);
+        expect(date.day, 2);
       },
     );
   });

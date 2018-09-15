@@ -93,12 +93,12 @@ void main() {
 
         // Building the events page should trigger the navigator observer
         // once.
-        verify(observer.didPush(typed(any), typed(any)));
+        verify(observer.didPush(any, any));
 
         await tester.tap(find.text('Test Title'));
         await tester.pumpAndSettle();
 
-        verify(observer.didPush(typed(any), typed(any)));
+        verify(observer.didPush(any, any));
         expect(find.byType(EventDetailsPage), findsOneWidget);
       },
     );

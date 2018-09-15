@@ -53,19 +53,17 @@ void main() {
     testWidgets(
       'when theater tapped, should call both changeCurrentTheater and onTheaterTapped',
       (WidgetTester tester) async {
+        Theater theater;
         when(mockViewModel.currentTheater).thenReturn(theaters.first);
         when(mockViewModel.theaters).thenReturn(theaters);
+        when(mockViewModel.changeCurrentTheater)
+            .thenReturn((newTheater) => theater = newTheater);
 
         await _buildTheaterList(tester);
-
         await tester.tap(find.text('Test Theater #2'));
 
-        Theater newTheater = verify<Theater>(
-                mockViewModel.changeCurrentTheater(typed(captureAny)))
-            .captured
-            .first;
-        expect(newTheater.id, '2');
-        expect(newTheater.name, 'Test Theater #2');
+        expect(theater.id, '2');
+        expect(theater.name, 'Test Theater #2');
 
         expect(theaterTappedCallbackCalled, isTrue);
       },

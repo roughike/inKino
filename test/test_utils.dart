@@ -31,12 +31,12 @@ MockHttpClient createMockImageHttpClient(io.SecurityContext _) {
   final MockHttpClientResponse response = MockHttpClientResponse();
   final MockHttpHeaders headers = MockHttpHeaders();
 
-  when(client.getUrl(typed(any))).thenAnswer((_) => Future<io.HttpClientRequest>.value(request));
+  when(client.getUrl(any)).thenAnswer((_) => Future<io.HttpClientRequest>.value(request));
   when(request.headers).thenReturn(headers);
   when(request.close()).thenAnswer((_) => Future<io.HttpClientResponse>.value(response));
   when(response.contentLength).thenReturn(_transparentImage.length);
-  when(response.statusCode).thenReturn(io.HttpStatus.OK);
-  when(response.listen(typed(any))).thenAnswer((Invocation invocation) {
+  when(response.statusCode).thenReturn(io.HttpStatus.ok);
+  when(response.listen(any)).thenAnswer((Invocation invocation) {
     final void Function(List<int>) onData = invocation.positionalArguments[0];
     final void Function() onDone = invocation.namedArguments[#onDone];
     final void Function(Object, [StackTrace]) onError = invocation.namedArguments[#onError];

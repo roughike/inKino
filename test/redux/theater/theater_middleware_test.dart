@@ -30,7 +30,7 @@ void main() {
     group('called with InitAction', () {
       test('loads the preloaded theaters', () async {
         // Given
-        when(mockAssetBundle.loadString(typed(any)))
+        when(mockAssetBundle.loadString(any))
             .thenAnswer((_) => theatersXml());
 
         // When
@@ -43,7 +43,7 @@ void main() {
 
       test('when a persisted theater id exists, uses that as a default',
           () async {
-        when(mockAssetBundle.loadString(typed(any)))
+        when(mockAssetBundle.loadString(any))
             .thenAnswer((_) => theatersXml());
         when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
             .thenReturn('001');
@@ -59,7 +59,7 @@ void main() {
       test(
         'when no persisted theater id, uses the first theater as a default',
         () async {
-          when(mockAssetBundle.loadString(typed(any)))
+          when(mockAssetBundle.loadString(any))
               .thenAnswer((_) => theatersXml());
           when(mockPreferences.getString(TheaterMiddleware.kDefaultTheaterId))
               .thenReturn(null);
