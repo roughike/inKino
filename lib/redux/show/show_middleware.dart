@@ -30,7 +30,7 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     }
   }
 
-  void _updateShowDates(dynamic action, NextDispatcher next) {
+  dynamic void _updateShowDates(dynamic action, NextDispatcher next) {
     var now = Clock.getCurrentTime();
     var dates = List.generate(7, (index) => now.add(Duration(days: index)));
 
