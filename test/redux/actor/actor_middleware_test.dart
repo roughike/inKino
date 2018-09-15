@@ -48,12 +48,12 @@ void main() {
     });
 
     test('FetchActorAvatarsAction - successful API request', () async {
-      when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
+      when(mockTMDBApi.findAvatarsForActors(any, any))
           .thenAnswer((_) => Future.value(actorsWithAvatars));
       await middleware.call(null, FetchActorAvatarsAction(event), next);
 
       expect(actionLog.length, 4);
-      expect(actionLog[0], const isInstanceOf<FetchActorAvatarsAction>());
+      expect(actionLog[0], const TypeMatcher<FetchActorAvatarsAction>());
 
       ActorsUpdatedAction actorsUpdated = actionLog[1];
       expect(actorsUpdated.actors, event.actors);
@@ -67,8 +67,8 @@ void main() {
     });
 
     test('FetchActorAvatarsAction - handles errors silently', () async {
-      when(mockTMDBApi.findAvatarsForActors(typed(any), typed(any)))
-          .thenAnswer((_) => Future.value(Error()));
+      when(mockTMDBApi.findAvatarsForActors(any, any))
+          .thenAnswer((_) => Future.error(Error()));
 
       await middleware.call(null, FetchActorAvatarsAction(event), next);
     });
