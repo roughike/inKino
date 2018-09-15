@@ -1,7 +1,6 @@
-import 'dart:io' as io;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image_test_utils/image_test_utils.dart';
 import 'package:inkino/models/actor.dart';
 import 'package:inkino/models/event.dart';
 import 'package:inkino/models/loading_status.dart';
@@ -13,9 +12,8 @@ import 'package:inkino/ui/events/events_page.dart';
 import 'package:inkino/ui/events/events_page_view_model.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../test_utils.dart';
-
 class MockEventsPageViewModel extends Mock implements EventsPageViewModel {}
+
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
@@ -36,18 +34,20 @@ void main() {
     EventsPageViewModel mockViewModel;
 
     setUp(() {
-      io.HttpOverrides.global = TestHttpOverrides();
-
       observer = MockNavigatorObserver();
       mockViewModel = MockEventsPageViewModel();
       when(mockViewModel.refreshEvents).thenReturn(() {});
     });
 
     Future<Null> _buildEventsPage(WidgetTester tester) {
-      return tester.pumpWidget(MaterialApp(
-        home: EventsPageContent(mockViewModel),
-        navigatorObservers: <NavigatorObserver>[observer],
-      ));
+      return provideMockedNetworkImages(() {
+        return tester.pumpWidget(
+          MaterialApp(
+            home: EventsPageContent(mockViewModel),
+            navigatorObservers: <NavigatorObserver>[observer],
+          ),
+        );
+      });
     }
 
     testWidgets(

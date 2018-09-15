@@ -1,7 +1,6 @@
-import 'dart:io' as io;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image_test_utils/image_test_utils.dart';
 import 'package:inkino/models/actor.dart';
 import 'package:inkino/models/event.dart';
 import 'package:inkino/models/show.dart';
@@ -14,16 +13,12 @@ import 'package:inkino/ui/events/event_poster.dart';
 import 'package:inkino/ui/events/event_poster.dart' as eventPoster;
 import 'package:meta/meta.dart';
 
-import '../../test_utils.dart';
-
 void main() {
   group('EventDetailsPage', () {
     String lastLaunchedTicketsUrl;
     String lastLaunchedTrailerUrl;
 
     setUp(() {
-      io.HttpOverrides.global = TestHttpOverrides();
-
       showtimeInfo.launchTicketsUrl = (url) => lastLaunchedTicketsUrl = url;
       eventPoster.launchTrailerVideo = (url) => lastLaunchedTrailerUrl = url;
     });
@@ -38,20 +33,22 @@ void main() {
       @required List<String> trailers,
       @required Show show,
     }) {
-      return tester.pumpWidget(MaterialApp(
-        home: eventDetails.EventDetailsPage(
-          Event(
-            id: '1',
-            title: 'Test Title',
-            genres: 'Test Genres',
-            directors: <String>[],
-            actors: <Actor>[],
-            images: EventImageData.empty(),
-            youtubeTrailers: trailers,
+      return provideMockedNetworkImages(() async {
+        return tester.pumpWidget(MaterialApp(
+          home: eventDetails.EventDetailsPage(
+            Event(
+              id: '1',
+              title: 'Test Title',
+              genres: 'Test Genres',
+              directors: <String>[],
+              actors: <Actor>[],
+              images: EventImageData.empty(),
+              youtubeTrailers: trailers,
+            ),
+            show: show,
           ),
-          show: show,
-        ),
-      ));
+        ));
+      });
     }
 
     testWidgets(
