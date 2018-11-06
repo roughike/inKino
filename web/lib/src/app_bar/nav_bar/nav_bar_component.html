@@ -1,0 +1,17 @@
+<nav [class.hidden]="theaterDropdownActive">
+  <a [routerLink]="RoutePaths.nowInTheaters.toUrl()"
+     routerLinkActive="active-route">
+    <img class="icon" alt="Now in theaters" src="images/now-in-theaters.svg"/>
+    <span>{{ messages.nowInTheaters }}</span>
+  </a>
+  <a [routerLink]="RoutePaths.showtimes.toUrl()"
+     routerLinkActive="active-route">
+    <img class="icon" alt="Showtimes" src="images/showtimes.svg"/>
+    <span>{{ messages.showtimes }}</span>
+  </a>
+  <a [routerLink]="RoutePaths.comingSoon.toUrl()"
+     routerLinkActive="active-route">
+    <img class="icon" alt="Coming soon" src="images/coming-soon.svg"/>
+    <span>{{ messages.comingSoon }}</span>
+  </a>
+</nav>

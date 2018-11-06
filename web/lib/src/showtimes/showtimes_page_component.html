@@ -1,0 +1,19 @@
+<div class="content-wrapper">
+  <div class="page-title">
+    <h3>{{ messages.showtimes }}</h3>
+    <theater-selector></theater-selector>
+  </div>
+
+  <date-selector [dates]="viewModel.dates"
+                 [selectedDate]="viewModel.selectedDate"
+                 [newDateSelected]="viewModel.changeCurrentDate"></date-selector>
+
+  <loading-view
+      [status]="viewModel.status"
+      [contentEmpty]="shows.isEmpty"
+      (actionButtonClicked)="viewModel.refreshShowtimes()">
+    <showtime-item *ngFor="let show of shows"
+                   [show]="show"
+                   (click)="openShowDetails(show)"></showtime-item>
+  </loading-view>
+</div>

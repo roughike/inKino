@@ -1,0 +1,64 @@
+@import '../breakpoints';
+
+:host {
+  display: flex;
+  color: rgba(255, 255, 255, 0.4);
+  justify-content: space-around;
+}
+
+.date-item {
+  flex: 1;
+  cursor: pointer;
+  height: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #0F1734;
+  transition: background-color 0.2s ease;
+
+  p {
+    text-align: center;
+  }
+
+  .dayname {
+    color: #717DAD;
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .day {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 300;
+    transition: color 0.2s ease, font-weight 0.2s ease;
+  }
+}
+
+.selected {
+  background: #FBBE35;
+
+  .dayname, .day {
+    color: #0d1732;
+  }
+
+  .day {
+    font-weight: 500;
+  }
+}
+
+@include screen-size-laptop {
+  .date-item {
+    height: 60px;
+    margin-right: 3px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .day {
+      font-size: 25px;
+    }
+  }
+}

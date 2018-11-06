@@ -1,0 +1,64 @@
+@import 'breakpoints';
+
+.app-bar-button {
+  width: 56px;
+  height: 56px;
+  padding: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 250ms ease, opacity 150ms ease, transform 250ms ease;
+
+  &.active {
+    background: #152451;
+  }
+
+  @include screen-size-tablet {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.scrolling-blocked {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.page-title {
+  display: none;
+
+  @include screen-size-tablet {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+
+    h3 {
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@include screen-size-laptop {
+  .content-wrapper {
+    margin: 0 auto;
+    width: 70%;
+    min-width: 850px;
+    padding: 100px 0;
+  }
+}
+
+// Needs the parent to have a position:relative directive.
+@mixin full-size-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

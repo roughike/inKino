@@ -1,0 +1,13 @@
+<div class="focus-trap"
+     [class.visible]="focusTrapVisible"
+     (click)="hideAndDestroy()">
+</div>
+
+<div class="menu" [class.opened]="isOpen" [style.background]="background">
+  <div class="item"
+       [class.selected]="theater == selectedTheater"
+       *ngFor="let theater of theaters"
+       (click)="onTheaterClicked(theater)">
+    {{ theater.name }}
+  </div>
+</div>
