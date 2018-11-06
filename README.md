@@ -65,7 +65,7 @@ If you don't trust in random bash scripts copied from the Internet, you can just
 
 First, ensure that you followed the "Development environment setup" section above.
 
-* To run the **web project**, first run `pub get` intially, and then `webdev serve` in the root of the web project.
+* To run the **web project**, first run `pub get` initially, and then `webdev serve` in the root of the web project.
 * To run the **Flutter project**, open it in your editor and click the play button, or run `flutter run` on your terminal.
 
 ## Contributing
