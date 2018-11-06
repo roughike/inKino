@@ -7,11 +7,8 @@
 inKino is a _multiplatform_ Dart app for browsing movies and showtimes for Finnkino cinemas. 
 
 InKino showcases Redux, has an extensive set of automated tests and **40% code sharing between Flutter and web**.
-The Android & iOS apps are made with [Flutter](http://flutter.io), and the progressive web app is made with [AngularDart](https://webdev.dartlang.org/angular). 
-It generally is something that I believe is a good example of a multiplatform Dart project.
-
-The mobile app is **100% Flutter code** that compiles into native Android and iOS apps.
-The web project is all AngularDart, HTML and CSS.
+The Android & iOS apps are made with a single [Flutter](http://flutter.io) codebase. The progressive web app is made with [AngularDart](https://webdev.dartlang.org/angular). 
+This project is generally something that I believe is a good example of a multiplatform Dart project.
 
 I plan on doing a full article series on multiplatform Dart stuff, so you might want to [check out my blog](https://iirokrankka.com) and subscribe to it.
 
