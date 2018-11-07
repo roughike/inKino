@@ -3,7 +3,7 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:core/core.dart';
-import 'package:http/browser_client.dart';
+import 'package:http/http.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/intl_browser.dart';
@@ -15,7 +15,7 @@ import 'package:web/app_component.template.dart' as ng;
 import 'main.template.dart' as self;
 
 final Store<AppState> _store = createStore(
-  BrowserClient(),
+  Client(),
   WebKeyValueStore(window.localStorage),
 );
 Store<AppState> storeFactory() => _store;

@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final keyValueStore = FlutterKeyValueStore(prefs);
-  final store = createStore(IOClient(), keyValueStore);
+  final store = createStore(Client(), keyValueStore);
 
   FinnkinoApi.useFinnish = ui.window.locale.languageCode == 'fi';
   runApp(InKinoApp(store));

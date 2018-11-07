@@ -11,7 +11,7 @@ dependencies:
   redux: ^3.0.0
   xml: ^3.0.1
   intl: any
-  http: ^0.11.3+7
+  http: ^0.12.0
   reselect: ^0.4.0
   key_value_store: ^1.0.0
 
