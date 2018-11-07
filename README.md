@@ -28,6 +28,7 @@ It also has a great test coverage.
 * **web**: the AngularDart progressive web app. Also imports **core**, and it's the thing that is live at https://inkino.app.
 
 To work on these projects, open each one of them in an editor of your choice. 
+
 For example, if you want to do a new feature and you do it for the Flutter project first, you'd open both **core** and **mobile** in separate editor windows.
 To clarify, you'd do `File -> Open...` for core and then `File -> Open...` again for mobile.
 
@@ -40,7 +41,7 @@ To clarify, you'd do `File -> Open...` for core and then `File -> Open...` again
 
 Finally, if you haven't already, [install Flutter](https://flutter.io/docs/get-started/install).
 And the Flutter plugin for your IDE. 
-At the time of being, inKino is built with **Flutter 0.9.4**.
+At the time of being, inKino is built with **Flutter 0.10.2**.
 
 If you don't like IDEs, [you can apparently use Emacs or Vim too](https://news.ycombinator.com/item?id=16822780).
 
@@ -76,6 +77,6 @@ Before starting to work on something, please comment on a specific issue and say
 
 ## Thanks
 
-Special thanks to Olli Haataja for the design. 
+Special thanks to [Olli Haataja](https://www.linkedin.com/in/olli-haataja-46b96b120/) for the design. 
 
 Additional thanks for the initial release go to [Thibaud Colas](https://twitter.com/thibaud_colas), [Brian Egan](https://twitter.com/brianegan), [Alessandro Aime](https://twitter.com/aimealessandro) and [Juho Rautioaho](https://github.com/Jraut) for giving their extra pair of eyes for reviewing the source code.
