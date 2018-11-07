@@ -1,0 +1,29 @@
+@import '../../breakpoints';
+
+:host {
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-left: 20px;
+
+  @include screen-size-laptop {
+    padding-left: 0;
+  }
+
+  div {
+    margin-right: 20px;
+    max-width: 60px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    p {
+      color: #1D1D1B;
+      font-size: 12px;
+      margin-top: 10px;
+      line-height: 14px;
+      text-align: center;
+    }
+  }
+}

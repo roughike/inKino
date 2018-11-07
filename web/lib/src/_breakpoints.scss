@@ -1,0 +1,29 @@
+@mixin screen-size-nexus-5x {
+  @media only screen and(min-width: 412px) {
+    @content;
+  }
+}
+
+@mixin screen-size-phablet {
+  @media only screen and(min-width: 650px) {
+    @content;
+  }
+}
+
+@mixin screen-size-tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin screen-size-laptop {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin screen-size-huge {
+  @media only screen and (min-width: 1800px) {
+    @content;
+  }
+}

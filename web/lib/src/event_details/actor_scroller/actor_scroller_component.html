@@ -1,0 +1,4 @@
+<div *ngFor="let actor of actors">
+  <actor-img [src]="actor.avatarUrl" [alt]="'Photo for ' + actor.name"></actor-img>
+  <p>{{ actor.name }}</p>
+</div>

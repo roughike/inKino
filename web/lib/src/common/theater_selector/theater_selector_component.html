@@ -1,0 +1,9 @@
+<div class="button" (click)="toggleMenu()">
+  <img class="leading" src="images/place.svg" alt="A map pin."/>
+  <span class="button-text">{{ currentTheater.name }}</span>
+  <img src="images/arrow_drop_down.svg" alt="Drop down arrow."/>
+</div>
+
+<div class="menu" [class.visible]="theaterDropdownVisible">
+  <template class="menu" #menuContainer></template>
+</div>

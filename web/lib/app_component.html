@@ -1,0 +1,13 @@
+<app-bar
+    [theaterDropdownActive]="theaterDropdownActive"
+    [theaterDropdownVisible]="theaterDropdownVisible"
+    (theaterButtonClicked)="toggleTheaterDropdown">
+</app-bar>
+
+<main class="content" [class.scrolling-blocked]="theaterDropdownVisible">
+  <router-outlet [routes]="Routes.all"></router-outlet>
+
+  <div class="theater-container" [class.visible]="theaterDropdownActive">
+    <template #theaterContainer></template>
+  </div>
+</main>
