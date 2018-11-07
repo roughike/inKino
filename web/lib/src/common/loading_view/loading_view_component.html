@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="loading-content"
+       *ngIf="loadingContentPresent"
+       [class.visible]="loadingContentVisible">
+    <spinner></spinner>
+  </div>
+
+  <div class="success-content"
+       *ngIf="successContentPresent"
+       [class.visible]="successContentVisible">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="error-content"
+       *ngIf="errorContentPresent"
+       [class.visible]="errorContentVisible">
+    <div class="icon">
+      <img src="images/info.svg"/>
+    </div>
+
+    <h2 class="title">{{ emptyTitle ?? errorTitle ?? messages.oops}}</h2>
+    <p class="message">
+      {{ emptyMessage ?? errorMessage ?? messages.loadingMoviesError }}<br/>
+      <small *ngIf="!contentEmpty">(this might be caused by your ad blocker)</small>
+    </p>
+
+    <a *ngIf="!contentEmpty" class="try-again" href="#" (click)="onTryAgainClicked($event)">
+      {{ messages.tryAgain }}
+    </a>
+  </div>
+</div>

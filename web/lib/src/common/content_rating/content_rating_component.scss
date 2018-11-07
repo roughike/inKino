@@ -1,0 +1,31 @@
+$small: 20px;
+$medium: 30px;
+$default: $small;
+
+@mixin _size($size) {
+  img {
+    width: $size;
+    height: $size;
+  }
+}
+
+:host {
+  &[size="small"] {
+    @include _size($small);
+  }
+
+  &[size="medium"] {
+    @include _size($medium);
+  }
+}
+
+img {
+  width: $default;
+  height: $default;
+  vertical-align: middle;
+  margin-right: 6px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

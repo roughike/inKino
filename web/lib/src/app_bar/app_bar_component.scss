@@ -1,0 +1,120 @@
+@import '../common';
+@import '../breakpoints';
+
+header {
+  background: #1C306D;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, .4);
+  width: 100%;
+  height: 56px;
+  position: fixed;
+  top: 0;
+  opacity: 1;
+  z-index: 3000;
+  transition: opacity 350ms ease, top 350ms ease;
+
+  &.hidden {
+    top: -56px;
+    opacity: 0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 100%;
+  padding-left: 20px;
+}
+
+.left {
+  display: flex;
+}
+
+.right {
+  display: flex;
+}
+
+.logo {
+  position: relative;
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+
+  img {
+    width: 28px;
+    height: 28px;
+    margin-top: 2px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #FEFEFE;
+  }
+
+  .mobile-logo-focus-trap {
+    @include full-size-overlay;
+  }
+}
+
+.name-and-selected-theater {
+  display: flex;
+  flex-direction: column;
+  margin-left: 6px;
+}
+
+.theater-name {
+  font-size: 12px;
+  opacity: 0.7;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@include screen-size-tablet {
+  header {
+    height: 60px;
+
+    &.hidden {
+      top: -60px;
+    }
+  }
+
+  .theater-name {
+    display: none;
+  }
+
+  .name-and-selected-theater {
+    margin-left: 10px;
+  }
+
+  .logo {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+
+  .mobile-logo-focus-trap {
+    display: none;
+  }
+
+  .app-bar-button.select-theater {
+    display: none;
+  }
+}
+
+@include screen-size-laptop {
+  .wrapper {
+    width: 70%;
+    min-width: 850px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}

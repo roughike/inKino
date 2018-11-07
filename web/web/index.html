@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>inKino - browse the movie selection of Finnish Finnkino cinemas</title>
+  <meta charset="utf-8">
+  <meta name="theme-color" content="#1C306D">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Description" content="A multiplatform Dart app with code sharing between Flutter and AngularDart.">
+  <base href="/">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="preconnect" href="https://media.finnkino.fi">
+  <link rel="preconnect" href="https://www.finnkino.fi">
+  <link rel="preconnect" href="https://finnkino.fi">
+  <link rel="manifest" href="manifest.json">
+  <script defer src="main.dart.js"></script>
+  <style>
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: url("images/background-image.jpg") no-repeat bottom fixed;
+      background-size: cover;
+      opacity: 0;
+      transition: opacity 500ms ease;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <noscript>This page requires Javascript to work.</noscript>
+</div>
+</body>
+</html>

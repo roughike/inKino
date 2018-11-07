@@ -1,0 +1,21 @@
+name: core
+description: Common shared code for inKino mobile and web.
+version: 0.0.1
+#homepage: https://www.example.com
+#author: ironman <email@example.com>
+
+environment:
+  sdk: '>=2.0.0-dev.58.0 <3.0.0'
+
+dependencies:
+  redux: ^3.0.0
+  xml: ^3.0.1
+  intl: any
+  http: ^0.12.0
+  reselect: ^0.4.0
+  key_value_store: ^1.0.0
+
+dev_dependencies:
+  test: ^1.3.0
+  mockito: ^3.0.0
+  intl_translation: 0.17.0

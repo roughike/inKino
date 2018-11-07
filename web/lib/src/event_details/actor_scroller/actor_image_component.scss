@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  background: #1C306D;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+img {
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+
+  &.placeholder {
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    top: 13px;
+    left: 13px;
+  }
+
+  &.actual {
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    opacity: 0;
+    transition: opacity 250ms ease;
+
+    &.loaded {
+      opacity: 1;
+    }
+  }
+}

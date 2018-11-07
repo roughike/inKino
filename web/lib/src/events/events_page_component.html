@@ -1,0 +1,19 @@
+<div class="content-wrapper">
+  <div class="page-title">
+    <h3>{{ eventTypeTitle }}</h3>
+    <theater-selector></theater-selector>
+  </div>
+
+  <loading-view [status]="viewModel.status"
+                [contentEmpty]="viewModel.events.isEmpty"
+                [errorMessage]="messages.errorLoadingEvents"
+                (actionButtonClicked)="viewModel.refreshEvents()">
+    <div class="grid-container">
+      <event-poster *ngFor="let event of viewModel.events"
+                    [event]="event"
+                    [isComingSoon]="isDisplayingComingSoonMovies"
+                    (click)="openEventDetails(event)">
+      </event-poster>
+    </div>
+  </loading-view>
+</div>

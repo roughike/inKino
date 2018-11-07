@@ -1,0 +1,148 @@
+{
+  "@@last_modified": "2018-11-03T15:02:36.546976",
+  "appName": "inKino",
+  "@appName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nowInTheaters": "Now in theaters",
+  "@nowInTheaters": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showtimes": "Showtimes",
+  "@showtimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "comingSoon": "Coming soon",
+  "@comingSoon": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "oops": "Oops!",
+  "@oops": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loadingMoviesError": "There was an error while\nloading movies.",
+  "@loadingMoviesError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tryAgain": "TRY AGAIN",
+  "@tryAgain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "director": "Director",
+  "@director": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "storyline": "Storyline",
+  "@storyline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "collapseStoryline": "touch to collapse",
+  "@collapseStoryline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "expandStoryline": "touch to expand",
+  "@expandStoryline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cast": "Cast",
+  "@cast": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gallery": "Gallery",
+  "@gallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "releaseDate": "Release date",
+  "@releaseDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "at": "at",
+  "@at": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tickets": "Tickets",
+  "@tickets": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allEmpty": "All empty!",
+  "@allEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noMovies": "Didn't find any movies at\nall.",
+  "@noMovies": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLoadingEvents": "Error loading events.",
+  "@errorLoadingEvents": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noMoviesForToday": "Didn't find any movies\nabout to start for today. ¯\\_(ツ)_/¯",
+  "@noMoviesForToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "About",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutInKino": "About inKino",
+  "@aboutInKino": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gotIt": "Okay, got it!",
+  "@gotIt": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutInKinoDescription": "inKino is the unofficial Finnkino client that is minimalistic, fast, and delightful to use.",
+  "@aboutInKinoDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDevelopedWith": "The app was developed with",
+  "@appDevelopedWith": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkoutRepo": "and it's open source; check out the source code yourself from",
+  "@checkoutRepo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "githubRepo": "the GitHub repo",
+  "@githubRepo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tmdbAttribution": "This product uses the TMDb API but is not endorsed or certified by TMDb.",
+  "@tmdbAttribution": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchHint": "Search movies & showtimes...",
+  "@searchHint": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,0 +1,50 @@
+.focus-trap {
+  display: none;
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.menu {
+  z-index: 2001;
+  position: relative;
+  width: 100%;
+  opacity: 0;
+  height: 0;
+  background: transparent;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  transition: height 250ms ease, opacity 250ms ease;
+
+  &.opened {
+    opacity: 1;
+    height: 100%;
+  }
+}
+
+.item {
+  position: relative;
+  cursor: pointer;
+  padding: 16px;
+  background: transparent;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.56);
+  user-select: none;
+
+  &.selected {
+    background: rgba(0, 0, 0, 0.54);
+    color: #ffffff;
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
