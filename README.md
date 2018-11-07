@@ -14,7 +14,7 @@ I plan on doing a full article series on multiplatform Dart stuff, so you might 
 
 <div>
 <a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='https://github.com/roughike/inKino/blob/multiplatform-stuff/_screenshots/google_play.png' height='56px'/></a>
-<a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/iinKino/blob/multiplatform-stuff/_screenshots/app_store.png' height='56px'/></a>
+<a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/multiplatform-stuff/_screenshots/app_store.png' height='56px'/></a>
 <a href='https://inkino.app'><img alt='Get it on the App Store' src='https://github.com/roughike/inKino/blob/multiplatform-stuff/_screenshots/launch_pwa.png' height='56px'/></a>
 </div>
 
