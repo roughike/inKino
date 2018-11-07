@@ -1,0 +1,77 @@
+@import '../../common';
+@import '../../breakpoints';
+
+:host {
+  display: flex;
+  background: #1F3169;
+
+  &[expanded] {
+    position: fixed;
+    left: 0;
+    right: 0;
+
+    @include screen-size-tablet {
+      position: unset;
+    }
+  }
+}
+
+.back {
+  display: none;
+
+  &.visible {
+    display: block;
+    padding-left: 16px;
+    cursor: pointer;
+
+    @include screen-size-tablet {
+      display: none;
+    }
+  }
+}
+
+input {
+  display: none;
+  background: transparent;
+  width: 100%;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px;
+
+  &, &:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &.visible {
+    display: block;
+  }
+}
+
+.buttons {
+  position: relative;
+  width: 56px;
+  height: 56px;
+
+  @include screen-size-tablet {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.buttons img {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  transform: scale(0.2);
+
+  &.visible {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+}

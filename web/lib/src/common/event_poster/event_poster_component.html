@@ -1,0 +1,23 @@
+<div class="fallback-icon">
+  <img src="images/fallback-icon.svg"
+       [alt]="'Fallback image for ' + event.title"/>
+</div>
+
+<lazy-img *ngIf="event.hasMediumPortraitImage"
+          [src]="event.images.portraitMedium"
+          [alt]="'Poster for ' + event.title"></lazy-img>
+
+<div class="event-information" *ngIf="hasDetails">
+  <content-rating [event]="event"
+                  size="medium"
+                  *ngIf="event.contentDescriptors.isNotEmpty">
+  </content-rating>
+
+  <p><strong>{{ event.title }}</strong></p>
+  <p class="genres">{{ event.genres }}</p>
+</div>
+
+<div class="release-date-information" *ngIf="isComingSoon">
+  <p class="label">{{ messages.releaseDate }}</p>
+  <p class="date">{{ releaseDate }}</p>
+</div>

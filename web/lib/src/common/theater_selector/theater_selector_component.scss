@@ -1,0 +1,50 @@
+@import '../../breakpoints';
+
+:host {
+  position: relative;
+  z-index: 2001;
+}
+
+.button {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #717DAD;
+  border-radius: 5px;
+  padding: 6px;
+  user-select: none;
+  cursor: pointer;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button-text {
+    flex-grow: 1;
+    font-size: 16px;
+    padding: 0 8px;
+    color: #FEFEFE;
+  }
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 36px;
+  width: 100%;
+  height: 400px;
+
+  &.visible {
+    display: block;
+  }
+}
+
+@include screen-size-phablet {
+  :host {
+    min-width: 250px;
+  }
+}

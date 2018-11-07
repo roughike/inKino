@@ -1,0 +1,30 @@
+name: inkino
+description: A new Flutter application.
+
+dependencies:
+  core:
+    path: ../core
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  xml: ^3.0.0
+  flutter_redux: ^0.5.0
+  intl: ^0.15.2
+  url_launcher: ^3.0.0
+  path_provider: ^0.4.0
+  key_value_store_flutter: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mockito: ^3.0.0
+  image_test_utils: ^1.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - assets/images/1x1_transparent.png
+  - assets/images/powered_by_tmdb.png
+  - assets/images/background_image.jpg
+  - assets/images/logo.png

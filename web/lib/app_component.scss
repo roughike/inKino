@@ -1,0 +1,27 @@
+@import 'src/common';
+@import 'src/breakpoints';
+
+main {
+  margin: 56px 0;
+
+  @include screen-size-tablet {
+    margin: 60px 20px;
+  }
+
+  @include screen-size-laptop {
+    margin: 60px 0;
+  }
+}
+
+.theater-container {
+  display: none;
+  position: fixed;
+  top: 56px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &.visible {
+    display: block;
+  }
+}

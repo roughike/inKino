@@ -1,0 +1,33 @@
+<header class="header"
+        [class.scrolling-blocked]="theaterDropdownVisible"
+        [class.hidden]="hide">
+  <div class="wrapper">
+    <div class="left">
+      <div class="logo" [routerLink]="RoutePaths.nowInTheaters.toUrl()">
+        <img alt="The InKino logo." src="images/logo.png"/>
+
+        <div class="name-and-selected-theater">
+          <h1>{{ messages.appName }}</h1>
+          <p class="theater-name">{{ theaterName }}</p>
+        </div>
+
+        <!-- If the user clicks the logo/text on mobile, show the theater dropdown.
+             TODO: figure out a better naming for this. -->
+        <div class="mobile-logo-focus-trap"
+             (click)="openTheaterDropdown(); $event.stopImmediatePropagation()"></div>
+      </div>
+
+      <nav-bar [theaterDropdownActive]="theaterDropdownActive"></nav-bar>
+    </div>
+
+    <div class="right">
+      <img src="images/theaters.svg"
+           alt="Change selected theater"
+           class="app-bar-button select-theater"
+           [class.active]="theaterDropdownVisible"
+           (click)="openTheaterDropdown()"/>
+
+      <search-bar></search-bar>
+    </div>
+  </div>
+</header>

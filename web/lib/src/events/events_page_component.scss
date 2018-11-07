@@ -1,0 +1,73 @@
+@import '../breakpoints';
+@import '../common';
+
+.grid-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+event-poster {
+  width: calc(100% / 2);
+  min-height: 243px;
+  cursor: pointer;
+}
+
+@include screen-size-nexus-5x {
+  event-poster {
+    min-height: 312px;
+  }
+}
+
+@include screen-size-phablet {
+  event-poster {
+    width: calc(100% / 3);
+    min-height: 327px;
+  }
+}
+
+$horizontal-margin: 1.5em;
+$vertical-margin: 1.5em;
+
+@include screen-size-tablet {
+  event-poster {
+    box-shadow: 1px 1px 8px 2px rgba(0, 0, 0, 0.32);
+    margin-top: $vertical-margin;
+    margin-right: $horizontal-margin;
+    width: calc(100% / 3 - 1em);
+    min-height: 343px;
+  }
+
+  .grid-container :nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+@include screen-size-laptop {
+  event-poster {
+    width: calc(100% / 3 - 1em);
+    min-height: 404px;
+  }
+
+  .grid-container {
+    margin: 0;
+  }
+
+  .grid-container :nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+@include screen-size-huge {
+  event-poster {
+    width: calc(100% / 4 - 1.15em);
+    min-height: 448px;
+  }
+
+  .grid-container :nth-child(3n) {
+    margin-right: $horizontal-margin;
+  }
+
+  .grid-container :nth-child(4n) {
+    margin-right: 0;
+  }
+}

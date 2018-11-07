@@ -1,0 +1,7 @@
+<div *ngFor="let date of dates"
+     class="date-item"
+     [class.selected]="date == selectedDate"
+     (click)="newDateSelected(date)">
+  <p class="dayname">{{ date | date: 'E' }}</p>
+  <p class="day">{{ date | date: 'd' }}</p>
+</div>

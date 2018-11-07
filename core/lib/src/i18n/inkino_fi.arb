@@ -1,0 +1,147 @@
+{
+  "appName": "inKino",
+  "@appName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nowInTheaters": "Ohjelmistossa",
+  "@nowInTheaters": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "showtimes": "Näytösajat",
+  "@showtimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "comingSoon": "Tulossa",
+  "@comingSoon": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "oops": "Oho!",
+  "@oops": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loadingMoviesError": "Ongelma elokuvien latauksessa.",
+  "@loadingMoviesError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tryAgain": "YRITÄ UUDELLEEN",
+  "@tryAgain": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "director": "Ohjaaja",
+  "@director": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "storyline": "Juoni",
+  "@storyline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "collapseStoryline": "näytä enemmän",
+  "@collapseStoryline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "expandStoryline": "näytä vähemmän",
+  "@expandStoryline": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cast": "Näyttelijät",
+  "@cast": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gallery": "Galleria",
+  "@gallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "releaseDate": "Julkaisupäivä",
+  "@releaseDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "at": "klo",
+  "@at": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tickets": "Liput",
+  "@tickets": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allEmpty": "Tyhjää täynnä!",
+  "@allEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noMovies": "Elokuvia ei löytynyt.",
+  "@noMovies": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorLoadingEvents": "Elokuvia ladattaessa tapahtui virhe.",
+  "@errorLoadingEvents": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noMoviesForToday": "Tälle päivälle ei löytynyt yhtään alkavia elokuvia. ¯ \\ _ (ツ) _ / ¯",
+  "@noMoviesForToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Tietoa",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutInKino": "Tietoa InKinosta",
+  "@aboutInKino": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gotIt": "Selvä homma!",
+  "@gotIt": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutInKinoDescription": "inKino on epävirallinen Finnkino-sovellus, joka on minimalistinen, nopea ja ihastuttava käyttää.",
+  "@aboutInKinoDescription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDevelopedWith": "Sovellus on kehitetty käyttämällä",
+  "@appDevelopedWith": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "checkoutRepo": "ja sen lähdekoodi on julkisesti saatavilla",
+  "@checkoutRepo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "githubRepo": "GitHubissa",
+  "@githubRepo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tmdbAttribution": "Tämä tuote käyttää TMDb:n rajapintaa, mutta sitä ei ole TMDb:n suosittelema tai sertifioima.",
+  "@tmdbAttribution": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchHint": "Hae elokuvia ja näytösaikoja...",
+  "@searchHint": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

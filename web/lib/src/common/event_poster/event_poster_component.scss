@@ -1,0 +1,76 @@
+@import '../../common';
+@import '../../breakpoints';
+
+:host {
+  position: relative;
+}
+
+.fallback-icon {
+  @include full-size-overlay;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  background: linear-gradient(#424242, #222222);
+
+  img {
+    display: block;
+    width: 70%;
+  }
+}
+
+.event-information {
+  @include full-size-overlay;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 30%, #000);
+  padding: 1.2em;
+
+  strong {
+    font-weight: 500;
+    font-size: 12pt;
+    color: #ffffff;
+  }
+
+  p.genres {
+    margin-top: 0.2em;
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  content-rating {
+    margin-bottom: 10px;
+  }
+}
+
+.release-date-information {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 5px 20px 5px 10px;
+
+  .label {
+    color: #FFBE00;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .date {
+    color: #FEFEFE;
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  @include screen-size-tablet {
+    padding: 10px 40px 10px 20px;
+
+    .date {
+      font-size: 20px;
+    }
+  }
+}

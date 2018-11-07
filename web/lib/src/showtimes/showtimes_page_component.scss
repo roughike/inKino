@@ -1,0 +1,14 @@
+@import '../common';
+@import '../breakpoints';
+
+.page-header {
+  display: flex;
+
+  theater-selector {
+    margin-left: 30px;
+  }
+}
+
+.page-title {
+  margin-bottom: 30px;
+}

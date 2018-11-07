@@ -1,0 +1,79 @@
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+.loading-content {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  transition: opacity 150ms ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.error-content {
+  position: absolute;
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 450ms ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.success-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 450ms ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.icon {
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.12);
+
+  img {
+    display: block;
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.title {
+  margin-top: 16px;
+  max-width: 350px;
+  text-align: center;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.message {
+  margin-top: 8px;
+  max-width: 250px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.try-again {
+  margin-top: 12px;
+  color: #ffffff;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  user-select: none;
+}
+
