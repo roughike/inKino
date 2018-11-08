@@ -1,6 +1,6 @@
 # inKino - a multiplatform Dart project with code sharing between Flutter and web
 
-<img src="_screenshots/now_in_theaters.png" width="33%" /> <img src="_screenshots/showtimes.png" width="33%" /> <img src="_screenshots/event_details.png" width="33%" />
+<img src="assets/screenshots/now_in_theaters.png" width="33%" /> <img src="_screenshots/showtimes.png" width="33%" /> <img src="assets/screenshots/event_details.png" width="33%" />
 
 ## What is inKino?
 
@@ -13,9 +13,9 @@ This project is generally something that I believe is a good example of a multip
 I plan on doing a full article series on multiplatform Dart stuff, so you might want to [check out my blog](https://iirokrankka.com) and subscribe to it.
 
 <div>
-<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='_screenshots/google_play.png' height='48px'/></a>
-<a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='_screenshots/app_store.png' height='48px'/></a>
-<a href='https://inkino.app'><img alt='Get it on the App Store' src='_screenshots/launch_pwa.png' height='48px'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='assets/screenshots/google_play.png' height='48px'/></a>
+<a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='assets/screenshots/app_store.png' height='48px'/></a>
+<a href='https://inkino.app'><img alt='Get it on the App Store' src='assets/screenshots/launch_pwa.png' height='48px'/></a>
 </div>
 
 ## Folder structure
