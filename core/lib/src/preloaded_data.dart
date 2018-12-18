@@ -26,6 +26,10 @@ class PreloadedData {
         <Name>Helsinki</Name>
     </TheatreArea>
     <TheatreArea>
+        <ID>1045</ID>
+        <Name>Helsinki: ITIS</Name>
+    </TheatreArea>
+    <TheatreArea>
         <ID>1031</ID>
         <Name>Helsinki: KINOPALATSI</Name>
     </TheatreArea>
