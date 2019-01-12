@@ -26,13 +26,18 @@ void main() {
       originalTitle: 'Coming soon event #1',
       title: 'Coming soon event #1',
     );
+    final firstComingSoonEventDuplicate = Event(
+      id: 'coming-soon-1-fr',
+      originalTitle: 'Coming soon event #1',
+      title: 'Coming soon event #1 (FR)',
+    );
     final secondComingSoonEvent = Event(
       id: 'coming-soon-2',
       originalTitle: 'Coming soon event #2',
       title: 'Coming soon event #2',
     );
-    final comingSoonEvents =
-        listOf(firstComingSoonEvent, secondComingSoonEvent);
+    final comingSoonEvents = listOf(firstComingSoonEvent,
+        firstComingSoonEventDuplicate, secondComingSoonEvent);
 
     final state = AppState.initial().copyWith(
       eventState: EventState.initial().copyWith(
@@ -43,7 +48,9 @@ void main() {
 
     test('events', () {
       expect(nowInTheatersSelector(state), nowInTheatersEvents);
-      expect(comingSoonSelector(state), comingSoonEvents);
+      // without duplicates
+      expect(comingSoonSelector(state),
+          listOf(firstComingSoonEvent, secondComingSoonEvent));
     });
 
     test('events with search query', () {

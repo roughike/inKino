@@ -39,7 +39,12 @@ KtList<Event> _eventsOrEventSearch(KtList<Event> events, String searchQuery) {
 /// do this hack because it is quite boring to display four movie posters that
 /// are exactly the same.
 KtList<Event> _uniqueEvents(KtList<Event> original) {
-  return original.associateBy((event) => event.originalTitle).values;
+  return original
+      // reverse because last unique key wins
+      .reversed()
+      .associateBy((event) => event.originalTitle)
+      .values
+      .reversed();
 }
 
 KtList<Event> _eventsWithSearchQuery(
