@@ -11,7 +11,7 @@ class InitCompleteAction {
     this.selectedTheater,
   );
 
-  final List<Theater> theaters;
+  final KtList<Theater> theaters;
   final Theater selectedTheater;
 }
 

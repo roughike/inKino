@@ -1,8 +1,8 @@
-import 'package:collection/collection.dart';
 import 'package:core/src/models/theater.dart';
 import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/theater/theater_selectors.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
@@ -14,7 +14,7 @@ class TheaterListViewModel {
   });
 
   final Theater currentTheater;
-  final List<Theater> theaters;
+  final KtList<Theater> theaters;
   final Function(Theater) changeCurrentTheater;
 
   static TheaterListViewModel fromStore(Store<AppState> store) {
@@ -33,9 +33,8 @@ class TheaterListViewModel {
       other is TheaterListViewModel &&
           runtimeType == other.runtimeType &&
           currentTheater == other.currentTheater &&
-          const IterableEquality().equals(theaters, other.theaters);
+          theaters == other.theaters;
 
   @override
-  int get hashCode =>
-      currentTheater.hashCode ^ const IterableEquality().hash(theaters);
+  int get hashCode => currentTheater.hashCode ^ theaters.hashCode;
 }
