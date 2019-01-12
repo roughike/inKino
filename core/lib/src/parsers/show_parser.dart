@@ -1,17 +1,18 @@
 import 'package:core/src/models/show.dart';
+import 'package:core/src/networking/image_url_rewriter.dart';
 import 'package:core/src/parsers/content_descriptor_parser.dart';
 import 'package:core/src/parsers/event_parser.dart';
-import 'package:core/src/networking/image_url_rewriter.dart';
 import 'package:core/src/utils/event_name_cleaner.dart';
 import 'package:core/src/utils/xml_utils.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:xml/xml.dart' as xml;
 
 class ShowParser {
-  static List<Show> parse(String xmlString) {
+  static KtList<Show> parse(String xmlString) {
     final document = xml.parse(xmlString);
     final shows = document.findAllElements('Show');
 
-    return shows.map((node) {
+    return listFrom(shows).map((node) {
       final title = tagContents(node, 'Title');
       final originalTitle = tagContents(node, 'OriginalTitle');
 
@@ -32,6 +33,6 @@ class ShowParser {
         contentDescriptors: ContentDescriptorParser.parse(
             node.findElements('ContentDescriptors')),
       );
-    }).toList();
+    });
   }
 }

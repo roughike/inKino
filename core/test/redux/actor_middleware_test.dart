@@ -6,6 +6,7 @@ import 'package:core/src/networking/tmdb_api.dart';
 import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/actor/actor_actions.dart';
 import 'package:core/src/redux/actor/actor_middleware.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -15,13 +16,13 @@ void main() {
   group('AppMiddleware', () {
     final Event event = Event(
       id: 'test',
-      actors: [
+      actors: listOf(
         Actor(name: 'Seth Ladd'),
         Actor(name: 'Eric Seidel'),
-      ],
+      ),
     );
 
-    final actorsWithAvatars = [
+    final actorsWithAvatars = listOf(
       Actor(
         name: 'Seth Ladd',
         avatarUrl: 'https://seths-profile-picture',
@@ -30,7 +31,7 @@ void main() {
         name: 'Eric Seidel',
         avatarUrl: 'https://erics-profile-picture',
       ),
-    ];
+    );
 
     final actionLog = <dynamic>[];
     final Function(dynamic) next = (dynamic action) => actionLog.add(action);

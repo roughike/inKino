@@ -2,6 +2,7 @@ import 'package:core/src/models/actor.dart';
 import 'package:core/src/redux/event/event_state.dart';
 import 'package:core/src/redux/show/show_state.dart';
 import 'package:core/src/redux/theater/theater_state.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -15,7 +16,7 @@ class AppState {
   });
 
   final String searchQuery;
-  final Map<String, Actor> actorsByName;
+  final KtMap<String, Actor> actorsByName;
   final TheaterState theaterState;
   final ShowState showState;
   final EventState eventState;
@@ -23,7 +24,7 @@ class AppState {
   factory AppState.initial() {
     return AppState(
       searchQuery: null,
-      actorsByName: <String, Actor>{},
+      actorsByName: emptyMap(),
       theaterState: TheaterState.initial(),
       showState: ShowState.initial(),
       eventState: EventState.initial(),
@@ -32,7 +33,7 @@ class AppState {
 
   AppState copyWith({
     String searchQuery,
-    Map<String, Actor> actorsByName,
+    KtMap<String, Actor> actorsByName,
     TheaterState theaterState,
     ShowState showState,
     EventState eventState,

@@ -5,15 +5,16 @@ import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/event/event_actions.dart';
 import 'package:core/src/redux/event/event_reducer.dart';
 import 'package:core/src/redux/event/event_state.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('EventReducer', () {
     test('when receiving now in theaters events', () {
-      final events = [
+      final events = listOf(
         Event(id: 'now in'),
         Event(id: 'theaters'),
-      ];
+      );
 
       final state = EventState.initial();
       final reducedState =
@@ -24,10 +25,10 @@ void main() {
     });
 
     test('when receiving upcoming events', () {
-      final events = [
+      final events = listOf(
         Event(id: 'coming'),
         Event(id: 'soon'),
-      ];
+      );
 
       final state = EventState.initial();
       final reducedState =
@@ -41,21 +42,21 @@ void main() {
       'when called with UpdateActorsForEventAction, should update event actors when it is a now playing event',
       () {
         final state = EventState.initial().copyWith(
-          nowInTheatersEvents: [
+          nowInTheatersEvents: listOf(
             Event(id: '1'),
             Event(id: 'event-to-update'),
             Event(id: '2'),
-          ],
+          ),
         );
 
         final reducedState = eventReducer(
           state,
           UpdateActorsForEventAction(
             Event(id: 'event-to-update'),
-            [
+            listOf(
               Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
               Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
-            ],
+            ),
           ),
         );
 
@@ -64,7 +65,7 @@ void main() {
         expect(nowInTheatersEvents[2].actors, isNull);
 
         final updatedEvent = nowInTheatersEvents[1];
-        expect(updatedEvent.actors.length, 2);
+        expect(updatedEvent.actors.size, 2);
         expect(updatedEvent.actors[0].name, 'Eric Seidel');
         expect(updatedEvent.actors[1].name, 'Seth Ladd');
       },
@@ -74,21 +75,21 @@ void main() {
       'when called with UpdateActorsForEventAction, should update event actors when it is a upcoming event',
       () {
         final state = EventState.initial().copyWith(
-          comingSoonEvents: [
+          comingSoonEvents: listOf(
             Event(id: '1'),
             Event(id: 'event-to-update'),
             Event(id: '2'),
-          ],
+          ),
         );
 
         final reducedState = eventReducer(
           state,
           UpdateActorsForEventAction(
             Event(id: 'event-to-update'),
-            [
+            listOf(
               Actor(name: 'Eric Seidel', avatarUrl: 'http://erics-avatar'),
               Actor(name: 'Seth Ladd', avatarUrl: 'http://seths-avatar'),
-            ],
+            ),
           ),
         );
 
@@ -97,7 +98,7 @@ void main() {
         expect(comingSoonEvents[2].actors, isNull);
 
         final updatedEvent = comingSoonEvents[1];
-        expect(updatedEvent.actors.length, 2);
+        expect(updatedEvent.actors.size, 2);
         expect(updatedEvent.actors[0].name, 'Eric Seidel');
         expect(updatedEvent.actors[1].name, 'Seth Ladd');
       },

@@ -6,6 +6,7 @@ import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/show/show_selectors.dart';
 import 'package:core/src/redux/show/show_state.dart';
 import 'package:core/src/redux/theater/theater_state.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -15,7 +16,7 @@ void main() {
     final secondShow =
         Show(id: 'second', title: 'Second show', originalTitle: 'Second show');
     final showWithAnotherCacheKey = Show(id: 'show-with-another-cache-key');
-    final shows = [firstShow, secondShow];
+    final shows = listOf(firstShow, secondShow);
 
     final theater = Theater(id: 'test', name: 'Test Theater');
     final date = DateTime(2018);
@@ -26,10 +27,10 @@ void main() {
       showState: ShowState.initial().copyWith(
         loadingStatus: LoadingStatus.success,
         selectedDate: date,
-        shows: {
+        shows: mapFrom({
           DateTheaterPair(date, theater): shows,
-          DateTheaterPair(null, null): [showWithAnotherCacheKey],
-        },
+          DateTheaterPair(null, null): listOf(showWithAnotherCacheKey),
+        }),
       ),
     );
 
@@ -52,23 +53,23 @@ void main() {
       expect(showsSelector(state), shows);
 
       /// When no shows found, should return empty show list instead of null.
-      expect(showsSelector(AppState.initial()), isEmpty);
+      expect(showsSelector(AppState.initial()), emptyList());
     });
 
     test('shows with search query', () {
       final stateWithSearchQuery = state.copyWith(searchQuery: 'Sec');
-      expect(showsSelector(stateWithSearchQuery), [secondShow]);
+      expect(showsSelector(stateWithSearchQuery), listOf(secondShow));
 
       /// When no shows found, should return empty show list instead of null.
       expect(
         showsSelector(
           stateWithSearchQuery.copyWith(
             showState: ShowState.initial().copyWith(
-              shows: {},
+              shows: emptyMap(),
             ),
           ),
         ),
-        isEmpty,
+        emptyList(),
       );
     });
 

@@ -10,6 +10,7 @@ import 'package:core/src/redux/show/show_middleware.dart';
 import 'package:core/src/redux/show/show_state.dart';
 import 'package:core/src/redux/theater/theater_state.dart';
 import 'package:core/src/utils/clock.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -20,7 +21,7 @@ void main() {
     final DateTime startOf2018 = DateTime(2018);
     final Theater theater = Theater(id: 'abc123', name: 'Test Theater');
     final actionLog = <dynamic>[];
-    final showCache = <DateTheaterPair, List<Show>>{};
+    final showCache = mutableMapFrom<DateTheaterPair, KtList<Show>>();
     final Function(dynamic) next = (dynamic action) {
       if (action is ReceivedShowsAction) {
         showCache[action.cacheKey] = action.shows;
@@ -91,11 +92,11 @@ void main() {
       () async {
         Clock.getCurrentTime = () => startOf2018;
         when(mockFinnkinoApi.getSchedule(theater, any))
-            .thenAnswer((_) => Future.value([
+            .thenAnswer((_) => Future.value(listOf(
                   Show(start: DateTime(2018, 02, 21)),
                   Show(start: DateTime(2018, 02, 21)),
                   Show(start: DateTime(2018, 03, 21)),
-                ]));
+                )));
 
         await middleware.call(mockStore, FetchShowsIfNotLoadedAction(), next);
 
@@ -106,9 +107,9 @@ void main() {
         expect(actionLog[1], const TypeMatcher<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[2];
-        expect(receivedShowsAction.shows.length, 3);
+        expect(receivedShowsAction.shows.size, 3);
 
-        final showCacheKey = showCache.keys.first;
+        final showCacheKey = showCache.keys.first();
         expect(showCacheKey.theater, theater);
         expect(showCacheKey.dateTime, startOf2018);
       },
@@ -121,11 +122,11 @@ void main() {
         Clock.getCurrentTime = () => DateTime(2018, 3);
         when(mockFinnkinoApi.getSchedule(theater, any))
             .thenAnswer((_) => Future.value(
-                  [
+                  listOf(
                     Show(start: DateTime(2018, 02, 21)),
                     Show(start: DateTime(2018, 02, 21)),
                     Show(start: DateTime(2018, 03, 21)),
-                  ],
+                  ),
                 ));
 
         // When
@@ -139,7 +140,7 @@ void main() {
         expect(actionLog[1], const TypeMatcher<RequestingShowsAction>());
 
         final ReceivedShowsAction receivedShowsAction = actionLog[2];
-        expect(receivedShowsAction.shows.length, 1);
+        expect(receivedShowsAction.shows.size, 1);
       },
     );
 
@@ -175,7 +176,7 @@ void main() {
         ShowDatesUpdatedAction action = actionLog[1];
         expect(
           action.dates,
-          [
+          listOf(
             DateTime(2018, 1, 1),
             DateTime(2018, 1, 2),
             DateTime(2018, 1, 3),
@@ -183,7 +184,7 @@ void main() {
             DateTime(2018, 1, 5),
             DateTime(2018, 1, 6),
             DateTime(2018, 1, 7),
-          ],
+          ),
         );
       },
     );
@@ -195,7 +196,7 @@ void main() {
 
         when(mockStore.state).thenReturn(_stateBoilerplate());
         when(mockFinnkinoApi.getSchedule(any, any))
-            .thenAnswer((_) => Future.value([]));
+            .thenAnswer((_) => Future.value(emptyList()));
 
         final firstDate = DateTime(2018);
         final secondDate = DateTime(2019);

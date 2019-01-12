@@ -1,5 +1,6 @@
 import 'package:core/src/models/show.dart';
 import 'package:core/src/parsers/show_parser.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:test/test.dart';
 
 import 'show_test_seeds.ignore.dart';
@@ -7,10 +8,10 @@ import 'show_test_seeds.ignore.dart';
 void main() {
   group('ShowParser', () {
     test('parsing test', () {
-      List<Show> deserialized = ShowParser.parse(showsXml);
-      expect(deserialized.length, 3);
+      KtList<Show> deserialized = ShowParser.parse(showsXml);
+      expect(deserialized.size, 3);
 
-      final jumanji = deserialized.first;
+      final jumanji = deserialized.first();
       expect(jumanji.id, '1155306');
       expect(jumanji.eventId, '302419');
       expect(jumanji.title, 'Jumanji: Welcome to the Jungle');
@@ -56,7 +57,7 @@ void main() {
       );
 
       final contentDescriptors = jumanji.contentDescriptors;
-      expect(contentDescriptors.length, 2);
+      expect(contentDescriptors.size, 2);
       expect(contentDescriptors[0].name, 'Violence');
       expect(contentDescriptors[0].imageUrl,
           'https://inkino.imgix.net/images/content_Violence.png?auto=format,compress');

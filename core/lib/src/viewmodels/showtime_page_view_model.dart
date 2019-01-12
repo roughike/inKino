@@ -1,9 +1,9 @@
-import 'package:collection/collection.dart';
 import 'package:core/src/models/loading_status.dart';
 import 'package:core/src/models/show.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/show/show_actions.dart';
 import 'package:core/src/redux/show/show_selectors.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
@@ -18,9 +18,9 @@ class ShowtimesPageViewModel {
   });
 
   final LoadingStatus status;
-  final List<DateTime> dates;
+  final KtList<DateTime> dates;
   final DateTime selectedDate;
-  final List<Show> shows;
+  final KtList<Show> shows;
   final Function(DateTime) changeCurrentDate;
   final Function refreshShowtimes;
 
@@ -43,14 +43,11 @@ class ShowtimesPageViewModel {
       other is ShowtimesPageViewModel &&
           runtimeType == other.runtimeType &&
           status == other.status &&
-          const IterableEquality().equals(dates, other.dates) &&
+          dates == other.dates &&
           selectedDate == other.selectedDate &&
-          const IterableEquality().equals(shows, other.shows);
+          shows == other.shows;
 
   @override
   int get hashCode =>
-      status.hashCode ^
-      const IterableEquality().hash(dates) ^
-      selectedDate.hashCode ^
-      const IterableEquality().hash(shows);
+      status.hashCode ^ dates.hashCode ^ selectedDate.hashCode ^ shows.hashCode;
 }

@@ -1,3 +1,5 @@
+import 'package:kt_dart/collection.dart';
+
 import 'content_descriptor.dart';
 import 'event.dart';
 
@@ -30,7 +32,7 @@ class Show {
   final DateTime start;
   final DateTime end;
   final EventImageData images;
-  final List<ContentDescriptor> contentDescriptors;
+  final KtList<ContentDescriptor> contentDescriptors;
 
   @override
   bool operator ==(Object other) =>

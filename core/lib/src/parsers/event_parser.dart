@@ -1,18 +1,19 @@
 import 'package:core/src/models/actor.dart';
 import 'package:core/src/models/event.dart';
+import 'package:core/src/networking/image_url_rewriter.dart';
 import 'package:core/src/parsers/content_descriptor_parser.dart';
 import 'package:core/src/parsers/gallery_parser.dart';
-import 'package:core/src/networking/image_url_rewriter.dart';
 import 'package:core/src/utils/event_name_cleaner.dart';
 import 'package:core/src/utils/xml_utils.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:xml/xml.dart' as xml;
 
 class EventParser {
-  static List<Event> parse(String xmlString) {
+  static KtList<Event> parse(String xmlString) {
     final document = xml.parse(xmlString);
     final events = document.findAllElements('Event');
 
-    return events.map((node) {
+    return listFrom(events).map((node) {
       final title = tagContents(node, 'Title');
       final originalTitle = tagContents(node, 'OriginalTitle');
 
@@ -37,7 +38,7 @@ class EventParser {
         youtubeTrailers: _parseTrailers(node.findAllElements('EventVideo')),
         galleryImages: GalleryParser.parse(node.findElements('Gallery')),
       );
-    }).toList();
+    });
   }
 
   static DateTime _parseReleaseDate(String rawDate) {
@@ -48,28 +49,28 @@ class EventParser {
     }
   }
 
-  static List<String> _parseDirectors(Iterable<xml.XmlElement> nodes) {
-    return nodes.map((node) {
+  static KtList<String> _parseDirectors(Iterable<xml.XmlElement> nodes) {
+    return listFrom(nodes).map((node) {
       final first = tagContents(node, 'FirstName');
       final last = tagContents(node, 'LastName');
 
       return '$first $last';
-    }).toList();
+    });
   }
 
-  static List<Actor> _parseActors(Iterable<xml.XmlElement> nodes) {
-    return nodes.map((node) {
+  static KtList<Actor> _parseActors(Iterable<xml.XmlElement> nodes) {
+    return listFrom(nodes).map((node) {
       final first = tagContents(node, 'FirstName');
       final last = tagContents(node, 'LastName');
 
       return Actor(name: '$first $last');
-    }).toList();
+    });
   }
 
-  static List<String> _parseTrailers(Iterable<xml.XmlElement> nodes) {
-    return nodes.map((node) {
+  static KtList<String> _parseTrailers(Iterable<xml.XmlElement> nodes) {
+    return listFrom(nodes).map((node) {
       return 'https://youtube.com/watch?v=' + tagContents(node, 'Location');
-    }).toList();
+    });
   }
 }
 
@@ -97,7 +98,6 @@ class EventImageDataParser {
       landscapeHd2: _getHdImageUrl2(landscapeBig),
     );
   }
-
 
   ///
   /// This hacky hack only exists because Finnkino API doesn't return HD

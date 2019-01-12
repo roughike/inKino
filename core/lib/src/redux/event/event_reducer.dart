@@ -3,6 +3,7 @@ import 'package:core/src/models/loading_status.dart';
 import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/event/event_actions.dart';
 import 'package:core/src/redux/event/event_state.dart';
+import 'package:kt_dart/collection.dart';
 
 EventState eventReducer(EventState state, dynamic action) {
   if (action is RequestingEventsAction) {
@@ -58,16 +59,16 @@ EventState _updateActorsForEvent(
   );
 }
 
-List<Event> _addActorImagesToEvent(
-    List<Event> originalEvents, Event replacement) {
-  final newEvents = <Event>[]..addAll(originalEvents);
-  final positionToReplace = originalEvents.indexWhere((candidate) {
-    return candidate.id == replacement.id;
-  });
+KtList<Event> _addActorImagesToEvent(
+    KtList<Event> originalEvents, Event replacement) {
+  final positionToReplace = originalEvents
+      .indexOfFirst((candidate) => candidate.id == replacement.id);
 
   if (positionToReplace > -1) {
+    final newEvents = originalEvents.toMutableList();
     newEvents[positionToReplace] = replacement;
+    return newEvents;
   }
 
-  return newEvents;
+  return originalEvents;
 }

@@ -1,5 +1,6 @@
 import 'package:core/src/models/actor.dart';
 import 'package:core/src/models/event.dart';
+import 'package:kt_dart/collection.dart';
 
 class FetchActorAvatarsAction {
   FetchActorAvatarsAction(this.event);
@@ -8,10 +9,10 @@ class FetchActorAvatarsAction {
 
 class ActorsUpdatedAction {
   ActorsUpdatedAction(this.actors);
-  final List<Actor> actors;
+  final KtList<Actor> actors;
 }
 
 class ReceivedActorAvatarsAction {
   ReceivedActorAvatarsAction(this.actors);
-  final List<Actor> actors;
+  final KtList<Actor> actors;
 }

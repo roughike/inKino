@@ -1,3 +1,4 @@
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'actor.dart';
@@ -35,19 +36,18 @@ class Event {
   final String ageRating;
   final String ageRatingUrl;
   final String genres;
-  final List<String> directors;
+  final KtList<String> directors;
   final String lengthInMinutes;
   final String shortSynopsis;
   final String synopsis;
   final EventImageData images;
-  final List<ContentDescriptor> contentDescriptors;
-  final List<String> youtubeTrailers;
-  final List<GalleryImage> galleryImages;
+  final KtList<ContentDescriptor> contentDescriptors;
+  final KtList<String> youtubeTrailers;
+  final KtList<GalleryImage> galleryImages;
 
-  String get director =>
-      directors.firstWhere((e) => e != null, orElse: () => null);
-  List<Actor> actors;
-  List<String> get genresSeparated => genres.split(', ');
+  String get director => directors.firstOrNull((e) => e != null);
+  KtList<Actor> actors;
+  KtList<String> get genresSeparated => listFrom(genres.split(', '));
 
   bool get hasSynopsis =>
       (shortSynopsis != null && shortSynopsis.isNotEmpty) ||
