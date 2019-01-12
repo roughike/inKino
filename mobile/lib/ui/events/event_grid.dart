@@ -4,6 +4,7 @@ import 'package:inkino/message_provider.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_grid_item.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 class EventGrid extends StatelessWidget {
@@ -17,14 +18,14 @@ class EventGrid extends StatelessWidget {
   });
 
   final EventListType listType;
-  final List<Event> events;
+  final KtList<Event> events;
   final VoidCallback onReloadCallback;
 
   @override
   Widget build(BuildContext context) {
     final messages = MessageProvider.of(context);
 
-    if (events.isEmpty) {
+    if (events.isEmpty()) {
       return InfoMessageView(
         key: emptyViewKey,
         title: messages.allEmpty,
@@ -39,7 +40,7 @@ class EventGrid extends StatelessWidget {
 
 class _Content extends StatelessWidget {
   _Content(this.events, this.listType);
-  final List<Event> events;
+  final KtList<Event> events;
   final EventListType listType;
 
   void _openEventDetails(BuildContext context, Event event) {
@@ -76,7 +77,7 @@ class _Content extends StatelessWidget {
             crossAxisCount: crossAxisChildCount,
             childAspectRatio: 2 / 3,
           ),
-          itemCount: events.length,
+          itemCount: events.size,
           itemBuilder: _buildItem,
         ),
       ),

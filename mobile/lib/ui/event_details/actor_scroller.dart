@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:inkino/assets.dart';
 import 'package:inkino/message_provider.dart';
+import 'package:kt_dart/collection.dart';
 
 class ActorScroller extends StatelessWidget {
   const ActorScroller(this.event);
@@ -10,7 +11,7 @@ class ActorScroller extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, List<Actor>>(
+    return StoreConnector<AppState, KtList<Actor>>(
       onInit: (store) => store.dispatch(FetchActorAvatarsAction(event)),
       converter: (store) => actorsForEventSelector(store.state, event),
       builder: (_, actors) => ActorScrollerContent(actors),
@@ -20,7 +21,7 @@ class ActorScroller extends StatelessWidget {
 
 class ActorScrollerContent extends StatelessWidget {
   const ActorScrollerContent(this.actors);
-  final List<Actor> actors;
+  final KtList<Actor> actors;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class ActorScrollerContent extends StatelessWidget {
       ListView.builder(
         padding: const EdgeInsets.only(left: 16.0),
         scrollDirection: Axis.horizontal,
-        itemCount: actors.length,
+        itemCount: actors.size,
         itemBuilder: (_, int index) {
           final actor = actors[index];
           return _ActorListItem(actor);

@@ -59,7 +59,7 @@ class _Grid extends StatelessWidget {
       ),
       children: event.galleryImages.map((image) {
         return _GalleryImage(image.location);
-      }).toList(),
+      }).list,
     );
   }
 }

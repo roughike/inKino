@@ -6,6 +6,7 @@ import 'package:inkino/message_provider.dart';
 import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
+import 'package:kt_dart/collection.dart';
 
 class ShowtimeList extends StatefulWidget {
   static const Key emptyViewKey = Key('emptyView');
@@ -13,21 +14,21 @@ class ShowtimeList extends StatefulWidget {
 
   ShowtimeList(this.status, this.shows);
   final LoadingStatus status;
-  final List<Show> shows;
+  final KtList<Show> shows;
 
   @override
   _ShowtimeListState createState() => _ShowtimeListState();
 }
 
 class _ShowtimeListState extends State<ShowtimeList> {
-  List<Show> _shows = [];
+  KtList<Show> _shows = emptyList();
   bool _showEmptyView = false;
 
   @override
   void initState() {
     super.initState();
     _shows = widget.shows;
-    _showEmptyView = _shows.isEmpty && widget.status == LoadingStatus.success;
+    _showEmptyView = _shows.isEmpty() && widget.status == LoadingStatus.success;
   }
 
   @override
@@ -51,7 +52,7 @@ class _ShowtimeListState extends State<ShowtimeList> {
     }
 
     _showEmptyView =
-        widget.shows.isEmpty && widget.status == LoadingStatus.success;
+        widget.shows.isEmpty() && widget.status == LoadingStatus.success;
   }
 
   @override
@@ -70,7 +71,7 @@ class _ShowtimeListState extends State<ShowtimeList> {
       key: ShowtimeList.contentKey,
       child: ListView.builder(
         padding: const EdgeInsets.only(bottom: 50.0),
-        itemCount: _shows.length,
+        itemCount: _shows.size,
         itemBuilder: (BuildContext context, int index) {
           final show = _shows[index];
           return ShowtimeListTile(show);

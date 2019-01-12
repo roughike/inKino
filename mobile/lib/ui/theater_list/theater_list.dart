@@ -39,7 +39,7 @@ class TheaterListContent extends StatelessWidget {
     return Scrollbar(
       child: ListView.builder(
         padding: EdgeInsets.zero,
-        itemCount: viewModel.theaters.length,
+        itemCount: viewModel.theaters.size,
         itemBuilder: (BuildContext context, int index) {
           final theater = viewModel.theaters[index];
           final isSelected = viewModel.currentTheater.id == theater.id;

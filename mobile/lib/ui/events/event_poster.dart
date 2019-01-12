@@ -26,7 +26,7 @@ class EventPoster extends StatelessWidget {
   final bool displayPlayButton;
 
   Widget _buildPlayButton() =>
-      displayPlayButton && event.youtubeTrailers.isNotEmpty
+      displayPlayButton && event.youtubeTrailers.isNotEmpty()
           ? _PlayButton(event)
           : null;
 
@@ -87,7 +87,7 @@ class _PlayButton extends StatelessWidget {
           iconSize: 42.0,
           color: Colors.white.withOpacity(0.8),
           onPressed: () {
-            final url = event.youtubeTrailers.first;
+            final url = event.youtubeTrailers.first();
             launchTrailerVideo(url);
           },
         ),

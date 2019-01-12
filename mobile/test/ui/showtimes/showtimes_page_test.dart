@@ -6,6 +6,7 @@ import 'package:inkino/ui/common/info_message_view.dart';
 import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/showtimes/showtime_list.dart';
 import 'package:inkino/ui/showtimes/showtimes_page.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:mockito/mockito.dart';
 
 class MockShowtimesPageViewModel extends Mock
@@ -18,9 +19,9 @@ void main() {
     setUp(() {
       mockViewModel = MockShowtimesPageViewModel();
       when(mockViewModel.status).thenReturn(LoadingStatus.loading);
-      when(mockViewModel.dates).thenReturn([]);
+      when(mockViewModel.dates).thenReturn(emptyList());
       when(mockViewModel.selectedDate).thenReturn(DateTime(2018));
-      when(mockViewModel.shows).thenReturn([]);
+      when(mockViewModel.shows).thenReturn(emptyList());
       when(mockViewModel.refreshShowtimes).thenReturn(() {});
     });
 
@@ -38,7 +39,7 @@ void main() {
       'when there are no shows, should show empty view',
       (WidgetTester tester) async {
         when(mockViewModel.status).thenReturn(LoadingStatus.success);
-        when(mockViewModel.shows).thenReturn([]);
+        when(mockViewModel.shows).thenReturn(emptyList());
 
         await _buildShowtimesPage(tester);
         await tester.pumpAndSettle();
@@ -54,7 +55,7 @@ void main() {
     testWidgets('when shows exist, should show them',
         (WidgetTester tester) async {
       when(mockViewModel.status).thenReturn(LoadingStatus.success);
-      when(mockViewModel.shows).thenReturn([
+      when(mockViewModel.shows).thenReturn(listOf(
         Show(
           title: 'Show title',
           theaterAndAuditorium: 'Auditorium One',
@@ -62,7 +63,7 @@ void main() {
           start: DateTime(2018),
           end: DateTime(2018),
         ),
-      ]);
+      ));
 
       await _buildShowtimesPage(tester);
       await tester.pumpAndSettle();

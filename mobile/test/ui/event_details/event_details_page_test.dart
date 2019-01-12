@@ -10,6 +10,7 @@ import 'package:inkino/ui/events/event_poster.dart' as eventPoster;
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart'
     as showtimeListTile;
 import 'package:inkino/ui/showtimes/showtime_list_tile.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 void main() {
@@ -41,7 +42,7 @@ void main() {
 
     Future<void> _buildEventDetailsPage(
       WidgetTester tester, {
-      @required List<String> trailers,
+      @required KtList<String> trailers,
       @required Show show,
     }) {
       return provideMockedNetworkImages(() async {
@@ -53,10 +54,10 @@ void main() {
               id: '1',
               title: 'Test Title',
               genres: 'Test Genres',
-              directors: [],
-              actors: [],
+              directors: emptyList(),
+              actors: emptyList(),
               images: EventImageData.empty(),
-              galleryImages: [],
+              galleryImages: emptyList(),
               youtubeTrailers: trailers,
             ),
             show: show,
@@ -68,7 +69,7 @@ void main() {
     testWidgets(
       'when navigated to with a null show, should not display showtime information widget in the UI',
       (WidgetTester tester) async {
-        await _buildEventDetailsPage(tester, trailers: [], show: null);
+        await _buildEventDetailsPage(tester, trailers: emptyList(), show: null);
         await tester.pump();
 
         expect(find.byType(ShowtimeListTile), findsNothing);
@@ -80,7 +81,7 @@ void main() {
       (WidgetTester tester) async {
         await _buildEventDetailsPage(
           tester,
-          trailers: [],
+          trailers: emptyList(),
           show: show,
         );
 
@@ -103,7 +104,7 @@ void main() {
       (WidgetTester tester) async {
         await _buildEventDetailsPage(
           tester,
-          trailers: [],
+          trailers: emptyList(),
           show: show,
         );
 
@@ -120,7 +121,7 @@ void main() {
       (WidgetTester tester) async {
         await _buildEventDetailsPage(
           tester,
-          trailers: ['https://youtube.com/?v=test-trailer'],
+          trailers: listOf('https://youtube.com/?v=test-trailer'),
           show: show,
         );
 

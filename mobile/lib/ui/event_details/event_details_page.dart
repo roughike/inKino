@@ -82,9 +82,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
   }
 
   Widget _buildActorScroller() =>
-      widget.event.actors.isNotEmpty ? ActorScroller(widget.event) : null;
+      widget.event.actors.isNotEmpty() ? ActorScroller(widget.event) : null;
 
-  Widget _buildGallery() => widget.event.galleryImages.isNotEmpty
+  Widget _buildGallery() => widget.event.galleryImages.isNotEmpty()
       ? EventGalleryGrid(widget.event)
       : Container(color: Colors.white, height: 500.0);
 
@@ -223,7 +223,6 @@ class _BackButton extends StatelessWidget {
   }
 }
 
-
 class _EventInfo extends StatelessWidget {
   _EventInfo(this.event);
   final Event event;
@@ -257,7 +256,7 @@ class _EventInfo extends StatelessWidget {
         _buildTitleAndLengthInMinutes(),
       );
 
-    if (event.directors.isNotEmpty) {
+    if (event.directors.isNotEmpty()) {
       content.add(Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: _DirectorInfo(event.director),
