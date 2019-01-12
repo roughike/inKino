@@ -10,7 +10,7 @@
 <div class="event-information" *ngIf="hasDetails">
   <content-rating [event]="event"
                   size="medium"
-                  *ngIf="event.contentDescriptors.isNotEmpty">
+                  *ngIf="event.contentDescriptors.isNotEmpty()">
   </content-rating>
 
   <p><strong>{{ event.title }}</strong></p>

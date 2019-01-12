@@ -29,19 +29,19 @@
     </div>
   </div>
 
-  <div class="section white top-shadow actor-section" *ngIf="event.actors.isNotEmpty">
+  <div class="section white top-shadow actor-section" *ngIf="event.actors.isNotEmpty()">
     <div class="centered-content">
       <h3>{{ messages.cast }}</h3>
-      <actor-scroller [actors]="event.actors"></actor-scroller>
+      <actor-scroller [actors]="event.actors.list"></actor-scroller>
     </div>
   </div>
 
-  <div class="section footer" *ngIf="event.galleryImages.isNotEmpty">
+  <div class="section footer" *ngIf="event.galleryImages.isNotEmpty()">
     <div class="centered-content">
       <h3>{{ messages.gallery }}</h3>
 
       <div class="gallery">
-        <img *ngFor="let galleryImage of event.galleryImages" [src]="galleryImage.location"
+        <img *ngFor="let galleryImage of event.galleryImages.list" [src]="galleryImage.location"
              [alt]="'A still frame from the movie ' + event.title"/>
       </div>
     </div>

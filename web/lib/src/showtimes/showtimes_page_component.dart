@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:core/core.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:redux/redux.dart';
 import 'package:web/src/common/loading_view/loading_view_component.dart';
 import 'package:web/src/common/showtime_item/showtime_item_component.dart';
@@ -35,7 +36,7 @@ class ShowtimesPageComponent implements OnActivate {
   ShowtimesPageViewModel get viewModel =>
       ShowtimesPageViewModel.fromStore(_store);
 
-  List<Show> get shows => eventFilter == null
+  KtList<Show> get shows => eventFilter == null
       ? viewModel.shows
       : showsForEventSelector(viewModel.shows, eventFilter);
 

@@ -32,10 +32,8 @@ final showsSelector = createSelector3<AppState, DateTheaterPair,
 );
 
 final showsForEventSelector =
-    memo2<List<Show>, Event, List<Show>>((shows, event) {
-  return shows
-      .where((show) => show.originalTitle == event.originalTitle)
-      .toList();
+    memo2<KtList<Show>, Event, KtList<Show>>((shows, event) {
+  return shows.filter((show) => show.originalTitle == event.originalTitle);
 });
 
 KtList<Show> _showsWithSearchQuery(KtList<Show> shows, String searchQuery) {
