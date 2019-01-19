@@ -20,11 +20,14 @@ class ShowtimeDateSelector extends StatelessWidget {
         ],
       ),
       height: 56.0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: viewModel.dates.map((date) {
-          return _DateSelectorItem(date, viewModel);
-        }).list,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: viewModel.dates.map((date) {
+            return _DateSelectorItem(date, viewModel);
+          }).list,
+        ),
       ),
     );
   }

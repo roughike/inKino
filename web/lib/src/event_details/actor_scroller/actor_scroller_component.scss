@@ -3,6 +3,7 @@
 :host {
   display: flex;
   overflow-x: scroll;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   padding-left: 20px;
 
