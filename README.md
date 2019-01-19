@@ -4,6 +4,8 @@
 
 ## What is inKino?
 
+[![Build Status](https://travis-ci.org/roughike/inKino.svg?branch=development)](https://travis-ci.org/roughike/inKino)
+
 inKino is a _multiplatform_ Dart app for browsing movies and showtimes for Finnkino cinemas. 
 
 InKino showcases Redux, has an extensive set of automated tests and **40% code sharing between Flutter and web**.
