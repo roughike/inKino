@@ -1,6 +1,5 @@
 import 'package:core/src/models/show.dart';
 import 'package:core/src/models/show_cache.dart';
-import 'package:core/src/models/theater.dart';
 import 'package:kt_dart/collection.dart';
 
 class UpdateShowDatesAction {}

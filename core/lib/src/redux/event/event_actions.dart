@@ -1,7 +1,5 @@
 import 'package:core/src/models/event.dart';
-import 'package:core/src/models/theater.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:meta/meta.dart';
 
 class RefreshEventsAction {
   RefreshEventsAction(this.type);
