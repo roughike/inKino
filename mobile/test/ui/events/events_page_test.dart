@@ -8,6 +8,7 @@ import 'package:inkino/ui/common/loading_view.dart';
 import 'package:inkino/ui/event_details/event_details_page.dart';
 import 'package:inkino/ui/events/event_grid.dart';
 import 'package:inkino/ui/events/events_page.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:mockito/mockito.dart';
 
 class MockEventsPageViewModel extends Mock implements EventsPageViewModel {}
@@ -16,18 +17,18 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
   group('EventGrid', () {
-    final events = [
+    final events = listOf(
       Event(
         id: '1',
         title: 'Test Title',
         genres: 'Test Genres',
-        directors: [],
-        actors: [],
+        directors: emptyList(),
+        actors: emptyList(),
         images: EventImageData.empty(),
-        youtubeTrailers: [],
-        galleryImages: [],
+        youtubeTrailers: emptyList(),
+        galleryImages: emptyList(),
       ),
-    ];
+    );
 
     MockNavigatorObserver observer;
     EventsPageViewModel mockViewModel;
@@ -55,7 +56,7 @@ void main() {
       'when there are no events, should show empty view',
       (WidgetTester tester) async {
         when(mockViewModel.status).thenReturn(LoadingStatus.success);
-        when(mockViewModel.events).thenReturn([]);
+        when(mockViewModel.events).thenReturn(emptyList());
 
         await _buildEventsPage(tester);
         await tester.pumpAndSettle();
@@ -111,7 +112,7 @@ void main() {
       'when clicking "try again" on the error view, should call refreshEvents on the view model',
       (WidgetTester tester) async {
         when(mockViewModel.status).thenReturn(LoadingStatus.error);
-        when(mockViewModel.events).thenReturn([]);
+        when(mockViewModel.events).thenReturn(emptyList());
 
         await _buildEventsPage(tester);
         await tester.pumpAndSettle();

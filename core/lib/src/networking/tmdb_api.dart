@@ -5,6 +5,7 @@ import 'package:core/src/models/actor.dart';
 import 'package:core/src/models/event.dart';
 import 'package:core/src/tmdb_config.dart';
 import 'package:http/http.dart';
+import 'package:kt_dart/collection.dart';
 
 /// If this has a red underline, it means that the lib/tmdb_config.dart file
 /// is not present on the project. Refer to the README for instructions
@@ -16,8 +17,8 @@ class TMDBApi {
 
   static final String baseUrl = 'api.themoviedb.org';
 
-  Future<List<Actor>> findAvatarsForActors(
-      Event event, List<Actor> actors) async {
+  Future<KtList<Actor>> findAvatarsForActors(
+      Event event, KtList<Actor> actors) async {
     int movieId = await _findMovieId(event.originalTitle);
 
     if (movieId != null) {
@@ -46,7 +47,7 @@ class TMDBApi {
     return null;
   }
 
-  Future<List<Actor>> _getActorAvatars(int movieId) async {
+  Future<KtList<Actor>> _getActorAvatars(int movieId) async {
     final actorUri = Uri.https(
       baseUrl,
       '3/movie/$movieId/credits',
@@ -61,8 +62,8 @@ class TMDBApi {
         (movieActors['cast'] as List).cast<Map<String, dynamic>>());
   }
 
-  List<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
-    final actorsWithAvatars = <Actor>[];
+  KtList<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
+    final actorsWithAvatars = mutableListOf<Actor>();
 
     movieCast.forEach((Map<String, dynamic> castMember) {
       String pp = castMember['profile_path'];

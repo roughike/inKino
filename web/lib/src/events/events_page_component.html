@@ -5,11 +5,11 @@
   </div>
 
   <loading-view [status]="viewModel.status"
-                [contentEmpty]="viewModel.events.isEmpty"
+                [contentEmpty]="viewModel.events.isEmpty()"
                 [errorMessage]="messages.errorLoadingEvents"
                 (actionButtonClicked)="viewModel.refreshEvents()">
     <div class="grid-container">
-      <event-poster *ngFor="let event of viewModel.events"
+      <event-poster *ngFor="let event of viewModel.events.list"
                     [event]="event"
                     [isComingSoon]="isDisplayingComingSoonMovies"
                     (click)="openEventDetails(event)">

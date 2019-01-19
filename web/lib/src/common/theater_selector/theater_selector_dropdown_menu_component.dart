@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:core/core.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:redux/redux.dart';
 import 'package:web/src/common/theater_selector/theater_dropdown_controller.dart';
 
@@ -18,7 +19,7 @@ class TheaterSelectorDropdownMenuComponent {
 
   TheaterListViewModel get _viewModel => TheaterListViewModel.fromStore(_store);
   Theater get selectedTheater => _viewModel.currentTheater;
-  List<Theater> get theaters => _viewModel.theaters;
+  List<Theater> get theaters => _viewModel.theaters.list;
 
   bool get focusTrapVisible => isOpen;
   bool isOpen = false;

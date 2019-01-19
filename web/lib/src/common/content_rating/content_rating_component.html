@@ -1,2 +1,2 @@
 <img class="content-descriptor age" [src]="ageRatingUrl" [alt]="'The age rating for this movie is' + ageRating"/>
-<img class="content-descriptor" *ngFor="let cd of contentDescriptors" [alt]="cd.name" [src]="cd.imageUrl"/>
+<img class="content-descriptor" *ngFor="let cd of contentDescriptors.iter" [alt]="cd.name" [src]="cd.imageUrl"/>

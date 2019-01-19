@@ -1,5 +1,6 @@
 import 'package:core/src/models/event.dart';
 import 'package:core/src/models/loading_status.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -12,24 +13,24 @@ class EventState {
   });
 
   final LoadingStatus nowInTheatersStatus;
-  final List<Event> nowInTheatersEvents;
+  final KtList<Event> nowInTheatersEvents;
   final LoadingStatus comingSoonStatus;
-  final List<Event> comingSoonEvents;
+  final KtList<Event> comingSoonEvents;
 
   factory EventState.initial() {
     return EventState(
       nowInTheatersStatus: LoadingStatus.idle,
-      nowInTheatersEvents: [],
+      nowInTheatersEvents: emptyList(),
       comingSoonStatus: LoadingStatus.idle,
-      comingSoonEvents: [],
+      comingSoonEvents: emptyList(),
     );
   }
 
   EventState copyWith({
     LoadingStatus nowInTheatersStatus,
-    List<Event> nowInTheatersEvents,
+    KtList<Event> nowInTheatersEvents,
     LoadingStatus comingSoonStatus,
-    List<Event> comingSoonEvents,
+    KtList<Event> comingSoonEvents,
   }) {
     return EventState(
       nowInTheatersStatus: nowInTheatersStatus ?? this.nowInTheatersStatus,

@@ -1,5 +1,6 @@
 import 'package:core/src/models/theater.dart';
 import 'package:core/src/utils/xml_utils.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:xml/xml.dart' as xml;
 
 final RegExp _nameExpr = new RegExp(r'([A-Z])([A-Z]+)');
@@ -10,11 +11,9 @@ class TheaterParser {
   /// theater". Thanks Finnkino.
   static const String kChooseTheaterId = '1029';
 
-  static List<Theater> parse(String xmlString) {
+  static KtList<Theater> parse(String xmlString) {
     final document = xml.parse(xmlString);
-    final theaters = document.findAllElements('TheatreArea');
-
-    return theaters.map((node) {
+    final theaters = document.findAllElements('TheatreArea').map((node) {
       final id = tagContents(node, 'ID');
       var normalizedName = _normalize(tagContents(node, 'Name'));
 
@@ -26,7 +25,9 @@ class TheaterParser {
         id: id,
         name: normalizedName,
       );
-    }).toList();
+    });
+
+    return listFrom(theaters);
   }
 
   static String _normalize(String text) {

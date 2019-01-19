@@ -9,10 +9,12 @@ import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/show/show_actions.dart';
 import 'package:core/src/utils/clock.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:redux/redux.dart';
 
 class ShowMiddleware extends MiddlewareClass<AppState> {
   ShowMiddleware(this.api);
+
   final FinnkinoApi api;
 
   @override
@@ -39,7 +41,8 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
 
   void _updateShowDates(dynamic action, NextDispatcher next) {
     final now = Clock.getCurrentTime();
-    var dates = List.generate(7, (index) => now.add(Duration(days: index)));
+    var dates =
+        listFrom(List.generate(7, (index) => now.add(Duration(days: index))));
 
     next(new ShowDatesUpdatedAction(dates));
   }
@@ -65,13 +68,13 @@ class ShowMiddleware extends MiddlewareClass<AppState> {
     }
   }
 
-  Future<List<Show>> _fetchShows(
+  Future<KtList<Show>> _fetchShows(
       DateTime currentDate, Theater newTheater, NextDispatcher next) async {
     final shows = await api.getSchedule(newTheater, currentDate);
     final now = Clock.getCurrentTime();
 
     // Return only show times that haven't started yet.
-    return shows.where((show) => show.start.isAfter(now)).toList();
+    return shows.filter((show) => show.start.isAfter(now));
   }
 
   Theater _getCorrectTheater(Store<AppState> store, dynamic action) {

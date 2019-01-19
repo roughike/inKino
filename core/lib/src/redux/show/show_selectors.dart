@@ -2,14 +2,13 @@ import 'package:core/src/models/event.dart';
 import 'package:core/src/models/show.dart';
 import 'package:core/src/models/show_cache.dart';
 import 'package:core/src/redux/app/app_state.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:memoize/memoize.dart';
 import 'package:reselect/reselect.dart';
 
 Show showByIdSelector(AppState state, String id) {
-  return showsSelector(state).firstWhere(
-    (show) => show.id == id,
-    orElse: () => _findFromAllShows(state, id),
-  );
+  return showsSelector(state).firstOrNull((show) => show.id == id) ??
+      _findFromAllShows(state, id);
 }
 
 /// Selects a list of shows based on the currently selected date and theater.
@@ -18,33 +17,31 @@ Show showByIdSelector(AppState state, String id) {
 /// that search query. Otherwise returns all matching shows for current theater
 /// and date.
 final showsSelector = createSelector3<AppState, DateTheaterPair,
-    Map<DateTheaterPair, List<Show>>, String, List<Show>>(
+    KtMap<DateTheaterPair, KtList<Show>>, String, KtList<Show>>(
   (state) => DateTheaterPair.fromState(state),
   (state) => state.showState.shows,
   (state) => state.searchQuery,
-  (key, shows, searchQuery) {
-    final matchingShows = shows[key] ?? [];
-
-    return searchQuery == null
-        ? matchingShows
-        : _showsWithSearchQuery(matchingShows, searchQuery);
+  (key, KtMap<DateTheaterPair, KtList<Show>> shows, searchQuery) {
+    KtList<Show> matchingShows = shows.getOrDefault(key, emptyList<Show>());
+    if (searchQuery == null) {
+      return matchingShows;
+    } else {
+      return _showsWithSearchQuery(matchingShows, searchQuery);
+    }
   },
 );
 
 final showsForEventSelector =
-    memo2<List<Show>, Event, List<Show>>((shows, event) {
-  return shows
-      .where((show) => show.originalTitle == event.originalTitle)
-      .toList();
+    memo2<KtList<Show>, Event, KtList<Show>>((shows, event) {
+  return shows.filter((show) => show.originalTitle == event.originalTitle);
 });
 
-List<Show> _showsWithSearchQuery(List<Show> shows, String searchQuery) {
+KtList<Show> _showsWithSearchQuery(KtList<Show> shows, String searchQuery) {
   final searchQueryPattern = new RegExp(searchQuery, caseSensitive: false);
 
-  return shows.where((show) {
-    return show.title.contains(searchQueryPattern) ||
-        show.originalTitle.contains(searchQueryPattern);
-  }).toList();
+  return shows.filter((show) =>
+      show.title.contains(searchQueryPattern) ||
+      show.originalTitle.contains(searchQueryPattern));
 }
 
 /// Goes through the list of showtimes for every single theater.
@@ -54,15 +51,8 @@ List<Show> _showsWithSearchQuery(List<Show> shows, String searchQuery) {
 /// when [showByIdSelector] fails.
 Show _findFromAllShows(AppState state, String id) {
   final allShows = state.showState.shows.values;
-  return allShows.firstWhere(
-    (shows) {
-      final match = shows.firstWhere(
-        (show) => show.id == id,
-        orElse: () => null,
-      );
-
-      return match != null;
-    },
-    orElse: () => null,
-  )?.first;
+  return allShows
+      .firstOrNull(
+          (shows) => shows.firstOrNull((show) => show.id == id) != null)
+      ?.firstOrNull();
 }

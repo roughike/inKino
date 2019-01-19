@@ -1,9 +1,9 @@
-import 'package:collection/collection.dart';
 import 'package:core/src/models/event.dart';
 import 'package:core/src/models/loading_status.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/event/event_actions.dart';
 import 'package:core/src/redux/event/event_selectors.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
@@ -15,7 +15,7 @@ class EventsPageViewModel {
   });
 
   final LoadingStatus status;
-  final List<Event> events;
+  final KtList<Event> events;
   final Function refreshEvents;
 
   static EventsPageViewModel fromStore(
@@ -39,8 +39,8 @@ class EventsPageViewModel {
       other is EventsPageViewModel &&
           runtimeType == other.runtimeType &&
           status == other.status &&
-          const IterableEquality().equals(events, other.events);
+          events == other.events;
 
   @override
-  int get hashCode => status.hashCode ^ const IterableEquality().hash(events);
+  int get hashCode => status.hashCode ^ events.hashCode;
 }

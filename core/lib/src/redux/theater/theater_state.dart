@@ -1,4 +1,5 @@
 import 'package:core/src/models/theater.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -9,18 +10,18 @@ class TheaterState {
   });
 
   final Theater currentTheater;
-  final List<Theater> theaters;
+  final KtList<Theater> theaters;
 
   factory TheaterState.initial() {
     return TheaterState(
       currentTheater: null,
-      theaters: [],
+      theaters: emptyList(),
     );
   }
 
   TheaterState copyWith({
     Theater currentTheater,
-    List<Theater> theaters,
+    KtList<Theater> theaters,
   }) {
     return TheaterState(
       currentTheater: currentTheater ?? this.currentTheater,

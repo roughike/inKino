@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inkino/ui/showtimes/showtime_date_selector.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:mockito/mockito.dart';
 
 class MockShowtimesPageViewModel extends Mock
@@ -9,10 +10,10 @@ class MockShowtimesPageViewModel extends Mock
 
 void main() {
   group('ShowtimeDateSelector', () {
-    final dates = [
+    final dates = listOf(
       DateTime(2018, 1, 1),
       DateTime(2018, 1, 2),
-    ];
+    );
 
     MockShowtimesPageViewModel mockViewModel;
 

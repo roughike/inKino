@@ -1,7 +1,8 @@
 import 'package:core/src/models/actor.dart';
 import 'package:core/src/redux/actor/actor_actions.dart';
+import 'package:kt_dart/collection.dart';
 
-Map<String, Actor> actorReducer(Map<String, Actor> state, dynamic action) {
+KtMap<String, Actor> actorReducer(KtMap<String, Actor> state, dynamic action) {
   if (action is ActorsUpdatedAction) {
     return _updateActors(state, action);
   } else if (action is ReceivedActorAvatarsAction) {
@@ -11,24 +12,24 @@ Map<String, Actor> actorReducer(Map<String, Actor> state, dynamic action) {
   return state;
 }
 
-Map<String, Actor> _updateActors(Map<String, Actor> state, dynamic action) {
-  final actors = <String, Actor>{}..addAll(state);
-  action.actors.forEach((Actor actor) {
-    actors.putIfAbsent(actor.name, () => Actor(name: actor.name));
+KtMap<String, Actor> _updateActors(
+    KtMap<String, Actor> state, ActorsUpdatedAction action) {
+  final actors = state.toMutableMap();
+  action.actors.forEach((actor) {
+    actors.putIfAbsent(actor.name, Actor(name: actor.name));
   });
-
-  return actors;
+  return actors.toMap();
 }
 
-Map<String, Actor> _updateActorAvatars(
-    Map<String, Actor> state, dynamic action) {
-  final actorsWithAvatars = <String, Actor>{}..addAll(state);
-  action.actors.forEach((Actor actor) {
+KtMap<String, Actor> _updateActorAvatars(
+    KtMap<String, Actor> state, ReceivedActorAvatarsAction action) {
+  final actorsWithAvatars = state.toMutableMap();
+  action.actors.forEach((actor) {
     actorsWithAvatars[actor.name] = Actor(
       name: actor.name,
       avatarUrl: actor.avatarUrl,
     );
   });
 
-  return actorsWithAvatars;
+  return actorsWithAvatars.toMap();
 }

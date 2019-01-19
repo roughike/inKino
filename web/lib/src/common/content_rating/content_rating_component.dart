@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:core/core.dart';
+import 'package:kt_dart/collection.dart';
 
 @Component(
   selector: 'content-rating',
@@ -17,6 +18,5 @@ class ContentRatingComponent {
   String get ageRating => show?.ageRating ?? event?.ageRating;
   String get ageRatingUrl => show?.ageRatingUrl ?? event?.ageRatingUrl;
 
-  List<ContentDescriptor> get contentDescriptors =>
-      show?.contentDescriptors ?? event?.contentDescriptors;
+  KtList<ContentDescriptor> get contentDescriptors => show?.contentDescriptors ?? event?.contentDescriptors;
 }

@@ -1,5 +1,6 @@
 import 'package:core/src/models/event.dart';
 import 'package:core/src/models/theater.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 class RefreshEventsAction {
@@ -14,12 +15,12 @@ class RequestingEventsAction {
 
 class ReceivedInTheatersEventsAction {
   ReceivedInTheatersEventsAction(this.events);
-  final List<Event> events;
+  final KtList<Event> events;
 }
 
 class ReceivedComingSoonEventsAction {
   ReceivedComingSoonEventsAction(this.events);
-  final List<Event> events;
+  final KtList<Event> events;
 }
 
 class ErrorLoadingEventsAction {

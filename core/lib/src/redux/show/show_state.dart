@@ -1,6 +1,7 @@
 import 'package:core/src/models/loading_status.dart';
 import 'package:core/src/models/show.dart';
 import 'package:core/src/models/show_cache.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -13,24 +14,24 @@ class ShowState {
   });
 
   final LoadingStatus loadingStatus;
-  final List<DateTime> dates;
+  final KtList<DateTime> dates;
   final DateTime selectedDate;
-  final Map<DateTheaterPair, List<Show>> shows;
+  final KtMap<DateTheaterPair, KtList<Show>> shows;
 
   factory ShowState.initial() {
     return ShowState(
       loadingStatus: LoadingStatus.idle,
-      dates: [],
+      dates: emptyList(),
       selectedDate: null,
-      shows: {},
+      shows: emptyMap(),
     );
   }
 
   ShowState copyWith({
     LoadingStatus loadingStatus,
-    List<DateTime> availableDates,
+    KtList<DateTime> availableDates,
     DateTime selectedDate,
-    Map<DateTheaterPair, List<Show>> shows,
+    KtMap<DateTheaterPair, KtList<Show>> shows,
   }) {
     return ShowState(
       loadingStatus: loadingStatus ?? this.loadingStatus,

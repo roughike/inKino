@@ -6,12 +6,14 @@ import 'package:core/src/preloaded_data.dart';
 import 'package:core/src/redux/_common/common_actions.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:key_value_store/key_value_store.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:redux/redux.dart';
 
 class TheaterMiddleware extends MiddlewareClass<AppState> {
   static const String kDefaultTheaterId = 'default_theater_id';
 
   TheaterMiddleware(this.keyValueStore);
+
   final KeyValueStore keyValueStore;
 
   @override
@@ -40,20 +42,18 @@ class TheaterMiddleware extends MiddlewareClass<AppState> {
     next(action);
   }
 
-  Theater _getDefaultTheater(List<Theater> allTheaters) {
+  Theater _getDefaultTheater(KtList<Theater> allTheaters) {
     var persistedTheaterId = keyValueStore.getString(kDefaultTheaterId);
 
     if (persistedTheaterId != null) {
-      return allTheaters.singleWhere((theater) {
+      return allTheaters.single((theater) {
         return theater.id == persistedTheaterId;
       });
     }
 
-    return allTheaters.singleWhere(
-      /// Default to Helsinki -> no reason to load movie information for the
-      /// whole country at first.
-      (theater) => theater.id == '1033',
-      orElse: () => allTheaters.first,
-    );
+    /// Default to Helsinki -> no reason to load movie information for the
+    /// whole country at first.
+    return allTheaters.singleOrNull((theater) => theater.id == '1033') ??
+        allTheaters.first;
   }
 }

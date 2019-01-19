@@ -26,7 +26,7 @@ class ShowtimeDateSelector extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: viewModel.dates.map((date) {
             return _DateSelectorItem(date, viewModel);
-          }).toList(),
+          }).list,
         ),
       ),
     );

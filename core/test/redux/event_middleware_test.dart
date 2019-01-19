@@ -9,6 +9,7 @@ import 'package:core/src/redux/event/event_actions.dart';
 import 'package:core/src/redux/event/event_middleware.dart';
 import 'package:core/src/redux/event/event_state.dart';
 import 'package:core/src/redux/theater/theater_state.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -24,17 +25,17 @@ void main() {
     EventMiddleware middleware;
     MockStore mockStore;
 
-    final nowInTheatersEvents = [
+    final nowInTheatersEvents = listOf(
       Event(),
       Event(),
       Event(),
-    ];
+    );
 
-    final upcomingEvents = [
+    final upcomingEvents = listOf(
       Event(),
       Event(),
       Event(),
-    ];
+    );
 
     setUp(() {
       mockFinnkinoApi = MockFinnkinoApi();

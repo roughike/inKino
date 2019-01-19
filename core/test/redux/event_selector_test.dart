@@ -3,6 +3,7 @@ import 'package:core/src/models/show.dart';
 import 'package:core/src/redux/app/app_state.dart';
 import 'package:core/src/redux/event/event_selectors.dart';
 import 'package:core/src/redux/event/event_state.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,19 +18,26 @@ void main() {
       originalTitle: 'In theater event #2',
       title: 'In theater event #2',
     );
-    final nowInTheatersEvents = [firstInTheaterEvent, secondInTheaterEvent];
+    final nowInTheatersEvents =
+        listOf(firstInTheaterEvent, secondInTheaterEvent);
 
     final firstComingSoonEvent = Event(
       id: 'coming-soon-1',
       originalTitle: 'Coming soon event #1',
       title: 'Coming soon event #1',
     );
+    final firstComingSoonEventDuplicate = Event(
+      id: 'coming-soon-1-fr',
+      originalTitle: 'Coming soon event #1',
+      title: 'Coming soon event #1 (FR)',
+    );
     final secondComingSoonEvent = Event(
       id: 'coming-soon-2',
       originalTitle: 'Coming soon event #2',
       title: 'Coming soon event #2',
     );
-    final comingSoonEvents = [firstComingSoonEvent, secondComingSoonEvent];
+    final comingSoonEvents = listOf(firstComingSoonEvent,
+        firstComingSoonEventDuplicate, secondComingSoonEvent);
 
     final state = AppState.initial().copyWith(
       eventState: EventState.initial().copyWith(
@@ -40,7 +48,9 @@ void main() {
 
     test('events', () {
       expect(nowInTheatersSelector(state), nowInTheatersEvents);
-      expect(comingSoonSelector(state), comingSoonEvents);
+      // without duplicates
+      expect(comingSoonSelector(state),
+          listOf(firstComingSoonEvent, secondComingSoonEvent));
     });
 
     test('events with search query', () {
@@ -48,12 +58,12 @@ void main() {
 
       expect(
         nowInTheatersSelector(stateWithSearchQuery),
-        [secondInTheaterEvent],
+        listOf(secondInTheaterEvent),
       );
 
       expect(
         comingSoonSelector(stateWithSearchQuery),
-        [secondComingSoonEvent],
+        listOf(secondComingSoonEvent),
       );
     });
 
