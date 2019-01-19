@@ -4,6 +4,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-./rename-tmdb-config-file.sh
-./analyze-all.sh
-./test-all.sh
+./tools/rename-tmdb-config-file.sh
+./tools/analyze-all.sh
+./tools/test-all.sh
