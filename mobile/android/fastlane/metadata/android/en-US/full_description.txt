@@ -1,1 +1,8 @@
-(Fill later)
+inKino is the unofficial Finnkino client that's minimalistic, fast, and delightful to use.
+
+- View movie details and trailers
+- See showtimes for your local theater
+- Search for movies and showtimes
+- Buy or reserve tickets
+
+With inKino, you have movie information and showtimes right at your fingertips.
