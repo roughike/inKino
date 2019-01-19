@@ -32,7 +32,7 @@ void main() {
 
         // Then
         final InitCompleteAction action = log.single;
-        expect(action.theaters.size, 20);
+        expect(action.theaters.size, 21);
       });
 
       test('when a persisted theater id exists, uses that as a default',

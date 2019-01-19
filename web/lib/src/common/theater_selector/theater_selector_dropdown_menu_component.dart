@@ -1,6 +1,5 @@
 import 'package:angular/angular.dart';
 import 'package:core/core.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:redux/redux.dart';
 import 'package:web/src/common/theater_selector/theater_dropdown_controller.dart';
 

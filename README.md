@@ -4,6 +4,8 @@
 
 ## What is inKino?
 
+[![Build Status](https://travis-ci.org/roughike/inKino.svg?branch=development)](https://travis-ci.org/roughike/inKino)
+
 inKino is a _multiplatform_ Dart app for browsing movies and showtimes for Finnkino cinemas. 
 
 InKino showcases Redux, has an extensive set of automated tests and **40% code sharing between Flutter and web**.
@@ -41,7 +43,7 @@ To clarify, you'd do `File -> Open...` for core and then `File -> Open...` again
 
 Finally, if you haven't already, [install Flutter](https://flutter.io/docs/get-started/install).
 And the Flutter plugin for your IDE. 
-At the time of being, inKino is built with **Flutter 0.10.2**.
+At the time of being, inKino is built with **Flutter 1.0**.
 
 If you don't like IDEs, [you can apparently use Emacs or Vim too](https://news.ycombinator.com/item?id=16822780).
 
