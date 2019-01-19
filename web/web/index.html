@@ -22,7 +22,11 @@
     }
 
     body {
-      background: url("images/background-image.jpg") no-repeat bottom fixed;
+      background-color: #0f1835;
+      background-image: url("images/background-image.jpg"),
+                        linear-gradient(#1b2f6c, #0f1835);
+      background-position: bottom;
+      background-attachment: fixed;
       background-size: cover;
       opacity: 0;
       transition: opacity 500ms ease;
