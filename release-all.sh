@@ -8,3 +8,4 @@ set -o nounset
 
 (cd mobile/android && fastlane internal)
 (cd mobile/ios && fastlane beta)
+(cd web && ./deploy.sh && firebase deploy)
