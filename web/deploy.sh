@@ -4,7 +4,7 @@
 # by this bash script. I'm working on it.
 rm -rf build
 webdev build
-(cd build/images && mv * ../)
+cd build/images && mv * ../ && cd ../
 
 dart ../../../fingerprint/bin/fingerprint.dart
 
