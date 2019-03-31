@@ -4,7 +4,7 @@
     <theater-selector></theater-selector>
   </div>
 
-  <date-selector [dates]="viewModel.dates.list"
+  <date-selector [dates]="viewModel.dates.asList()"
                  [selectedDate]="viewModel.selectedDate"
                  [newDateSelected]="viewModel.changeCurrentDate"></date-selector>
 
@@ -12,7 +12,7 @@
       [status]="viewModel.status"
       [contentEmpty]="shows.isEmpty()"
       (actionButtonClicked)="viewModel.refreshShowtimes()">
-    <showtime-item *ngFor="let show of shows.list"
+    <showtime-item *ngFor="let show of shows.asList()"
                    [show]="show"
                    (click)="openShowDetails(show)"></showtime-item>
   </loading-view>
