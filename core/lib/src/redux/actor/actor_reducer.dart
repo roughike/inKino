@@ -14,22 +14,19 @@ KtMap<String, Actor> actorReducer(KtMap<String, Actor> state, dynamic action) {
 
 KtMap<String, Actor> _updateActors(
     KtMap<String, Actor> state, ActorsUpdatedAction action) {
-  final actors = state.toMutableMap();
-  action.actors.forEach((actor) {
-    actors.putIfAbsent(actor.name, Actor(name: actor.name));
-  });
-  return actors.toMap();
+  final updated = action.actors.associateBy((it) => it.name);
+  return updated.plus(state);
 }
 
 KtMap<String, Actor> _updateActorAvatars(
     KtMap<String, Actor> state, ReceivedActorAvatarsAction action) {
-  final actorsWithAvatars = state.toMutableMap();
-  action.actors.forEach((actor) {
-    actorsWithAvatars[actor.name] = Actor(
-      name: actor.name,
-      avatarUrl: actor.avatarUrl,
-    );
-  });
-
-  return actorsWithAvatars.toMap();
+  final actors = state.toMutableMap();
+  for (final actor in action.actors.iter) {
+    final current = actors[actor.name];
+    if (current == null) {
+      continue;
+    }
+    actors.put(actor.name, actor);
+  }
+  return actors.toMap();
 }

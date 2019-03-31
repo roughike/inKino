@@ -11,7 +11,7 @@ void main() {
         'when called with ActorsUpdatedAction, should not modify existing actors',
         () {
       final state = AppState.initial().copyWith(
-        actorsByName: mapFrom<String, Actor>({
+        actorsByName: mapFrom({
           'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
@@ -34,7 +34,7 @@ void main() {
 
       expect(
         reducedState.actorsByName,
-        mapFrom<String, Actor>({
+        mapFrom({
           'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
@@ -55,7 +55,7 @@ void main() {
         'when called with ReceivedActorAvatarsAction, should add urls for actors',
         () {
       final state = AppState.initial().copyWith(
-        actorsByName: mapFrom<String, Actor>({
+        actorsByName: mapFrom({
           'Seth Ladd': Actor(name: 'Seth Ladd', avatarUrl: null),
           'Eric Seidel': Actor(name: 'Eric Seidel', avatarUrl: null),
         }),
@@ -71,7 +71,7 @@ void main() {
 
       expect(
         reducedState.actorsByName,
-        mapFrom<String, Actor>({
+        mapFrom({
           'Seth Ladd': Actor(
             name: 'Seth Ladd',
             avatarUrl: 'https://seths-avatar-url',
