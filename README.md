@@ -17,7 +17,7 @@ I plan on doing a full article series on multiplatform Dart stuff, so you might 
 <div>
 <a href='https://play.google.com/store/apps/details?id=com.roughike.inkino'><img alt='Get it on Google Play' src='assets/screenshots/google_play.png' height='48px'/></a>
 <a href='https://itunes.apple.com/us/app/inkino/id1367181450'><img alt='Get it on the App Store' src='assets/screenshots/app_store.png' height='48px'/></a>
-<a href='https://inkino.app'><img alt='Get it on the App Store' src='assets/screenshots/launch_pwa.png' height='48px'/></a>
+<a href='https://inkino.app'><img alt='Launch now as Web App' src='assets/screenshots/launch_pwa.png' height='48px'/></a>
 </div>
 
 ## Folder structure
