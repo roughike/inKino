@@ -2,6 +2,10 @@
 
 <img src="assets/screenshots/now_in_theaters.png" width="33%" /> <img src="assets/screenshots/showtimes.png" width="33%" /> <img src="assets/screenshots/event_details.png" width="33%" />
 
+inKino is being sponsored by the following tool; please help to support us by taking a look and signing up to a free trial:
+
+<a href="https://tracking.gitads.io/?repo=roughike/inKino"> <img src="https://images.gitads.io/roughike/inKino" alt="GitAds"/> </a>
+
 ## What is inKino?
 
 [![Build Status](https://travis-ci.org/roughike/inKino.svg?branch=development)](https://travis-ci.org/roughike/inKino)
