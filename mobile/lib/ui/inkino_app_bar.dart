@@ -27,6 +27,7 @@ class _InkinoAppBarState extends State<InkinoAppBar>
   @override
   void dispose() {
     super.dispose();
+    _searchQuery.close()
   }
 
   void _toggleTheaters() async {
@@ -57,11 +58,13 @@ class _InkinoAppBarState extends State<InkinoAppBar>
             if (_searchQuery == null || _searchQuery.text.isEmpty) {
               // Stop searching.
               Navigator.pop(context);
-              return;
+              return null;
+            }else{
+              _clearSearchQuery();
+             return null;
             }
 
-            _clearSearchQuery();
-          },
+                     },
         ),
       ];
     }
@@ -69,7 +72,7 @@ class _InkinoAppBarState extends State<InkinoAppBar>
     return [
       _TheaterIconButton(_theatersOpen, _toggleTheaters),
       IconButton(
-        color: Colors.white70,
+        color: Colors.white60,
         icon: const Icon(Icons.search),
         onPressed: _startSearch,
       ),
@@ -81,7 +84,7 @@ class _InkinoAppBarState extends State<InkinoAppBar>
       controller: _searchQuery,
       autofocus: true,
       decoration: const InputDecoration(
-        hintText: 'Search movies & showtimes...',
+        hintText: 'Search you want to see..',
         border: InputBorder.none,
         hintStyle: const TextStyle(color: Colors.white30),
       ),
@@ -98,17 +101,13 @@ class _InkinoAppBarState extends State<InkinoAppBar>
   void _startSearch() {
     ModalRoute.of(context).addLocalHistoryEntry(_searchEntry);
 
-    setState(() {
-      _isSearching = true;
-    });
+    setState(() => _isSearching = true);
   }
 
   void _stopSearching() {
     _clearSearchQuery();
 
-    setState(() {
-      _isSearching = false;
-    });
+    setState(() =>_isSearching = false);
   }
 
   void _clearSearchQuery() {
