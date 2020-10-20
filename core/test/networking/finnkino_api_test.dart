@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:core/src/models/theater.dart';
 import 'package:core/src/networking/finnkino_api.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
-import 'package:utf/utf.dart';
 
 import '../parsers/event_test_seeds.ignore.dart';
 import '../parsers/show_test_seeds.ignore.dart';
@@ -31,7 +31,7 @@ void main() {
         return Future(() {
           /// Have to do this "toBytes" dance because apparently, it's hard to
           /// get the Response do the encoding with utf8 instead of Latin 1.
-          return Response.bytes(encodeUtf8(value), 200);
+          return Response.bytes(Utf8Encoder().convert(value), 200);
         });
       });
     }
