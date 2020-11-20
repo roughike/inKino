@@ -6,7 +6,7 @@
 <div class="menu" [class.opened]="isOpen" [style.background]="background">
   <div class="item"
        [class.selected]="theater == selectedTheater"
-       *ngFor="let theater of theaters"
+       *ngFor="let theater of theaters.asList()"
        (click)="onTheaterClicked(theater)">
     {{ theater.name }}
   </div>

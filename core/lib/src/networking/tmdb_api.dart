@@ -63,19 +63,15 @@ class TMDBApi {
   }
 
   KtList<Actor> _parseActorAvatars(List<Map<String, dynamic>> movieCast) {
-    final actorsWithAvatars = mutableListOf<Actor>();
-
-    movieCast.forEach((Map<String, dynamic> castMember) {
+    return listFrom(movieCast).map((castMember) {
       String pp = castMember['profile_path'];
       final profilePath =
           pp != null ? 'https://image.tmdb.org/t/p/w200$pp' : null;
 
-      actorsWithAvatars.add(Actor(
+      return Actor(
         name: castMember['name'],
         avatarUrl: profilePath,
-      ));
+      );
     });
-
-    return actorsWithAvatars;
   }
 }

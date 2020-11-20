@@ -9,7 +9,7 @@
                 [errorMessage]="messages.errorLoadingEvents"
                 (actionButtonClicked)="viewModel.refreshEvents()">
     <div class="grid-container">
-      <event-poster *ngFor="let event of viewModel.events.list"
+      <event-poster *ngFor="let event of viewModel.events.asList()"
                     [event]="event"
                     [isComingSoon]="isDisplayingComingSoonMovies"
                     (click)="openEventDetails(event)">
