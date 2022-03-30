@@ -1,1 +1,0 @@
-New look, smaller app size and some UI tweaks! Also the usual performance improvements.

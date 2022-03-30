@@ -1,7 +1,0 @@
-analyzer:
-  language:
-    enableSuperMixins: true
-
-linter:
-  rules:
-    - prefer_const_constructors
